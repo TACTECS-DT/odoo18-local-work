@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+
+
+        <record id="action_manager_approve_loan_request" model="ir.actions.act_window">
+            <field name="name">Manager Approve Loan</field>
+            <field name="res_model">hr.loan</field>
+             <field name="domain">['|','|','|',
+                ('employee_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.parent_id.parent_id.user_id', '=', uid),
+                ]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="employee_loan.view_loan_request_search_form"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new Loan request.
+                </p>
+                <p>
+                    Use this menu to create loan requests.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_manager_approve_request_loan"
+                  name="Manager Approve Loan" parent="employee_loan.menu_base_hr_loan_request" action="action_manager_approve_loan_request" sequence="2"/>
+
+
+    </data>
+</odoo>

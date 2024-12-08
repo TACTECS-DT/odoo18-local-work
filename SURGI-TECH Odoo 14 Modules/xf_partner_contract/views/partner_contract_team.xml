@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> <!--  noupdate="1" -->
+        <record id="xf_partner_contract_team_form" model="ir.ui.view">
+            <field name="name">xf_partner_contract_team_form</field>
+            <field name="model">xf.partner.contract.team</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Team"/>
+                            <h1>
+                                <field name="name" placeholder="Team Name..."/>
+                            </h1>
+                            <div name="options_active"/>
+                        </div>
+                        <group>
+                            <group name="left">
+                                <field name="active" invisible="1"/>
+                                <field name="user_id" domain="[('share', '=', False)]"/>
+                                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            </group>
+                            <group name="right">
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="approvers" string="Approvers">
+                                <field name="approver_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="user_id"/>
+                                        <field name="role"/>
+                                        <field name="can_edit"/>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                        <field name="company_currency_id" invisible="True"/>
+                                        <field name="custom_condition_code"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="help" string="Help">
+                                <group>
+                                    <group>
+                                        <p colspan="2">
+                                            Please ensure that each approver is at least contract module user!
+                                            It is mandatory to avoid access issues.
+                                        </p>
+                                        <p colspan="2">
+                                            <ul>
+                                                <li>
+                                                    If <b>Minimum Amount</b> is not set,
+                                                    approver should approve each contract.
+                                                </li>
+                                                <li>
+                                                    If <b>Minimum Amount</b> is set and
+                                                    <b>Cost</b>
+                                                    is less than <b>Minimum Amount</b>,
+                                                    then approver will be skipped.
+                                                </li>
+                                                <li>
+                                                    If <b>Maximum Amount</b> is set and
+                                                    <b>Cost</b>
+                                                    is greater than <b>Maximum Amount</b>,
+                                                    then the approver will be skipped.
+                                                </li>
+                                            </ul>
+                                        </p>
+                                        <p colspan="2">
+                                            If checkbox "<b>Can Edit</b>" is enabled,
+                                            approver can edit contract details before own approval.
+                                        </p>
+                                    </group>
+                                    <group>
+                                        <p colspan="2">
+                                            You can enter python expression to define custom condition
+                                            to include/exclude approver to/from contract approval workflow.
+                                        </p>
+                                        <p colspan="2">Returned value have to be set in the variable 'result'.</p>
+                                        <p colspan="2">Keywords: Use the "<b>CONTRACT</b>" to get "xf.partner.contract" object properties, and the "USER"
+                                            keyword for
+                                            current user's "res.users" object.
+                                        </p>
+                                        <p colspan="2">
+                                            Examples:
+                                            <ul>
+                                                <li>
+                                                    If you want to include additional approver only for partner from United States:
+                                                    <br/>
+                                                    <code>result = CONTRACT.partner_id.country_id.code == 'US'</code>
+                                                    <br/>
+                                                    ("code" is the ISO country code in two chars)
+                                                </li>
+                                                <li>
+                                                    Additional approver only for particular vendor/customer:
+                                                    <br/>
+                                                    <code>result = CONTRACT.partner_id.name == 'Gemini Furniture'</code>
+                                                </li>
+                                                <li>
+                                                    Add additional approver only for particular period (using contract dates):
+                                                    <br/>
+                                                    <code>result = '2021-08-09' &lt;= str(CONTRACT.date_start) &lt;= '2021-08-15'</code>
+                                                </li>
+                                                <li>
+                                                    Add additional approver only for contract from particular company employee:
+                                                    <br/>
+                                                    <code>result = USER.company_id.name == 'YourCompany'</code>
+                                                </li>
+                                                <li>
+                                                    Add additional approver only for contracts from particular department member:
+                                                    <br/>
+                                                    <code>result = USER.department_id.name == 'IT Department'</code>
+                                                    <br/>
+                                                    (Applicable only if HR module used)
+                                                </li>
+                                            </ul>
+                                        </p>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" help="Follow this team to automatically track the events associated to users of this team."/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="xf_partner_contract_team_tree" model="ir.ui.view">
+            <field name="name">xf_partner_contract_team_tree</field>
+            <field name="model">xf.partner.contract.team</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <act_window
+                id="xf_partner_contract_team_act_window"
+                name="Contract Approval Teams"
+                res_model="xf.partner.contract.team"
+                view_mode="tree,form"/>
+
+        <menuitem
+                id="xf_partner_contract_team_menuitem"
+                name="Contract Approval Teams"
+                action="xf_partner_contract_team_act_window"
+                parent="xf_partner_contract.xf_partner_contract_config_menuitem"
+                groups="xf_partner_contract.group_xf_partner_contract_team_leader"
+                sequence="1"
+        />
+
+    </data>
+</odoo>

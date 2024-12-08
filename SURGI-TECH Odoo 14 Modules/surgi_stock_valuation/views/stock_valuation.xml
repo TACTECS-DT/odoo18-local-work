@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+
+        <record id="form_view_stock_valuation_layer" model="ir.ui.view">
+            <field name="name">name.stock.valuation.layer.inherit.form</field>
+            <field name="model">stock.valuation.layer</field>
+            <field name="inherit_id" ref="stock_account.stock_valuation_layer_form"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='product_id']" position="after">-->
+<!--                    <field name="product_id2"/>-->
+<!--                    <field name="company_id2"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">1</attribute>
+                    <attribute name="edit">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='create_date']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='quantity']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='unit_cost']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='value']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='remaining_qty']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="tree_view_stock_valuation_layer_inherit" model="ir.ui.view">
+            <field name="name">name.stock.valuation.layer.inherit</field>
+            <field name="model">stock.valuation.layer</field>
+            <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">1</attribute>
+                    <attribute name="import">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

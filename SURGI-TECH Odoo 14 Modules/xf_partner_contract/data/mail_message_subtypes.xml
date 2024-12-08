@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mt_contract_confirmed" model="mail.message.subtype">
+            <field name="name">Contract Confirmed</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">xf.partner.contract</field>
+            <field name="description">Contract confirmed</field>
+        </record>
+        <record id="mt_contract_confirmed_team" model="mail.message.subtype">
+            <field name="name">Contract Confirmed</field>
+            <field name="res_model">xf.partner.contract.team</field>
+            <field name="default" eval="False"/>
+            <field name="parent_id" ref="mt_contract_confirmed"/>
+            <field name="relation_field">approval_team_id</field>
+        </record>
+
+
+        <record id="mt_contract_confirmed_and_sent" model="mail.message.subtype">
+            <field name="name">Contract Sent for Approval</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">xf.partner.contract</field>
+            <field name="description">Contract confirmed and sent for approval</field>
+        </record>
+        <record id="mt_contract_confirmed_and_sent_team" model="mail.message.subtype">
+            <field name="name">Contract Sent for Approval</field>
+            <field name="res_model">xf.partner.contract.team</field>
+            <field name="default" eval="False"/>
+            <field name="parent_id" ref="mt_contract_confirmed_and_sent"/>
+            <field name="relation_field">approval_team_id</field>
+        </record>
+
+        <record id="mt_contract_approved" model="mail.message.subtype">
+            <field name="name">Contract Approved</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">xf.partner.contract</field>
+            <field name="description">Contract approved</field>
+        </record>
+        <record id="mt_contract_approved_team" model="mail.message.subtype">
+            <field name="name">Contract Approved</field>
+            <field name="res_model">xf.partner.contract.team</field>
+            <field name="default" eval="False"/>
+            <field name="parent_id" ref="mt_contract_approved"/>
+            <field name="relation_field">approval_team_id</field>
+        </record>
+
+        <record id="mt_contract_cancelled" model="mail.message.subtype">
+            <field name="name">Contract Cancelled</field>
+            <field name="default" eval="False"/>
+            <field name="res_model">xf.partner.contract</field>
+            <field name="description">Contract cancelled</field>
+        </record>
+        <record id="mt_contract_cancelled_team" model="mail.message.subtype">
+            <field name="name">Contract Cancelled</field>
+            <field name="res_model">xf.partner.contract.team</field>
+            <field name="default" eval="False"/>
+            <field name="parent_id" ref="mt_contract_cancelled"/>
+            <field name="relation_field">approval_team_id</field>
+        </record>
+    </data>
+</odoo>

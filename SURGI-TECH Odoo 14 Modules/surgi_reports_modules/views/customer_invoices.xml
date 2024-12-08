@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="action_view_customer_invoice" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_account_move"/>
+            <field name="code">action=model.button_invoice_action()</field>
+            <field name="name">Customer Invoice</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_customer_invoice" name="Invoice" parent="menu_reports_root"
+                  action="action_view_customer_invoice" sequence="3"/>
+
+    </data>
+</odoo>

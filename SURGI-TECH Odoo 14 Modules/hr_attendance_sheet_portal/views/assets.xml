@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" inherit_id="web.assets_frontend" name="evaluation assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/hr_attendance_sheet_portal/static/toasts.css"/>
+            <link rel="stylesheet" href="/hr_attendance_sheet_portal/static/js/toastr/toastr.min.css"/>
+            <script type="text/javascript" src="/hr_attendance_sheet_portal/static/js/sheet.js"></script>
+            <script type="text/javascript" src="/hr_attendance_sheet_portal/static/js/toastr/toastr.min.js"></script>
+            <script type="text/javascript" src="/hr_attendance_sheet_portal/static/js/jquery-validation/jquery.validate.min.js"></script>
+            <script type="text/javascript" src="/hr_attendance_sheet_portal/static/js/jquery-validation/additional-methods.min.js"></script>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_xf_partner_contract" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.xf_partner_contract</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block"
+                     data-string="Contract Management"
+                     string="Contract Management"
+                     data-key="xf_partner_contract" groups="xf_partner_contract.group_xf_partner_contract_manager">
+                    <h2>Contracts</h2>
+                    <div class="row mt16 o_settings_container" name="purchase_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="contract_approval">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="contract_approval"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                      aria-label="Values set here are company-specific." groups="base.group_multi_company"
+                                      role="img"/>
+                                <div class="text-muted">
+                                    Use team-based approval workflows for contracts
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="contract_approval" class="o_light_label" widget="radio"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="use_contract">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="use_contract"/>
+                                <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                      aria-label="Values set here are company-specific." groups="base.group_multi_company"
+                                      role="img"/>
+                                <div class="text-muted">
+                                    Use contract to create customer invoices and vendor bills
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="use_contract" class="o_light_label" widget="radio"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_xf_partner_contract_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'xf_partner_contract', 'bin_size': False}</field>
+    </record>
+
+    <menuitem
+            id="menu_xf_partner_contract_general_settings"
+            name="Settings"
+            parent="xf_partner_contract.xf_partner_contract_config_menuitem"
+            sequence="0"
+            action="action_xf_partner_contract_configuration"
+            groups="base.group_system"/>
+
+</odoo>

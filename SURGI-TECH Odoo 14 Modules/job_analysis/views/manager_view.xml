@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view -->
+    <record id="manager_answer_line_tree_view" model="ir.ui.view">
+        <field name="name">answer.row.tree</field>
+        <field name="model">answer.row</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="employee_id" readonly="1"/>
+                <field name="grade_id" readonly="1"/>
+                <field name="question_id" readonly="1"/>
+                <field name="question_description" readonly="1"/>
+                <field name="name" readonly="1"/>
+                <field name="answer_date" readonly="1"/>
+                <field name="manager_check"
+                       attrs="{'readonly':['|',('is_manager','!=',True),('state','!=','draft')]}"/>
+                <field name="collection_answer" force_save="1"
+                       attrs="{'readonly':['|',('is_manager','!=',True),('state','!=','draft')]}"/>
+                <field name="parent_check" attrs="{'readonly':['|',('is_parent','!=',True),('state','!=','manager')]}"/>
+                <field name="parent_answer" force_save="1"
+                       attrs="{'readonly':['|',('is_parent','!=',True),('state','!=','manager')]}"/>
+                <field name="hr_check" attrs="{'readonly':['|',('is_hr','!=',True),('state','!=','parent')]}"/>
+                <field name="hr_answer" force_save="1"
+                       attrs="{'readonly':['|',('is_hr','!=',True),('state','!=','parent')]}"/>
+                <field name="job_analysis_type_id"
+                       attrs="{'readonly':['|',('is_hr','!=',True),('state','!=','parent')]}"/>
+                <field name="answer_id" invisible="1"/>
+                <field name="is_manager" invisible="1"/>
+                <field name="is_parent" invisible="1"/>
+                <field name="is_hr" invisible="1"/>
+                <field name="is_access" invisible="1"/>
+                <field name="state" widget="badge" decoration-info="state in ('manager','parent')"
+                       decoration-success="state == 'hr'"/>
+                <button name="manager_approve" type="object"
+                        string="Manager Approve" class="oe_highlight"
+                        attrs="{'invisible': ['|',('state', '!=', 'draft'),('is_manager', '!=', True)]}"/>
+                <button name="parent_approve" type="object"
+                        attrs="{'invisible': ['|',('state', '!=', 'manager'),('is_parent', '!=', True)]}"
+                        string="Parent Approve" class="oe_highlight"/>
+                <button name="hr_approve" type="object"
+                        attrs="{'invisible': ['|',('state', '!=', 'parent'),('is_hr', '!=', True)]}"
+                        string="HR Approve" class="oe_highlight"/>
+                <button name="reset" type="object"
+                        attrs="{'invisible': ['|',('state', 'not in', ('manager','parent','hr')),('is_access','!=',True)]}"
+                        string="Reset"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="answer_line_form_view" model="ir.ui.view">
+        <field name="name">answer.row.form</field>
+        <field name="model">answer.row</field>
+        <field name="arch" type="xml">
+            <form string="Answers">
+                <sheet>
+                    <group>
+                        <field name="question_id" readonly="1"/>
+                        <field name="question_description" readonly="1"/>
+                        <field name="name" readonly="1"/>
+                        <field name="collection_answer" readonly="1"/>
+                        <field name="answer_date" readonly="1"/>
+                        <field name="employee_id" readonly="1"/>
+                        <field name="batch_id" readonly="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+
+    <record id="answer_line_search" model="ir.ui.view">
+        <field name="name">answer.row.search</field>
+        <field name="model">answer.row</field>
+        <field name="arch" type="xml">
+            <search string="Answer Search">
+                <field name="question_id" string="Question"/>
+                <field name="question_description" readonly="1"/>
+                <field name="employee_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Manager Approved" name="manager" domain="[('state','=','manager')]"/>
+                <filter string="Parent Approved" name="parent" domain="[('state','=','parent')]"/>
+                <filter string="HR Approved" name="hr" domain="[('state','=','hr')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="state" domain="[]"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Batch" name="batch" domain="[]" context="{'group_by': 'batch_id'}"/>
+                    <filter string="Position" name="position" domain="[]"
+                            context="{'group_by': 'position_id'}"/>
+                    <filter string="Question" name="question" domain="[]"
+                            context="{'group_by': 'question_id'}"/>
+                    <filter string="Employee" name="employee_id" domain="[]"
+                            context="{'group_by': 'employee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_manager_answer_row">
+        <field name="name">Manager Approve Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">answer.row</field>
+        <field name="search_view_id" ref="answer_line_search"/>
+        <field name="view_id" ref="manager_answer_line_tree_view"/>
+        <field name="binding_view_types">form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_batch': 1,'search_default_position':
+            1,'search_default_question':1,'search_default_draft':1,'create': 0}
+        </field>
+
+    </record>
+    <record model="ir.actions.act_window" id="action_parent_answer_row">
+        <field name="name">Parent Approve Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">answer.row</field>
+        <field name="search_view_id" ref="answer_line_search"/>
+        <field name="view_id" ref="manager_answer_line_tree_view"/>
+        <field name="binding_view_types">form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_batch': 1,'search_default_position':
+            1,'search_default_question':1,'search_default_manager':1,'create': 0}
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_answer_row">
+        <field name="name">HR Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">answer.row</field>
+        <field name="search_view_id" ref="answer_line_search"/>
+        <field name="view_id" ref="manager_answer_line_tree_view"/>
+        <field name="binding_view_types">form</field>
+        <field name="target">current</field>
+        <field name="context">{'search_default_batch': 1,'search_default_position':
+            1,'search_default_question':1,'search_default_parent':1,'create': 0}
+        </field>
+    </record>
+
+    <record id="manager_approve_multi_action" model="ir.actions.server">
+        <field name="name">Manager Approve</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="job_analysis.model_answer_row"/>
+        <field name="binding_model_id" ref="job_analysis.model_answer_row"/>
+        <field name="code">
+            records.manager_approve_multi()
+        </field>
+    </record>
+
+    <record id="parent_approve_multi_action" model="ir.actions.server">
+        <field name="name">Parent Approve</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="job_analysis.model_answer_row"/>
+        <field name="binding_model_id" ref="job_analysis.model_answer_row"/>
+        <field name="code">
+            records.parent_approve_multi()
+        </field>
+    </record>
+
+    <record id="hr_approve_multi_action" model="ir.actions.server">
+        <field name="name">HR Approve</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4, ref('job_analysis.group_job_analysis_manager'))]"/>
+        <field name="model_id" ref="job_analysis.model_answer_row"/>
+        <field name="binding_model_id" ref="job_analysis.model_answer_row"/>
+        <field name="code">
+            records.hr_approve_multi()
+        </field>
+    </record>
+
+    <record id="hr_reset_multi_action" model="ir.actions.server">
+        <field name="name">Reset</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="job_analysis.model_answer_row"/>
+        <field name="binding_model_id" ref="job_analysis.model_answer_row"/>
+        <field name="code">
+            records.reset_multi()
+        </field>
+    </record>
+
+    <menuitem id="menu_manager_parent" parent="menu_job_analysis"
+              name="Managers" sequence="3" groups="job_analysis.group_job_analysis_user"/>
+
+    <menuitem id="menu_manager_approve_analysis" action="action_manager_answer_row"
+              parent="menu_manager_parent"
+              name="Manager Approve" sequence="1"/>
+    <menuitem id="menu_parent_approve_analysis" action="action_parent_answer_row"
+              parent="menu_manager_parent"
+              name="Parent Approve" sequence="2"/>
+
+    <menuitem id="menu_hr_approve_analysis" action="action_hr_answer_row"
+              groups="job_analysis.group_job_analysis_manager"
+              parent="menu_job_analysis"
+              name="HR Report" sequence="4"/>
+
+</odoo>

@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <menuitem
+                id="regularity_menuitem"
+                name="Regulatory"
+                sequence="-1"
+                web_icon="surgi_Regulatory,static/src/img/icon.jpg"
+
+                groups="surgi_Regulatory.reg_viewer_group"
+        />
+
+        <record model="ir.ui.view" id="product_product_form_view_regularity">
+            <field name="name">product.product.regularity.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[last()]" position="after">
+                    <page string="Regulatory" attrs="{'invisible': [('is_medical', '=', False)]}">
+                        <div class="oe_left">
+                            <group>
+                                <field name="productTypeRegularity"/>
+                                <field name="sterilizeField"/>
+                                <field name="regularityRef"/>
+                                <field name="regularityLabelRef"/>
+                                <field name="ProductClass"/>
+                            </group>
+                        </div>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_view_product_product_regularity" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_product_product"/>
+            <field name="code">action=model.button_stock_action()</field>
+            <field name="name">Regulatory</field>
+        </record>
+
+        <menuitem id="menu_product_regularity" name="Product" parent="regularity_menuitem" action="action_view_product_product_regularity"
+                  sequence="-1"/>
+    </data>
+</odoo>

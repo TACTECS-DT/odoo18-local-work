@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="employee_certificate_tree_view" model="ir.ui.view">
+        <field name="name">employees.certificate.tree</field>
+        <field name="model">employees.certificate</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Employees Certificates">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="institute"/>
+                <field name="date"/>
+                <field name="salary_allowance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employees_certificate_form_view" model="ir.ui.view">
+        <field name="name">employees.certificate.form</field>
+        <field name="model">employees.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Employees Certificates">
+                <sheet>
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="institute"/>
+                            <field name="date"/>
+                            <field name="salary_allowance"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_employee_form_certificate" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='grad_year']" position="after">
+                <field name="certificate_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_contract_form_certificate" model="ir.ui.view">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='hazard_pay']" position="after">
+                <field name="certificates_allowance"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_employees_certificate">
+        <field name="name">Employees Certificates</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employees.certificate</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_employees_certificate" action="action_employees_certificate"
+              parent="hr.menu_human_resources_configuration"
+              name="Employees Certificates" sequence="5"/>,
+
+
+</odoo>

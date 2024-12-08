@@ -1,0 +1,260 @@
+
+
+.expense_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.expense_table thead tr {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.expense_table th,
+.expense_table td {
+    padding: 8px 16px;
+}
+
+.expense_table tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+.expense_table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.expense_table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.expense_table tbody tr {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 0.1s;
+}
+
+.expense_table tbody tr:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.expense_table tbody tr:hover > td:nth-child(1)::after {
+    content: attr(data-flip);
+    display: block;
+    position: absolute;
+    visibility: visible;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    line-height: 1.6;
+    padding: 0.75rem;
+    text-align: right;
+}
+
+.expense_table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.expense_table th,
+.expense_table td {
+    padding: 0.5rem;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.expense_table thead th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #dee2e6;
+
+}
+
+.expense_table thead th:first-child {
+    text-align: center;
+}
+.expense_table tbody tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+.expense_table .rounded-pill {
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Add a subtle box-shadow to make elements look like cards */
+.allocation-item {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Add a hover effect to scale up the element and apply a stronger box-shadow */
+.allocation-item:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* Add a transition to the content of the elements for a smooth fade-in effect */
+.allocation-item > div {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Keyframes for the fadeInUp animation */
+@keyframes fadeInUp {
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply a staggered animation-delay to the elements' content */
+.allocation-item:nth-child(1) > div {
+    animation-delay: 0.3s;
+}
+
+.allocation-item:nth-child(2) > div {
+    animation-delay: 0.6s;
+}
+
+.allocation-item:nth-child(3) > div {
+    animation-delay: 0.9s;
+}
+/* Add padding and a background color to the container */
+.allocation-container {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Add rounded borders to the allocation items */
+.allocation-item {
+    border-radius: 5px;
+}
+/* Add padding and a background color to the container */
+.allocation-container {
+    padding: 2px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Add rounded borders and margin to the allocation items */
+.allocation-item {
+    border-radius: 5px;
+    margin: 0 2px; /* Add 5px horizontal margin between the items */
+}
+/* Add padding, a background color, and a border to the container */
+.allocation-container {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 2px solid #dee2e6; /* Add a border to the container */
+}
+
+/* Add rounded borders, margin, and a background color to the allocation items */
+.allocation-item {
+    border-radius: 5px;
+    margin: 0 5px; /* Add 5px horizontal margin between the items */
+    border: 1px solid #dee2e6; /* Add a border to each item */
+    background-color: #ffffff; /* Add a slight background color */
+}
+/* Update CSS for the allocation items */
+/* Update CSS for the allocation items */
+.allocation-item:nth-child(1) {
+    background-color: #f8c4c4;
+}
+.allocation-item:nth-child(2) {
+    background-color: #c4f8f2;
+}
+.allocation-item:nth-child(3) {
+    background-color: #c4d0f8;
+}
+.allocation-item:nth-child(4) {
+    background-color: #e1c4f8;
+}
+.allocation-item:nth-child(5) {
+    background-color: #f8c4e8;
+}
+.allocation-item:nth-child(6) {
+    background-color: #f3c4f8;
+}
+.allocation-item:nth-child(7) {
+    background-color: #c4f8cd;
+}
+.allocation-item:nth-child(8) {
+    background-color: #f8ecc4;
+}
+.allocation-item:nth-child(9) {
+    background-color: #f8d1c4;
+}
+.allocation-item:nth-child(10) {
+    background-color: #c4f8e8;
+}
+.allocation-item:nth-child(11) {
+    background-color: #d6f8c4;
+}
+.allocation-item:nth-child(12) {
+    background-color: #c4f8db;
+}
+.allocation-item:nth-child(13) {
+    background-color: #f8c4f3;
+}
+.allocation-item:nth-child(14) {
+    background-color: #c4e5f8;
+}
+.allocation-item:nth-child(15) {
+    background-color: #f8c4c8;
+}
+.allocation-item:nth-child(16) {
+    background-color: #c4f8f5;
+}
+.allocation-item:nth-child(17) {
+    background-color: #f8c4dd;
+}
+.allocation-item:nth-child(18) {
+    background-color: #c4f8de;
+}
+.allocation-item:nth-child(19) {
+    background-color: #f8c4ed;
+}
+.allocation-item:nth-child(20) {
+    background-color: #c4f8ea;
+}
+.bgsuccess {
+    background-color: #7ed6df !important;
+    color: #ffffff !important;
+}
+.expense_table tbody tr.bg-success {
+    background-color: #7ed6df !important;
+}
+
+.expense_table tbody tr.bg-success td,
+.expense_table tbody tr.bg-success th {
+    color: #ffffff !important;
+}
+.custom-modal-body {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.custom-modal-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}

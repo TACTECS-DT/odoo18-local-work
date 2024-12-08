@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <record id="form_view_request_wizard" model="ir.ui.view">
+            <field name="name">name.request.wizard.form</field>
+            <field name="model">request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Request Wizard">
+                    <sheet>
+                        <group col="4">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                        </group>
+                        <footer>
+                            <button name="request_create" string="Create Request" class="oe_right oe_highlight"
+                                    type="object"/>
+                            <button string="Cancel" class="oe_right" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_request_wizard" model="ir.actions.act_window">
+            <field name="name">Request Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">request.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_view_request_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="request_menu_wizard_categ" name="Request Wizard"
+                  parent="surgi_evaluation_menuitem" action="action_view_request_wizard" sequence="12"/>
+    </data>
+</odoo>

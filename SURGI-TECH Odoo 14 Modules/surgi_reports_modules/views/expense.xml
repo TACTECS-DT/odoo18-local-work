@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+
+
+        <record id="action_view_hr_expense" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_hr_expense"/>
+            <field name="code">action=model.button_expense_action()</field>
+            <field name="name">HR Expense</field>
+        </record>
+
+
+
+<!--        <record id="action_view_hr_expense" model="ir.actions.act_window">-->
+<!--            <field name="name">Expense</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">hr.expense</field>-->
+<!--            <field name="view_mode">tree,kanban,form,graph,pivot,activity</field>-->
+<!--        </record>-->
+
+        <menuitem id="menu_hr_expense" name="Expense" parent="menu_reports_root"
+                  action="action_view_hr_expense" sequence="4"/>
+
+
+    </data>
+</odoo>

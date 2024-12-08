@@ -1,0 +1,168 @@
+<odoo>
+
+
+
+        <template id="report_credit_note_demo">
+
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="o">
+
+                 <t t-call="surgi_invoice_print.report_invoice_a">
+                        <div class="page">
+
+                     <div class="row">
+                         <div class="col-12">
+                             <img t-if="o.qr_image" t-att-src="image_data_uri(o.qr_image)"
+                             style="max-height: 100px; position: absolute; left:800px;"  alt="QR"/>
+                         </div>
+                     </div>
+                    <div  style="text-align: center;"><h1>Credit Note</h1></div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style="text-align: center;"><h1 t-field="o.name"/></div>
+
+                     <div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+
+
+                    <div>
+                        <div class="row">
+                            <div class="col-2">ORDER NO.</div>
+                            <div class="col-8" style="text-align: center;"><span t-field="o.related_operation"/></div>
+                            <div class="col-2">رقم الأمر</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">DATE</div>
+                            <div class="col-8" style="text-align: center;"><span t-field="o.invoice_date"/></div>
+                            <div class="col-2">التاريخ</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">CLIENT NAME</div>
+                            <div class="col-8" style="text-align: center;">
+                                <span t-field="o.partner_id.name"/>
+                                <span t-field="o.partner_arabic_name"/>
+                            </div>
+                            <div class="col-2">اسم العميل</div>
+                        </div>
+<!--                        <div class="row">-->
+<!--                            <div class="col-12">-->
+<!--                                <br/>-->
+<!--                                <b>Operation: <span t-field="o.related_operation"/></b>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                    <br/>
+                        <div t-if="o.creditNoteReason or o.CreditNoteMethod" style="text-align: left;">
+                                 <strong>Original Invoice: </strong> <span t-field="o.creditNoteOrginlMove"/>
+                            </div>
+                            <div t-if="o.creditNoteReason or o.CreditNoteMethod" style="text-align: left;">
+                                <strong>Credit Note Reason: </strong> <span t-field="o.creditNoteReason"/>
+                            </div>
+                            <div t-if="o.creditNoteReason or o.CreditNoteMethod" style="text-align: left;">
+                                <strong>Credit Note Method: </strong> <span t-field="o.CreditNoteMethod"/>
+                            </div>
+                            <table class="table" style="width:100%; margin-top: 80px;">
+                        <tr>
+                            <th><span>DESCRIPTION</span><br/><span>الصنف</span></th>
+                            <th><span>QTY</span><br/><span>الكمية</span></th>
+                            <th><span>PCS PRICE</span><br/><span>سعر الوحدة</span></th>
+                            <th><span>TOTAL</span><br/><span>الاجمالى</span></th>
+                        </tr>
+
+                            <t t-foreach="o.printinvoicetoline" t-as="line">
+                            <tr>
+                                <td><span t-field="line.description"/></td>
+                                <td><span t-if="line.uquantity>0" t-field="line.uquantity"/></td>
+                                <td><span t-if="line.uprice>0" t-field="line.uprice"/></td>
+                                <td><span t-if="line.total>0" t-field="line.total"/></td>
+                            </tr>
+                        </t>
+                    </table>
+
+<div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                <table class="table table-sm" style="page-break-inside: avoid;">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Subtotal</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                        <tr style="">
+                                            <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+                                                <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
+                                                <td class="text-right o_price_total">
+                                                    <span class="text-nowrap" t-esc="amount_by_group[3]" />
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    <span t-esc="amount_by_group[0]"/>
+                                                    <span class="text-nowrap"> on
+                                                        <t t-esc="amount_by_group[4]"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-right o_price_total">
+                                                    <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr class="border-black o_total">
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right">
+                                            <span class="text-nowrap" t-field="o.amount_total"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="direction:rtl; text-align:right;">
+                        الاجمالى : <span t-field="o.amount_total_words"/>جنيهاً
+                    </p>
+                            </div>
+
+<!--                        </div>-->
+                 </t>
+
+            </t>
+        </t>
+    </template>
+
+<!--<record id="invoice_pformat" model="report.paperformat">-->
+<!--    <field name="name">Invoice Format</field>-->
+<!--    <field name="default" eval="True"/>-->
+<!--         <field name="orientation">Portrait</field>-->
+
+<!--    <field name="margin_bottom">0</field>-->
+
+<!--</record>-->
+<!--  <report
+        id="account_invoices"
+        model="account.move"
+        string="Invoice Print Report"
+        name="surgi_invoice_print.report_credit_note_demo"
+        file="surgi_invoice_print.report_credit_note_demo"
+        report_type="qweb-pdf"
+        paperformat="invoice_pformat"
+    /> -->
+
+ <record id="surgi_credit_note_print_report" model="ir.actions.report">
+        <field name="name">printed Credit Note</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">surgi_invoice_print.report_credit_note_demo</field>
+    </record>
+
+</odoo>

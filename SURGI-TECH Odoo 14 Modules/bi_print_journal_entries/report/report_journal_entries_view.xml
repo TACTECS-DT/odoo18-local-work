@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <template id="journal_entry_template_report_view">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page">
+                    <br/>
+                    <br/>
+                    <div class="oe_structure"/>
+                    <div>
+                        <h3 class="text-center mb32">
+                            <strong>Journal Entry</strong>
+                        </h3>
+                    </div>
+                    <br/>
+
+                    <div class="row" id="journal_information">
+                        <div class="col-8">
+                            <div>
+                                <strong>Journal Entry :</strong>
+                                <p t-field="o.name"/>
+                            </div>
+
+                            <div class="text-left">
+                                <strong>Date :</strong>
+                                <p t-field="o.date"/>
+                            </div>
+                        </div>
+
+                        <div class="col-8">
+                            <div>
+                                <strong>Journal :</strong>
+                                <p t-field="o.journal_id"/>
+                            </div>
+                            <div class="text-left">
+                                <strong>Reference :</strong>
+                                <p t-field="o.ref"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br/>
+                    <br/>
+                    <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Partner</th>
+                                <th>Account</th>
+                                <th>Label</th>
+                                <th>Due Date</th>
+                                <th>Analytic Account</th>
+                                <th>Taxes(%)</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="consumed_tbody">
+                            <t t-set="total" t-value="0.0"/>
+                            <t t-set="total1" t-value="0.0"/>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td>
+                                        <span t-field="line.partner_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.account_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.date_maturity"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.analytic_account_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.tax_ids"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.debit"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.credit"/>
+                                    </td>
+                                </tr>
+                                <t t-set="total" t-value="total + line.debit"/>
+                                <t t-set="total1" t-value="total1 + line.credit"/>
+                            </t>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <strong>Total:</strong>
+                                </td>
+                                <td width="10%">
+                                    <strong>
+                                        <span>
+                                            <t t-esc="total"/>
+                                        </span>
+                                    </strong>
+                                </td>
+                                <td width="10%">
+                                    <strong>
+                                        <span>
+                                            <t t-esc="total1"/>
+                                        </span>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+
+
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <strong>Created by:</strong>
+                            <t t-if="o.expenses_created_by">
+                                <p t-field="o.expenses_created_by"/>
+                            </t>
+                            <t t-else="">
+                                <p t-field="o.move_created_by"/>
+                            </t>
+                        </div>
+                        <div class="col-3">
+                            <strong>Created On:</strong>
+                            <t t-if="o.expenses_created_on">
+
+                                <p t-field="o.expenses_created_on"/>
+                            </t>
+                            <t t-else="">
+                                <p t-field="o.move_created_on"/>
+                            </t>
+                        </div>
+                        <div class="col-3">
+                            <strong>Approved By:</strong>
+                            <p t-field="o.expenses_approve_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Approved On:</strong>
+                            <p t-field="o.expenses_approve_on"/>
+                        </div>
+
+                    </div>
+                    <br/><br/>
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <strong>Accountant Reviewed By:</strong>
+                            <p t-field="o.account_reviewed_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Accountant Reviewed On:</strong>
+                            <p t-field="o.account_reviewed_on"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Treasury Manager By:</strong>
+                            <p t-field="o.treasury_manager_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Treasury Manager On:</strong>
+                            <p t-field="o.treasury_manager_on"/>
+                        </div>
+
+
+                    </div>
+                    <br/><br/>
+                    <div class="row mt32 mb32">
+
+                        <div class="col-3">
+                            <strong>Submitted By:</strong>
+                            <p t-field="o.submitted_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Submitted On:</strong>
+                            <p t-field="o.submitted_on"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Posted By:</strong>
+                            <t t-if="o.post_by">
+
+                                <p t-field="o.post_by"/>
+                            </t>
+                            <t t-else="">
+
+                                <p t-field="o.move_post_by"/>
+                            </t>
+                        </div>
+                        <div class="col-3">
+                            <strong>Posted On:</strong>
+                            <t t-if="o.post_on">
+
+                                <p t-field="o.post_on"/>
+                            </t>
+                            <t t-else="">
+
+                                <p t-field="o.move_post_on"/>
+                            </t>
+                        </div>
+
+                    </div>
+                    <br/><br/>
+                    <div class="row mt32 mb32">
+
+                        <div class="col-3">
+                            <strong>Second Approved By:</strong>
+                            <p t-field="o.secend_approved_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>Second Approved On:</strong>
+                            <p t-field="o.secend_approved_on"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>CFO Approved By:</strong>
+                            <p t-field="o.cfo_approved_by"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>CFO Approved On:</strong>
+                            <p t-field="o.cfo_approved_on"/>
+                        </div>
+
+
+                    </div>
+                    <div class="row mt32 mb32">
+
+                        <div class="col-3">
+                            <strong>Reset To Draf By:</strong>
+                            <t t-if="o.reset_by">
+
+                                <p t-field="o.reset_by"/>
+                            </t>
+                            <t t-else="">
+                                <p t-field="o.move_reset_by"/>
+
+                            </t>
+
+                        </div>
+                        <div class="col-3">
+                            <strong>Reset To Draft On:</strong>
+                            <t t-if="o.reset_on">
+
+                                <p t-field="o.reset_on"/>
+                            </t>
+                            <t t-else="">
+                                <p t-field="o.move_reset_on"/>
+
+                            </t>
+                        </div>
+
+
+                    </div>
+                    <!--                <br/><br/>-->
+                    <!--                <div class="row mt32 mb32">-->
+
+                    <!--                    <div class="col-3">-->
+                    <!--                        <strong>Received By</strong>-->
+                    <!--                        <br/><br/>-->
+                    <!--            ...................................................-->
+                    <!--                    </div>-->
+
+                    <!--                </div>-->
+
+                    <br/>
+                    <br/>
+
+
+                    <br/>
+                    <br/>
+
+                    <center>
+                        <div style="width:100%;" dir="rtl">
+                            <div style="width:35%;float:right">
+                                <strong style="text-align:right">
+                                    Created By
+                                    <br/>
+                                    <span t-esc="o.create_uid.name"/>
+                                    <br/>
+                                    <br/>
+                                    ....................................................................
+                                </strong>
+                            </div>
+                            <div style="width:35%;float:left">
+                                <strong style="text-align:left">Approved By
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ....................................................................
+                                </strong>
+                            </div>
+                            <div style="width:30%;float:left">
+
+                                <strong>
+                                    <span t-if="o.journal_id.type == 'bank'">Bank Statement</span>
+                                    <span t-else="">Cash Statement</span>
+                                </strong>
+
+                                <strong style="text-align:center">Reviewed
+                                    <br/>
+                                    <span t-esc="o.entry_reviewed_by"/>
+                                    <br/>
+<!--                                    <span t-esc="o.entry_reviewed_on"/>-->
+
+                                    <br/>
+
+                                </strong>
+                            </div>
+
+                        </div>
+                    </center>
+
+                </div>
+            </t>
+        </template>
+
+        <template id="journal_entry_report_template_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bi_print_journal_entries.journal_entry_template_report_view" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

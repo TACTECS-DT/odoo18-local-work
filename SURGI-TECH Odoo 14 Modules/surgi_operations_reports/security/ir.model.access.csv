@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surgi_operations_reports_surgi_operations_reports,surgi_operations_reports.surgi_operations_reports,model_surgi_operations_reports_surgi_operations_reports,base.group_user,1,1,1,1

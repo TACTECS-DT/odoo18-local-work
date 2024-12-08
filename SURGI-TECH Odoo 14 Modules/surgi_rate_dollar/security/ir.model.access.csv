@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surgi_rate_dollar_surgi_dollar_value,dollar value,model_dollar_rate,base.group_user,1,1,1,1

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="job_analysis_batch_tree_view" model="ir.ui.view">
+        <field name="name">job.analysis.batch.tree</field>
+        <field name="model">job.analysis.batch</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Job Analysis Batch'">
+                <field name="name"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="user_id"/>
+                <field name="type"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'confirm'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="job_analysis_batch_form_view" model="ir.ui.view">
+        <field name="name">job.analysis.batch.form</field>
+        <field name="model">job.analysis.batch</field>
+        <field name="arch" type="xml">
+            <form string="Job Analysis Batch">
+                <header>
+                    <button name="confirm" type="object"
+                            string="Confirm" class="oe_highlight" states="draft"/>
+                    <button name="reset" type="object" groups="job_analysis.group_job_analysis_manager"
+                            string="Reset" states="confirm"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="show_questionnaires" type="object" class="oe_stat_button" icon="fa-envelope-o">
+                            <field string="Registered" name="answer_count" widget="statinfo"/>
+                        </button>
+                        <button name="show_collections" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                            <field string="Collections" name="answer_done_count" widget="statinfo"/>
+                        </button>
+                        <button name="show_answer_row" type="object" string="Answer Report" class="oe_stat_button" icon="fa-list"/>
+                    </div>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="from_date" string="Period"/>
+                            <div>
+                                <field name="from_date" class="oe_inline" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                -
+                                <field name="to_date" class="oe_inline"
+                                       nolabel="1" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </div>
+                        </group>
+                        <group >
+                            <field name="type" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="company_ids" widget="many2many_tags"
+                                   attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','!=','company')],'required':[('type','=','company')]}"/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','!=','employee')],'required':[('type','=','employee')]}"/>
+                            <field name="category_ids" widget="many2many_tags"
+                                   attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','!=','tag')],'required':[('type','=','tag')]}"/>
+                            <field name="department_ids" widget="many2many_tags"
+                                   attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','!=','department')],'required':[('type','=','department')]}"/>
+                            <field name="company_id" groups="base.group_multi_company" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="user_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Questionnaire" name="questionnaire_ids">
+                            <field name="questionnaire_ids" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree string="Questionnaire" editable="bottom">
+                                    <field name="code"/>
+                                    <field name="name" string="Question"/>
+                                    <field name="description" string="Question"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="job_analysis_batch_search" model="ir.ui.view">
+        <field name="name">job.analysis.batch.search</field>
+        <field name="model">job.analysis.batch</field>
+        <field name="arch" type="xml">
+            <search string="Search Job Analysis">
+                <field name="name" string="Name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="user_id"/>
+                <separator/>
+                <filter string="Date" name="filter_start_date" date="from_date"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Batch Type" name="type" domain="[]" context="{'group_by': 'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_job_analysis_batch">
+        <field name="name">Job Analysis Batch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">job.analysis.batch</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="job_analysis_batch_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <menuitem id="menu_job_analysis"
+              name="Job Analysis" sequence="5" web_icon="job_analysis,static/description/icon.png"/>
+    <menuitem id="menu_job_analysis_batch" action="action_job_analysis_batch" parent="menu_job_analysis"
+              name="Job Analysis Batch" sequence="1" groups="job_analysis.group_job_analysis_manager"/>
+</odoo>

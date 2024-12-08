@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> <!--  noupdate="1" -->
+        <menuitem
+                id="xf_partner_contract_root_menuitem"
+                name="Contract Management"
+                web_icon="xf_partner_contract,static/description/icon.png"
+                groups="xf_partner_contract.group_xf_partner_contract_user"/>
+        />
+        <menuitem
+                id="xf_partner_contract_config_menuitem"
+                name="Configuration"
+                parent="xf_partner_contract.xf_partner_contract_root_menuitem"
+                groups="xf_partner_contract.group_xf_partner_contract_team_leader"/>
+        />
+    </data>
+</odoo>

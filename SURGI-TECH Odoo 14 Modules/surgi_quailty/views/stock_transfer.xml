@@ -1,0 +1,54 @@
+<odoo>
+
+    <data>
+
+
+
+        <record id="action_view_stock_transfer" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="code">action=model.button_stock_action()</field>
+            <field name="name">Stock Transfer</field>
+        </record>
+
+
+
+
+                <record id="qstock_picking_operation_check_field" model="ir.ui.view">
+			<field name="name">stock.picking.operation.check.field</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='state_delivery']" position="after">
+
+
+                                <field name="quality_check" />
+
+
+				</xpath>
+			</field>
+			</record>
+
+
+		        <record id="stock_picking_operation_check_button" model="ir.ui.view">
+			<field name="name">stock.picking.operation.check.button</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//header" position="inside">
+
+					<button name="quality_check_button" string="Quality Check"  type="object" attrs="{'invisible': [('quality_check', '=', True),],}" groups="surgi_quailty.quality_viewer_group"/>
+					<button name="quality_uncheck_button" string="Quality Uncheck"  type="object"  attrs="{'invisible': [('quality_check', '=', False),],}" groups="surgi_quailty.quality_viewer_group"/>
+
+
+
+				</xpath>
+			</field>
+			</record>
+
+        <menuitem id="menu_stock_transfer" name="Operation Transfer" parent="operations_quality_menuitem" action="action_view_stock_transfer" sequence="5"/>
+    </data>
+
+</odoo>

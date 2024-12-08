@@ -1,0 +1,205 @@
+<odoo>
+    <data>
+
+
+        <template id="partner_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="header" style="margin-bottom:50;margin-top:0px;">
+                            <div class="text-right" style="float:right; width:50%;">
+                                <p style="text-align:right;" dir="rtl">
+                                    <strong style="font-size: 18px;">
+                                        <br/>
+                                        <br/>
+                                        SURGI-TECH
+                                        <br/>
+                                        سيــــــــرجي تـــــــك
+
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="text-left" style="float:left; width:50%;">
+                                <p style="text-align:left;font-size: 20px;padding-right:25px;">
+                                    <strong>
+                                        <br/>
+                                        <img align="center" width="250px;" hieght="200px;"
+                                             src="/surgi_partner_report/static/src/img/logo.jpg"/>
+                                        <br/>
+                                    </strong>
+                                </p>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div style="width:100%;border:1px solid black;"/>
+                        </div>
+                        <div class="page">
+                            <center>
+                                <!--                                <h3 align="center" style="border-bottom: 2px solid black;width:50%">-->
+                                <!--                                    Vendor Card-->
+                                <!--                                </h3>-->
+                                <!--                                -->
+                                <div style="width:80%">
+                                    <table style="border-collapse: collapse;width: 100%;"
+                                           class="table table-sm table-bordered oe_inline">
+                                        <thead>
+                                            <tr style="background-color:#004d99;color:#ffffff;height:1cm;">
+                                                <td colspan="3">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Vendor Card</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+                                            <tr style="background-color:#004d99;color:#ffffff;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Company Name</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+                                                <td colspan="2">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Company Code</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+                                            <tr style="background-color:#eaeae1;color:black;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.name"/>
+                                                    </center>
+                                                </td>
+                                                <td colspan="2">
+                                                    <center>
+                                                        <span t-esc="o.ref"/>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#004d99;color:#ffffff;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Street</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>City</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Country</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="background-color:#eaeae1;color:black;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.street"/>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.city"/>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.country_id.name"/>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr style="background-color:#004d99;color:#ffffff;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>phone</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>Contact person</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <b>
+                                                            <h4>email</h4>
+                                                        </b>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr style="background-color:#eaeae1;color:black;height:1cm;">
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.phone"/>
+                                                    </center>
+                                                </td>
+                                                <td colspan="1">
+                                                    <t t-foreach="o.child_ids" t-as="chile">
+                                                        <center>
+                                                            <span t-esc="chile.name"/>-
+                                                        </center>
+                                                    </t>
+                                                </td>
+                                                <td colspan="1">
+                                                    <center>
+                                                        <span t-esc="o.email"/>
+                                                    </center>
+                                                </td>
+
+                                            </tr>
+
+
+                                        </thead>
+                                    </table>
+                                </div>
+                            </center>
+
+                        </div>
+<!--                        <div class="footer" style="margin-top:50px;">-->
+<!--                            <div class="row" style="margin-top:50px;">-->
+<!--                                <div class="col-12"></div>-->
+<!--                            </div>-->
+<!--                           -->
+<!--                            <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                                Page:-->
+<!--                                <span class="page"/>-->
+<!--                                of-->
+<!--                                <span class="topage"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

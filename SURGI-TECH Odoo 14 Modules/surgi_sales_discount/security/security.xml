@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+
+<!-- 
+            <record model="ir.module.category" id="surgitech_sales_discount_category">
+        <field name="name">Sales Discount</field>
+        <field name="description">Sales Discount over 5%</field>
+       <field name="sequence">11</field> 
+         </record>
+        <record id="sales_discount_permissions" model="res.groups">
+            <field name="name">Can Make Dicount Over 5%</field>
+           <field name="category_id" ref="surgitech_sales_discount_category"/>
+        </record> -->
+            <record id="sales_discount_permissions" model="res.groups">
+             <field name="name">Can Make Dicount Over 5%</field>
+
+        </record>
+        <record id="sales_discount_apply_negative" model="res.groups">
+            <field name="name">Can Make Negative Dicount</field>
+
+       </record>
+
+    </data>
+</odoo>

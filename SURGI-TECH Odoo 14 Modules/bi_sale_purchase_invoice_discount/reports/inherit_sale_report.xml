@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_sale_discount_inherit" inherit_id="sale.report_saleorder_document">
+            <xpath
+                    expr="//div[@class='clearfix']"
+                    position="replace">
+                <div class="clearfix">
+                    <div class="row" name="total">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <table class="table table-sm">
+
+                                <t t-if="doc.apply_discount == True">
+                                    <tr class="border-black is-subtotal text-right"
+                                        style="border-bottom:1px solid #dddddd;">
+                                        <td>
+                                            <strong>Amount Before Discount</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.amount_untaxed"
+                                                  t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-black is-subtotal text-right">
+                                        <td>
+                                            <strong>Discount Type</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.discount_type_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-black is-subtotal text-right">
+                                        <td>
+                                            <strong>Sale Discount</strong>
+                                        </td>
+                                        <t t-if="doc.discount_type_id.name == 'Percent'">
+											<td class="text-right">
+												<span t-field="doc.discount_value" />
+												%
+											</td>
+										</t>
+										<t t-if="doc.discount_type_id.name == 'Fixed'">
+											<td class="text-right">
+												<span t-field="doc.discount_value" />
+											</td>
+										</t>
+
+                                    </tr>
+                                    <tr class="border-black is-subtotal text-right">
+                                        <td>
+                                            <strong>Amount After Discount</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.amount_after_discount"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.apply_discount == False">
+                                    <tr class="border-black is-subtotal text-right">
+                                        <td>
+                                            <strong>Total Without Taxes</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.amount_untaxed"
+                                                  t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr class="border-black is-subtotal text-right">
+                                    <td>Taxes</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_tax"
+                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                    </td>
+                                </tr>
+                                <tr class="border-black is-subtotal text-right">
+                                    <td>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_total"
+                                              t-field-options='{"widget": "monetary", "display_currency": "doc.pricelist_id.currency_id"}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

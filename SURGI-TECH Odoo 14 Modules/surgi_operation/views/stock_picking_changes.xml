@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+	    
+	    <record model="ir.ui.view" id="view_stock_quant_freeze">
+	<field name="name">These Items Will be freezed</field>
+	<field name="model">stock.quant</field>
+<!--	<field name="groups_id"></field>-->
+
+	<field name="type">form</field>
+        <field name="arch" type="xml">
+
+
+            <tree create="false">
+                <field name="product_id"/>
+            </tree>
+
+
+        </field>
+
+
+</record>
+
+	    
+	    
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+<!--		        <xpath expr="//header" position="inside">-->
+<!--                    <button name="open_wizard_cancel_operation" states="" type="object" string="Cancel" icon="fa-pencil" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['done','assigned','cancel'])]}"/>-->
+
+<!--                </xpath>-->
+<!--                <xpath expr="//button[@name='action_cancel']" position="attributes">-->
+<!--                    <attribute name="invisible">True</attribute>-->
+<!--                </xpath>-->
+
+                <field name="picking_type_id" position="after">
+                    <field name="surgeries_supply_checked" invisible="True"/>
+                    <!-- Adding invisible field for filter -->
+<!--                    <field name="reviewed"/>-->
+                    <field name="source_location_is_operation" invisible="1"/>
+                    <field name="destination_location_is_operation" invisible="1"/>
+                    <field name="source_location_is_freeze" invisible="1"/>
+                    <field name="destination_location_is_freeze" invisible="1"/>
+                </field>
+
+                <xpath expr="//header" position="inside">
+                    <button string="Freeze Location" name="setoperationlocationfreeze" type="object"
+                            attrs="{'invisible':['|',('source_location_is_operation', '=', False),('source_location_is_freeze', '!=', False)]}"/>
+                </xpath>
+                    <field name="location_dest_id" position="attributes">
+                        <attribute name="required">False</attribute>
+                    </field>
+                <!-- Adding Reviewed button -->
+<!--                <xpath expr="//header" position="inside">-->
+<!--                    <button  string="Set Reviewed" attrs="{'invisible':[('reviewed', '=', True)]}" name="setReviewed"  type="object" />-->
+<!--                </xpath>-->
+
+<!--                <xpath expr="//header/button[@name='action_cancel']" position="replace">-->
+<!--                    &lt;!&ndash;open_stock_wizard_cancel_operation&ndash;&gt;-->
+<!--                    <button name="open_stock_wizard_cancel_operation" states="assigned,confirmed,partially_available,draft,waiting" string="Cancel" groups="base.group_user" type="object"/>-->
+<!--                </xpath>-->
+
+                <xpath expr="//page[2]" position="after">
+                    <page string="Operation Components">
+                        <group>
+                            <field name="operation_components_ids" widget="many2many"/>
+                        </group>
+                        <group>
+                            <field name="operation_product_lines" >
+                                <tree string="Product lines">
+                                    <field name="product_id" create="false" edit="false"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[3]" position="after">
+                    <page string="Cancel Reason" attrs="{'invisible':[('state','!=','cancel')]}">
+                        <group>
+                            <field name="reason"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </page>
+                </xpath>
+
+                </field>
+                </record>
+
+
+        <!-- Inherit tree View to add filter on  it -->
+<!--        <record id="stock_picking_inherited" model="ir.ui.view">-->
+<!--            <field name="name">stock.picking.inherited</field>-->
+<!--            <field name="model">stock.picking</field>-->
+<!--            <field name="inherit_id" ref="stock.view_picking_internal_search"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//filter[@name='draft']" position="after">-->
+<!--                    <filter name="reviewed" string="Reviewed" domain="[('reviewed','=',True)]" />-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

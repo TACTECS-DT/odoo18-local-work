@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="assets_frontend_portal_loan" name="Website Form Assets Frontend"
+                  inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/expense_portal/static/src/toastr/toastr.min.js"/>
+                <script type="text/javascript" src="/expense_portal/static/src/js/perform.js"/>
+                <script type="text/javascript" src="/expense_portal/static/src/js/table_select_ids.js"/>
+                <script type="text/javascript" src="/expense_portal/static/src/chocies/scripts/choices.min.js"/>
+                <link type="text/css" rel="stylesheet" href="/expense_portal/static/src/chocies/styles/choices.min.css"/>
+                <link type="text/css" rel="stylesheet" href="/expense_portal/static/src/toastr/toastr.min.css"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

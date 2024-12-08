@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+<record id="tenderoperation_inherit_tenderaprove" model="ir.ui.view">
+    <field name="name">tenderaprove.operation.form.inherit</field>
+    <field name="model">operation.operation</field>
+    <field name="inherit_id" ref="surgi_operation.operation_form"/>
+    <field name="arch" type="xml">
+        <field name="consumed_items_file" position="after">
+            <field name="is_tenderx" invisible="1"/>
+            <field name="tenderaprove" 
+            readonly="1"
+             attrs="{'invisible': [('is_tenderx', '!=',True)]}" >
+                <tree>
+                <field name="username" />
+                <field name="aproved" />
+            </tree>
+                </field>
+        </field>
+    </field>
+</record>
+       
+        
+        
+        
+      <record id="tenderadminoperation_inherit_tenderaprove_is_tenderx" model="ir.ui.view">
+    <field name="name">is_tenderx.tenderadminaprove.operation.form.inherit</field>
+    <field name="model">operation.operation</field>
+    <field name="inherit_id" ref="surgi_operation.tender_operations_admin_form"/>
+    <field name="arch" type="xml">
+        <field name="responsible" position="after">
+            <field name="is_tenderx"/>
+            
+        </field>
+        
+        
+        
+         <xpath expr="//header" position="inside">
+            <button name="tender_aprove_admin" type="object" string="Aprove Tender" class="oe_highlight" groups="surgi_operation.operations_tender_aprove" attrs="{'invisible': [('is_tenderx', '!=',True)]}"/>
+            </xpath>
+        
+    </field>
+          
+          
+          
+          
+          
+</record>
+        
+ <record id="tenderadminaproveoperation_inherit_tenderaprove_responsible" model="ir.ui.view">
+    <field name="name">responsible.tenderadminaproveaprove.operation.form.inherit</field>
+    <field name="model">operation.operation</field>
+    <field name="inherit_id" ref="surgi_operation.tender_operations_admin_form"/>
+    <field name="arch" type="xml">
+        
+        <field name="operation_type" position="after">
+              <field name="tenderaprove" 
+            readonly="1"
+              >
+                <tree>
+                <field name="username" />
+                <field name="aproved" />
+            </tree>
+                </field>
+        </field>
+       
+   </field>
+          
+          
+          
+          
+          
+</record>     
+        
+        
+
+    </data>
+</odoo>

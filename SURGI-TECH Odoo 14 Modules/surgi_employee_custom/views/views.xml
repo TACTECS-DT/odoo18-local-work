@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="view_hr_payslip_filter_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.search.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field string="Registration Number Not Contains" name="registration_number"
+                           filter_domain="[('registration_number', '!=', self)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

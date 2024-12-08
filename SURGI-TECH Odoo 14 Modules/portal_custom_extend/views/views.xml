@@ -1,0 +1,37 @@
+<odoo>
+    <template id="my_profile_inherit" inherit_id="portal_custom.my_profile">
+        <xpath expr="//ul[@id='myTab']" position="inside">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="private"
+                   aria-selected="false">
+                    Medical Insurance
+                </a>
+            </li>
+        </xpath>
+        <xpath expr="//div[@id='myTabContent']" position="inside">
+            <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">
+                <br/>
+                <div class="row profile-section">
+                    <div class="col-md-6">
+                        <div class="section">
+                            <h6 class="text-primary">Medical Insurance</h6>
+                            <div class="info">
+                                Has Medical Insurance:
+                                <input type="checkbox" disabled="disabled" t-att-checked="emp.medical_ins_exist"/>
+                            </div>
+                            <div t-if="emp.medical_ins_exist" class="info">Medical Co.: <span
+                                    t-field="emp.medical_company"/></div>
+                            <div t-if="emp.medical_ins_exist" class="info">Medical No.: <span
+                                    t-field="emp.medical_number_char"/></div>
+                            <div t-if="emp.medical_ins_exist" class="info">Medical Insurance Date: <span
+                                    t-field="emp.mi_date"/></div>
+                            <div t-if="emp.medical_ins_exist" class="info">Password: <span
+                                    t-field="emp.medical_password"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

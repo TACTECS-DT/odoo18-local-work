@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+
+
+<!--        <record id="form_view_hr_employee_inherit" model="ir.ui.view">-->
+<!--            <field name="name">name.hr.employee.inherit.form</field>-->
+<!--            <field name="model">hr.employee</field>-->
+<!--            <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//field[@name='address_home_id']" position="attributes">-->
+<!--                    <attribute name="groups">surgi_help_desk_category.group_helpdesk_my_request</attribute>-->
+<!--                </xpath>-->
+
+<!--&lt;!&ndash;                <xpath expr="//field[@name='address_home_id']" position="replace">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="address_home_id" groups="surgi_help_desk_category.group_helpdesk_my_request"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_helpdesk_team_inherit" model="ir.ui.view">
+            <field name="name">name.helpdesk.team.form.inherit</field>
+            <field name="model">helpdesk.team</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='visibility_member_ids']" position="after">
+                    <br/>
+                    <label for="category_ids" string="Category"/><br/>
+                    <field name="category_ids" widget="many2many_tags"
+                                    class="mt16"/>
+
+                    <br/>
+                    <label for="category_needed" string="Category Needed"/><br/>
+                    <field name="category_needed"
+                                    class="mt16"/>
+                    <br/>
+                    <label for="is_maintenance" string="Equipment"/><br/>
+                    <field name="is_maintenance"
+                                    class="mt16"/>
+
+                    <br/>
+                    <label for="create_task" string="Create Task"/><br/>
+                    <field name="create_task" class="mt16"/>
+                    <br/>
+                    <label for="is_order_phone" string="Phone"/><br/>
+                    <field name="is_order_phone" class="mt16"/>
+                    <br/>
+                    <label for="is_manager" string="IS Manager"/><br/>
+                    <field name="is_manager" class="mt16"/>
+                    <br/>
+                    <label for="is_request" string="IS Request"/><br/>
+                    <field name="is_request" class="mt16"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="form_view_helpdesk_category" model="ir.ui.view">
+            <field name="name">name.helpdesk.category.form</field>
+            <field name="model">helpdesk.category</field>
+            <field name="arch" type="xml">
+                <form string="Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_view_helpdesk_category" model="ir.actions.act_window">
+            <field name="name">Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpdesk.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_action_helpdesk_category" name="" parent="helpdesk.helpdesk_menu_config"
+                  action="action_view_helpdesk_category" sequence="4"/>
+    </data>
+</odoo>

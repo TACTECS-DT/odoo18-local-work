@@ -1,0 +1,289 @@
+<odoo>
+    <data>
+        <template id="admin_wherehouse_new_request_portal_view">
+            <link rel="stylesheet" href="/expense_portal/static/src/chocies/styles/choices.min.css"/>
+
+            <script src="/portal_custom/static/src/js/select2.min.js"></script>
+            <link rel="stylesheet" href="/portal_custom/static/src/css/select2.css" type="text/css"/>
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">Admin Request</t>
+                <h4 style="color:#CA6F1E;"></h4>
+                <form action="/admin/warehouse/create" id="expenses" enctype="multipart/form-data" method="post"
+                      data-model_name="admin.warehouse">
+                    <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"/>
+
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <t t-if="pass_message">
+                        <div class="row" role="alert">
+                            <div class="container">
+                                <div clas="row">
+                                    <div class="col-8 alert alert-success">
+                                        <h5 class="text-center" t-if="expense_request_id">
+                                            <i class="fa fa-check-circle fa-2x text-success" role="img"
+                                               aria-label="Success"
+                                               title="Success"/>
+                                        </h5>
+                                        <t t-if="expense_request_id">
+                                            <h5 class="text-center">
+                                                Your Request Number is
+                                                <a t-attf-href="/expense/request/#{expense_request_id.id}">
+                                                    #
+                                                    <span t-esc="expense_request_id.name"/>
+                                                </a>
+                                                Request Creation Successfully Done! .
+                                            </h5>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="message">
+                        <div class="alert alert-danger" role="alert">
+                            <t t-esc="message"/>
+                        </div>
+                    </t>
+                    <t t-if="warn_message">
+                        <div class="alert alert-warning" role="alert">
+                            <t t-esc="warn_message"/>
+                        </div>
+                    </t>
+                    <div class="card shadow o_portal_details">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold  text-primary" style="font-size: 21px;font-weight: 600;">
+                                Admin Request</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                        <t t-foreach="error_message" t-as="err">
+                                            <t t-esc="err"/>
+                                            <br/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div t-attf-class="form-group col-xl-8" id="description">
+                                    <label class="col-form-label" for="description">Code</label>
+                                    <input type="text" class="form-control o_website_form_input"
+                                           value="New" readonly="True"
+                                           name="description"/>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div t-attf-class="form-group col-xl-6">
+                                    <label class="col-form-label" for="employee">Employee</label>
+                                    <select class="form-control o_website_form_input" id="employee" name="employee_id"
+                                            readonly="True"
+                                            required="1">
+                                        <option t-esc="request.env.user.employee_id.name"
+                                                t-att-value="request.env.user.employee_id.id"/>
+                                    </select>
+                                </div>
+
+                                <div t-attf-class="form-group col-xl-6">
+                                    <label class="col-form-label" for="employee">Department</label>
+                                    <select class="form-control o_website_form_input" id="department" readonly="True"
+                                            name="department_id"
+                                            required="1">
+                                        <option t-esc="request.env.user.employee_id.department_id.name"
+                                                t-att-value="request.env.user.employee_id.department_id.id"/>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div t-attf-class="form-group col-xl-6">
+                                    <label class="col-form-label" for="manager">Manager</label>
+                                    <select class="form-control o_website_form_input" id="manager" name="user_id"
+                                            readonly="True"
+                                    >
+                                        <option t-esc="request.env.user.employee_id.parent_id.name"
+                                                t-att-value="request.env.user.employee_id.parent_id.id"/>
+                                    </select>
+                                </div>
+
+                                <div t-attf-class="form-group col-xl-6">
+                                    <label class="col-form-label" for="work">Work Location</label>
+                                    <select class="form-control o_website_form_input" id="work" name="work_location"
+                                            readonly="True"
+                                    >
+                                        <option t-esc="request.env.user.employee_id.work_location"
+                                                t-att-value="request.env.user.employee_id.work_location"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div t-attf-class="form-group col-xl-6">
+                                    <label class="col-form-label" readonly="">Date</label>
+                                    <input type="date" name="date" t-attf-class="form-control" readonly="True"
+                                           t-att-value="request_date"/>
+                                </div>
+
+                            </div>
+                            <br/>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="card shadow mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-primary card-tabs">
+                                        <div class="card-header p-0 pt-1">
+                                            <ul class="nav nav-tabs "
+                                                id="custom-tabs-one-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active"
+                                                       id="components-tab"
+                                                       data-toggle="pill"
+                                                       href="#components"
+                                                       role="tab"
+                                                       aria-controls="components"
+                                                       aria-selected="true">
+                                                        Product</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content"
+                                                 id="custom-tabs-one-tabContent">
+                                                <div class="tab-pane fade show active"
+                                                     id="components"
+                                                     role="tabpanel"
+                                                     aria-labelledby="components-tab">
+                                                    <div class="card-body">
+                                                        <div class="invoice-box table-responsive scrollable-div">
+                                                            <table class="table table-bordered table-scroll mt-3"
+                                                                   width="100%"
+                                                                   id="service">
+
+                                                                <thead>
+                                                                    <tr class="text-primary">
+                                                                        <th class="text-center"
+                                                                            style="min-width: 150px;"><span>
+                                                                            Product Category</span></th>
+                                                                        <th class="text-center"
+                                                                            style="min-width: 150px;"><span>
+                                                                            Product</span></th>
+
+                                                                        <th class="text-center"
+                                                                            style="min-width: 150px;"><span>QTY
+                                                                        </span></th>
+
+                                                                        <th class="text-center"
+                                                                            style="min-width: 150px;"><span>Reason
+                                                                        </span></th>
+                                                                        <th/>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="multi">
+                                                                    <tr id="add-service" class="add-service">
+
+                                                                        <td>
+                                                                            <select class="form-control ProductCategory_class ProductCategory clear-on-clone"
+                                                                                    style="margin-top: 10px;"
+                                                                                    id="ProductCategory" required="1"
+                                                                                    name="ProductCategory">
+                                                                                <option value="" selected="selected"
+                                                                                        disabled="disabled">Select
+                                                                                </option>
+                                                                                <t t-foreach="product_category"
+                                                                                   t-as="serv">
+                                                                                    <option
+                                                                                            t-att-value="serv.id">
+                                                                                        <t t-esc="serv.display_name"/>
+                                                                                    </option>
+                                                                                </t>
+                                                                            </select>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <select class="form-control product_id_class product_id clear-on-clone"
+                                                                                    style="margin-top: 10px;"
+                                                                                    id="product_id" required="1"
+                                                                                    name="product_id">
+
+                                                                            </select>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="number"
+                                                                                   style="margin-top: 10px;"
+                                                                                   min="1"
+                                                                                   name="quantity"
+                                                                                   class="form-control quantity_class clear-on-clone"/>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <input type="text"
+                                                                                   style="margin-top: 10px;"
+                                                                                   min="0" step="0.01"
+                                                                                   id="reason"
+                                                                                   name="reason"
+                                                                                   class="form-control service_price_class clear-on-clone"/>
+                                                                        </td>
+                                                                        <td>
+
+                                                                            <button class="btn btn-danger remove"
+                                                                                    style="margin-top: 10px;">
+                                                                                <i class="fa fa-times"
+                                                                                   aria-hidden="true"></i>
+                                                                            </button>
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="12">
+                                                                            <button type="button" id="addService"
+                                                                                    style="width: 90%;"
+                                                                                    class="btn btn-primary btn-block"><i
+                                                                                    class="fa fa-plus"></i> Add a
+                                                                                line</button>
+                                                                        </td>
+
+                                                                    </tr>
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="clearfix">
+                            <button type="submit"
+                                    class="btn btn-primary float-right mb32">
+                                Submit
+                                <span class="fa fa-long-arrow-right"/>
+                            </button>
+                        </div>
+                        <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    </div>
+
+                </form>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_move_form_einvoice" model="ir.ui.view">
+            <field name="name">account.move.form.einvoice</field>
+            <field name="model">account.move</field>
+            <field name="groups_id" eval="[(4, ref('E_invoice_manager_group'))]" />
+            <field name="inherit_id" ref="account.view_move_form" />
+
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <field name="egtax_status" invisible="1" readonly='1' />
+<!--                     <button name="action_send_einvoice" attrs="{'invisible': ['|',('egtax_status','=','Valid'),('state','!=','posted'),('sendSign','=','true')]}" groups="account.group_account_invoice" type="object" string="Send E-invoice" class="oe_highlight" /> -->
+                    <button name="action_send_tosign" attrs="{'invisible': ['|','|',('egtax_status','=','Valid'),('state','!=','posted'),('sendSign','=','true')]}" groups="account.group_account_invoice" type="object" string="Send E-invoice to sign" class="oe_highlight" />
+                    <button name="action_cancel_send_tosign" attrs="{'invisible': ['|','|',('egtax_status','!=','Valid'),('state','!=','posted'),('sendSign','=','false')]}" groups="account.group_account_invoice" type="object" string="Send E-invoice to sign" class="oe_highlight" />
+                    <!--                  <button name="action_Generate_einvoice_line" groups="account.group_account_invoice" type="object" string="Generate E-invoice"  class="oe_highlight"/>-->
+
+
+                    <button name="action_Cancel_Invoice" attrs="{'invisible': [('egtax_status','!=','Valid')]}" groups="account.group_account_invoice" type="object" string="Cancel E-invoice" class="oe_highlight" />
+                </xpath>
+
+
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="einvoice_itemstype" readonly='True' />
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="account_move_form_einvoice1" model="ir.ui.view">
+            <field name="name">account.move.form.einvoice1</field>
+            <field name="model">account.move</field>
+            <field name="groups_id" eval="[(4, ref('E_invoice_manager_group'))]" />
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@id='other_tab']" position="after">
+                    <page name="E-Invoice" string="E-Invoice" groups="product.group_product_variant">
+                        <button name="update_move_status" attrs="{'invisible': [('egtax_uuid','=',False)]}" type="object" string="Update Status" class="oe_highlight" />
+                        <!--                        <button name="get_printed_version" type="object" string="Get Printout" class="oe_highlight"/>-->
+                        <group>
+                            <group>
+                                <field name="documenttype" invisible='1' />
+
+                            </group>
+                            <group>
+                                <field name="egtax_status" readonly='1' />
+                                <field name="branch" invisible="1" />
+                                <field name="egtax_link" readonly='1' widget="url" text="Link" />
+
+                                <!--                            <field name="egytax_printout" widget="url" text="Download"/>-->
+                                <field name="egtax_uuid"  />
+                                <field name="sendSign" />
+                                <field name="eg_tax_cancelreason"/>
+                                <field name="eg_tax_error" readonly='1' attrs="{'invisible': [('eg_tax_error','=',False)]}" />
+                            </group>
+                        </group>
+                        <group invisible="1">
+                       
+                            <!-- -->
+                            <field name="eg_tax_lines"  widget="section_and_note_one2many" >
+                                <tree>
+                                   
+                                    <field name="description" />
+                                    <field name="itemCode" />
+                                    <field name="unitamountEGP" />
+                                    <field name="quantitiy" />
+                                    <field name="totaltaxablefees" />
+                                    <field name="discount_amount" />
+                                    <field name="discount_rate" />
+                                    
+
+                                    <field name="total" />
+                                    <field name="salestotal" />
+                                    <field name="nettotal" />
+                                    <field name="totaltaxperline" />
+                                    <field name="tax_ids" />
+                                </tree>
+                            </field>
+                            
+                            <group class="oe_subtotal_footer oe_right" attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')),                                                                ('payment_state' ,'=', 'invoicing_legacy')]}">
+                                <field name="eg_tax_totalSalesAmount" />
+                                <field name="overalldiscount" invisible="1"/>
+                                <field name="eg_tax_totalDiscountAmount" attrs="{'invisible': [('eg_tax_totalDiscountAmount', '=', 0)]}" />
+
+                                <!-- <field name="eg_tax_totalItemsDiscountAmount" attrs="{'invisible': [('eg_tax_totalItemsDiscountAmount', '=', 0)]}"/> -->
+                                <field name="eg_tax_taxtotal" class="oe_subtotal_footer_separator" attrs="{'invisible': [('eg_tax_taxtotal', '=', 0)]}" />
+                                <field name="eg_tax_totalAmount" />
+
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- <record id="view_account_move_cancel_einvoice1_wizard" model="ir.ui.view">
+            
+            <field name="name">account.move.cancel.einvoice.wizard.view</field>
+            <field name="model">account.move</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <field name="eg_tax_cancelation_reason" />
+
+                    <footer>
+                        <button name="action_Invoice_Cancel_Done" string="Cancel Invoice" type="object" class="oe_highlight" />
+                        <button string="Cancel" class="btn btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    -->
+
+    </data>
+</odoo>

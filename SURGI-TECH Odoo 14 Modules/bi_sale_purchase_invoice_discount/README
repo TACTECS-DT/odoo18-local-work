@@ -1,0 +1,3 @@
+1) Version: 14.0.0.1 | Date : 10/02/2021
+-->  Fixed the issue of undone "add a line" effect when adding a journal entries.
+-->  Fixed the traceback, when apply discount and add line in journal entries.

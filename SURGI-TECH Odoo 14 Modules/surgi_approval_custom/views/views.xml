@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+        <record id="view_approval_request_from" model="ir.ui.view">
+            <field name="name">approval.request</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//page[@name='approvers']" position='before'>
+                        <page string="Partner Invoices">
+                          <field name="partner_invoices_ids" nolabel="1"/>
+                        </page>
+                    </xpath>
+                <xpath expr="//field[@name='amount']" position="after">
+                    <field name="discount_percentage" attrs="{'invisible':[('has_amount','=','no')]}"/>
+                </xpath>
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Tracking">
+                        <field name="approval_history_ids">
+                            <tree readonly="1">
+                                <field name="approved_by"/>
+                                <field name="approved_on"/>
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="create_uid"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="submitted_by"/>
+                            <field name="submitted_on"/>
+                            <field name="total_lines" invisible="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+  </data>
+</odoo>

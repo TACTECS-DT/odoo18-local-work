@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_variable_allowance_request,hr_variable_allowance_request,model_hr_variable_allowance_request,base.group_user,1,1,1,0
+access_hr_variable_allowance_request_hr_manager,hr_variable_allowance_request_hr_manager,model_hr_variable_allowance_request,hr.group_hr_manager,1,1,1,1
+access_hr_variable_allowance_rule,hr_variable_allowance_rule,model_hr_variable_allowance_rule,base.group_user,1,1,1,0
+access_variable_allow_valid_status,variable_allow_valid_status,model_variable_allow_valid_status,base.group_user,1,1,1,0,1,1,1,1

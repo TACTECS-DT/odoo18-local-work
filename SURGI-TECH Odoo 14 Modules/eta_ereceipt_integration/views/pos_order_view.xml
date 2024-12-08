@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_pos_eta_order_form" model="ir.ui.view">
+            <field name="name">view_pos_eta_order_form</field>
+            <field name="model">pos.order</field>
+            <field name="arch" type="xml">
+                <form string="Point of Sale Orders" create="0" edit="0" delete="1">
+                    <header>
+                        <button name="%(action_pos_payment)d" string="Payment" class="oe_highlight" type="action" states="draft" />
+                        <field name="eta_submit_state" widget="statusbar" statusbar_visible="unsent,sent"/>
+                        <!-- <field name="has_refundable_lines" invisible="1"/> -->
+                        <field name="refunded_orders_count" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Valid" bg_color="bg-success"
+                                attrs="{'invisible': [('eta_status', '!=', 'valid')]}" style="margin-top: -16px;"/>
+                        <widget name="web_ribbon" title="Invalid" bg_color="bg-danger"
+                                attrs="{'invisible': [('eta_status', '!=', 'invalid')]}" style="margin-top: -16px;"/>
+                        <field name="failed_pickings" invisible="1"/>
+                        <!-- <field name="is_refund" invisible="1"/> -->
+                        <field name="eta_status" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                        <group col="4" colspan="4" name="order_fields">
+                            <field name="name"/>
+                            <field name="date_order"/>
+                            <field name="session_id"/>
+                            <field string="User" name="user_id"/>
+                            <field name="partner_id" context="{'res_partner_search_mode': 'customer'}"
+                                   attrs="{'readonly': [('state','=','invoiced')]}"/>
+                            <field name="fiscal_position_id" options="{'no_create': True}"/>
+                            <field name="invoice_group" invisible="1"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Products" name="products">
+                                <field name="lines" colspan="4" nolabel="1">
+                                    <tree string="Order lines" editable="bottom">
+                                        <field name="full_product_name"/>
+                                        <field name="pack_lot_ids" widget="many2many_tags"
+                                               groups="stock.group_production_lot"/>
+                                        <field name="qty"/>
+                                        <!-- <field name="customer_note" optional="hide"/> -->
+                                        <field name="product_uom_id" string="UoM" groups="uom.group_uom"/>
+                                        <field name="price_unit" widget="monetary"/>
+                                        <field name="is_total_cost_computed" invisible="1"/>
+                                        <field name="total_cost"
+                                               attrs="{'invisible': [('is_total_cost_computed','=', False)]}"
+                                               optional="hide" widget="monetary"/>
+                                        <field name="margin"
+                                               attrs="{'invisible': [('is_total_cost_computed','=', False)]}"
+                                               optional="hide" widget="monetary"/>
+                                        <field name="margin_percent"
+                                               attrs="{'invisible': [('is_total_cost_computed','=', False)]}"
+                                               optional="hide" widget="percentage"/>
+                                        <field name="discount" string="Disc.%"/>
+                                        <field name="tax_ids_after_fiscal_position" widget="many2many_tags"
+                                               string="Taxes"/>
+                                        <field name="tax_ids" widget="many2many_tags" invisible="1"/>
+                                        <field name="price_subtotal" widget="monetary" force_save="1"/>
+                                        <field name="price_subtotal_incl" widget="monetary" force_save="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="refunded_qty" optional="hide"/>
+                                    </tree>
+                                    <form string="Order lines">
+                                        <group col="4">
+                                            <field name="full_product_name"/>
+                                            <field name="qty"/>
+                                            <field name="discount"/>
+                                            <field name="price_unit" widget="monetary"/>
+                                            <field name="price_subtotal" invisible="1" widget="monetary"
+                                                   force_save="1"/>
+                                            <field name="price_subtotal_incl" invisible="1" widget="monetary"
+                                                   force_save="1"/>
+                                            <field name="tax_ids_after_fiscal_position" widget="many2many_tags"
+                                                   string="Taxes"/>
+                                            <field name="tax_ids" widget="many2many_tags" invisible="1"/>
+                                            <field name="pack_lot_ids" widget="many2many_tags"
+                                                   groups="stock.group_production_lot"/>
+                                            <field name="notice"/>
+                                            <field name="currency_id" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="order_total">
+                                    <field name="amount_tax"
+                                           force_save="1"
+                                           widget="monetary"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="amount_total"/>
+                                    </div>
+                                    <field name="amount_total"
+                                           force_save="1"
+                                           nolabel="1"
+                                           class="oe_subtotal_footer_separator"
+                                           widget="monetary"/>
+                                    <field name="amount_paid"
+                                           string="Total Paid (with rounding)"
+                                           class="oe_subtotal_footer_separator"
+                                           widget="monetary"
+                                           attrs="{'invisible': [('amount_paid','=', 'amount_total')]}"/>
+                                    <label for="margin"/>
+                                    <div class="text-nowrap">
+                                        <field name="margin" class="oe_inline"
+                                               attrs="{'invisible': [('is_total_cost_computed','=', False)]}"/>
+                                        <span class="oe_inline"
+                                              attrs="{'invisible': [('is_total_cost_computed','=', False)]}">
+                                            (<field name="margin_percent" nolabel="1" class="oe_inline"
+                                                    widget="percentage"/>)
+                                        </span>
+                                        <span attrs="{'invisible': [('is_total_cost_computed','=', True)]}">TBD</span>
+                                    </div>
+                                    <field name="is_total_cost_computed" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </page>
+                            <page string="Payments" name="payments">
+                                <field name="payment_ids" colspan="4" nolabel="1">
+                                    <tree string="Payments">
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="payment_date"/>
+                                        <field name="payment_method_id"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Validation Error" attrs="{'invisible': [('eta_status', '!=', 'invalid')]}">
+                                <field name="invalid_reason" nolabel="1" readonly="1" force_save="1" class="text-danger"/>
+                            </page>
+                            <page name="extra" string="Extra Info">
+                                <group>
+                                    <group string="ETA Receipt">
+                                        <field name="eta_uuid"/>
+                                    </group>
+                                    <group
+                                            string="Accounting"
+                                            groups="account.group_account_manager"
+                                            attrs="{'invisible':['|', ('session_move_id','=', False), ('state', '=', 'invoiced')]}"
+                                    >
+                                        <field name="session_move_id" readonly="1"/>
+                                    </group>
+                                    <group string="Other Information">
+                                        <field name="pos_reference"/>
+                                        <field name="company_id" groups="base.group_multi_company"/>
+                                        <field name="pricelist_id" groups="product.group_product_pricelist"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pos_eta_order_view_tree" model="ir.ui.view">
+            <field name="name">view_pos_eta_order_view_tree</field>
+            <field name="model">pos.order</field>
+            <field name="arch" type="xml">
+                <tree create="0" edit="0" delete="0">
+                    <field name="currency_id" invisible="1"/>
+                    <field name="name" decoration-bf="1"/>
+                    <field name="session_id"/>
+                    <field name="date_order"/>
+                    <field name="pos_reference"/>
+                    <field name="partner_id"/>
+                    <field string="Cashier" name="user_id" widget="many2one_avatar_user"/>
+                    <field name="amount_total" sum="Amount total" widget="monetary" decoration-bf="1"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'"
+                           decoration-success="state not in ('draft','cancel')"/>
+                    <field name="eta_submit_state" widget="badge" decoration-info="eta_submit_state == 'unsent'"
+                           decoration-success="eta_submit_state == 'sent'"/>
+                    <field name="eta_status" widget="badge" decoration-danger="eta_status == 'invalid'"
+                           decoration-success="eta_status == 'valid'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_eta_pos_order_filter" model="ir.ui.view">
+            <field name="name">view_eta_pos_order_filter</field>
+            <field name="model">pos.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Sales Order">
+                    <field name="name"/>
+                    <field name="pos_reference"/>
+                    <field name="date_order"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                    <field name="session_id"/>
+                    <filter string="Unsent or Invalid" name="unsent"
+                            domain="['|', ('eta_submit_state', '=', 'unsent'), ('eta_status', '=', 'invalid')]"/>
+                    <separator/>
+                    <filter string="Order Date" name="order_date" date="date_order"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Session" name="session" domain="[]" context="{'group_by': 'session_id'}"/>
+                        <filter string="User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+                        <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter string="Order Date" name="order_month" domain="[]"
+                                context="{'group_by': 'date_order'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_pos_eta_order_action" model="ir.actions.act_window">
+            <field name="name">E-Receipts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="eta_ereceipt_integration.view_eta_pos_order_filter"/>
+            <field name="view_id" eval="False"/>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_unsent': 1}</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_pos_eta_order_view_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('view_pos_eta_order_form')}),
+                         ]"/>
+        </record>
+
+        <menuitem id="view_pos_eta_order_menu" name="E-Receipts" parent="point_of_sale.menu_point_of_sale"
+                  action="view_pos_eta_order_action" sequence="2"/>
+
+        <record id="action_send_eta_receipt" model="ir.actions.server">
+            <field name="name">Send To ETA</field>
+            <field name="model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="groups_id" eval="[(4, ref('point_of_sale.group_pos_manager'))]"/>
+            <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="state">code</field>
+            <field name="code">records.action_send_eta_receipt()</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<odoo>
+    <!-- Stage Tree View -->
+    <record model="ir.ui.view" id="hr_overtime_reviewers_tree">
+        <field name="name">hr.overtime.reviewers.tree</field>
+        <field name="model">hr.overtime.reviewers</field>
+        <field name="arch" type="xml">
+            <tree string="Reviewers">
+                <field name="state"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Stage Form View -->
+    <record model="ir.ui.view" id="hr_overtime_reviewers_form">
+        <field name="name">hr.overtime.reviewers.form</field>
+        <field name="model">hr.overtime.reviewers</field>
+        <field name="arch" type="xml">
+            <form string="Stage Reviewers">
+                <sheet>
+                    <group name="stage_definition" string="Definition">
+                        <group>
+                            <field name="name"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <separator string="Reviewers"/>
+                    <field name="reviewer_ids" widget="many2many_tags"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Stage Action -->
+    <record id="hr_overtime_reviewers_act" model="ir.actions.act_window">
+        <field name="name">Overtime Reviewers</field>
+        <field name="res_model">hr.overtime.reviewers</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_overtime_reviewers_tree"/>
+    </record>
+
+    <menuitem id="overtime_reviewers_menu" name="Overtime Reviewers"
+              parent="overtime_config_menu"
+              action="hr_overtime_reviewers_act"/>
+</odoo>

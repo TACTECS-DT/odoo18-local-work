@@ -1,0 +1,849 @@
+<odoo>
+    <template id="portal_my_operations_new" name="New Operation">
+        <t t-call="portal.portal_layout">
+            <link rel="stylesheet" href="/surgi_operation_portal/static/js/toasts.css"/>
+            <link rel="stylesheet" href="/surgi_operation_portal/static/js/autocompleted.css"/>
+
+            <!-- <link rel="stylesheet" href="/surgi_operation_portal/static/js/filter_multi_select.css" /> -->
+            <!-- <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"/> -->
+            <!-- <link rel="stylesheet" href="/portal_custom/static/src/css/select2.css" type="text/css"/> -->
+            <!--  <script src="/portal_custom/static/src/js/select2.min.js"></script> -->
+            <!-- Load the plugin bundle. -->
+            <div id="toastElement" name="toastElement" class="toastElement">Operation Request successfully!</div>
+
+            <div class="card-header">
+
+                <div class="row">
+                    <h3 class="card-title col-6">
+                        <span>New Operation</span>
+                    </h3>
+                    <div class="col-6 text-right">
+                        <div class="d-inline-block">
+                            <div t-foreach="operation" t-as="tf" class="float-left"
+                                 style="font-size: 20px">
+                                <span t-att-class="'badge badge-success' if tf.state=='confirm' else '' 'badge badge-primary' if tf.state=='reviewed' else '' 'badge badge-danger' if tf.state=='cancel' else '' 'badge badge-warning' if tf.state=='freezed' else '' 'badge badge-light' if tf.state=='draft' else '' 'badge badge-info' if tf.state=='so_created' else ''"
+                                      t-field="tf.state"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div id="op_form_ahmed">
+                <!--
+                    TODO
+                    Fix UI Not LOADED -->
+                <link rel="stylesheet" href="/web/static/lib/jquery.ui/jquery-ui.css"/>
+                <form action="/my/operation/new/submit" method="post"
+                      class="container-fluid mt32 op_new_form " id="op_new_form" name="op_new_form"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" name="csrf_token"
+                           t-att-value="request.csrf_token()"/>
+
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Operation
+                                Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Operation Type
+                                        <span style="color:red">*</span>
+                                    </label>
+                                    <select class="form-control  operation_type_id operation_type"
+                                            required="required"
+                                            name="operation_type"
+                                            id="operation_type">
+                                        <option disabled="disabled" selected="selected"></option>
+                                        <t t-foreach="operation_type"
+                                           t-as="types">
+                                            <option
+                                                    t-att-value="types.id">
+                                                <t t-esc="types.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Type
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <select class="form-control op_type"
+                                            name="op_type"
+                                            id="op_type">
+
+
+                                        <option disabled="disabled">
+                                        </option>
+                                        <option value="private" selected="selected">
+                                            Private</option>
+                                        <option value="tender">Waiting
+                                            List</option>
+                                        <option value="supply_order">Supply
+                                            Order</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-md-12 col-form-label m-0 font-weight-bold text-primary"
+                                           for="start_datetime">Date Start
+                                        <span style="color:red">*</span>
+                                    </label>
+                                    <div class="input-group date">
+
+                                        <input type="text"
+                                               name="start_datetime"
+                                               id="start_datetime"
+                                               required="required"
+                                               class="form-control start_datetime"
+
+                                               placeholder="YYYY-MM-DD">
+
+                                        </input>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calendar"
+                                                      role="img"
+                                                      aria-label="Calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Side
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <select class="form-control side"
+                                            name="side"
+                                            id="side">
+
+
+                                        <option disabled="disabled" selected="selected">
+                                        </option>
+                                        <option value="r">
+                                            Right</option>
+                                        <option value="l">Left</option>
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Sales Channel
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <select class="form-control  op_sales_area_id op_sales_area"
+
+                                            name="op_sales_area"
+                                            id="op_sales_area">
+                                        <option disabled="disabled" selected="selected">
+                                        </option>
+                                        <t t-foreach="operations_teams"
+                                           t-as="team">
+                                            <option t-field="team.name"
+                                                    t-att-selected="currentteam.id == team.id"
+                                                    t-att-value="team.id">
+
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Area Manager
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="op_area_manager"
+                                               id="op_area_manager"
+                                               readonly="True"
+                                               t-att-value="currentteam.user_id.name"
+                                               class="form-control op_area_manager"
+
+                                        />
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Delivery Type
+                                    </label>
+                                    <div class="input-group">
+
+                                        <select class="form-control delivery_type" name="delivery_type"
+                                                id="delivery_type">
+                                            <option value="">--- Select --</option>
+                                            <option value="delivery2customer">Delivery To Customer</option>
+                                            <option value="delivery2tender">Delivery To Tender</option>
+                                            <option value="deliveryorder">Delivery Order</option>
+                                            <option value="loading">Loading</option>
+                                            <option value="exchange">Exchange</option>
+                                            <option value="replacement">Replacement</option>
+                                            <option value="purchasereturn">Purchase Return</option>
+                                            <option value="gov">Government Form</option>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-md-4 ui-widget">
+                                    <label class="m-0 font-weight-bold text-primary">Sale Order
+                                    </label>
+                                    <div class="input-group">
+                                        <input name="sale_order" id="sale_order"
+                                               class="form-control sale_order ui-autocomplete-input"/>
+                                        <!-- <select class="form-control sale_order" name="sale_order" id="sale_order" > </select> -->
+                                        <!-- <span class="ui-autocomplete"></span> -->
+                                        <input type="hidden" id="sale_order_id"></input>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Patient
+                                Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Patient Name
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   name="patient_name"
+                                                   id="patient_name"
+                                                   class="form-control patient_name"
+                                            />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Patient Gender
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <select class="form-control patient_gender"
+                                            name="patient_gender"
+                                            id="patient_gender">
+                                        <option disabled="disabled" selected="selected">
+                                        </option>
+
+                                        <option value="m">Male</option>
+                                        <option value="f">
+                                            Female</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Patient National ID
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="patient_national_id"
+                                               id="patient_national_id"
+                                               class="form-control patient_national_id"
+                                        />
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Patient National ID Image</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                       name="patient_national_id_image"
+                                                       class="custom-file-input"
+                                                       id="patient_national_id_image"
+                                                /> <!-- Accept only images -->
+                                                <label class="custom-file-label"
+                                                       for="patient_national_id_image">
+                                                    Choose file
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                  <div class="form-group col-md-6">-->
+                                <input type="hidden" name="base64" id="base64"
+                                       class="form-control base64_file"
+                                       rows="5"></input>
+                                <!--                                </div>-->
+                                <input type="hidden" name="file_name2" id="file_name2"
+                                       class="form-control file_name2"
+                                       rows="5"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Location
+                                Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4 hospital-auto-widget">
+                                    <label class="m-0 font-weight-bold text-primary">Hospital<span style="color:red">
+                                        *</span></label>
+                                    <input type="hidden" name="hospital_id" id="hospital_id"/>
+                                    <input type="text" class="form-control hospital-input" id="hospital_input"
+                                           required="True" autocomplete="off"
+                                           placeholder="Search Hospital"/>
+                                    <div class="custom-hospital-dropdown" id="custom_hospital_dropdown"></div>
+                                </div>
+
+                                <!-- <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Authority Type
+                                        <span style="color:red">*</span>
+                                    </label>
+                                    <select disabled="1" readonly="true" class="form-control authority"
+                                            required="required"
+                                            name="authority"
+                                            id="authority">
+                                        <option  disabled="disabled" selected="selected">
+                                        </option>
+                                        <option value="closed">
+                                            Closed</option>
+                                        <option value="open">
+                                            Open</option>
+                                        <option value="open_approval">
+                                            Open With Approval</option>
+
+                                    </select>
+                                </div> -->
+                                <div class="form-group col-md-4 patient-auto-widget">
+                                    <label class="m-0 font-weight-bold text-primary">Patient
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <input type="text" class="form-control patient-input" id="patient_input"
+                                           autocomplete="off"
+                                    />
+                                    <input type="hidden" name="patient_id" id="patient_id"/>
+                                    <div id="custom_patient_dropdown" class="custom-patient-dropdown"
+                                         style="display: none;"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+
+                                <div class="form-group col-md-4 surgeon-auto-widget">
+                                    <label class="m-0 font-weight-bold text-primary">Surgeon
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <input type="text" class="form-control surgeon-input" id="surgeon_input"
+                                           autocomplete="off"
+                                    />
+                                    <input type="hidden" id="surgeon_id"
+                                           name="surgeon_id"/>
+                                    <div id="custom_surgeon_dropdown" class="custom-dropdown custom-surgeon-dropdown"
+                                         style="display: none;"></div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Doctor Phone Number
+                                        <!--                                        <span style="color:red">*</span>-->
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="DoctorPhoneNum"
+                                               id="DoctorPhoneNum"
+                                               class="form-control DoctorPhoneNum"
+                                        />
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Payment Methods
+                                    </label>
+                                    <select class="form-control payment_methods"
+                                            name="payment_methods"
+                                            id="payment_methods">
+
+                                        <option disabled="disabled" selected="selected">
+                                        </option>
+                                        <option value="cash">
+                                            Cash</option>
+                                        <option value="credit">
+                                            Credit</option>
+                                        <option value="replacement">
+                                            replacement</option>
+                                        <option value="hospitalcash">
+                                            Hospital
+                                            Cash</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">X Rays</h6>
+
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Pre Operative XRay
+                                    </label>
+
+                                    <div class="form-group">
+
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                       name="attachment_pre"
+                                                       class="custom-file-input"
+                                                       id="attachment_pre"/>
+                                                <label class="custom-file-label"
+                                                       for="attachment_pre">
+                                                    Choose file</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Post Operative XRay
+                                    </label>
+
+                                    <div class="form-group">
+
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                       name="attachment_after"
+                                                       class="custom-file-input"
+                                                       id="attachment_after"/>
+                                                <label class="custom-file-label"
+                                                       for="attachment_after">
+                                                    Choose file</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Revised Implant
+                                    </label>
+
+
+                                    <div class="form-group">
+
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                       name="attachment_paitent"
+                                                       class="custom-file-input"
+                                                       id="attachment_paitent"/>
+                                                <label class="custom-file-label"
+                                                       for="attachment_paitent">
+                                                    Choose file</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-4">
+                                    <label class="m-0 font-weight-bold text-primary">Joint Pre Company
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="paitent_joint_pre_company"
+                                               id="paitent_joint_pre_company"
+                                               class="form-control paitent_joint_pre_company"
+                                        />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Supply
+                                Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="m-0 font-weight-bold text-primary">Warehouse
+                                        <span style="color:red">*</span>
+                                    </label>
+                                    <select disabled="1" readonly="true" class="form-control warehouse_id"
+                                            required="required"
+                                            name="warehouse_id"
+                                            id="warehouse_id">
+                                        <option selected="selected" disabled="disabled"></option>
+
+                                        <t t-foreach="warehouses"
+                                           t-as="warehouse">
+                                            <option t-field="warehouse.name"
+                                                    t-att-value="warehouse.id">
+
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="m-0 font-weight-bold text-primary">Location
+                                        <span style="color:red">*</span>
+                                    </label>
+                                    <select disabled="1" readonly="true" class="form-control location_id"
+                                            required="required"
+                                            name="location_id"
+                                            id="location_id">
+                                        <option selected="selected" disabled="disabled"></option>
+                                        <t t-foreach="locations"
+                                           t-as="location">
+                                            <option t-field="location.name"
+                                                    t-att-value="location.id">
+
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div> -->
+
+                    <div class="card shadow mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-primary card-tabs">
+                                        <div class="card-header p-0 pt-1">
+                                            <ul class="nav nav-tabs "
+                                                id="custom-tabs-one-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active"
+                                                       id="components-tab"
+                                                       data-toggle="pill"
+                                                       href="#components"
+                                                       role="tab"
+                                                       aria-controls="components"
+                                                       aria-selected="true">
+                                                        Components</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       id="more-items-tab"
+                                                       data-toggle="pill"
+                                                       href="#more-items"
+                                                       role="tab"
+                                                       aria-controls="more-items"
+                                                       aria-selected="false">More
+                                                        Items</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       id="other-info-tab"
+                                                       data-toggle="pill"
+                                                       href="#other-info"
+                                                       role="tab"
+                                                       aria-controls="other-info"
+                                                       aria-selected="false">Other
+                                                        Info</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       id="add-items-tab"
+                                                       data-toggle="pill"
+                                                       href="#add-items"
+                                                       role="tab"
+                                                       aria-controls="add-items"
+                                                       aria-selected="false">Add
+                                                        Items</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content"
+                                                 id="custom-tabs-one-tabContent">
+                                                <div class="tab-pane fade show active"
+                                                     id="components"
+                                                     role="tabpanel"
+                                                     aria-labelledby="components-tab">
+                                                    <div class="card-body">
+                                                        <div class="row"
+                                                             style="font-size: 15px;font-weight: bold">
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="component_divs">You Need to Choose
+                                                                        Operation Type To Show Its Components</div>
+                                                                    <!-- <label class="control-label col-sm-2"
+                                                                           for="component_ids">
+                                                                        Components:</label>
+
+                                                                    <select class="form-control select2-multi   component_ids "
+                                                                            name="component_ids[]"
+                                                                            placeholder="You Need to Choose Operation Type To Show Its Components"
+                                                                            id="component_ids"
+                                                                            multiple="multiple">
+
+                                                                        <t t-foreach="components"
+                                                                           t-as="component">
+                                                                            <option
+
+                                                                                    t-att-value="component.id">
+                                                                                <t t-esc="component.name_get()"/>
+                                                                            </option>
+                                                                        </t>
+                                                                    </select> -->
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade"
+                                                     id="more-items"
+                                                     role="tabpanel"
+                                                     aria-labelledby="more-items-tab">
+                                                    <div class="invoice-box table-responsive"
+                                                         id="new_medical_addition_portal">
+                                                        <table class="table table-bordered table-scroll mt-3"
+                                                               id="invoice">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Product</th>
+                                                                    <th scope="col">Quantity</th>
+                                                                    <th scope="col">
+
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="multi">
+                                                            </tbody>
+                                                        </table>
+                                                        <a class="o_website_links_edit_codes" aria-label="Add Raw"
+                                                           title="Add Row">
+                                                            <span style="color: #4e8039;font-size: 30px;"
+                                                                  class="fa fa-plus"></span>
+                                                        </a>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="tab-pane fade"
+                                                     id="other-info"
+                                                     role="tabpanel"
+                                                     aria-labelledby="other-info-tab">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label class="m-0 font-weight-bold text-primary">Additional
+                                                                File
+                                                            </label>
+
+                                                            <div class="form-group">
+
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                        <input type="file"
+                                                                               name="additional_file"
+                                                                               class="custom-file-input"
+                                                                               id="additional_file"/>
+                                                                        <label class="custom-file-label"
+                                                                               for="additional_file">
+                                                                            Choose file</label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-header py-3">
+                                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                                Notes</h6>
+
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <textarea class="form-control op_notes" rows="3"
+                                                                      name="op_notes"
+                                                                      style="margin-top: 0px; margin-bottom: 0px; height: 81px;">
+
+                                                            </textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="card-header py-3">
+                                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                                Hospital Notes</h6>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <textarea class="form-control hospital_additional_notes"
+                                                                      rows="3"
+                                                                      name="hospital_additional_notes"
+                                                                      style="margin-top: 0px; margin-bottom: 0px; height: 81px;">
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade"
+                                                     id="add-items"
+                                                     role="tabpanel"
+                                                     aria-labelledby="add-items-tab">
+                                                    <table class="table table-bordered table-scroll mt-3"
+                                                           id="more_product">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Internal</th>
+                                                                <th>External</th>
+                                                                <th>Empties</th>
+                                                                <th scope="col">
+
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="multi">
+
+                                                        </tbody>
+                                                    </table>
+                                                    <a class="addMoreProduct" aria-label="Add Raw"
+                                                       title="Add Row">
+                                                        <span style="color: #4e8039;font-size: 30px;"
+                                                              class="fa fa-plus"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary submit-button">
+                            <i class="fa fa-paper-plane"></i>
+                            Submit
+                        </button>
+                    </div>
+
+
+                    <script>
+                        function multiSelectWithoutCtrl(elemSelector){
+
+                        console.log("option entered msg");
+                        let options = [].slice.call(document.querySelectorAll("#component_ids option"));
+                        options.forEach(function (element) {
+                        console.log("option foreach");
+                        element.addEventListener("mousedown",
+                        function (e) {
+                        e.preventDefault();
+                        element.parentElement.focus();
+                        this.selected = !this.selected;
+                        return false;
+                        }, false );
+                        });
+
+
+                        }
+                        window.onload = function() {
+                        <!-- $("#component_ids").on('click',function(){ -->
+                        console.log("option clicked");
+                        <!-- multiSelectWithoutCtrl('#component_ids');  -->
+                        $(document).ready(function() {
+                        $('.component_ids').select2();
+                        $('.js-example-basic-multiple').select2();
+                        });
+                        <!-- }); -->
+
+                        }
+
+
+                        <!-- const multiSelectWithoutCtrl = ( elemSelector ) => {
+                            let options = [].slice.call(document.querySelectorAll(`${elemSelector} option`));
+                            options.forEach(function (element) {
+                                element.addEventListener("mousedown",
+                                    function (e) {
+                                        e.preventDefault();
+                                        element.parentElement.focus();
+                                        this.selected = !this.selected;
+                                        return false;
+                                    }, false );
+                            });
+                          }-->
+
+
+                        <!-- $(document).ready(function(){
+                        $('.component_ids option').on('click',function(){
+                            if($(this).is(':selected')){
+                                $(this).attr('selected',false);
+                            }else{
+                                $(this).attr('selected','selected');
+                            }
+                        });
+                    }); -->
+                        <!-- $('.component_ids').select2(); -->
+                        <!-- $(function () {
+
+
+                            var trees = $('.component_ids').filterMultiSelect({
+
+                              });
+                        }); -->
+                        <!-- $('.operation_type').select2({
+
+                        });
+        $('.patient_id').select2();
+
+                        $('.op_sales_area').select2({
+
+                        });
+                        $('.hospital_id').select2({
+
+
+                        });
+
+                        $('.surgeon_id').select2({
+
+                        });
+                        $('.warehouse_id').select2({
+
+                        });
+                        $('.location_id').select2({
+
+                        }); -->
+
+
+                    </script>
+
+                </form>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

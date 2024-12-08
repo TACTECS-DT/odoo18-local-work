@@ -1,0 +1,71 @@
+.o_kanban_view.o_kanban_ungrouped .o_kanban_record {
+  width: 265px;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+.o_kanban_view.o_kanban_grouped .o_kanban_record {
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.accounts-dashboard-wrap .box-1 .main-title {
+  margin: -1px;
+}
+.o_kanban_view.o_kanban_dashboard .o_kanban_record {
+  padding: 0px;
+}
+.o_kanban_view .o_kanban_record {
+  border: none;
+  background-color: #f9f9f9;
+}
+.dropdown-item {
+  font-size: 1.08333333rem;
+}
+.card-body {
+  font-size: 1.08333333rem !important;
+}
+.text-info {
+  font-size: 1rem !important;
+}
+.text-xs {
+  font-size: 0.9rem;
+}
+.o_kanban_view.o_kanban_ungrouped .oe_module_vignette {
+  background-color: #fff !important;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
+  margin: 0.5rem !important;
+  padding: 1rem !important;
+  border-color: #ced4da;
+  border: 1px solid #dee2e6;
+}
+.o_kanban_view .o_kanban_group .oe_kanban_global_click {
+  border-color: #ced4da !important;
+  border: 1px solid #dee2e6 !important;
+  margin-bottom: 0.7rem !important;
+}
+
+.o_content .o_kanban_view .o_kanban_group .o_kanban_record {
+  margin-bottom: 1rem;
+}
+
+.o_content .o_kanban_view .o_res_partner_kanban {
+  background-color: #fff;
+  margin: 0.6rem !important;
+  padding: 8px 8px !important;
+  border: 1px solid #dee2e6;
+  border-color: #ced4da;
+}
+
+.o_kanban_view.o_kanban_ungrouped .oe_kanban_global_click {
+  background-color: #fff;
+  margin: 0.6rem !important;
+  padding: 8px 8px !important;
+  border: 1px solid #dee2e6;
+  border-color: #ced4da;
+}
+.o_content .o_stock_kanban .o_kanban_record {
+  background-color: #fff;
+  margin: 0.6rem !important;
+  padding: 8px 8px !important;
+  border: 1px solid #dee2e6;
+  border-color: #ced4da;
+}

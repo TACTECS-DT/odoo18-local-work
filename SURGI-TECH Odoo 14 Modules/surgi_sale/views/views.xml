@@ -1,0 +1,104 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="surgi_sale.list">
+      <field name="name">surgi_sale list</field>
+      <field name="model">surgi_sale.surgi_sale</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="surgi_sale.action_window">
+      <field name="name">surgi_sale window</field>
+      <field name="res_model">surgi_sale.surgi_sale</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="surgi_sale.action_server">
+      <field name="name">surgi_sale server</field>
+      <field name="model_id" ref="model_surgi_sale_surgi_sale"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="surgi_sale" id="surgi_sale.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="surgi_sale.menu_1" parent="surgi_sale.menu_root"/>
+    <menuitem name="Menu 2" id="surgi_sale.menu_2" parent="surgi_sale.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="surgi_sale.menu_1_list" parent="surgi_sale.menu_1"
+              action="surgi_sale.action_window"/>
+    <menuitem name="Server to list" id="surgi_sale" parent="surgi_sale.menu_2"
+              action="surgi_sale.action_server"/>
+-->
+
+<record id="view_order_form_inherit_surg_sale" model="ir.ui.view">
+  <field name="name">sale.order.view.form.inherit_surgi_sale</field>
+  <field name="model">sale.order</field>
+  <field name="inherit_id" ref="sale.view_order_form"/>
+  <field name="arch" type="xml">
+    <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+      <field name="price_unit"  attrs="{'readonly':True}"/>
+    </xpath>
+    <xpath expr="//field[@name='pricelist_id'] " position="attributes">
+       <attribute name="invisible">True</attribute>
+      <attribute name="nolabel">1</attribute>
+    </xpath>
+  </field>
+</record>
+
+
+
+
+<record id="unit_price_writable" model="ir.ui.view">
+  <field name="name">sale.order.view.form.inherit.unit_price_writable</field>
+  <field name="model">sale.order</field>
+  <field name="inherit_id" ref="sale.view_order_form"/>
+  <field name="groups_id" eval="[(6, 0, [ref('surgi_accounting.only_show_data_groups_ar_team')])]"/>
+  <field name="arch" type="xml">
+    <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="attributes">
+       <attribute name="readonly">False</attribute>
+    </xpath>
+   
+    <xpath expr="//field[@name='discount_options'] " position="attributes">
+       <attribute name="invisible">False</attribute>
+    </xpath>
+  </field>
+</record>
+
+
+
+
+
+
+
+
+
+
+  </data>
+</odoo>

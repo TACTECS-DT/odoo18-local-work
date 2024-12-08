@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+
+        <record id="tree_view_job_analysis_evaluation" model="ir.ui.view">
+            <field name="name">name.job.analysis.evaluation.tree</field>
+            <field name="model">job.analysis.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Job Analysis">
+                    <field name="employee_id"/>
+                    <field name="job_title"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="section_id"/>
+                    <field name="registration_number"/>
+                    <field name="grade_id"/>
+                    <field name="rank_id"/>
+                    <field name="rang_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_job_analysis_evaluation" model="ir.ui.view">
+            <field name="name">name.job.analysis.evaluation</field>
+            <field name="model">job.analysis.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Job Analysis">
+                    <header>
+                        <button name="button_done" type="object" string="Confirm" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}"/>
+<!--                        <button name="button_cancel" type="object" string="Set To Draft" class="oe_highlight"-->
+<!--                                attrs="{'invisible':[('state','!=','confirm')]}"/>-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="employee_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employee_id" placeholder="Employee" readonly="1"/>
+                                <field name="department_id"  invisible="0"/>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="date_start" readonly="1" force_save="1"/>
+                            <field name="date_end" readonly="1" force_save="1"/>
+                            <field name="job_title" readonly="1"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="section_id" readonly="1"/>
+                            <field name="job_id" readonly="1"/>
+                            <field name="parent_id" readonly="1"/>
+                            <field name="certificate" readonly="1"/>
+                            <field name="count_man_employee" readonly="1"/>
+
+                            <label for="experience_y"/>
+                            <div class="o_row">
+                                <field name="experience_y"/>Years-<field name="experience_m"/>Months-<field
+                                    name="experience_d"/>Days
+                            </div>
+
+                            <field name="registration_number"/>
+                            <field name="grade_id" readonly="1" force_save="1"/>
+                            <field name="rank_id" readonly="1" force_save="1"/>
+                            <field name="rang_id" readonly="1" force_save="1"/>
+
+
+                        </group>
+                        <notebook>
+                            <page string="Questions">
+                                <field name="questions_ids" attrs="{'readonly':[('state','!=','draft')]}">
+                                    <tree editable="bottom" create="false">
+                                        <field name="question" readonly="1"/>
+                                        <field name="answer"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_employee_job_analysis_evaluation" model="ir.actions.act_window">
+            <field name="name">Job Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.analysis.evaluation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_id.user_id','=',uid)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="action_view_job_analysis_evaluation" model="ir.actions.act_window">
+            <field name="name">Job Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.analysis.evaluation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="surgi_job_analysis_menuitem"
+                name="Job Analysis"
+                sequence="2"
+        />
+
+        <menuitem id="menu_job_employee_analysis_evaluation" name="Employee Job Analysis"
+                  parent="surgi_job_analysis_menuitem" action="action_view_employee_job_analysis_evaluation"
+                  sequence="9"
+        />
+
+        <menuitem id="menu_job_analysis_evaluation" name="Job Analysis"
+                  parent="surgi_job_analysis_menuitem" action="action_view_job_analysis_evaluation"
+                  sequence="10"
+                  groups="surgi_job_analysis.hr_admin_permission_group_job_analysis"
+        />
+
+    </data>
+</odoo>

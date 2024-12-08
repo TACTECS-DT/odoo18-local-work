@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_hr_approve_job" model="res.groups">
+            <field name="name">Job Position HR Approve</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_gm_approve_job" model="res.groups">
+            <field name="name">Job Position GM Approve</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_edit_job_position" model="res.groups">
+            <field name="name">Allow to edit Job Position after approved</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="applicant_process_line_rule_reviewer" model="ir.rule">
+            <field name="name">reviewer:Applicant Process Line</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_applicant_process_line"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('reviewer_ids','in', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="applicant_process_line_rule_user" model="ir.rule">
+            <field name="name">User:Applicant Process Line</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_applicant_process_line"/>
+            <field name="domain_force">[(1,'=',1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+        <record id="applicant_survey_line_reviewer" model="ir.rule">
+            <field name="name">reviewer:Applicant Survey Line</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_applicant_survey_line"/>
+            <field name="domain_force">[('user_ids','in', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="applicant_survey_line_user" model="ir.rule">
+            <field name="name">User:Applicant Survey Line</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_applicant_survey_line"/>
+            <field name="domain_force">[(1,'=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+        <record id="hr_applicant_rule_reviewer" model="ir.rule">
+            <field name="name">reviewer:Applicants</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="domain_force">['|',('reviewer_ids','in', user.id),('user_id','=', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="hr_applicant_rule_user" model="ir.rule">
+            <field name="name">User:Applicants</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="domain_force">[(1,'=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+        <record id="survey_user_input_rule_survey_user_reviewer" model="ir.rule">
+            <field name="name">Survey user input: Reviewer</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+        </record>
+
+        <record id="user_hiring_request_rule" model="ir.rule">
+            <field name="name">Hiring Request User</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_hiring_request"/>
+            <field name="domain_force">['|',('create_uid','=', user.id),('user_id','=', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="hr_hiring_request_rule" model="ir.rule">
+            <field name="name">Hiring Request HR</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_hiring_request"/>
+            <field name="domain_force">[(1,'=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user')),(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+
+        <record id="user_referral_request_rule" model="ir.rule">
+            <field name="name">Referral Request User</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_referral_request"/>
+            <field name="domain_force">['|',('create_uid','=', user.id),('user_id','=', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+         <record id="hr_referral_request_rule" model="ir.rule">
+            <field name="name">Referral Request HR</field>
+            <field name="model_id" ref="surgi_recruitment_management.model_referral_request"/>
+            <field name="domain_force">[(1,'=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user')),(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+    </data>
+</odoo>

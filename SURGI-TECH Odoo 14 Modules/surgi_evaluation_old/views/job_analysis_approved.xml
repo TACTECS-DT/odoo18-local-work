@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+
+
+        <record id="form_view_job_analysis_approved" model="ir.ui.view">
+            <field name="name">name.job.analysis.approved.form</field>
+            <field name="model">job.analysis.approved</field>
+            <field name="arch" type="xml">
+                <form string="Job Analysis Approved">
+                    <header>
+                        <button name="button_confirm" type="object" string="Confirm" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','draft')]}" confirm="Are you sure you want to do this?"/>
+                        <button name="button_cancel" type="object" string="Set To Draft" class="oe_highlight"
+                                attrs="{'invisible':[('state','!=','confirm')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="job_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="job_id" placeholder="Job Position"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="questions_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="question"/>
+                                    <field name="answer"/>
+                                    <field name="employee_id"/>
+                                    <field name="is_approved"/>
+<!--                                    <button name="button_action" type="object" widget="boolean_button" />-->
+
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_view_job_approved" model="ir.actions.act_window">
+            <field name="name">Job Analysis Approved</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.analysis.approved</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_action_job_analysis_categ" name="Job Analysis Approved"
+                  parent="surgi_evaluation_menuitem"
+                  action="action_view_job_approved" sequence="12"
+                  groups="surgi_evaluation.groups_show_all"
+        />
+    </data>
+</odoo>

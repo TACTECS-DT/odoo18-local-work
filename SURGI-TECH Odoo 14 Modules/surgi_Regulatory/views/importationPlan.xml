@@ -1,0 +1,113 @@
+<odoo>
+    <data>
+    <record id="tree_view_Importation_Plan" model="ir.ui.view">
+            <field name="name">Importation Plan</field>
+            <field name="model">importation.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Importation Plan">
+                    <field name="name"/>
+                    <field name="planYear"/>
+                    <field name="registrationLicense"/>
+<!--                    <field name="countryOfOrigin" widget="many2many_tags"/>-->
+                    <field name="legelManufacturer"/>
+                    <field name="actualManufacturer" widget="many2many_tags"/>
+                    <field name="IssueDate"/>
+                    <field name="expiryDate"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_Importation_Plan" model="ir.ui.view">
+            <field name="name">Importation Plan</field>
+            <field name="model">importation.plan</field>
+            <field name="arch" type="xml">
+                <form string="Importation Plan">
+                    <sheet>
+                        <div style="text-align:center">
+                            <group string="Plan" col="4" colspan="6"></group>
+                        </div>
+                        <group>
+                            <div>
+                                <group string="Basic Information">
+                                     <field name="name"/>
+                                     <field name="planYear"/>
+                                    <field name="registrationLicense"/>
+                                </group>
+                            </div>
+                            <div>
+                                <group string="Manufacture">
+<!--                                    <field name="countryOfOrigin" widget="many2many_tags"/>-->
+                                    <field name="legelManufacturer"/>
+                                    <field name="legelManufacturerAddress"/>
+<!--                                    <field name="legelManufacturerCountry"/>-->
+                                   <field name="actualManufacturer" widget="many2many_tags"/>
+                                    <field name="actualManufacturerAddress"/>
+<!--                                    <field name="actualManufacturerCountry"/>-->
+                                </group>
+                            </div>
+                            <div>
+                                <group string="Plan Date">
+                                    <field name="IssueDate"/>
+                                    <field name="expiryDate"/>
+                                </group>
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="product" string="Scope Of Product">
+                                <group>
+                                </group>
+                                <field name="planProduct">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Product"/>
+                                        </control>
+                                        <field name="productTemplate"/>
+                                        <field name="ProductVendor"/>
+                                        <field name="internalRef"/>
+                                        <field name="regularityLabelRef"/>
+                                        <field name="ProductClass"/>
+                                        <field name="productTypeRegularity"/>
+                                        <field name="productSterilizeField"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="attachment" string="Certificate">
+                                <group>
+                                </group>
+                                <field name="attachmentPage">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Attachment"/>
+                                        </control>
+                                        <field name="certificateName"/>
+                                        <field name="certificateExpiry"/>
+                                        <field name="certificateAttachment" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_view_Importation_Plan" model="ir.actions.act_window">
+            <field name="name">Importation Plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">importation.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_Importation_Plan" name="Importation Plan" parent="regularity_menuitem"
+                  action="action_view_Importation_Plan" sequence="2"/>
+
+    </data>
+</odoo>

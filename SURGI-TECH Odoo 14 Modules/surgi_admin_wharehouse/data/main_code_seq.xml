@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+
+      <record id="admin_warehouse_seq_code_seq" model="ir.sequence">
+    <field name="name">admin warehouse seq</field>
+    <field name="code">admin.warehouse.seq</field>
+    <field name="prefix">AW-</field>
+    <field name="padding">5</field>
+    <field name="company_id" eval="False"/>
+</record>
+
+
+</odoo>

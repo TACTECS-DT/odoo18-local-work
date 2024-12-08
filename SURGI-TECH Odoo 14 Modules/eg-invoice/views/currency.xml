@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+
+
+        
+        <!--
+        
+        Human readable name
+        Human readable name
+        
+        Inherited Views
+        
+        - - - - - - - - - model
+        - Model·········: model
+        - Base Module···: module_name
+        - Mode··········: primary|extension
+        - View priority·: 16
+        - - - - - - - - - model
+        
+        -->
+        
+        <!-- primary|extension Inherited .:Tree:. view for "model" -->
+        <record id="view_currency_rate_tree_einvoice_inhert" model="ir.ui.view">
+            <field name="name">view.currency.rate.tree.einvoice.inhert</field>
+            <field name="model">res.currency.rate</field>
+            <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+            <field name="inherit_id" ref="base.view_currency_rate_tree" />
+            <field name="type">tree</field>
+            <!-- <field name="mode">primary|extension</field> -->
+            <field name="priority" eval="16" />
+            <field name="active" eval="True" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='rate']" position="after">
+                    <field name="currencydate" />
+                    <field name="currencyvalue"/>
+                </xpath>
+            </field>
+        </record>
+        
+
+    </data>
+</odoo>

@@ -1,0 +1,258 @@
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="operation_operation_recon_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.recon.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.recon_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+                </xpath>
+
+                </field>
+
+
+                </record>
+
+        <record id="operations_operation_truma_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.truma.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.trauma_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+        <record id="operations_operation_spine_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.truma.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.spine_operations_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+
+        <record id="operations_operation_new_recon_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.new_recona.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.new_recon_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+
+        <record id="operations_operation_biologic_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.	biologic.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.biologic_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+
+        <record id="operations_operation_new_vanguard_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.new_vanguard.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.new_vanguard_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+        <record id="operations_operation_new_extremities_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.new_extremities.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.new_extremities_operations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+
+        <record id="operations_operation_new_sports_inherit" model="ir.ui.view">
+            <field name="name">operation.operation.new_sports.inherit</field>
+            <field name="model">operation.operation</field>
+            <field name="inherit_id" ref="surgi_operation.sports_operations_form"/>
+            <field name="arch" type="xml">
+
+                  <xpath expr="//header" position="inside">
+
+                    <button string="Start Operation" name="action_start_operation_date" type="object"
+                attrs="{'invisible': [('started_op', '=', True)]}"
+                           />
+                    <button string="End Operation" name="action_end_operation_date" type="object"
+                            attrs="{'invisible': [('ended_op', '=', True)]}"
+
+                           />
+
+                </xpath>
+                <xpath expr="//field[@name='emp_confirm']" position="after">
+
+                   <field name="started_op_date" />
+                   <field name="ended_op_date" />
+                   <field name="started_op" invisible="1"/>
+                   <field name="ended_op" invisible="1"/>
+
+
+
+                </xpath>
+
+                </field>
+
+                </record>
+
+
+    </data>
+</odoo>

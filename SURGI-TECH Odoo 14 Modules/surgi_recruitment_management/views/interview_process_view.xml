@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="interview_process_tree_view" model="ir.ui.view">
+        <field name="name">interview.process.tree</field>
+        <field name="model">interview.process</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Interview Process">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="interview_process_form_view" model="ir.ui.view">
+        <field name="name">interview.process.form</field>
+        <field name="model">interview.process</field>
+        <field name="arch" type="xml">
+            <form string="Interview Process">
+                <sheet>
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="job_ids" widget="many2many_tags" options="{'no_edit': True,'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="stage_id"/>
+                                    <field name="user_id"/>
+                                    <field name="reviewer_ids" widget="many2many_tags"/>
+                                    <field name="type"/>
+                                    <field name="survey_ids" widget="many2many_tags"/>
+                                    <field name="applicant_survey_ids" widget="many2many_tags"/>
+                                    <field name="interview_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_interview_process">
+        <field name="name">Interview Process Steps</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">interview.process</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <menuitem id="menu_interview_process" action="action_interview_process" parent="hr_recruitment.menu_hr_recruitment_configuration"
+              name="Interview Process Steps" sequence="2"/>
+</odoo>

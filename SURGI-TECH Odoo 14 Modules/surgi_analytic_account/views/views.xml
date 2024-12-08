@@ -1,0 +1,203 @@
+<odoo>
+    <data>
+
+        <record id="view_account_move_line_inherit_search" model="ir.ui.view">
+            <field name="name">view.account.move.line.inherit.search</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="check_number_payment" force_save="1"/>
+                    <field name="date_payment" force_save="1"/>
+                    <field name="collection_receipt_number" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="tree_view_account_move_line" model="ir.ui.view">
+            <field name="name">name.account.move.line.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="check_number_payment" optional="hide"/>
+                    <field name="date_payment" optional="hide"/>
+                    <field name="collection_receipt_number" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="product_line" optional="hide"/>
+                    <field name="product_line_parent" optional="hide"/>
+                    <field name="analytic_account_group_id" optional="hide"/>
+                    <field name="analytic_account_group_parent_id" optional="hide"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_account_move_line_id__inherit" model="ir.ui.view">
+            <field name="name">name.account.move.line.form.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Payment Info">
+                        <group col="4">
+                            <field name="check_number_payment" force_save="1"/>
+                            <field name="date_payment" force_save="1"/>
+                            <field name="collection_receipt_number" force_save="1"/>
+                            <field name="date_check_number" invisible="1"/>
+                        </group>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--        &lt;!&ndash; Inherit Form View to Modify it &ndash;&gt;-->
+        <!--        <record id="form_view_account_move_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">name.account.move.inherit</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="surgi_invoice_print.invoice_move_print"/>-->
+        <!--            <field name="arch" type="xml">-->
+
+        <!--                <xpath expr="//page[@id='other_tab']" position="inside">-->
+        <!--                    <field name="close_edit"/>-->
+        <!--                </xpath>-->
+
+        <!--                 <xpath expr="//field[@name='printinvoicetoline']//tree" position="attributes">-->
+        <!--                    <attribute name="attrs">{'readonly': [('close_edit','=',True)]}</attribute>-->
+        <!--                </xpath>-->
+
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="group_is_reviewed" model="res.groups">
+            <field name="name">IS Reviewed</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="view_account_move_inherit_search" model="ir.ui.view">
+            <field name="name">view.account.move.inherit.search</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="check_number_payment" force_save="1"/>
+                    <field name="date_payment" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_account_payment_inherit" model="ir.ui.view">
+            <field name="name">name.account.payment.inherit.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="date_check_number" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="account_view_move_form_edit" model="ir.ui.view">
+            <field name="name">account_view_move_form_edit_name</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='product_id']" position="after">
+                    <field name="check_number_payment" force_save="1" invisible="1"/>
+                    <field name="date_payment" force_save="1" invisible="1"/>
+                    <field name="collection_receipt_number" force_save="1" invisible="1"/>
+                </xpath>
+
+
+
+
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Payment Info">
+                        <group col="4">
+                            <field name="check_number_payment" readonly="1" force_save="1"/>
+                            <field name="date_payment" readonly="1" force_save="1"/>
+                            <field name="collection_receipt_number" readonly="1" force_save="1"/>
+                            <field name="date_check_number" invisible="1" force_save="1"/>
+                        </group>
+
+                    </page>
+                </xpath>
+
+
+
+
+                <xpath expr="//button[@name='button_draft']" position="after">
+                    <field name="is_check" invisible="1"/>
+                    <button name="compute_analytic_account" type="object" class="oe_highlight"
+                            icon="fa-check-square" string="Check.A.C">
+                        <field name="is_check" widget="boolean_button" options='{"terminology": {
+        "string_true": "Blacklist",
+        "hover_true": "Blacklist",
+        "string_false": "Active",
+        "hover_false": "Active"
+    }}'/>
+                    </button>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_views_analytic_account_page" model="ir.ui.view">
+            <field name="name">analytic_account_page</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="account_budget.view_account_analytic_account_form_inherit_budget"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[1]" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <page string="Sales and Product">
+                        <group string="Matrix">
+                            <field name="user_id"/>
+                            <field name="salesteam_id"/>
+                            <field name="product_id"/>
+                            <field name="product_line_id"/>
+                            <field name="user_add_ids" widget="many2many_tags"/>
+                            <field name="undefined_sales_person"/>
+                        </group>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+<!--        <record id="ir_cron_account_move_line_date" model="ir.cron">-->
+<!--            <field name="name">Account Move Line</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.cron_all_account_move()</field>-->
+<!--            <field name="doall" eval="False"/>-->
+<!--            <field name="model_id"-->
+<!--                   ref="account.model_account_move_line"/>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

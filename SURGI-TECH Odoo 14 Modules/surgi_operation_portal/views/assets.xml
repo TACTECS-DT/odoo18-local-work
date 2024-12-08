@@ -1,0 +1,34 @@
+<odoo>
+    <!--=========================Website SCRIPTS======================-->
+    <template id="website_operation_scripts" name="Website Scripts"
+              inherit_id="portal_custom.website_dashboard_scripts">
+
+        <xpath expr="." position="inside">
+
+            <script type="text/javascript" href="/surgi_operation_portal/static/flat/flatpickr.min.js"/>
+
+
+        </xpath>
+    </template>
+
+
+    <template id="assets_frontend_inh_operations" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+
+            <script type="text/javascript" src="/surgi_operation_portal/static/js/frontend.js"></script>
+            <script type="text/javascript" src="/surgi_operation_portal/static/js/autocompleted.js"></script>
+            <script type="text/javascript" src="/surgi_operation_portal/static/js/table.js"/>
+
+
+            <link rel="stylesheet" href="/surgi_operation_portal/static/js/toasts.css"/>
+            <link rel="stylesheet" href="/surgi_operation_portal/static/js/toastr/toastr.min.css"/>
+            <script type="text/javascript" src="/surgi_operation_portal/static/js/toastr/toastr.min.js"></script>
+            <script type="text/javascript"
+                    src="/surgi_operation_portal/static/js/jquery-validation/jquery.validate.min.js"></script>
+            <script type="text/javascript"
+                    src="/surgi_operation_portal/static/js/jquery-validation/additional-methods.min.js"></script>
+
+        </xpath>
+    </template>
+
+</odoo>

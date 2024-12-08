@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <record id="grade_fixed_variable_allowance" model="ir.ui.view">
+            <field name="model">grade.grade</field>
+            <field name="inherit_id" ref="surgi_hr_payroll.view_employee_grade_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="after">
+                    <!--      page for allowance-->
+                    <page string="Salary Range" name="salary_range">
+                        <group>
+                            <group>
+                                <field name="min_salary"/>
+                                <field name="max_salary"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Fixed Allowances" name="fixed_allowance">
+                        <group string="Fixed Allowances">
+                            <group string="InDoor Allowances">
+                                <label for="driver_rep_allow_in"/>
+                                <div class="o_row" name="driver_rep_allow_in">
+                                    <field name="driver_rep_allow_in" nolabel="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <field name="benzene_allow_in"/>
+                                <field name="transport_allow_in"/>
+                                <field name="transport_to_bank_allow_in"/>
+                                <field name="travel_exp_allow_in"/>
+                                <field name="fix_internal_travel_exp_allow_in"/>
+                                <field name="housing_allow_in"/>
+                                <field name="risk_allow_in"/>
+                                <field name="extra_hours_work_allow_in"/>
+                                <field name="fix_collection_comm_allow_in"/>
+                                <field name="fix_sales_comm_allow_in"/>
+                                <field name="car_allow_in"/>
+                            </group>
+                            <group string="OutDoor Allowances">
+                                <label for="driver_rep_allow_out"/>
+                                <div class="o_row" name="driver_rep_allow_out">
+                                    <field name="driver_rep_allow_out" nolabel="1"/>
+                                    <span>/ month</span>
+                                </div>
+                                <field name="benzene_allow_out"/>
+                                <field name="transport_allow_out"/>
+                                <field name="transport_to_bank_allow_out"/>
+                                <field name="travel_exp_allow_out"/>
+                                <field name="fix_internal_travel_exp_allow_out"/>
+                                <field name="housing_allow_out"/>
+                                <field name="risk_allow_out"/>
+                                <field name="extra_hours_work_allow_out"/>
+                                <field name="fix_collection_comm_allow_out"/>
+                                <field name="fix_sales_comm_allow_out"/>
+                                <field name="car_allow_out"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Variable Allowances" name="variable_allowance">
+                        <group string="Variable Allowances">
+                            <group>
+                                <field name="var_internal_travel_exp_allow"/>
+                                <field name="var_external_travel_reward_allow"/>
+                                <field name="var_accomod_allow"/>
+                                <field name="var_overtime_allow"/>
+                            </group>
+                            <group>
+                                <field name="var_collection_comm_allow"/>
+                                <field name="var_sales_comm_allow"/>
+                                <field name="var_manufacturing_comm_allow"/>
+                                <field name="var_night_shift_allow"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

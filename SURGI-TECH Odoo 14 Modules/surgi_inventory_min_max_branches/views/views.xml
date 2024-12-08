@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+        <record id="view_form_produc_warranty_branch_info" model="ir.ui.view">
+            <field name="name">view.form.product.warranty.branch.info</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[last()]" position="after">
+                    <page string="Product Branches">
+                        <field name="MinMaxBranches">
+
+                            <tree editable="bottom">
+                                <control>
+                                    <create name="add_relation_control" string="Add"/>
+                                </control>
+                                <field name="branch_name"/>
+                                <field name="min_branch"/>
+                                <field name="max_branch"/>
+
+
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_form_produc_warranty_info_product_branch_template" model="ir.ui.view">
+            <field name="name">view.form.produc.warranty.info.product.branch.template</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[last()]" position="after">
+                    <page string="Product Branches">
+                        <field name="MinMaxBranches">
+
+                            <tree editable="bottom">
+                                <control>
+                                    <create name="add_relation_control" string="Add"/>
+                                </control>
+                                <field name="branch_name"/>
+                                <field name="min_branch"/>
+                                <field name="max_branch"/>
+
+
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="calendar_event_inherit_tree" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="MinMaxBranches" widget="many2many_tags"/>
+
+                </xpath>
+            </field>
+        </record>
+<!--        <record id="stock_quant_tree_inherit_editable_tree" model="ir.ui.view">-->
+<!--            <field name="model">stock.quant</field>-->
+<!--            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//tree/field[@name='product_id']" position="after">-->
+<!--                    <field name="product_branches" widget="many2many_tags"  optional="hide" force_save="1"/>-->
+
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

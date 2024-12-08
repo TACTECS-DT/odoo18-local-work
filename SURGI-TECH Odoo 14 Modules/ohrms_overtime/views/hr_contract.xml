@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_contract_overtime_view">
+            <field name="name">hr.contract.overtime.form.inherit.view</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='duration_group']" position="after">
+                    <group string="Overtime">
+                        <field name="computeovertime"/>
+                        <label for="over_day"/>
+                        <div class="o_row" name="day_wage">
+                            <field name="over_day"/>
+                            <span>/day</span>
+                        </div>
+                        <label for="compute_over_day"  />
+                        <div class="o_row" name="compute_over_day" >
+                            <field name="compute_over_day" />
+                            <span>/Manually Day Wage</span>
+                        </div>
+                        <label for="over_hour"/>
+                        <div class="o_row" name="hour_wage">
+                            <field name="over_hour"/>
+                            <span>/hour</span>
+                        </div>
+                        <label for="compute_over_hour" />
+                        <div class="o_row" name="compute_over_hour" >
+                            <field name="compute_over_hour" />
+                           <span>/Manually Hour Wage</span>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

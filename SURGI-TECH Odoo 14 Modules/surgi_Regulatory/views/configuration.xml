@@ -1,0 +1,623 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_configuration" name="Configuration"
+                  parent="regularity_menuitem"
+                  sequence="99"/>
+
+        <record id="tree_view_actual_manufacturer" model="ir.ui.view">
+            <field name="name">Actual Manufacturer</field>
+            <field name="model">actual.manufacturer</field>
+            <field name="arch" type="xml">
+                <tree string="Actual Manufacturer">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_actual_manufacturer" model="ir.ui.view">
+            <field name="name">Actual Manufacturer</field>
+            <field name="model">actual.manufacturer</field>
+            <field name="arch" type="xml">
+                <form string="Actual Manufacturer">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="address">
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_relation_control" string="Add"/>
+                                    </control>
+
+                                    <field name="name"/>
+                                    <field name="country"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_actual_manufacturer" model="ir.actions.act_window">
+            <field name="name">Actual Manufacturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">actual.manufacturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_actual_manufacturer" name="Actual Manufacturer"
+                  parent="menu_configuration"
+                  action="action_view_actual_manufacturer" sequence="1"/>
+        ################################################################################################################################
+        <record id="tree_view_address_manufacturer" model="ir.ui.view">
+            <field name="name">Address Manufacturer</field>
+            <field name="model">address.manufacturer</field>
+            <field name="arch" type="xml">
+                <tree string="Address Manufacturer">
+                    <field name="name"/>
+                    <field name="country"/>
+                    <field name="legal_maunfacture"/>
+                    <field name="actual_maunfacture"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_address_manufacturer" model="ir.ui.view">
+            <field name="name">Address Manufacturer</field>
+            <field name="model">address.manufacturer</field>
+            <field name="arch" type="xml">
+                <form string="Address Manufacturer">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="country"/>
+                            <field name="legal_maunfacture"/>
+                            <field name="actual_maunfacture"/>
+
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_address_manufacturer" model="ir.actions.act_window">
+            <field name="name">Address Manufacturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">address.manufacturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_address_manufacturer" name="Address Manufacturer"
+                  parent="menu_configuration"
+                  action="action_view_address_manufacturer" sequence="2"/>
+        ################################################################################################################################
+
+        <record id="tree_view_Legal_manufacturer" model="ir.ui.view">
+            <field name="name">Legal Manufacturer</field>
+            <field name="model">legal.manufacturer</field>
+            <field name="arch" type="xml">
+                <tree string="Legal Manufacturer">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_Legal_manufacturer" model="ir.ui.view">
+            <field name="name">Legal Manufacturer</field>
+            <field name="model">legal.manufacturer</field>
+            <field name="arch" type="xml">
+                <form string="Legal Manufacturer">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="address">
+                                <tree editable="bottom">
+                                    <control>
+                                        <create name="add_relation_control" string="Add"/>
+                                    </control>
+
+                                    <field name="name"/>
+                                    <field name="country"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_Legal_manufacturer" model="ir.actions.act_window">
+            <field name="name">Legal Manufacturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">legal.manufacturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_Legal_manufacturer" name="Legal Manufacturer"
+                  parent="menu_configuration"
+                  action="action_view_Legal_manufacturer" sequence="7"/>
+        ################################################################################################################################
+
+        <record id="tree_view_sterilize_method" model="ir.ui.view">
+            <field name="name">Sterilize Method</field>
+            <field name="model">sterilize.method</field>
+            <field name="arch" type="xml">
+                <tree string="Sterilize Method">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_sterilize_method" model="ir.ui.view">
+            <field name="name">Sterilize Method</field>
+            <field name="model">sterilize.method</field>
+            <field name="arch" type="xml">
+                <form string="Sterilize Method">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_sterilize_method" model="ir.actions.act_window">
+            <field name="name">Sterilize Method</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sterilize.method</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_sterilize_method" name="Sterilize Method"
+                  parent="menu_configuration"
+                  action="action_view_sterilize_method" sequence="6"/>
+
+        ################################################################################################################################
+
+        <record id="tree_view_medical_category" model="ir.ui.view">
+            <field name="name">Medical Category</field>
+            <field name="model">medical.category</field>
+            <field name="arch" type="xml">
+                <tree string="Medical Category">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_medical_category" model="ir.ui.view">
+            <field name="name">Medical Category</field>
+            <field name="model">medical.category</field>
+            <field name="arch" type="xml">
+                <form string="Medical Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_medical_category" model="ir.actions.act_window">
+            <field name="name">Medical Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">medical.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_medical_category" name="Medical Category"
+                  parent="menu_configuration"
+                  action="action_view_medical_category" sequence="7"/>
+
+        ################################################################################################################################
+        <record id="tree_view_nomen_clature" model="ir.ui.view">
+            <field name="name">Nomen Clature Type</field>
+            <field name="model">nomen.clature</field>
+            <field name="arch" type="xml">
+                <tree string="Nomen Clature Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_nomen_clature" model="ir.ui.view">
+            <field name="name">Nomen Clature Type</field>
+            <field name="model">nomen.clature</field>
+            <field name="arch" type="xml">
+                <form string="Nomen Clature Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_nomen_clature" model="ir.actions.act_window">
+            <field name="name">Nomen Clature Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nomen.clature</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_nomen_clature" name="Nomen Clature Type"
+                  parent="menu_configuration"
+                  action="action_view_nomen_clature" sequence="8"/>
+
+        ################################################################################################################################
+        <record id="tree_view_adopted_regulation" model="ir.ui.view">
+            <field name="name">Adopted Regulation</field>
+            <field name="model">adopted.regulation</field>
+            <field name="arch" type="xml">
+                <tree string="Adopted Regulation">
+                    <field name="name"/>
+                    <field name="NameClass"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_adopted_regulation" model="ir.ui.view">
+            <field name="name">Adopted Regulation</field>
+            <field name="model">adopted.regulation</field>
+            <field name="arch" type="xml">
+                <form string="adopted Regulation">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="NameClass"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_adopted_regulation" model="ir.actions.act_window">
+            <field name="name">Adopted Regulation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">adopted.regulation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_adopted_regulation" name="Adopted Regulation"
+                  parent="menu_configuration"
+                  action="action_view_adopted_regulation" sequence="8"/>
+
+        ################################################################################################################################
+
+
+        <record id="tree_view_storge_conditions" model="ir.ui.view">
+            <field name="name">Storge Conditions</field>
+            <field name="model">storge.conditions</field>
+            <field name="arch" type="xml">
+                <tree string="Storge Conditions">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_storge_conditions" model="ir.ui.view">
+            <field name="name">Storge Conditions</field>
+            <field name="model">storge.conditions</field>
+            <field name="arch" type="xml">
+                <form string="Storge Conditions">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_storge_conditions" model="ir.actions.act_window">
+            <field name="name">Storge Conditions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">storge.conditions</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_storge_conditions" name="Storge Conditions"
+                  parent="menu_configuration"
+                  action="action_view_storge_conditions" sequence="5"/>
+
+        ################################################################################################################################
+
+        <record id="tree_view_issuing_authority" model="ir.ui.view">
+            <field name="name">Issuing Authority</field>
+            <field name="model">issuing.authority</field>
+            <field name="arch" type="xml">
+                <tree string="Issuing Authority">
+                    <field name="name"/>
+                    <field name="country"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_issuing_authority" model="ir.ui.view">
+            <field name="name">Issuing Authority</field>
+            <field name="model">issuing.authority</field>
+            <field name="arch" type="xml">
+                <form string="Issuing Authority">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="country"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_issuing_authority" model="ir.actions.act_window">
+            <field name="name">Issuing Authority</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">issuing.authority</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_issuing_authority" name="Issuing Authority"
+                  parent="menu_configuration"
+                  action="action_view_issuing_authority" sequence="9"/>
+
+        ################################################################################################################################
+
+        <record id="tree_view_legalization" model="ir.ui.view">
+            <field name="name">Legalization</field>
+            <field name="model">certificate.legalization</field>
+            <field name="arch" type="xml">
+                <tree string="Legalization">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_legalization" model="ir.ui.view">
+            <field name="name">Legalization</field>
+            <field name="model">certificate.legalization</field>
+            <field name="arch" type="xml">
+                <form string="Legalization">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_legalization" model="ir.actions.act_window">
+            <field name="name">Legalization</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">certificate.legalization</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_legalization" name="Legalization"
+                  parent="menu_configuration"
+                  action="action_view_legalization" sequence="10"/>
+
+        ################################################################################################################################
+
+        <record id="tree_view_CertificateClass" model="ir.ui.view">
+            <field name="name">Class Of Certificate</field>
+            <field name="model">classof.certificate</field>
+            <field name="arch" type="xml">
+                <tree string="Class Of Certificate">
+                    <field name="name"/>
+                    <field name="typeOfCertificate" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_CertificateClass" model="ir.ui.view">
+            <field name="name">Class Of Certificate</field>
+            <field name="model">classof.certificate</field>
+            <field name="arch" type="xml">
+                <form string="Class Of Certificate">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="typeOfCertificate" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_CertificateClass" model="ir.actions.act_window">
+            <field name="name">Class Of Certificate</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">classof.certificate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_CertificateClass" name="Class Of Certificate"
+                  parent="menu_configuration"
+                  action="action_view_CertificateClass" sequence="3"/>
+
+        ################################################################################################################################
+
+        <record id="tree_view_typeOfCertificate" model="ir.ui.view">
+            <field name="name">Type Of Certificate</field>
+            <field name="model">typeof.certificate</field>
+            <field name="arch" type="xml">
+                <tree string="Type Of Certificate">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_typeOfCertificate" model="ir.ui.view">
+            <field name="name">Type Of Certificate</field>
+            <field name="model">typeof.certificate</field>
+            <field name="arch" type="xml">
+                <form string="Type Of Certificate">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_typeOfCertificate" model="ir.actions.act_window">
+            <field name="name">Type Of Certificate</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">typeof.certificate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_typeOfCertificate" name="Type Of Certificate"
+                  parent="menu_configuration"
+                  action="action_view_typeOfCertificate" sequence="11"/>
+
+
+        ###############################################
+        <record id="tree_view_country_manufacturer" model="ir.ui.view">
+            <field name="name">Country Manufacturer</field>
+            <field name="model">country.manufacturer</field>
+            <field name="arch" type="xml">
+                <tree string="country Manufacturer">
+                    <field name="name"/>
+                    <field name="countryName"/>
+<!--                    <field name="legal_maunfacture" widget="many2many_tags" invisible="1"/>-->
+<!--                    <field name="actual_maunfacture" widget="many2many_tags" invisible="1"/>-->
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_country_manufacturer" model="ir.ui.view">
+            <field name="name">Country Manufacturer</field>
+            <field name="model">country.manufacturer</field>
+            <field name="arch" type="xml">
+                <form string="country Manufacturer">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="countryName"/>
+<!--                            <field name="legal_maunfacture" widget="many2many_tags" invisible="1"/>-->
+<!--                            <field name="actual_maunfacture" widget="many2many_tags" invisible="1"/>-->
+
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_country_manufacturer" model="ir.actions.act_window">
+            <field name="name">Country Manufacturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">country.manufacturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_view_country_manufacturer" name="country Manufacturer"
+                  parent="menu_configuration"
+                  action="action_view_country_manufacturer" sequence="4"/>
+
+
+    </data>
+</odoo>

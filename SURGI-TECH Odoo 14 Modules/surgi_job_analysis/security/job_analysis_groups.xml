@@ -1,0 +1,91 @@
+<odoo>
+
+
+    <data>
+
+        <record id="job_analysis_groups" model="ir.module.category">
+            <field name="name">Job Analysis</field>
+            <field name="sequence" eval="1"/>
+        </record>
+
+<!--        <record id="job_analysis_groups_employee" model="res.groups">-->
+<!--            <field name="name">job analysis Group</field>-->
+<!--            <field name="category_id" ref="job_analysis_groups"/>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+
+        <record id="hr_admin_permission_group_job_analysis" model="res.groups">
+            <field name="name">Job Analysis HR Admin</field>
+            <field name="category_id" ref="job_analysis_groups"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="groups_show_all_job_analysis" model="res.groups">
+            <field name="name">Show ALL Job Analysis</field>
+            <field name="category_id" ref="job_analysis_groups"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="manager_group_job_analysis" model="res.groups">
+            <field name="name">Job Analysis Manager</field>
+            <field name="category_id" ref="job_analysis_groups"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="manager_group_job_analysis_user_rule" model="ir.rule">
+            <field name="name">Job Analysis Permission</field>
+            <field name="model_id" ref="model_job_analysis_evaluation"/>
+            <field name="perm_write" eval="1"/>
+            <field name="domain_force">[('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('surgi_job_analysis.manager_group_job_analysis'))]"/>
+        </record>
+
+        <record id="hr_admin_permission_group_job_analysis_user_rule" model="ir.rule">
+            <field name="name">All Job Analysis Permission</field>
+            <field name="model_id" ref="model_job_analysis_evaluation"/>
+            <field name="perm_write" eval="1"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('surgi_job_analysis.hr_admin_permission_group_job_analysis'))]"/>
+        </record>
+
+<!--        <record id="user_permisions_rule_groups_manager" model="ir.rule">-->
+<!--            <field name="name">User Rule</field>-->
+<!--            <field name="model_id" ref="model_evaluation_evaluation"/>-->
+<!--            <field name="groups" eval="[(4,ref('surgi_job_analysis.kpi_manger_groups_employee'))]"/>-->
+<!--            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)] </field>-->
+
+<!--        </record>-->
+<!--        <record id="user_permisions_rule_groups_hr" model="ir.rule">-->
+<!--            <field name="name">User Rule HR</field>-->
+<!--            <field name="model_id" ref="model_evaluation_evaluation"/>-->
+<!--            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>-->
+<!--            <field name="domain_force">[(1,'=',1 )]</field>-->
+
+
+<!--        </record>-->
+        <!--&lt;!&ndash;################################################&ndash;&gt;-->
+
+
+        <!--<record id="user_permisions_rule_groups_manager22" model="ir.rule">-->
+            <!--<field name="name">User Rule22</field>-->
+            <!--<field name="model_id" ref="model_function_competencies"/>-->
+            <!--<field name="groups" eval="[(4,ref('surgi_job_analysis.kpi_manger_groups_employee'))]"/>-->
+            <!--<field name="domain_force">[('active_function','=',True)]</field>-->
+
+        <!--</record>-->
+        <!--<record id="user_permisions_rule_groups_hr22" model="ir.rule">-->
+            <!--<field name="name">User Rule HR22</field>-->
+            <!--<field name="model_id" ref="model_function_competencies"/>-->
+            <!--<field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>-->
+            <!--<field name="domain_force">[(1,'=',1 )]</field>-->
+
+
+        <!--</record>-->
+
+
+
+
+
+    </data>
+
+</odoo>

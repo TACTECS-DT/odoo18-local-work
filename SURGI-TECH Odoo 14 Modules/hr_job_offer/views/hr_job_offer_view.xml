@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Tree view-->
+    <record id="hr_job_offer_tree_view" model="ir.ui.view">
+        <field name="name">hr.job.offer.tree</field>
+        <field name="model">hr.job.offer</field>
+        <field name="arch" type="xml">
+            <tree string="Job Offer">
+                <field name="name"/>
+                <field name="applicant_id"/>
+                <field name="partner_name"/>
+                <field name="job_id"/>
+                <field name="department_id"/>
+                <field name="availability"/>
+                <field name="hr_hiring_date"/>
+                <field name="notice_period"/>
+                <field name="prepaid_date"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form view-->
+    <record id="hr_job_offer_form_view" model="ir.ui.view">
+        <field name="name">hr.job.offer.form</field>
+        <field name="model">hr.job.offer</field>
+        <field name="arch" type="xml">
+            <form string="Job Offer">
+                <header>
+                    <button name="set_progress" type="object" string="To Progress" states="new" class="oe_highlight"/>
+                    <button name="set_new" type="object" string="Set To New" class="oe_highlight"
+                            states="progress,to_employee"/>
+                    <button name="set_to_employee" type="object" string="To Employee" states="progress"
+                            class="oe_highlight"/>
+                    <button name="action_offer_send" type="object" string="Send By Mail" class="oe_highlight"/>
+                    <button name="do_accept" type="object" string="Accept" states="to_employee"
+                            class="btn-primary btn-success"/>
+                    <button name="do_refuse" type="object" string="Refuse" states="to_employee"
+                            class="btn-primary btn-danger"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,progress,to_employee,accepted,refused"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Application Information">
+                            <field name="applicant_id"/>
+                            <field name="partner_name"/>
+                            <field name="partner_mobile"/>
+                            <field name="job_id"/>
+                            <field name="department_id"/>
+                            <field name="address_ids" widget="many2many_tags"/>
+                            <field name="grade_id"/>
+                            <field name="rank_id"/>
+                            <field name="rang_id"/>
+                        </group>
+                        <group>
+                            <field name="availability"/>
+                            <field name="hr_hiring_date"/>
+                            <field name="notice_period"/>
+                            <field name="prepaid_date"/>
+                            <field name="date"/>
+                            <field name="user_id" readonly="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Salary Information">
+                            <group>
+                                <group string="Salary Information">
+                                    <field name="basic"/>
+                                    <field name="variable_incentive"/>
+                                    <field name="is_car_allowance"/>
+                                    <field name="car_allowance"
+                                           attrs="{'invisible': [('is_car_allowance','=',False)]}"/>
+                                    <field name="attendance_type"/>
+                                    <field name="transport_allowance"
+                                           attrs="{'invisible': [('attendance_type','=',False)]}"/>
+                                    <field name="mobile_package"/>
+                                    <field name="salary"/>
+                                    <field name="social_insurance" string="Social Insurance Employee Share 11%"/>
+                                    <field name="tax_amount" string="Salaries Taxes"/>
+                                    <field name="net_salary" string="Net Salary"/>
+                                </group>
+                                <group string="Other allowances">
+                                    <field name="other_allowance_ids" nolabel="1"
+                                           force_save="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="allowance"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--search view-->
+    <record id="view_hr_job_offer_search_form" model="ir.ui.view">
+        <field name="name">hr.job.offer.search.form</field>
+        <field name="model">hr.job.offer</field>
+        <field name="arch" type="xml">
+            <search string="Job Offer">
+                <filter string="My Offering" name="myrequest" domain="[('user_id.id', '=', uid)]"/>
+                <field name="partner_name" string="Employee"/>
+                <filter string="Employee" name="partner_name" context="{'group_by':'partner_name'}"/>
+                <filter string="Status" name="status" context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_hr_job_offer" model="ir.actions.act_window">
+        <field name="name">Job Offer</field>
+        <field name="res_model">hr.job.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_myrequest': 1}</field>
+        <field name="search_view_id" ref="view_hr_job_offer_search_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Job Offer request.
+            </p>
+            <p>
+                Use this menu to create Job Offer requests.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Job Offers"
+              parent="hr_recruitment.menu_crm_case_categ0_act_job"
+              id="menu_hr_job_offer"
+              sequence="4"
+              action="action_hr_job_offer"/>
+</odoo>

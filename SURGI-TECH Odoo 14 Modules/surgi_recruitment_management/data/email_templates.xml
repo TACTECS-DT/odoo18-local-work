@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+        <record id="email_template_data_applicant_meeting" model="mail.template">
+            <field name="name">Calendar: Meeting Invitation</field>
+            <field name="model_id" ref="calendar.model_calendar_event"/>
+            <field name="subject">SurgiTech - Interview Invitation</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted or '') | safe}
+            </field>
+            <field name="email_to">
+                ${ctx['mail_to']}
+            </field>
+            <field name="partner_to">${object.user_id.partner_id.id}</field>
+            <field name="lang">${object.user_id.partner_id.lang}</field>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" width="590"
+                       style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                    <tr>
+                        <td valign="top">
+                            <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                                Dear <strong>${object.applicant_id.partner_name}</strong>,
+                                <br/>
+                                <br/>
+                                Thank you for your interest to join Surgi-Tech as a
+                                <b>${object.job_id.name}</b>
+                                ,
+                                we were impressed with your background and would like to invite you to an interview to
+                                tell you more about our role and to get to know you a little better.
+                                <br/>
+                                <br/>
+                                <br/>
+                                Interviews have been scheduled for
+                                <strong>${object.get_interval('dayname', tz=object.partner_id.tz if not object.allday else None)} ${object.get_interval('day', tz=object.partner_id.tz if not object.allday else None)} ${object.get_interval('month', tz=object.partner_id.tz if not object.allday else None)} ${object.get_interval('time', tz=object.partner_id.tz if not object.allday else None)}</strong>
+                                per confirmed in our phone call and the interviewing cycle and company details as
+                                below:-
+                                <br/>
+                                <br/>
+                                <br/>
+                                <strong>The interview Process:-</strong>
+                                <br/>
+                                <ul>
+                                    <li>
+                                        Technical Interview
+                                    </li>
+                                    <li>
+                                        HR Interview
+                                    </li>
+                                    <li>
+                                        GM Interview
+                                    </li>
+                                </ul>
+                                <br/>
+                                % if object.survey_ids:
+                                Exam Links:
+                                <ul>
+                                    % for ex in object.survey_ids:
+                                    <li>
+                                        <div style="display: inline-block; border-radius: 50%; width: 10px; height: 10px; background:'white';"></div>
+                                        <span style="margin-left:5px">${ex.session_link}</span>
+                                    </li>
+                                    % endfor
+                                </ul>
+                                % endif
+                                <br/>
+                                Company details and location:-
+                                <br/>
+                                Company Website: ${object.user_id.company_id.website}
+                                <br/>
+                                Company Location GPS: https://maps.google.com/?q=30.014057,31.297894
+                                <br/>
+                                Company Address: ${object.user_id.company_id.street}
+                                <br/>
+                                Dress Code: Formal Code.
+                                <br/>
+                                Please submit a recent photo for you
+                                <br/>
+                                <br/>
+                                <br/>
+                                We sincerely appreciate the time and effort you dedicated to applying for this position
+                                and wish you success in your job search.
+                                <br/>
+                                Sincerely
+                                <div style="font-size: 11px; color: grey;">
+                                    <br/>
+                                    <strong>${object.user_id.name}</strong>
+                                    <br/>
+                                    HR Section Head
+                                    <br/>
+                                    ${object.user_id.company_id.name}
+                                    <br/>
+                                    Email: ${object.user_id.email or ''}
+                                    <br/>
+                                    Phone: ${object.user_id.phone or ''}
+                                    <br/>
+                                    Mobile: ${object.user_id.mobile or ''}
+                                    <br/>
+                                    Website: ${object.user_id.company_id.website}
+                                    <br/>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

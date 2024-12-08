@@ -1,0 +1,330 @@
+<odoo>
+    <data>
+        <template id="requests_followup" name="Hr attendance_sheet">
+                    <link rel="stylesheet" href="/hr_attendance_sheet_portal/static/toasts.css"/>
+
+            <t t-call="portal.portal_layout">
+                <style>
+                    .tag-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                    }
+
+                    .tag {
+                        display: inline-block;
+                        background-color: #007bff;
+                        color: white;
+                        padding: 4px 8px;
+                        margin: 4px;
+                        font-size: 14px;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        text-decoration: none;
+                    }
+
+                    .tag:hover {
+                        background-color: #0069d9;
+                    }
+
+                    .categories-tags .tag {
+                        display: inline-block;
+                        padding: 4px 8px;
+                        background-color: #007bff;
+                        color: #fff;
+                        margin: 4px;
+                        border-radius: 4px;
+                        text-decoration: none;
+                    }
+
+                    .categories-tags .tag:hover {
+                        background-color: #0056b3;
+                    }
+                </style>
+                <t t-set="wrap_classes" t-value="'o_portal_bg_dark'"/>
+                <t t-call="portal.portal_record_layout">
+
+                    <t t-set="card_header">
+                                            <div id="toastssss" name="toastssss" class="toastssss">Overtime Request successfully!</div>
+
+                        <div class="row no-gutters">
+                            <div class="col-md">
+                                <h5 class="mb-1 mb-md-0">
+                                    <span t-field="attendance_sheet.name"/>
+
+                                </h5>
+                            </div>
+
+
+                            <div class="col-md text-md-center">
+                                <strong class="text-right">Employee:</strong>
+                                <small>
+                                    <span t-field="attendance_sheet.employee_id"/>
+                                </small>
+
+                            </div>
+                            <div class="col-md text-md-center">
+                                <strong class="text-right">Department:</strong>
+                                <small>
+                                    <span t-field="attendance_sheet.department_id"/>
+                                </small>
+                            </div>
+
+
+                            <div class="col-md text-md-right">
+                                <strong class="text-right">Status:</strong>
+                                <!--                            <span t-field="attendance_sheet.state" class=" badge badge-pill badge-info"-->
+                                <!--                                  title="Current stage of this request"/>-->
+                                <span t-if="attendance_sheet.state == 'draft'" title="Current stage of this request"
+                                      t-attf-class="bg-info rounded-pill py-1 px-2"
+                                      t-field="attendance_sheet.state"/>
+                                <span t-if="attendance_sheet.state == 'confirm'" title="Current stage of this request"
+                                      t-attf-class="bg-primary rounded-pill py-1 px-2"
+                                      t-field="attendance_sheet.state"/>
+                                <span t-if="attendance_sheet.state == 'cancel'" title="Current stage of this request"
+                                      t-attf-class="bg-danger rounded-pill py-1 px-2" t-field="attendance_sheet.state"/>
+
+                                <span t-if="attendance_sheet.state == 'done'" title="Current stage of this request"
+                                      t-attf-class="bg-success rounded-pill py-1 px-2"
+                                      t-field="attendance_sheet.state"/>
+                            </div>
+                        </div>
+                        <br/>
+                    </t>
+                    <t t-set="card_body">
+
+
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Company</strong>
+                            <span class="col-lg-4" t-field="attendance_sheet.company_id"
+                            />
+                            <strong class="col-lg-2">Attendance Sheet Batch </strong>
+                            <span class="col-lg-4" t-field="attendance_sheet.batch_id"
+                            />
+                        </div>
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Period</strong>
+                            <span class="col-lg-2" t-field="attendance_sheet.date_from"
+                            />
+                            <span class="col-lg-2" t-field="attendance_sheet.date_to"
+                            />
+                        </div>
+
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Contract</strong>
+                            <span class="col-lg-4" t-field="attendance_sheet.contract_id"
+                            />
+                        </div>
+
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Attendance Policy</strong>
+                            <span class="col-lg-4" t-field="attendance_sheet.att_policy_id"
+                            />
+
+                        </div>
+
+                        <div class="card shadow mb-4">
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-primary card-tabs">
+                                            <div class="card-header p-0 pt-1">
+                                                <ul class="nav nav-tabs "
+                                                    id="custom-tabs-one-tab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                           id="components-tab"
+                                                           data-toggle="pill"
+                                                           href="#components"
+                                                           role="tab"
+                                                           aria-controls="components"
+                                                           aria-selected="true">Attendances</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link"
+                                                           id="more-items-tab"
+                                                           data-toggle="pill"
+                                                           href="#more-items"
+                                                           role="tab"
+                                                           aria-controls="more-items"
+                                                           aria-selected="false">Attendance Data</a>
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+                                            <form method="post" id="attendance_sheet_form" name="attendance_sheet_form"
+                                                  class="attendance_sheet_form">
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <input type="hidden"
+                                                       class="form-control attendance_sheet_id"
+                                                       t-att-value="attendance_sheet.id"
+                                                />
+                                                <div class="card-body">
+                                                    <div class="tab-content"
+                                                         id="custom-tabs-one-tabContent">
+                                                        <div class="tab-pane fade show active"
+                                                             id="components"
+                                                             role="tabpanel"
+                                                             aria-labelledby="components-tab">
+                                                            <t t-call="portal.portal_table">
+                                                                <tr class="text-center">
+                                                                    <th>Date</th>
+                                                                    <th>Day</th>
+                                                                    <th>PL/IN</th>
+                                                                    <th>PL/OUT</th>
+                                                                    <th>ACT/IN</th>
+                                                                    <th>ACT/OUT</th>
+                                                                    <th>Worked/H</th>
+                                                                    <th>Late in</th>
+                                                                    <th>Overtime</th>
+                                                                    <th>Diff time</th>
+                                                                    <th>Status</th>
+                                                                    <th>Note</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                                <tr class="text-center"
+                                                                    t-foreach="attendance_sheet.line_ids"
+                                                                    t-as="line">
+                                                                    <input type="hidden" name="csrf_token"
+                                                                           t-att-value="request.csrf_token()"/>
+
+                                                                    <td><span t-field="line.date"/></td>
+                                                                    <td><span t-field="line.day"/></td>
+                                                                    <td><span t-field="line.pl_sign_in"/></td>
+                                                                    <td><span t-field="line.pl_sign_out"/></td>
+                                                                    <td><span t-field="line.ac_sign_in"/></td>
+                                                                    <td><span t-field="line.ac_sign_out"/></td>
+                                                                    <td><span t-field="line.worked_hours"/></td>
+                                                                    <td><span t-field="line.late_in"/></td>
+                                                                    <td><span t-field="line.overtime"/></td>
+                                                                    <td><span t-field="line.diff_time"/></td>
+                                                                    <td><span t-field="line.status"/></td>
+                                                                    <td><span t-field="line.note"/></td>
+                                                                    <td>
+
+                                                                        <button type="button"
+                                                                                class="btn btn-primary request_overtime_portal_button"
+                                                                                name="request_overtime_portal_button"
+                                                                                t-att-data-id="line.id"
+                                                                                id="request_overtime_portal_button">
+                                                                            request overtime
+                                                                        </button>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </t>
+                                                        </div>
+                                                        <div class="tab-pane fade"
+                                                             id="more-items"
+                                                             role="tabpanel"
+                                                             aria-labelledby="more-items-tab">
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-6 text-primary"
+                                                                        style="font-size: 25px">Over Time</strong>
+
+
+                                                            </div>
+
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-2">No of overtimes</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.no_overtime"
+                                                                />
+                                                                <strong class="col-lg-2">Total Over Time</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.tot_overtime"
+                                                                />
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-6 text-primary"
+                                                                        style="font-size: 25px">Late In</strong>
+
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-2">No of Late</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.no_late"
+                                                                />
+                                                                <strong class="col-lg-2">Total Late In</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.tot_late"
+                                                                />
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-6 text-primary"
+                                                                        style="font-size: 25px">Absence</strong>
+
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-2">No of Absence Days</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.no_absence"
+                                                                />
+                                                                <strong class="col-lg-2">Total absence Hours</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.tot_absence"
+                                                                />
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-6 text-primary"
+                                                                        style="font-size: 25px">Difference Time</strong>
+
+                                                            </div>
+                                                            <div class="row mb-4">
+                                                                <strong class="col-lg-2">No of Diff Times</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.no_difftime"
+                                                                />
+                                                                <strong class="col-lg-2">Total Diff time Hours</strong>
+                                                                <span class="col-lg-2"
+                                                                      t-field="attendance_sheet.tot_difftime"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4">
+                                                            <strong class="col-lg-6 text-primary"
+                                                                    style="font-size: 25px">Mis Punch Penalties</strong>
+
+                                                        </div>
+                                                        <div class="row mb-4">
+                                                            <strong class="col-lg-2">No of Miss Punches</strong>
+                                                            <span class="col-lg-2"
+                                                                  t-field="attendance_sheet.no_miss"
+                                                            />
+                                                            <strong class="col-lg-2">Total Miss Punches Penalty</strong>
+                                                            <span class="col-lg-2"
+                                                                  t-field="attendance_sheet.tot_miss"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="o_portal_messages_container mt32">
+                            <h4>Message and communication history</h4>
+                            <t t-call="portal.message_thread">
+                                <!--                            <t t-set="token" t-value="request_id.access_token"/>-->
+                                <t t-set="object" t-value="attendance_sheet"/>
+                            </t>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

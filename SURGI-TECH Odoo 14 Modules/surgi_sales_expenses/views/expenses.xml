@@ -1,0 +1,305 @@
+<odoo>
+    <data>
+
+
+        <record id="action_view_scend_approve_self" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_hr_expense_sheet"/>
+            <field name="code">action = model.button_secend_approve_view_action()</field>
+            <field name="name">Second Approve</field>
+        </record>
+
+
+        <menuitem id="menu_second_approve_self" name="Second Approve" parent="hr_expense.menu_hr_expense_report"
+                  action="action_view_scend_approve_self" sequence="2"
+                  groups="surgi_sales_expenses.expenses_menu_sceond"/>
+
+        <record id="action_view_cfo_approve_self" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_hr_expense_sheet"/>
+            <field name="code">action = model.button_cfo_approve_view_action()</field>
+            <field name="name">Second to Approve</field>
+        </record>
+
+
+        <menuitem id="menu_cfo_approve_self" name="CFO to Approve" parent="hr_expense.menu_hr_expense_report"
+                  action="action_view_cfo_approve_self" sequence="1" groups="surgi_sales_expenses.expenses_cfo_sceond"/>
+
+        <record id="tree_view_hr_expense_inherit" model="ir.ui.view">
+            <field name="name">name.hr.expense.inherit.tree</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.view_my_expenses_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="total_expense_amount" sum="total_expense_amount"/>
+                    <field name="operations_type" readonly="1" force_save="1"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="tree_view_hr_expense_inherit" model="ir.ui.view">
+            <field name="name">name.hr.expense.inherit.tree</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.view_my_expenses_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="total_expense_amount" sum="total_expense_amount"/>
+                    <field name="operations_type"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="expense_accounting_reviewed" model="res.groups">
+            <field name="name">Accounting Reviewed</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="expense_treasury_manager" model="res.groups">
+            <field name="name">Treasury Manager</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_hr_expense_hr_expense" model="ir.ui.view">
+            <field name="name">name.hr.expense.inherit.form</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_submit_expenses']" position="after">
+                    <button name="get_all_operation_type" type="object" string="Get All Operation Type"
+                            groups="surgi_sales_expenses.expenses_get_all_operation_type_group"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{"no_create_edit": True}</attribute>
+                    <attribute name="options">{"no_create": True}</attribute>
+                    <attribute name="attrs">{'readonly': [('state', '=', 'approved')]}</attribute>
+
+
+                </xpath>
+                <xpath expr="//field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="options">{"no_create_edit": True}</attribute>
+                    <attribute name="options">{"no_create": True}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                    <attribute name="options">{"no_create_edit": True}</attribute>
+                    <attribute name="options">{"no_create": True}</attribute>
+
+
+                </xpath>
+
+                <xpath expr="//button[@name='action_submit_expenses']" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="after">
+
+
+                    <field name="is_sales" invisible="1"/>
+                    <field name="sales_id"
+                           attrs="{'required':['|',('sale_order_mandatory','=',True),('is_sales','=',True)]}"/>
+                    <field name="sales_state"/>
+                    <!--                    <field name="operation_type_id"/>-->
+                    <field name="operations_type" force_save="1" readonly="1"/>
+                    <field name="is_expenses_ids" invisible="1"/>
+                    <field name="partner_surgeon_id"/>
+                    <field name="event_id"/>
+                    <field name="num_day_expire" invisible="1"/>
+                    <field name="sale_order_mandatory" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Expenses">
+                            <field name="expenses_lines_ids">
+                                <tree editable="bottom">
+                                    <field name="expensescc_id" readonly="1" force_save="1"/>
+                                    <field name="date" readonly="1" force_save="1"/>
+                                    <field name="total_amount" readonly="1" sum="total_amount" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_hr_expense_sheet_inherit" model="ir.ui.view">
+            <field name="name">name.hr.expense.sheet.form.inherit</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='employee_details']" position="after">
+                    <group>
+                        <field name="is_have_operation_record" invisible="1"/>
+                        <field name="account_reviewed"/>
+                        <field name="treasury_manager"/>
+                        <field name="check_access_expense"/>
+                        <field name="show_secend_approve" groups="surgi_sales_expenses.expense_accounting_reviewed"/>
+                        <field name="secend_approved_done" invisible="0"/>
+
+                        <field name="show_CFO_approve" groups="surgi_sales_expenses.expense_accounting_reviewed"/>
+                        <field name="CFO_approved_done" invisible="0"/>
+
+
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="after">
+
+                    <field name="secend_user_id" widget="many2one_avatar_user"
+                           groups="surgi_sales_expenses.expense_accounting_reviewed"
+                           attrs="{'invisible': [('show_secend_approve', '=', False),('secend_approved_done', '=', False)]}"/>
+                    <field name="cfo_user_id" widget="many2one_avatar_user"
+                           groups="surgi_sales_expenses.expense_accounting_reviewed"
+                           attrs="{'invisible': [ ('show_CFO_approve', '=', False),('CFO_approved_done', '=', False)]}"/>
+
+
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Report Track">
+                        <group>
+                            <div style="text-align:left">
+                                <group string="Create">
+                                    <field name="expenses_created_on"/>
+                                    <field name="expenses_created_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Submitted">
+                                    <field name="submitted_on"/>
+                                    <field name="submitted_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Approve">
+                                    <field name="expenses_approve_on"/>
+                                    <field name="expenses_approve_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Second Approve">
+                                    <field name="secend_approved_on"/>
+                                    <field name="secend_approved_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="CFO Approve">
+                                    <field name="cfo_approved_on"/>
+                                    <field name="cfo_approved_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Accountant Reviewer">
+                                    <field name="account_reviewed_on"/>
+                                    <field name="account_reviewed_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Treasury Manager">
+                                    <field name="treasury_manager_on"/>
+                                    <field name="treasury_manager_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="post">
+                                    <field name="post_on"/>
+                                    <field name="post_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Reset To Draft">
+                                    <field name="reset_on"/>
+                                    <field name="reset_by"/>
+                                </group>
+                            </div>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='expense_line_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('check_access_expense', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='expense_line_ids']/tree/field[@name='name']" position="after">
+                    <field name="sales_id" optional="hide"/>
+                </xpath>
+                <!--                <xpath expr="//field[@name='state']" position="attributes">-->
+                <!--                    <attribute name="statusbar_visible">"draft,submit,approve,secend_approve,post,done"</attribute>-->
+                <!--                </xpath>-->
+
+                <xpath expr="//button[@name='action_sheet_move_create']" position="before">
+                    <button name="secend_approve_expense_sheets" string="Second approve"
+                            type="object" class="oe_highlight o_expense_sheet_post"
+                            attrs="{'invisible':['|',('show_secend_approve','=',False),('secend_approved_done','=',True)]}"
+                    />
+                    <button name="cfo_approve_expense_sheets" string="CFO approve"
+                            type="object" class="oe_highlight o_expense_sheet_post"
+                            attrs="{'invisible':['|',('show_CFO_approve','=',False),('CFO_approved_done','=',True)]}"
+                            groups="surgi_sales_expenses.expenses_cfo_sceond"
+                    />
+                    <button name="button_account_reviewed" string="Accounting Reviewed"
+                            type="object" class="oe_highlight o_expense_sheet_post"
+                            groups="surgi_sales_expenses.expense_accounting_reviewed"
+                            attrs="{'invisible':['|',('account_reviewed','=',True),('state','in',('draft','submit'))]}"
+                    />
+
+                    <button name="button_treasury_manager" string="Treasury Manager"
+                            type="object" class="oe_highlight o_expense_sheet_post"
+                            groups="surgi_sales_expenses.expense_treasury_manager"
+                            attrs="{'invisible':['|','|',('treasury_manager','=',True),('account_reviewed','=',False),('state','in',('draft','submit'))]}"
+                    />
+                    <!--                    '|',('state', '!=', 'approve'),-->
+
+                </xpath>
+
+                <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                    <attribute name="attrs">{
+                        'invisible': ['|', '|', '|', '|', ('state', '!=', 'approve'), ('account_reviewed', '=', False),
+                                      ('treasury_manager', '=', False),
+                                      ('show_CFO_approve', '=', True), ('show_secend_approve', '=', True)]}
+                    </attribute>
+                    <attribute name="groups">surgi_sales_expenses.expenses_post_button</attribute>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.purchase.property.form.inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <!--        <field name="priority">36</field>-->
+            <field name="groups_id" eval="[(4, ref('surgi_sales_expenses.expense_accounting_reviewed'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="attrs">{
+                        'readonly': [('state', 'not in', ['draft', 'reported', 'refused', 'approved'])]}</attribute>
+
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

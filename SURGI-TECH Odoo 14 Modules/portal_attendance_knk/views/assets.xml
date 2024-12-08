@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="base.res_partner_rule_private_employee" model="ir.rule">
+        <field name="name">res.partner.rule.private.employee</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">
+            ['|', ('type', '!=', 'private'), ('type', '=', False)]
+        </field>
+        <field name="groups" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('base.group_portal')),
+            ]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <template id="knk_portal_attendance_assets" inherit_id="web.assets_frontend" name="Portal Attendances Assets">
+        <xpath expr="//link[last()]" position="after">
+            <link type="text/css" rel="stylesheet" href="/portal_attendance_knk/static/src/scss/custom.scss"/>
+        </xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/portal_attendance_knk/static/src/js/custom.js"></script>
+            <script type="text/javascript" src="/portal_attendance_knk/static/src/js/gmaps.js"></script>
+            <script type="text/javascript"
+                    src="/portal_attendance_knk/static/src/js/my_attendances.js"></script>
+            <script type="text/javascript" src="/portal_attendance_knk/static/src/js/attend.js"></script>
+
+        </xpath>
+
+
+    </template>
+    <template id="website_dashboard_head" inherit_id="portal.assets_frontend">
+
+
+        <xpath expr="//link[last()]" position="after">
+            <link type="text/css" rel="stylesheet" href="/portal_attendance_knk/static/src/scss/custom.scss"/>
+        </xpath>
+
+    </template>
+
+
+    <!-- <template id="assets_backends_attendances_restriction_knk"
+    name="hr_attendance assets" inherit_id="web.assets_backend">
+<xpath expr="." position="inside">
+  <script type="text/javascript"
+          src="/portal_attendance_knk/static/src/js/my_attendances.js"></script>
+</xpath>
+</template> -->
+
+
+</odoo>

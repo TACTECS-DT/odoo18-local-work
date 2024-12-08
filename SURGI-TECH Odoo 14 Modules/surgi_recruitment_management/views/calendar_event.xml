@@ -1,0 +1,13 @@
+<odoo>
+    <record id="calendar_event_view_form_inherit_applicant_calendar" model="ir.ui.view">
+        <field name="name">calendar.event.form</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ids']" position="after">
+                <button name="action_send_meeting_mail" type="object" string="Send mail" icon="fa-envelope" class="oe_link"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

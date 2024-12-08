@@ -1,0 +1,269 @@
+<odoo>
+    <record id="hr_applicant_view_form" model="ir.ui.view">
+        <field name="name">hr.applicant.form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                        name="%(action_hr_hiring_approval_wizard)d"
+                        attrs="{'invisible': [('hiring_approval_id','!=',False)]}"
+                        groups="hr_recruitment.group_hr_recruitment_user"
+                        context="{'default_partner_name':partner_name,'default_applicant_id':id,'default_job_id':job_id,'default_department_id':department_id}"
+                        string="Create Hiring Approval" type="action" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//header/button[@name='create_employee_from_applicant']" position="attributes">
+                <attribute name="groups">hr_recruitment.group_hr_recruitment_user</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='archive_applicant']" position="attributes">
+                <attribute name="groups">hr_recruitment.group_hr_recruitment_user</attribute>
+            </xpath>
+            <xpath expr="//label[@for='name']" position="before">
+                <h1>
+                    <field name="number" readonly="1"/>
+                </h1>
+            </xpath>
+            <field name="categ_ids" position="before">
+                <field name="applicant_state" widget="radio"/>
+                <field name="reviewer_ids" widget="many2many_tags" invisible="1"/>
+                <field name="hiring_approval_id" invisible="1"/>
+            </field>
+            <field name="partner_name" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+            <field name="partner_mobile" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+            <field name="salary_proposed" position="attributes">
+                <attribute name="string">HR Proposed Salary</attribute>
+            </field>
+            <field name="email_from" position="before">
+                <field name="partner_national_id"/>
+            </field>
+            <field name="availability" position="after">
+                <field name="hr_hiring_date"/>
+                <field name="notice_period"/>
+            </field>
+            <field name="email_from" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+            <xpath expr="//sheet/group" position="after">
+                <notebook>
+                    <page string="Interview Sequences">
+                        <field name="line_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="stage_id" readonly="1"/>
+                                <field name="user_id"/>
+                                <field name="reviewer_ids" widget="many2many_tags"/>
+                                <field name="type"/>
+                                <field name="survey_ids" widget="many2many_tags"/>
+                                <field name="applicant_survey_ids" widget="many2many_tags"/>
+                                <field name="accepted"/>
+                                <field name="rejected"/>
+                                <field name="shortlisted"/>
+                                <field name="applicant_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Evaluations">
+                        <button name="print_evaluations" type="object"
+                                string="Print Selected evaluations" class="oe_highlight"
+                        />
+                        <field name="evaluation_ids">
+                            <tree editable="bottom">
+                                <field name="is_print" string="Select"/>
+                                <field name="applicant_id" invisible="1"/>
+                                <field name="is_current_user" invisible="1"/>
+                                <field name="stage_id" readonly="1"/>
+                                <field name="partner_id" string="Person" readonly="1"/>
+                                <field name="survey_id" readonly="1"/>
+                                <field name="response_id" readonly="1"/>
+                                <field name="response_date" readonly="1" string="Response Date"/>
+                                <field name="state" readonly="1"/>
+                                <field name="scoring_percentage" readonly="1"/>
+                                <field name="scoring_total" readonly="1"/>
+                                <field name="scoring_success" readonly="1"/>
+                                <field name="comment"/>
+                                <button name="action_start_survey" type="object"
+                                        string="Start Survey" class="oe_highlight"
+                                        context="{'survey_id': survey_id}"
+                                />
+                                <button name="action_print_survey"
+                                        class="oe_stat_button"
+                                        icon="fa-pencil-square-o"
+                                        type="object"
+                                        string="Print"
+                                        help="See interview report"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Stage Timing">
+                        <field name="timing_ids">
+                            <tree editable="bottom">
+                                <field name="old_stage_id"/>
+                                <field name="new_stage_id"/>
+                                <field name="user_id"/>
+                                <field name="date"/>
+                                <field name="date_to"/>
+                                <field name="duration" widget="float_time" string="Duration(Hours)"/>
+                                <field name="applicant_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_applicant_view_form_inherit_history" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_makeMeeting']" position="after">
+                <button name="action_show_hiring_approval"
+                        class="oe_stat_button"
+                        icon="fa-book"
+                        type="object"
+                        attrs="{'invisible':[('hiring_approval_id','=',False)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Hiring</span>
+                        <span class="o_stat_text">Approval</span>
+                    </div>
+                </button>
+                <button name="show_surveys"
+                        class="oe_stat_button"
+                        icon="fa-user"
+                        type="object"
+                        help="Answer related job question"
+                        context="{'applicant_id': id}"
+                        attrs="{'invisible':[('job_id','=',False)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Interview</span>
+                        <span class="o_stat_text">Surveys</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//button[@name='action_makeMeeting']" position="before">
+                <button name="action_show_employee"
+                        class="oe_stat_button"
+                        icon="fa-user"
+                        type="object"
+                        attrs="{'invisible':[('emp_id','=',False)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Employee</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_job_inherit" model="ir.ui.view">
+        <field name="name">hr.applicant.tree</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="applicant_state"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_calendar_event_form" model="ir.ui.view">
+        <field name="name">calendar.event.inherit</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='page_invitations']" position="attributes">
+                <attribute name="groups">base.group_user</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Tree view -->
+    <record id="applicant_survey_line_view" model="ir.ui.view">
+        <field name="name">applicant.survey.line.tree</field>
+        <field name="model">applicant.survey.line</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Applicant Surveys" editable="bottom">
+                <field name="applicant_id" readonly="1"/>
+                <field name="stage_id" readonly="1"/>
+                <field name="partner_id" string="Person"/>
+                <field name="job_id"/>
+                <field name="department_id"/>
+                <field name="survey_id"/>
+                <field name="user_ids" invisible="1"/>
+                <field name="is_current_user" invisible="1"/>
+                <field name="response_id" readonly="1"/>
+                <field name="response_date" readonly="1" string="Response Date"/>
+                <field name="meeting_date" readonly="1"/>
+                <field name="state" readonly="1"/>
+                <field name="scoring_percentage" readonly="1"/>
+                <field name="scoring_total" readonly="1"/>
+                <field name="scoring_success" readonly="1"/>
+                <button name="action_start_survey" type="object"
+                        string="Start Survey" class="oe_highlight"
+                        context="{'survey_id': survey_id}"
+                />
+                <button name="action_print_survey"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        type="object"
+                        string="Print"
+                        help="See interview report"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="applicant_survey_line_search" model="ir.ui.view">
+        <field name="name">applicant.survey.line.search</field>
+        <field name="model">applicant.survey.line</field>
+        <field name="arch" type="xml">
+            <search string="Applicant Survey Request">
+                <field name="applicant_id" string="Name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="partner_id" string="Person"/>
+                <separator/>
+                <filter string="Success" name="scoring_success" domain="[('scoring_success', '!=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Application" name="applicant_id" domain="[]"
+                            context="{'group_by': 'applicant_id'}"/>
+                    <filter string="Job Position" name="job_id" domain="[]" context="{'group_by': 'job_id'}"/>
+                    <filter string="Department" name="department_id" domain="[]"
+                            context="{'group_by': 'department_id'}"/>
+                    <filter string="Contact" name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_applicant_survey_line">
+        <field name="name">Application Exam Result</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">applicant.survey.line</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="applicant_survey_line_search"/>
+    </record>
+
+    <menuitem id="menu_applicant_survey_line" action="action_applicant_survey_line"
+              parent="hr_recruitment.menu_crm_case_categ0_act_job"
+              name="All Exams Result" sequence="90"/>
+
+    <menuitem id="menu_hr_interviewer_evaluation"
+              name="Interviewer Evaluation"/>
+
+    <menuitem
+            name="All Applications"
+            parent="menu_hr_interviewer_evaluation"
+            id="menu_interviewer_evaluation_all_app" action="hr_recruitment.crm_case_categ0_act_job" sequence="1"/>
+
+    <menuitem id="menu_applicant_survey_evaluation" action="action_applicant_survey_line"
+              parent="menu_hr_interviewer_evaluation"
+              name="All Exams Result" sequence="2"/>
+
+
+</odoo>

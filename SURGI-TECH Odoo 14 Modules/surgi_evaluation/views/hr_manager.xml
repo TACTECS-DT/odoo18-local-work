@@ -1,0 +1,136 @@
+<odoo>
+    <data>
+
+
+
+
+
+
+        <record id="tree_view_hr_manager_evaluation" model="ir.ui.view">
+            <field name="name">name.hr.manager.evaluation.tree</field>
+            <field name="model">hr.manager.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Redundancy wave">
+                    <field name="employee_id"/>
+                     <field name="job_title"/>
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="section_id"/>
+                            <field name="registration_number"/>
+                            <field name="performance"/>
+                            <field name="grade_id"/>
+                            <field name="rank_id"/>
+                            <field name="rang_id"/>
+                            <field name="pip_type"/>
+                            <field name="course_id" widget="many2many_tags"/>
+                            <field name="replacement"/>
+                            <field name="termination_date"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_hr_manager_evaluation" model="ir.ui.view">
+            <field name="name">name.hr.manager.evaluation</field>
+            <field name="model">hr.manager.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Redundancy wave">
+                    <header>
+                        <button name="button_confirm" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible':[('state','!=','draft')]}"/>
+                        <button name="button_cancel" type="object" string="Set To Draft" class="oe_highlight" attrs="{'invisible':[('state','=','draft')]}"/>
+                        <button name="button_parent_confirm" type="object"
+                                string="Confirm Parent" class="oe_highlight"
+                                attrs="{'invisible':['|',('state','!=','confirm'),('is_department_man','!=',True)]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <label for="employee_id" class="oe_edit_only"/>
+                        <h1>
+                            <field name="employee_id" placeholder="Employee" readonly="1" force_save="1"/>
+                        </h1>
+                    </div>
+                        <group col="4">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="job_title"/>
+                            <field name="employee_parent_id"/>
+                            <field name="department_id"/>
+                            <field name="section_id"/>
+                            <field name="is_department_man" invisible="1"/>
+                            <field name="registration_number"/>
+                            <field name="grade_id" readonly="1" force_save="1"/>
+                            <field name="rank_id" readonly="1" force_save="1"/>
+                            <field name="rang_id" readonly="1" force_save="1"/>
+
+                            <field name="performance"/>
+
+                            <field name="pip_type" attrs="{'invisible':[('performance','!=','PIP')]}"/>
+                            <field name="course_id" attrs="{'invisible':['|',('pip_type','not in',['pip_soft','pip_technical','soft_technical']),('performance','!=','PIP')]}" widget="many2many_tags"/>
+                            <field name="replacement" attrs="{'invisible':[('performance','!=','PAP')]}" />
+                            <field name="termination_date" attrs="{'invisible':[('performance','!=','PAP')]}" />
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_hr_manager_evaluation" model="ir.actions.act_window">
+            <field name="name">Redundancy wave</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.manager.evaluation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_hr_manager_evaluation" name="Redundancy wave"
+                  parent="surgi_evaluation_menuitem"
+                  action="action_view_hr_manager_evaluation" sequence="9"
+
+        />
+
+
+
+        <record id="groups_show_all" model="res.groups">
+            <field name="name">Show ALL </field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="manager_group_redundancy" model="res.groups">
+            <field name="name">Redundancy wave Manager</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="all_permission_group_redundancy" model="res.groups">
+            <field name="name">Redundancy wave Permission</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="manager_group_redundancy_user_rule" model="ir.rule">
+            <field name="name">Manager Permission</field>
+            <field name="model_id" ref="model_hr_manager_evaluation"/>
+            <field name="perm_write" eval="1"/>
+            <field name="domain_force">['|','|','|',('employee_id.parent_id.user_id','=',user.id),('employee_id.parent_id.parent_id.user_id','=',user.id),('employee_id.parent_id.parent_id.parent_id.user_id','=',user.id),('employee_id.parent_id.parent_id.parent_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('surgi_evaluation.manager_group_redundancy'))]"/>
+        </record>
+
+        <record id="all_permission_group_redundancy_user_rule" model="ir.rule">
+            <field name="name">All Permission</field>
+            <field name="model_id" ref="model_hr_manager_evaluation"/>
+            <field name="perm_write" eval="1"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('surgi_evaluation.all_permission_group_redundancy'))]"/>
+        </record>
+
+
+
+    </data>
+</odoo>

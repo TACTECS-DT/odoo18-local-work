@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        
+             <record id="invoice_form_views_groups_tree" model="ir.ui.view">
+        <field name="name">invoice.form.views.groups.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                    <attribute name="groups">account.group_account_invoice,account.group_account_user</attribute>
+                </xpath>
+        </field>
+    </record>
+        
+        
+        
+        
+        <record id="form_view_account_move_inherit" model="ir.ui.view">
+            <field name="name">name.account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+
+                    <page string="Entry Track" attrs="{'invisible': [('move_type', '!=', 'entry')],}">
+                        <group>
+                            <div style="text-align:left">
+                                <group string="Create">
+                                    <field name="move_created_on"/>
+                                    <field name="move_created_by"/>
+                                </group>
+                            </div>
+                                                    <div style="text-align:left">
+                                <group string="Entry Reviewer" >
+                                    <field name="entry_reviewed_on"/>
+                                    <field name="entry_reviewed_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Post">
+                                    <field name="move_post_on"/>
+                                    <field name="move_post_by"/>
+                                </group>
+                            </div>
+
+                            <div style="text-align:left">
+                                <group string="Reset To Draft">
+                                    <field name="move_reset_on"/>
+                                    <field name="move_reset_by"/>
+                                </group>
+                            </div>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

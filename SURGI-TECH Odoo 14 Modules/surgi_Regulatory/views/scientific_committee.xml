@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+
+        <record id="tree_view_scientific_committee" model="ir.ui.view">
+            <field name="name">Scientific Committee</field>
+            <field name="model">scientific.committee</field>
+            <field name="arch" type="xml">
+                <tree string="Scientific Committee">
+                    <field name="name"/>
+                    <field name="IssueDate"/>
+                    <field name="expiryDate"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_view_scientific_committee" model="ir.ui.view">
+            <field name="name">Scientific Committee</field>
+            <field name="model">scientific.committee</field>
+            <field name="arch" type="xml">
+                <form string="Scientific Committee">
+                    <sheet>
+                        <div style="text-align:center">
+                            <group string="Scientific Committee" col="4" colspan="6"></group>
+                        </div>
+                        <group>
+                            <div>
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                            </div>
+
+                            <div>
+                                <group>
+                                    <field name="IssueDate"/>
+                                    <field name="expiryDate"/>
+                                </group>
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="product" string="Scope Of Product">
+                                <group>
+                                </group>
+                                <field name="productForms">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Product"/>
+                                        </control>
+                                        <field name="productTemplate"/>
+                                        <field name="ProductClass"/>
+                                        <field name="ProductVendor"/>
+                                        <field name="productSterilizeField"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="attachment" string="Certificate">
+                                <group>
+                                </group>
+                                <field name="attachmentPage">
+                                   <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Attachment"/>
+                                        </control>
+                                        <field name="certificateName"/>
+                                        <field name="certificateExpiry"/>
+                                        <field name="certificateAttachment" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="product" string="Description">
+                                <field name="description">
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_view_scientific_committee" model="ir.actions.act_window">
+            <field name="name">Scientific Committee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scientific.committee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_view_scientific_committee" name="Scientific Committee" parent="regularity_menuitem"
+                  action="action_view_scientific_committee" sequence="3"/>
+
+    </data>
+</odoo>

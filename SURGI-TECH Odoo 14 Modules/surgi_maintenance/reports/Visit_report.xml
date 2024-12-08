@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record id="action_maintenance_visit" model="ir.actions.report">
+   <field name="name">maintenance Report</field>
+   <field name="model">pickup.visit</field>
+   <field name="report_type">qweb-pdf</field>
+   <field name="report_name">surgi_maintenance.report_maintenance_visit_card</field>
+   <field name="report_file">education.report_maintenance_visit_card</field>
+   <field name="print_report_name">'Pickup and visit - %s'</field>
+   <field name="binding_model_id" ref="model_pickup_visit"/>
+</record>
+
+
+
+
+
+
+<template id="report_maintenance_visit_card">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                <div class="oe_structure"/>
+                <h2  class="text-center">
+
+
+                    <span>نموذج زيارة وخدمة ما بعد البيع </span>
+                </h2>
+                <h2 class="mt16">
+<!--                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">-->
+<!--                        <span t-if="o.state not in ['draft','sent']">Order # </span>-->
+<!--                        <span t-if="o.state in ['draft','sent']">Quotation # </span>-->
+<!--                    </t>-->
+                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                        <span>Pro-Forma Invoice # </span>
+                    </t>
+                    <span t-field="o.name"/>
+                </h2>
+
+                <div class="row mt32 mb32" id="informations">
+                      <div t-if="o.client_res" class="col-auto col-3 mw-100 mb-2">
+                        <strong>  :العميل</strong>
+                        <p class="m-0" t-field="o.client_res"/>
+                    </div>
+                    <div t-if="o.contact_representative" class="col-auto col-3 mw-100 mb-2">
+                        <strong> :المندوب</strong>
+                        <p class="m-0" t-field="o.contact_representative"/>
+                    </div>
+
+                    <div  t-if="o.pickup_date" class="col-auto col-3 mw-100 mb-2">
+                        <strong> :التاريخ</strong>
+                        <p class="m-0" t-field="o.pickup_date"/>
+                    </div>
+
+                    <div t-if="o.inform" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: إبلاغ</strong>
+                        <p class="m-0" t-field="o.inform"/>
+                    </div>
+                    <div t-if="o.planed" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: مخطط</strong>
+                        <p class="m-0" t-field="o.planed"/>
+                    </div>
+                    <div t-if="o.installed" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: تركيب</strong>
+                        <p class="m-0" t-field="o.installed"/>
+                    </div>
+                    <div t-if="o.insure" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: داخل الضمان</strong>
+                        <p class="m-0" t-field="o.insure"/>
+                    </div>
+                                        <div t-if="o.uninsure" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: خارج الضمان</strong>
+                        <p class="m-0" t-field="o.uninsure"/>
+                    </div>
+                </div>
+
+                <!-- Is there a discount on at least one line? -->
+                    <span class="text-left">بيانات الاجهزة</span>
+
+                <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">Product</th>
+
+                            <th name="th_quantity" class="text-right">Notes</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t t-foreach="o.product_forms" t-as="line">
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section'">
+                                <t >
+                                    <td name="td_name"><span t-field="line.product_form_id"/></td>
+                                    <td name="td_quantity" class="text-right">
+                                        <span t-field="line.notic"/>
+                                    </td>
+
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+                                        <span class="text-left">فحص دورة الهواء</span>
+
+                        <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">الضغط</th>
+
+                            <th name="th_quantity" class="text-center">الفلاتر</th>
+                            <th name="th_quantity" class="text-right">التجفيف</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t>
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold '">
+                                <t >
+                                    <td name="td_name"><span t-field="o.press"/></td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="o.filt"/>
+                                    </td>
+                                        <td name="td_quantity" class="text-right">
+                                        <span t-field="o.dry"/>
+                                    </td>
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+                    <span class="text-left">تعليمات الغسيل</span>
+
+                        <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">مسلمة</th>
+
+                            <th name="th_quantity" class="text-center">غير مسلمة</th>
+                            <th name="th_quantity" class="text-right">ملائمة الغسيل</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t>
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold '">
+                                <t >
+                                    <td name="td_name"><span t-field="o.received"/></td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="o.unreceived"/>
+                                    </td>
+                                        <td name="td_quantity" class="text-right">
+                                        <span t-field="o.dry_or_not"/>
+                                    </td>
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+
+
+                    <span class="text-left">الاتوكلاف</span>
+
+                        <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">درجة الحرارة</th>
+
+                            <th name="th_quantity" class="text-center">مدة الدورة</th>
+                            <th name="th_quantity" class="text-right">وجود مجفف من عدمة	</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t>
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold '">
+                                <t >
+                                    <td name="td_name"><span t-field="o.temp"/></td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="o.timeder"/>
+                                    </td>
+                                        <td name="td_quantity" class="text-right">
+                                        <span t-field="o.fit_to_dry"/>
+                                    </td>
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+
+                    <span class="text-left">انطباع العميل</span>
+
+                        <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">ممتازة</th>
+
+                            <th name="th_quantity" class="text-center">جيدة</th>
+                            <th name="th_quantity" class="text-right">سيئة</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t>
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold '">
+                                <t >
+                                    <td name="td_name"><span t-field="o.customer_vgood"/></td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="o.customer_good"/>
+                                    </td>
+                                        <td name="td_quantity" class="text-right">
+                                        <span t-field="o.customer_bad"/>
+                                    </td>
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+
+                <div class="row mt32 mb32" id="info_emp">
+
+                      <div t-if="o.name" class="col-auto col-3 mw-100 mb-2">
+                        <strong>:الموظف</strong>
+                        <p class="m-0" t-field="o.employee_id"/>
+                    </div>
+
+                </div>
+                 </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+
+    </data>
+</odoo>
+
+
+
+
+

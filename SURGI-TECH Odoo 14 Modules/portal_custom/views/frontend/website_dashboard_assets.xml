@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--=========================Website SCRIPTS======================-->
+    <template id="website_dashboard_scripts" name="Website Scripts">
+        <script type="text/javascript" src="/portal_custom/static/src/js/link.js"/>
+
+        <!--                <script type="text/javascript" src="/portal_custom/static/src/vendor/jquery/jquery.min.js"/>-->
+        <!--        <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"/>-->
+        <!-- Core plugin JavaScript-->
+        <!--        <script type="text/javascript" src="/portal_custom/static/src/vendor/jquery-easing/jquery.easing.min.js"/>-->
+
+        <!-- Custom scripts for all pages-->
+
+        <!-- Page level plugins -->
+        <!--        <script type="text/javascript" src="/portal_custom/static/src/vendor/chart.js/Chart.min.js"/>-->
+
+
+        <!--        <script type="text/javascript" src="/portal_custom/static/src/js/select2.min.js"></script>-->
+
+        <!-- Page level custom scripts -->
+        <script type="text/javascript" src="/portal_custom/static/src/vendor/flat/flatpickr.min.js"></script>
+        <script type="text/javascript"
+                src="/portal_custom/static/src/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+
+    </template>
+
+    <!--==================Website DASHBOARD HEAD=======================-->
+    <template id="website_dashboard_head" name="Website Head">
+
+        <link rel="stylesheet" href="/portal_custom/static/src/vendor/fontawesome-free/css/all.min.css"/>
+        <!--         <link rel="stylesheet" href="/portal_custom/static/src/vendors/ti-icons/css/themify-icons.cs" />-->
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>
+        <link rel="stylesheet" href="/portal_custom/static/src/css/select2.min.css" type="text/css"/>
+        <link rel="stylesheet" href="/portal_custom/static/src/css/sb-admin-2.min.css" type="text/css"/>
+        <link rel="stylesheet" href="/portal_custom/static/src/css/style.css"/>
+        <link rel="stylesheet" href="/portal_custom/static/src/css/ticket.css"/>
+
+                <link href="/portal_custom/static/src/vendor/toastr/toastr.min.css" rel="stylesheet"/>
+
+        <link type="text/css" rel="stylesheet" href="/portal_custom/static/src/css/custom.scss"/>
+        <link rel="stylesheet" href="/portal_custom/static/src/vendor/flat/flatpickr.min.css" type="text/css"/>
+        <!-- Custom styles for this page -->
+
+
+        <link href="/portal_custom/static/src/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    </template>
+    <template id="assets_frontend_inh_portal_custom" inherit_id="web.assets_frontend">
+        <xpath expr="//link[last()]" position="after">
+            <link type="text/css" rel="stylesheet" href="/portal_attendance_knk/static/src/scss/custom.scss"/>
+            <t t-call="portal_custom.website_dashboard_head"/>
+        </xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/portal_custom/static/src/js/jm.min.js"></script>
+
+            <script type="text/javascript" src="/portal_custom/static/src/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
+            <script type="text/javascript" src="/portal_custom/static/src/js/sb-admin-2.min.js"/>
+            <script type="text/javascript" src="/portal_custom/static/src/js/select9_search.js"></script>
+            <script type="text/javascript" src="/portal_custom/static/src/js/select2.min.js"></script>
+            <script type="text/javascript" src="/portal_custom/static/src/vendor/flat/flatpickr.min.js"></script>
+            <script type="text/javascript"
+                    src="/portal_custom/static/src/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+            <script src="/portal_custom/static/src/vendor/toastr/toastr.min.js" type="text/javascript"/>
+
+        </xpath>
+    </template>
+    <!-- <aside class="main-sidebar  main-sidebar-custom sidebar-dark-primary elevation-2">-->
+    <!--==============SIDE BAR MENU================================-->
+    <template id="website_dashboard_sidebar" name="Website Dashboard sidebar">
+        <!-- Sidebar -->
+        <style>
+            .sidebar-brand {
+                width: 100%;
+                padding: 0;
+            }
+
+            .sidebar-brand-logo,
+            .sidebar-brand-logo-collapsed {
+                width: 100%;
+                max-height: 100px;
+            }
+
+            .sidebar .sidebar-brand-text {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar .sidebar-toggled .sidebar-brand-text {
+                height: auto;
+            }
+
+            .rounded-card {
+                width: 100%;
+                border-radius: 12px;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                padding: 5px;
+                margin-top: 20px;
+            }
+
+            /* Pulse animation */
+            /*@keyframes pulse {*/
+            /*    0% {*/
+            /*        transform: scale(1);*/
+            /*        opacity: 1;*/
+            /*    }*/
+            /*    50% {*/
+            /*        transform: scale(1.1);*/
+            /*        opacity: 0.5;*/
+            /*    }*/
+            /*    100% {*/
+            /*        transform: scale(1);*/
+            /*        opacity: 1;*/
+            /*    }*/
+            /*}*/
+
+            /*.sidebar-brand-logo {*/
+            /*    animation: pulse 3s ease-in-out infinite;*/
+            /*}*/
+
+            .sidebar-brand-logo-collapsed {
+                display: none;
+            }
+
+            body.sidebar-collapsed .sidebar-brand-logo {
+                display: none;
+            }
+
+            body.sidebar-collapsed .sidebar-brand-logo-collapsed {
+                display: block;
+            }
+
+            /*.sidebar {*/
+            /*    position: fixed;*/
+            /*    top: 0;*/
+            /*    left: 0;*/
+            /*    height: 100%;*/
+            /*    overflow-y: auto;*/
+            /*}*/
+
+            /*.main-content {*/
+            /*    margin-left: calc(100% - 87%); !* Adjust this value based on the width of your sidebar (100% - width%) *!*/
+            /*    transition: margin-left 0.3s ease-in-out;*/
+            /*}*/
+
+            /*body.sidebar-collapsed .main-content {*/
+            /*    margin-left: calc(100% - 93%);*/
+            /*}*/
+        </style>
+
+        <aside class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar"
+               style="background-color:#4e73df;">
+            <!-- Sidebar - Brand -->
+            <a class="d-flex align-items-center justify-content-center" href="/my/home" style="margin-bottom: 20px">
+                <div class="mx-1">
+                    <div class="rounded-card">
+                        <img src="/portal_custom/static/logo.jpg" class="sidebar-brand-logo"/>
+                        <img src="/portal_custom/static/logo2.jpg" class="sidebar-brand-logo-collapsed"/>
+
+                    </div>
+                </div>
+
+
+            </a>
+
+            <div class="sidebar-heading">Menu</div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li t-attf-class=" nav-item #{ticket_class}"
+                t-if="request.env.user.attendance_portal_access or request.env.user.leave_portal_access or request.env.user.expense_portal_access or request.env.user.daily_plan_portal_access"
+            >
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Human Resources</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a t-if="request.env.user.attendance_portal_access" class="collapse-item" href="/my/attendance">
+                            Attendance</a>
+                        <a t-if="request.env.user.leave_portal_access" class="collapse-item" href="/my/leaves">
+                            Leaves</a>
+                        <a t-if="request.env.user.expense_portal_access" class="collapse-item"
+                           href="/my/expense/requests">Expenses</a>
+                        <a t-if="request.env.user.daily_plan_portal_access" class="collapse-item" href="/daily/plan">
+                            Daily Plan</a>
+                        <!--                        <a class="collapse-item" href="/my/home?filterby=4">Done</a>-->
+                        <!--                        <a class="collapse-item" href="/my/home?filterby=5">Cancelled</a>-->
+                    </div>
+                </div>
+            </li>
+
+            <li t-attf-class=" nav-item #{ticket_class}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagespr"
+                   t-if="request.env.user.admin_request_portal_access"
+
+                   aria-expanded="true" aria-controls="collapsePagespr">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Admin Requests</span>
+                </a>
+                <div id="collapsePagespr" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a t-if="request.env.user.admin_request_portal_access" class="collapse-item"
+                           href="/admin/warehouse">My Requests</a>
+
+                    </div>
+                </div>
+            </li>
+            <li t-attf-class=" nav-item #{ticket_class}" t-if="request.env.user.evaluation_portal_access">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePageseval"
+                   aria-expanded="true" aria-controls="collapsePageseval">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Employee Evaluation</span>
+                </a>
+                <div id="collapsePageseval" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a t-if="request.env.user.evaluation_portal_access" class="collapse-item" href="/hr/evaluation">
+                            Self Assessment</a>
+
+                    </div>
+                </div>
+            </li>
+            <li t-attf-class=" nav-item #{ticket_class}" t-if="request.env.user.attendance_sheet_portal_access">
+                <a class="nav-link collapsed" href="/hr/attendance/sheet" data-toggle="collapse"
+                   data-target="#collapsePagesattendanceSheet"
+                   aria-expanded="true" aria-controls="collapsePagesattendanceSheet">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Attendance Sheet</span>
+                </a>
+                <div id="collapsePagesattendanceSheet" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a t-if="request.env.user.attendance_sheet_portal_access" class="collapse-item"
+                           href="/hr/attendance/sheet">Attendance Sheet</a>
+
+                    </div>
+                </div>
+            </li>
+            <li t-attf-class=" nav-item #{ticket_class}" t-if="request.env.user.operation_portal_access">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesOp"
+                   aria-expanded="true" aria-controls="collapsePagesOp">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Operations</span>
+                </a>
+                <div id="collapsePagesOp" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item" href="/my/operation">My Operation</a>
+
+                    </div>
+                </div>
+            </li>
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/my/profile">-->
+<!--                    <i class="fas fa-fw fa-user"></i>-->
+<!--                    <span>My Profile</span>-->
+<!--                </a>-->
+<!--            </li>-->
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block"/>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </aside>
+        <!-- End of Sidebar -->
+    </template>
+
+    <!--================SETTINGS MENU===============================-->
+    <template id="website_dashboard_topbar" name="Website Dashboard topbar">
+        <!-- Topbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+
+            <a class="nav-link " href="/my/home">
+                <i class="fas fa-home "></i>
+                <span class="d-none d-sm-inline-block">Dashboard</span>
+            </a>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <t t-if="company_class is 'active' or service_class is 'active'">
+
+                    <!-- Search bar shown on sm screens -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search" method="post"
+                                  t-attf-action="#{form_action}">
+                                <input type="hidden" t-att-value="request.csrf_token()"/>
+                                <t t-call="website.website_search_box"/>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Search bar shown on md and xs screens -->
+                    <form t-attf-action="#{form_action}" class="my-auto mw-100 d-none d-sm-inline-block" method="post">
+                        <input type="hidden" t-att-value="request.csrf_token()"/>
+                        <t t-call="website.website_search_box"/>
+                    </form>
+                </t>
+
+
+                <div class="topbar-divider d-none d-sm-block"></div>
+
+                <t t-set="is_connected" t-value="not user_id._is_public()"/>
+                <t t-set="_user_name" t-value="true"/>
+
+
+                <li t-if="is_connected" class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <span t-if="_user_name"
+                              t-attf-class="mr-2 d-none d-lg-inline text-gray-600 small #{_user_name_class}"
+                              t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
+                        <t t-if="user_id.image_1920">
+                            <img class="rounded-circle oe_topbar_avatar"
+                                 t-att-src="image_data_uri(user_id.image_1920)"
+                                 height="35" width="35" alt=" User"/>
+                        </t>
+                        <t t-if="not user_id.image_1920">
+                            <t t-if="user_id.employee_id">
+                                <t t-if="user_id.employee_id.image_1920">
+                                    <img class="rounded-circle oe_topbar_avatar"
+                                         t-att-src="image_data_uri(user_id.employee_id.image_1920)"
+                                         height="35" width="35" alt=" User"
+                                    />
+                                </t>
+                                <t t-else="">
+                                    <img class="rounded-circle oe_topbar_avatar"
+                                         src="/portal_custom/static/src/img/user.png"
+                                         height="35" width="35" alt=" User"
+                                    />
+                                </t>
+
+                            </t>
+                            <t t-else="">
+                                <img class="rounded-circle oe_topbar_avatar"
+                                     src="/portal_custom/static/src/img/user.png"
+                                     height="35" width="35" alt=" User"
+                                />
+                            </t>
+
+                        </t>
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                         aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="/my/home">
+                            <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Dashboard
+                        </a>
+                        <a class="dropdown-item" href="/my/profile">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a role="menuitem" class="dropdown-item" data-menu="4"
+                           data-menu-xmlid="base.menu_administration" href="/portal/contactus">
+                            <i class="fas fa-phone fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <span class="oe_menu_text">Contact Us</span>
+                        </a>
+                        <a class="dropdown-item" t-attf-href="/web/session/logout?redirect=/" role="menuitem"
+                           id="o_logout">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+    </template>
+
+    <!--====================Website DASHBOARD FOOTER=====================-->
+    <template id="website_dashboard_footer" name="Website Footer">
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>
+                        ©
+                        <span t-esc="time.strftime('%Y')"/>
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </template>
+
+    <template id="frontend_portal_layout" name="portal Frontend Layout" inherit_id="web.layout"
+              primary="True">
+
+        <xpath expr="//head/link[last()]" position="after">
+
+            <t t-call="portal_custom.website_dashboard_head"/>
+
+        </xpath>
+        <xpath expr="//head/script[@id='web.layout.odooscript'] | //head/script[last()]" position="after">
+            <script type="text/javascript">
+                odoo.session_info =<t t-raw="json.dumps(request.env['ir.http'].get_frontend_session_info())"/>;
+                if (!/(^|;\s)tz=/.test(document.cookie)) {
+                const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                document.cookie = `tz=${userTZ}; path=/`;
+                }
+            </script>
+            <!--            <t t-call-assets="web.assets_frontend" t-js="false"/>-->
+            <t t-call-assets="web.assets_common_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call-assets="web.assets_frontend_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call-assets="web.assets_common_lazy" t-css="false" defer_load="True"/>
+            <t t-call-assets="web.assets_frontend_lazy" t-css="false" defer_load="True"/>
+            <t t-call="portal_custom.website_dashboard_scripts"/>
+
+        </xpath>
+        <xpath expr="//body" position="replace">
+            <style>
+
+
+                li.breadcrumb-item a {
+                    /*color: #17a2b8 !important;*/
+                }
+
+                .nav-treeview > .nav-item > .nav-link.active {
+                    background-color: #b2dce2 !important;
+                }
+
+                .col {
+                    padding: 0rem .5rem !important;
+                }
+
+                @media (max-width: 400px) {
+                    .create_new {
+                        margin-bottom: 13px !important;
+                    }
+                }
+
+                .layout-fixed .main-sidebar {
+
+                    z-index: 910;
+                    transition: all 400ms ease;
+                    background-color: #fff;
+                }
+
+                .navbar-light .navbar-text {
+                    color: #607d8b;
+                }
+
+                .btn-secondary {
+                    color: #fff;
+                    /*background-color: #17a2b8;*/
+                    /*border-color: #12a0b7;*/
+
+                    font-weight: 500;
+                }
+
+                .navbar-light {
+                    background-color: #ffffff;
+                }
+
+                li.breadcrumb-item a {
+                    color: #6c757d;
+                }
+
+                .o_notification_manager {
+                    z-index: 10000;
+                    position: absolute;
+                    right: 0;
+                }
+
+                .layout-fixed .main-sidebar {
+                    display: block;
+
+
+                    transition: all 400ms ease;
+                    background-color: #fff;
+                    box-shadow: 0 0px 30px 0 rgb(17 38 146 / 5%);
+                }
+
+                .layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]) {
+                    background-color: #fff;
+                    border-bottom: 1px solid #dee2e6;
+
+                }
+
+                span.brand-text.font-weight-light {
+                    margin-left: 1rem;
+
+                    color: #212529;
+                    font-size: 20px;
+                    font-weight: 600 !important;
+                }
+
+                .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary
+                .nav-sidebar > .nav-item > .nav-link.active {
+                    /*background-color: #17a2b8;*/
+                    color: #fff;
+                }
+
+                [class*=sidebar-dark] .btn-sidebar, [class*=sidebar-dark] .form-control-sidebar {
+                    /*background-color: #17a2b8;*/
+                    border: 1px solid #ffffff;
+                    color: #fff;
+                }
+
+                [class*=sidebar-dark] .btn-sidebar:focus, [class*=sidebar-dark] .form-control-sidebar:focus {
+                    border: 1px solid #ffffff;
+                }
+
+                [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link {
+                    color: #6c757d;
+                    font-weight: 600;
+                }
+
+                [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link:focus, [class*=sidebar-dark-]
+                .nav-treeview > .nav-item > .nav-link:hover {
+                    /*background-color: #17a2b8;*/
+                    color: #fff;
+                }
+
+                [class*=sidebar-dark-] .sidebar a {
+
+                    color: #6c757d;
+                    font-weight: 600;
+                }
+
+                [class*=sidebar-dark-] .nav-sidebar > .nav-item.menu-open > .nav-link, [class*=sidebar-dark-]
+                .nav-sidebar > .nav-item:hover > .nav-link, [class*=sidebar-dark-] .nav-sidebar > .nav-item >
+                .nav-link:focus {
+                    background-color: #17a2b8;
+                    color: #fff;
+                }
+
+                .search::placeholder {
+                    color: #fff !important;
+                    opacity: 0.9 !important;
+                }
+
+                .search:-ms-input-placeholder {
+                    color: #fff !important;
+                    opacity: 0.9 !important;
+                }
+
+                .search::-ms-input-placeholder {
+                    color: #fff !important;
+                    opacity: 0.9 !important;
+                }
+
+                .content-wrapper {
+                    background-color: #eaeaf4;
+                }
+
+                .ui-datepicker {
+                    display: none;
+                    padding: 10px 12px;
+                    background: #fff;
+                    -webkit-box-shadow: 0 0 11px rgba(0, 0, 0, 0.3);
+                    -moz-box-shadow: 0 0 11px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 0 11px rgba(0, 0, 0, 0.3);
+                    font: 13px/1.55 'Roboto', Arial, sans-serif;
+                    text-align: center;
+                    color: #666;
+                    -webkit-border-radius: 24px;
+                    -moz-border-radius: 24px;
+                    border-radius: 24px;
+                    margin-top: 5px;
+                }
+
+                .ui-datepicker a {
+                    color: #404040;
+                }
+
+                .ui-datepicker-header {
+                    position: relative;
+                    margin: -10px -12px 10px;
+                    padding: 10px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                    font-size: 15px;
+                    line-height: 27px;
+                }
+
+                .ui-datepicker-prev,
+                .ui-datepicker-next {
+                    position: absolute;
+                    top: 0;
+                    display: block;
+                    width: 47px;
+                    height: 47px;
+                    font-size: 15px;
+                    line-height: 47px;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                .ui-datepicker-prev {
+                    left: 0;
+                }
+
+                .ui-datepicker-next {
+                    right: 0;
+                }
+
+                .ui-datepicker-calendar {
+                    border-collapse: collapse;
+                    font-size: 13px;
+                    line-height: 27px;
+                }
+
+                .ui-datepicker-calendar th {
+                    color: #999;
+                }
+
+                .ui-datepicker-calendar a,
+                .ui-datepicker-calendar span {
+                    display: block;
+                    width: 30px;
+                    margin: auto;
+                    text-decoration: none;
+                    color: #404040;
+                }
+
+                .ui-datepicker-calendar a:hover {
+                    background: rgba(0, 0, 0, 0.05);
+                }
+
+                .ui-datepicker-calendar span {
+                    color: #bfbfbf;
+                }
+
+                .ui-datepicker-today a {
+                    font-weight: 700;
+                }
+
+                .ui-datepicker-calendar .ui-state-active {
+                    background: rgba(0, 0, 0, 0.05);
+                    cursor: default;
+                }
+
+                .ui-datepicker-inline {
+                    border: 2px solid #e5e5e5;
+                    background: #fff;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+
+                .ui-datepicker-inline .ui-datepicker-header {
+                    line-height: 47px;
+                }
+
+                .ui-datepicker-inline .ui-datepicker-calendar {
+                    width: 100%;
+                }
+
+                .ui-datepicker-month,
+                .ui-datepicker-year {
+                    margin: 0 3px;
+                    -webkit-border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    border-radius: 3px;
+                    padding: 1px;
+                    border: 1px dotted #efefef;
+                }
+            </style>
+
+            <body id="page-top">
+                <div id="wrapper">
+                    <t t-call="portal_custom.website_dashboard_sidebar"/>
+                    <div id="content-wrapper" class="d-flex flex-column">
+                        <div id="content">
+                            <!-- TopBar -->
+
+                            <t t-call="portal_custom.website_dashboard_topbar"/>
+                            <!-- Topbar -->
+
+                            <div class="container-fluid" id="container-wrapper">
+                                <t t-raw="0"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <t t-call="portal_custom.website_dashboard_footer"/>
+
+                    </div>
+                </div>
+            </body>
+        </xpath>
+    </template>
+    <template id="portal.portal_layout" name="Portal Layout">
+        <t t-call="portal_custom.frontend_portal_layout">
+            <t t-set="is_portal" t-value="True"/>
+
+            <div t-if="not no_breadcrumbs and not my_details and not breadcrumbs_searchbar"
+                 class="o_portal  ">
+                <div class="row align-items-center bg-white no-gutters border rounded">
+                    <div class="col">
+                        <t t-call="portal.portal_breadcrumbs"></t>
+                    </div>
+                    <div t-if="prev_record or next_record" class="col flex-grow-0">
+                        <t t-call='portal.record_pager'/>
+                    </div>
+                </div>
+            </div>
+
+            <t t-if="my_details">
+                <div class=" mt-4">
+
+                    <t t-raw="0"/>
+
+                    <div id="o_my_sidebar" class="col-12 col-md col-lg-4 col-xl-3 o_my_sidebar">
+                        <div class="o_my_contact" t-if="sales_user">
+                            <t t-call="portal.portal_contact"/>
+                        </div>
+                        <div class="o_portal_my_details">
+                            <!--                            <h4>Details-->
+                            <!--                                <a role="button" href="/my/account" class="btn btn-sm btn-link">-->
+                            <!--                                    <i class="fa fa-pencil"/>-->
+                            <!--                                    Edit-->
+                            <!--                                </a>-->
+                            <!--                            </h4>-->
+                            <!--                            <hr class="mt-1 mb-0"/>-->
+                            <!--                            <div t-field="user_id.partner_id"-->
+                            <!--                                 t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>-->
+                        </div>
+                        <div class="o_my_archives" t-if="archive_groups">
+                            <t t-call="portal.portal_archive_groups"/>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <t t-raw="0"/>
+            </t>
+
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,147 @@
+<odoo>
+  <data>
+<!--    <function model="eg.tax" name="update_taxes"/>-->
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="surgi_company_branches.list">
+      <field name="name">surgi_company_branches list</field>
+      <field name="model">surgi_company_branches.surgi_company_branches</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="surgi_company_branches.action_window">
+      <field name="name">surgi_company_branches window</field>
+      <field name="res_model">surgi_company_branches.surgi_company_branches</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="surgi_company_branches.action_server">
+      <field name="name">surgi_company_branches server</field>
+      <field name="model_id" ref="model_surgi_company_branches_surgi_company_branches"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="surgi_company_branches" id="surgi_company_branches.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="surgi_company_branches.menu_1" parent="surgi_company_branches.menu_root"/>
+    <menuitem name="Menu 2" id="surgi_company_branches.menu_2" parent="surgi_company_branches.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="surgi_company_branches.menu_1_list" parent="surgi_company_branches.menu_1"
+              action="surgi_company_branches.action_window"/>
+    <menuitem name="Server to list" id="surgi_company_branches" parent="surgi_company_branches.menu_2"
+              action="surgi_company_branches.action_server"/>
+-->
+<!--    #TODO 1- create menu for E-invoice-->
+<!--    # 2- create page to call ajax inside-->
+<!--    #3- Call Ajax Requests inside the webpage-->
+
+      <record id="list_egytax_recentmoves" model="ir.ui.view">
+        <field name="name">Recent Documents</field>
+        <field name="model">egytax.invoicewizared</field>
+        <field name="arch" type="xml">
+<!--            <owl_tree></owl_tree>-->
+            <invoice_list></invoice_list>
+
+        </field>
+    </record>
+
+<record id="action_egytax_recentmoves" model="ir.actions.act_window">
+    <field name="name">Recent Documents</field>
+    <field name="res_model">egytax.invoicewizared</field>
+<!--    <field name="view_type">list</field>-->
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="list_egytax_recentmoves"/>
+</record>
+
+      <record id="action_egtax_creditnotes_move" model="ir.actions.act_window">
+   <field name="name">Credit Notes</field>
+   <field name="res_model">account.move</field>
+   <field name="view_mode">tree,kanban,form</field>
+   <field name="view_id" ref="account.view_out_invoice_tree"/>
+          <field name="domain">[('move_type', '=', 'out_refund')]</field>
+   <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+           Generate Customer Details
+       </p>
+   </field>
+</record>
+      <record id="action_egtax_invoices_move" model="ir.actions.act_window">
+   <field name="name">Invoices</field>
+   <field name="res_model">account.move</field>
+   <field name="view_mode">tree,kanban,form</field>
+   <field name="view_id" ref="account.view_out_invoice_tree"/>
+          <field name="domain">[('move_type', '=', 'out_invoice')]</field>
+   <field name="help" type="html">
+       <p class="o_view_nocontent_smiling_face">
+           Generate Customer Details
+       </p>
+   </field>
+</record>
+
+<record id="action_egytax_getsent_invoices" model="ir.actions.client">
+  <field name="name">Sent Invoice</field>
+      <field name="tag">egtax.sentinvoice</field>
+    </record>
+      <menuitem id="menu_egy_tax"
+            name="Eg Tax"
+            sequence="2"/>
+        <menuitem id="menu_egtax_customer"
+         name="Customers"
+         parent="menu_egy_tax"
+
+         sequence="0"/>
+      <menuitem id="menu_egtax_portal"
+         name="Eg. tax Portal"
+         parent="menu_egy_tax"
+groups="base.group_user"
+         sequence="2"/>
+<menuitem id="menu_egtax_sent_invoices"
+         name="Sent Invoice"
+         parent="menu_egtax_portal"
+          action="action_egytax_recentmoves"
+
+         sequence="2"/>
+
+  <menuitem id="menu_egtax_customer_invoices"
+         name="Invoices"
+         parent="menu_egtax_customer"
+            action="action_egtax_invoices_move"
+         sequence="0"/>
+      <menuitem id="menu_egtax_customer_creditnotes"
+         name="Credit Notes"
+         parent="menu_egtax_customer"
+            action="action_egtax_creditnotes_move"
+         sequence="1"/>
+<!--      <menuitem id="menu_customer_details_report"-->
+<!--         name="Customer Details Report"-->
+<!--         parent="menu_customer_details_main_reports"-->
+<!--         action="action_customer_details_report"-->
+<!--         sequence="0"/>-->
+  </data>
+</odoo>

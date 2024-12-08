@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_assets_dashboard" name="CEP Backend Dashboard" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+            <link rel="stylesheet" href="/portal_custom/static/src/css/kanban.css"/>
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+            <link href="/portal_custom/static/src/css/materialdesignicons.min.css" rel="stylesheet"/>
+            <link href="/portal_custom/static/src/css/layout.css" rel="stylesheet"/>
+            <script type="text/javascript" src="/portal_custom/static/src/js/link.js"/>
+            <script type="text/javascript" src="/portal_custom/static/src/js/scolarship.js"/>
+            <link href="/portal_custom/static/src/vendor/toastr/toastr.min.css" rel="stylesheet"/>
+            <script src="/portal_custom/static/src/vendor/toastr/toastr.min.js" type="text/javascript"/>
+
+        </xpath>
+    </template>
+</odoo>

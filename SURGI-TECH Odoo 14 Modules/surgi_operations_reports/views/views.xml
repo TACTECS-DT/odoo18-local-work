@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <!--        <report-->
+        <!--                id="operation_coordinator_report_excel_id"-->
+        <!--                string="Excel Operation Coordinator"-->
+        <!--                model="operation.operation"-->
+        <!--                report_type="xlsx"-->
+        <!--                file="surgi_operations_reports.coordinator_excel"-->
+        <!--                name="surgi_operations_reports.coordinator_excel"-->
+        <!--        />-->
+
+
+        <report
+                id="operation_coordinator_report_id"
+                string="All Operation Coordinator"
+                model="operation.operation"
+                report_type="qweb-pdf"
+                file="surgi_operations_reports.coordinator_report"
+                name="surgi_operations_reports.coordinator_report"
+        />
+        <template id="coordinator_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <center>
+                                <h3 align="center" style="width:50%">Operation
+                                    Coordinator Report
+                                </h3>
+                            </center>
+                        </div>
+                        <br/>
+                        <t t-foreach="docs" t-as="o">
+
+                            <table class="table" style="width:100%;">
+                                <tr style="border-bottom: 1px solid black;">
+                                    <th>
+                                        <span>Name</span>
+                                    </th>
+                                    <th>
+                                        <span>Hospital</span>
+                                    </th>
+                                    <th>
+                                        <span>Payment Method</span>
+                                    </th>
+                                    <th>
+                                        <span>Surgeon</span>
+                                    </th>
+                                    <th>
+                                        <span>Responsible</span>
+                                    </th>
+                                    <th>
+                                        <span>Start Date</span>
+                                    </th>
+                                    <th>
+                                        <span>Operation Type</span>
+                                    </th>
+
+                                </tr>
+                                <br/>
+
+                                <tr  style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.hospital_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.payment_methods"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.surgeon_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.responsible.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.start_datetime"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.operation_type"/>
+                                    </td>
+                                    <table style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                        <tr  style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                            <td  style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">Component</td>
+                                        </tr>
+
+                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                            <t t-foreach="o.component_ids" t-as="com">
+
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                                    <span t-field="com.name"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </table>
+                                </tr>
+
+
+                            </table>
+                        </t>
+                    </div>
+
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

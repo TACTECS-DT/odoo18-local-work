@@ -1,0 +1,32 @@
+<odoo>
+
+    <data>
+
+
+
+        <record id="action_view_stock_valuation" model="ir.actions.server">
+            <field name="sequence" eval="1"/>
+            <field name="state">code</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_stock_valuation_layer"/>
+            <field name="code">action=model.button_stock_action()</field>
+            <field name="name">Stock Valuation</field>
+        </record>
+
+
+<!--        <record id="action_view_stock_valuation" model="ir.actions.act_window">-->
+<!--            <field name="name">Stock Valuation</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">stock.valuation.layer</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[('product_id.type', '=', 'product')]</field>-->
+<!--            <field name="context">{'search_default_group_by_product_id': 1}</field>-->
+
+<!--        </record>-->
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_stock_valuation" name="Stock Valuation" parent="menu_reports_root" action="action_view_stock_valuation" sequence="5"/>
+    </data>
+
+</odoo>

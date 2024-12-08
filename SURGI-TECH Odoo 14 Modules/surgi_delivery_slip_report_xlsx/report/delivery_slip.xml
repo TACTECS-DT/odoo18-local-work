@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+         <report
+                id="stock_delivery_slip_report_xlsx"
+                string="Delivery Slip Excel"
+                model="stock.picking"
+                report_type="xlsx"
+                file="surgi_delivery_slip_report_xlsx.delivery_slip_report"
+                name="surgi_delivery_slip_report_xlsx.delivery_slip_report"
+        />
+
+    </data>
+</odoo>

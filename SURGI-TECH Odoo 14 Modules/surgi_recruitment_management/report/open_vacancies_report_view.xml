@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="open_vacancies_situation_report_tree" model="ir.ui.view">
+            <field name="name">open.vacancies.situation.report.tree</field>
+            <field name="model">open.vacancies.situation.report</field>
+            <field name="arch" type="xml">
+                <tree string="Open Vacancies Situation Report">
+                    <field name="job_id"/>
+                    <field name="open_date"/>
+                    <field name="close_date"/>
+                    <field name="user_id"/>
+                    <field name="name"/>
+                    <field name="source_id"/>
+                    <field name="applicant_state"/>
+                    <field name="offering_date"/>
+                    <field name="offering_state"/>
+                    <field name="availability"/>
+                    <field name="hr_hiring_date"/>
+                    <field name="employee_date" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="open_vacancies_situation_report_view_search" model="ir.ui.view">
+            <field name="name">open.vacancies.situation.report.search</field>
+            <field name="model">open.vacancies.situation.report</field>
+            <field name="arch" type="xml">
+                <search string="Open Vacancies Situation Report">
+                    <field name="company_id" filter_domain="[('company_id', 'ilike', self)]"/>
+                    <field name="job_id" filter_domain="[('job_id', 'ilike', self)]"/>
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="create_date"/>
+                    <filter string="Open Vacancies Situation" name="open"
+                            domain="[('employee_date', '=', False),
+                                ('open_date', '&lt;=', (context_today()).strftime('%Y-%m-%d')),
+                                ('close_date', '>=', (context_today()).strftime('%Y-%m-%d'))]"/>
+                    <filter string="Last 365 Days Applicant" name="year" domain="[
+                                ('create_date', '>=', (context_today() + relativedelta(days=-365)).strftime('%Y-%m-%d')),
+                                ('create_date', '&lt;', (context_today() + relativedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <filter name="filter_create_date" date="create_date"/>
+                    <filter name="filter_availability" date="availability"/>
+                    <filter name="filter_hr_hiring_date" date="hr_hiring_date"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Job Position" name="job_id" context="{'group_by':'job_id'}"/>
+                        <filter string="Recruiter" name="user_id" context="{'group_by':'user_id'}"/>
+                        <filter string="Status" name="applicant_state" context="{'group_by':'applicant_state'}"/>
+                        <filter string="Source" name="source_id" context="{'group_by':'source_id'}"/>
+                        <filter string="Company" name="company" context="{'group_by':'company_id'}"
+                                groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="open_vacancies_action" model="ir.actions.act_window">
+            <field name="name">Open Vacancies Situation Report</field>
+            <field name="res_model">open.vacancies.situation.report</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="open_vacancies_situation_report_view_search"/>
+            <field name="context">{
+                'search_default_open': True,
+                }
+            </field>
+            <field name="help">This report performs analysis on your Applications.</field>
+        </record>
+
+        <menuitem id="open_vacancies_menu"
+                  parent="hr_recruitment.report_hr_recruitment"
+                  action="open_vacancies_action"/>
+
+    </data>
+</odoo>

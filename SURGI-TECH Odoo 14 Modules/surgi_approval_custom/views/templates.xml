@@ -1,0 +1,127 @@
+<odoo>
+    <data>
+
+        <template id="approval_print_template">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">
+                        <span t-field="o.name"/>
+                    </h2>
+                    <div class="row">
+
+                        <div class="col-6">
+                            Request Owner:
+                            <span t-field="o.request_owner_id"/>
+                        </div>
+                        <div class="col-6">
+                            Category:
+                            <span t-field="o.category_id"/>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-6">
+                            Date Confirmed:
+                            <span t-field="o.date_confirmed"/>
+                        </div>
+                        <div class="col-6">
+                            Contact:
+                            <span t-field="o.partner_id"/>
+                        </div>
+                    </div>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray"/>
+                    <div class="row">
+                        <div class="col-6">
+                            Amount:
+                            <span t-field="o.amount"/>
+                        </div>
+                        <div class="col-6">
+                            Discount percentage:
+                            <span t-esc="round(o.discount_percentage,2)"/>
+                        </div>
+                    </div>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray"/>
+
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <th>Number</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Payment State</th>
+
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.partner_invoices_ids" t-as="line">
+                                <td><span t-field="line.name"/></td>
+                                <td><span t-field="line.invoice_date"/></td>
+                                <td><span t-field="line.amount_total_signed"/></td>
+                                <td><span t-field="line.state"/></td>
+                                <td><span t-field="line.payment_state"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center"><strong>Total</strong></td>
+                                <td class="text-center" colspan="3"><strong><span t-field="o.total_lines"/></strong></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr style="height:1px;border-width:0;color:gray;background-color:gray"/>
+                    <table class="table table-bordered table-sm" t-if="o.approval_history_ids">
+                        <thead>
+                            <th>Approved by</th>
+                            <th>Approved on</th>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.approval_history_ids" t-as="history">
+                                <td><span t-field="history.approved_by"/></td>
+                                <td><span t-field="history.approved_on"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div class="row">
+
+                        <div class="col-6">
+                            Created by:
+                            <span t-field="o.create_uid"/>
+                        </div>
+                        <div class="col-6">
+                            Created on:
+                            <span t-field="o.create_date"/>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-6">
+                            Submitted by:
+                            <span t-field="o.submitted_by"/>
+                        </div>
+                        <div class="col-6">
+                            Submitted on:
+                            <span t-field="o.submitted_on"/>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_approval_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="surgi_approval_custom.approval_print_template"/>
+                </t>
+            </t>
+        </template>
+        <record id="report_approval" model="ir.actions.report">
+            <field name="name">discount Request</field>
+            <field name="model">approval.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">surgi_approval_custom.report_approval_print</field>
+            <field name="report_file">surgi_approval_custom.report_approval_print</field>
+            <field name="print_report_name">'discount Request - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_approval_request"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

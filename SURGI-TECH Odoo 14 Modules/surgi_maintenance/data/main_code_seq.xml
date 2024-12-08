@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="p_d_default_code_seq" model="ir.sequence">
+        <field name="name">pickup and delivery Code Mandatory</field>
+        <field name="code">pickup.delivery.code</field>
+        <field name="prefix">PD-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+        <record id="p_r_default_code_seq" model="ir.sequence">
+        <field name="name">pickup and repair Code Mandatory</field>
+        <field name="code">pickup.repair.code</field>
+        <field name="prefix">PR-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+
+    <record id="p_i_default_code_seq" model="ir.sequence">
+        <field name="name">pickup and installation Code Mandatory</field>
+        <field name="code">pickup.installation.code</field>
+        <field name="prefix">PI-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+        <record id="i_f_default_code_seq" model="ir.sequence">
+        <field name="name">maintenance inform Code Mandatory</field>
+        <field name="code">maintenance.inform.code</field>
+        <field name="prefix">IF-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+
+    <record id="p_f_default_code_seq" model="ir.sequence">
+        <field name="name">pickup and final Code Mandatory</field>
+        <field name="code">pickup.final.code</field>
+        <field name="prefix">PF-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+    <record id="p_v_default_code_seq" model="ir.sequence">
+        <field name="name">pickup and visit Code Mandatory</field>
+        <field name="code">pickup.visit.code</field>
+        <field name="prefix">PV-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+
+
+</odoo>

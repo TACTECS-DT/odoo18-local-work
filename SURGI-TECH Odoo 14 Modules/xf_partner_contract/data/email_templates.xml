@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <template id="request_to_approve">
+            <p>
+                Dear
+                <t t-esc="object.sudo().current_approver.user_id.name"/>,
+            </p>
+            <p>
+                You have been requested to approve the contract
+                <t t-esc="object.name"/>.
+            </p>
+            <p>
+                <a t-att-href="'/mail/view?model=%s&amp;res_id=%s' % (object._name, object.id)">
+                    View Contract
+                </a>
+            </p>
+        </template>
+
+        <template id="return_for_correction">
+            <p>
+                Dear
+                <t t-esc="object.user_id.sudo().name"/>,
+            </p>
+            <p>
+                The contract "<t t-esc="object.name"/>"
+                was returned for correction.
+            </p>
+            <p>
+                Comments:
+                <t t-esc="comments"/>
+            </p>
+            <p>
+                <a t-att-href="'/mail/view?model=%s&amp;res_id=%s' % (object._name, object.id)">
+                    View Contract
+                </a>
+            </p>
+        </template>
+
+        <template id="contract_approved">
+            <p>
+                Dear
+                <t t-esc="object.user_id.sudo().name"/>,
+            </p>
+            <p>
+                The contract "<t t-esc="object.name"/>" was approved.
+            </p>
+            <p>
+                <a t-att-href="'/mail/view?model=%s&amp;res_id=%s' % (object._name, object.id)">
+                    View Contract
+                </a>
+            </p>
+        </template>
+    </data>
+</odoo>

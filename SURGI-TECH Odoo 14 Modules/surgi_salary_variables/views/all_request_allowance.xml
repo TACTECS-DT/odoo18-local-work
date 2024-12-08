@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+         <record id="view_salary_variable_payslip_form_grade_rank" model="ir.ui.view">
+        <field name="name">hr..salary.variablespayslip.form.grade.rank</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <field name="contract_id" position="after">
+       
+                <field name="shiftallownece" />
+               
+            </field>
+        </field>
+    </record>
+        
+        
+        
+        <record id="action_view_all_request_allowance" model="ir.actions.server">
+        <field name="sequence" eval="5"/>
+        <field name="state">code</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="surgi_salary_variables.model_hr_variable_allowance_request"/>
+        <field name="code">action=model.action_all_request()</field>
+        <field name="name">All Request</field>
+    </record>
+
+
+<!--        <record id="action_view_all_request_allowance" model="ir.actions.act_window">-->
+<!--            <field name="name">all Request</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">hr.variable.allowance.request</field>-->
+<!--            <field name="domain">[('rule_id.administrator_ids', 'in', [uid]), ]-->
+<!--            </field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="context">{'default_check_allowance_type': 'all_request'}</field>-->
+<!--        </record>-->
+        <menuitem id="menu_all_request_allowance" name="all Request"
+                  parent="surgi_salary_variables.variable_allowance_submenu"
+                  action="action_view_all_request_allowance" sequence="5" groups="surgi_salary_variables.access_group_admin_request,surgi_salary_variables.access_group_user_request"/>
+
+    </data>
+</odoo>

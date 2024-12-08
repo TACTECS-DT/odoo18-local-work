@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+stock_route_configeration,tock_route_configeration,stock.model_stock_location_route,,1,1,1,0
+
+

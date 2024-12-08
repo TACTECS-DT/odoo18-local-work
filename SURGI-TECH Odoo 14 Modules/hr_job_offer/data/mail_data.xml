@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="email_template_job_offer" model="mail.template">
+            <field name="name">Job Offer: Send by email</field>
+            <field name="model_id" ref="hr_job_offer.model_hr_job_offer"/>
+            <field name="subject">Your Job Offer: ${object.applicant_id.job_id.name | safe}</field>
+            <field name="email_from">${object.env.user.email_formatted |safe}
+            </field>
+            <field name="email_to">
+                ${ctx['mail_to']}
+            </field>
+            <field name="email_cc">
+                ${ctx['mail_cc']}
+            </field>
+            <field name="partner_to">${object.user_id.partner_id.id}</field>
+            <field name="lang">${object.user_id.partner_id.lang}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.partner_name}
+                        <br/>
+                        Congratulations! After a thorough review and based on your credentials, we are pleased to
+                        confirm that you have been accepted for full time position at Surgi Tech Egypt teamwork.
+                        We are delighted to make you the following job offer.
+                        <div style="text-align: center; margin: 16px 0px 16px 0px;">
+                            <a href="/offer/accept?id=${object.id}"
+                               style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
+                                Accept
+                            </a>
+                            <a href="/offer/refuse?id=${object.id}"
+                               style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
+                                Refuse
+                            </a>
+                        </div>
+                        <br/>
+                        Please sign the offer and send it back
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="action_job_offer_report"/>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

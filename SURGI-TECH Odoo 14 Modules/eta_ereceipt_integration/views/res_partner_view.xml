@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">view_partner_form_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="ETA Configuration">
+                        <group string="Additional Address Details">
+                            <group>
+                                <field name="building_no"/>
+                                <field name="floor"/>
+                                <field name="room"/>
+                                <field name="landmark"/>
+                                <field name="additional_information"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

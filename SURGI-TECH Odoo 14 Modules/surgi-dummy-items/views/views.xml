@@ -1,0 +1,236 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="surgi-dummy-items.list">
+      <field name="name">Faked-Items list</field>
+      <field name="model">surgi-dummy-items.surgi-dummy-items</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="surgi-dummy-items.action_window">
+      <field name="name">Faked-Items window</field>
+      <field name="res_model">surgi-dummy-items.surgi-dummy-items</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="surgi-dummy-items.action_server">
+      <field name="name">Faked-Items server</field>
+      <field name="model_id" ref="model_faked-items_faked-items"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="Faked-Items" id="surgi-dummy-items.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="surgi-dummy-items.menu_1" parent="surgi-dummy-items.menu_root"/>
+    <menuitem name="Menu 2" id="surgi-dummy-items.menu_2" parent="surgi-dummy-items.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="surgi-dummy-items.menu_1_list" parent="surgi-dummy-items.menu_1"
+              action="surgi-dummy-items.action_window"/>
+    <menuitem name="Server to list" id="surgi-dummy-items" parent="surgi-dummy-items.menu_2"
+              action="surgi-dummy-items.action_server"/>
+-->
+
+
+        <template id="assets_backend" name="petstore_assets_faked_scan" inherit_id="web.assets_backend">
+
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/surgi-dummy-items/static/src/js/fakedscan.js"></script>
+            </xpath>
+</template>
+
+
+       <record id="action_start_scanning_faked" model="ir.actions.client">
+            <field name="name">Scan Faked Items</field>
+            <field name="tag">stock.biking.faked.item</field>
+            <field name="target">current</field>
+            <field name="res_model">stock.biking.faked.item</field>
+           <!-- <field name="params" eval="{'id':this.id}" />-->
+        </record>
+
+
+<record id="surgi_product_template_form_inherit" model="ir.ui.view">
+            <field name="name">surgitech product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <div name="options" position="inside">
+                    <div>
+                        <field name="isfakedproduct"/>
+                        <label for="isfakedproduct" string="Is Dummy Item"/>
+                    </div>
+                    <div>
+                        <field name="obsolete"/>
+                        <label for="obsolete" string="Obsolete"/>
+                    </div>
+
+
+
+                </div>
+
+            </field>
+        </record>
+
+
+
+
+<record id="stock_picking_form_inherititems" model="ir.ui.view">
+            <field name="name">stock.picking.inherit.fakeditems</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//header" position="inside">
+
+                    <button class="startscanclass" name="%(action_start_scanning_faked)d" type="action" string="Scan Dummy Items" attrs="{'invisible': ['|',('id', '=', False),('state', 'in', ['done','assigned', 'cancel'])]}"/>
+
+
+
+                </xpath>
+
+                 <field name="priority" position="after">
+                     <field name="nofakedlines" attrs="{'invisible' : True}" />
+                    <field name="nofakeditems" attrs="{'readonly':[('nofakedlines','=',True)]}"/>
+                </field>
+
+
+                <xpath expr="//notebook/page[4]" position="after">
+               <page string="Dummy Items">
+                 <field name="fakeditem" >
+                    <tree create="0" edit="0">
+                        <field name="product"/>
+                      <field name="serial"/>
+                      <field name="quantity"/>
+                      <field name="solved"/>
+                    </tree>
+                  </field>
+
+                  </page>
+                </xpath>
+            </field>
+</record>
+
+
+<record id="product_dummy_surgi_view_form" model="ir.ui.view">
+        <field name="name">product_dummy_surgi_view_form</field>
+        <field name="model">stock.biking.faked.item</field>
+        <field name="arch" type="xml">
+            <form create="false" string="product_compination_surgi_form">
+
+
+            </form></field></record>
+
+ <record id="product_dummy_surgi_view_tree" model="ir.ui.view">
+            <field name="name">product_dummy_surgi_view_tree</field>
+            <field name="model">stock.biking.faked.item</field>
+
+            <field name="arch" type="xml">
+                <tree create="0"  edit="0" delete="0"   string="Dummy Products">
+
+                    <field name="name"/>
+                    <field name="product"/>
+                    <field name="serial"/>
+                    <field name="expirartion"/>
+                    <field name="quantity"/>
+                    <field name="stock_bikeid"/>
+                    <field name="solved"/>
+                    <field name="lotexist" />
+
+                </tree>
+            </field>
+        </record>
+
+ <record model="ir.actions.act_window" id="product_dummy_list_action">
+            <field name="name">Dummy Products</field>
+            <field name="res_model">stock.biking.faked.item</field>
+
+            <field name="view_mode">list</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create The First Compined Product
+                </p>
+            </field>
+        </record>
+
+<menuitem id="surgi_Dummy_products_list" groups="group_dummy_items"   name="Dummy Products" parent="stock.menu_stock_warehouse_mgmt" sequence="11" action="product_dummy_list_action" />
+<!--key2="client_action_multi"-->
+
+<!--<act_window name="Solve Items" res_model="stock.biking.faked.item" src_model="stock.biking.faked.item" multi="True" id="solve_dummy_items" />-->
+<!--<act_window name="Add To Lots" res_model="stock.biking.faked.item" src_model="stock.biking.faked.item" multi="True" id="add_dummies_to_lots" />-->
+<!--<record id="action_account_invoice_from_list_cvcc" model="ir.actions.server">-->
+<!--            <field name="name">Register Payment</field>-->
+<!--            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--            <field name="model_id" ref="account.model_account_move"/>-->
+<!--            <field name="binding_model_id" ref="account.model_account_move"/>-->
+<!--            <field name="binding_view_types">list</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--                if records:-->
+<!--                    action = records.action_register_payment()-->
+<!--            </field>-->
+<!--        </record>-->
+<!--<record id="action_dummy_solve_items" model="ir.actions.server">-->
+<!--    <field name="name">Solve Items</field>-->
+<!--    <field name="model_id" ref="surgi-dummy-items.model_stock_biking_faked_item"/>-->
+<!--    <field name="binding_view_types">tree</field>-->
+<!--    <field name="binding_model_id" ref="surgi-dummy-items.model_stock_biking_faked_item"/>-->
+<!--    <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>-->
+<!--    <field name="state">code</field>-->
+<!--    <field name="code">-->
+<!--        if records:-->
+<!--            action=records.solve_items()-->
+<!--    </field>-->
+<!--</record>-->
+
+     <record id="action_server_solve_dummy" model="ir.actions.server">
+    <field name="name">Solve Items</field>
+    <field name="binding_model_id" ref="surgi-dummy-items.model_stock_biking_faked_item"/>
+                     <field name="model_id" ref="model_stock_biking_faked_item"/>
+                     <field name="binding_view_types">list</field>
+                     <field name="state">code</field>
+    <field name="code">
+        if records:
+            action = records.solve_items()
+    </field>
+</record>
+
+           <record id="action_server_dummy_to_lot" model="ir.actions.server">
+    <field name="name">Create LotS</field>
+    <field name="binding_model_id" ref="surgi-dummy-items.model_stock_biking_faked_item"/>
+                     <field name="model_id" ref="model_stock_biking_faked_item"/>
+                     <field name="binding_view_types">list</field>
+                     <field name="state">code</field>
+    <field name="code">
+        if records:
+            action = records.dummyToLot()
+    </field>
+</record>
+  </data>
+</odoo>

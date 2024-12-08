@@ -1,0 +1,207 @@
+<odoo>
+    <data>
+        <record id="tree_view_registration_Licence" model="ir.ui.view">
+            <field name="name">Registration Licence</field>
+            <field name="model">registration.license</field>
+            <field name="arch" type="xml">
+                <tree string="Registration Licence">
+                    <field name="name"/>
+                    <field name="registration_name"/>
+                    <field name="legelManufacturer"/>
+                    <field name="actualManufacturer" widget="many2many_tags"/>
+                    <field name="sterilizeMethod"/>
+                    <field name="countryOfOrigin" widget="many2many_tags"/>
+                    <field name="IssueDate"/>
+                    <field name="expiryDate"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_registration_Licence" model="ir.ui.view">
+            <field name="name">Registration Licence</field>
+            <field name="model">registration.license</field>
+            <field name="arch" type="xml">
+                <form string="Registration Licence">
+
+                    <sheet>
+                        <div style="text-align:center">
+                            <group string="Registration Licence" col="4" colspan="6"></group>
+                        </div>
+                        <group>
+                            <div>
+                                <group string="Basic Information">
+                                    <field name="name"/>
+                                    <field name="NomenClature"/>
+                                    <field name="NomenClatureCode"/>
+                                    <field name="AdoptedRegulation"/>
+                                    <field name="AdoptedRegulationClass"/>
+                                    <field name="sterilize"/>
+                                    <field name="sterilizeMethod"/>
+                                    <field name="storgeConditions"/>
+                                    <field name="isDosage"/>
+
+                                </group>
+                            </div>
+                            <div>
+                                <group string="Manufacture">
+                                    <field name="legelManufacturer"/>
+                                    <field name="legelManufacturerAddress"/>
+<!--                                    <field name="legelManufacturerCountry"/>-->
+                                   <field name="actualManufacturer" widget="many2many_tags"/>
+                                    <field name="actualManufacturerAddress" widget="many2many_tags"/>
+                                    <field name="countryOfOrigin" widget="many2many_tags"/>
+
+<!--                                    <field name="actualManufacturerCountry"/>-->
+                                </group>
+                            </div>
+
+                            <div>
+                                <group string="Registration Date">
+                                    <field name="IssueDate"/>
+                                    <field name="expiryDate"/>
+                                </group>
+                            </div>
+
+                            <div>
+                                <group string="Shelf Life">
+                                    <field name="year"/>
+                                    <field name="month"/>
+                                    <field name="dateDiff" style="font-size:16px"/>
+                                </group>
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="product" string="Scope Of Product">
+                                <group>
+                                </group>
+                                <field name="registrationProduct">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Product"/>
+                                        </control>
+                                        <field name="productTemplate"/>
+                                        <field name="ProductVendor"/>
+
+                                        <field name="internalRef"/>
+                                        <field name="regularityLabelRef"/>
+                                        <field name="ProductClass"/>
+                                        <field name="productTypeRegularity"/>
+                                        <field name="productSterilizeField"/>
+                                        <field name="productDescription"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="Variation" string="Variation Number">
+                                <group>
+                                </group>
+                                <field name="variationNum">
+
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add"/>
+                                        </control>
+
+                                        <field name="variationNum"/>
+                                        <field name="variationType"/>
+                                        <field name="variationDate"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="Row" string="Row Material">
+                                <group>
+                                </group>
+                                <field name="RowMatrial">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add"/>
+                                        </control>
+                                        <field name="CompanyName"/>
+                                        <field name="CompanyMatrial"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="RegistrationName" string="Registration Name">
+
+                            <div>
+                                <group string="">
+                                    <field name="registration_name"/>
+                                    <field name="TradeName"/>
+                                    <field name="MedicalDeviceName"/>
+                                    <field name="MedicalDeviceCateg"/>
+
+                                    <field name="MedicalDeviceDesc"/>
+                                </group>
+                            </div>
+                            </page>
+                            <page name="IntendedUse" string="Intended Use">
+
+                            <div>
+                                <group string="">
+                                    <field name="intendedUse"/>
+
+                                </group>
+                            </div>
+                            </page>
+                            <page name="Packing" string="Packing">
+
+                            <div>
+                                <group string="">
+                                    <field name="PackingDesc"/>
+                                    <field name="Material"/>
+                                    <field name="NumOfunit"/>
+                                    <field name="MaterialOfScendPack"/>
+
+                                    <field name="numUnitPerSec"/>
+                                </group>
+                            </div>
+                            </page>
+                            <page name="attachment" string="Certificate">
+                                <group>
+                                </group>
+                                <field name="attachmentPage">
+                                      <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Attachment"/>
+                                        </control>
+                                        <field name="certificateName"/>
+                                        <field name="certificateExpiry"/>
+                                        <field name="certificateAttachment" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="attachments" string="Attachment">
+
+                                <field name="regLicAttachment">
+                                      <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add Attachment"/>
+                                        </control>
+                                        <field name="RegistrationAttachmentName"/>
+                                        <field name="RegistrationAttachment"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_view_registration_Licence" model="ir.actions.act_window">
+            <field name="name">Registration Licence</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">registration.license</field>
+            <field name="view_mode">tree,form</field>
+
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_view_registration_Licence" name="Registration Licence" parent="regularity_menuitem"
+                  action="action_view_registration_Licence" sequence="1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="attendance_sheet_form_view_ah" model="ir.ui.view">
+            <field name="name">attendance.sheet.form.ah</field>
+            <field name="model">attendance.sheet</field>
+            <field name="inherit_id" ref="rm_hr_attendance_sheet.attendance_sheet_form_view"/>
+            <field name="arch" type="xml">
+
+                <!-- <xpath expr="//field[@name='att_policy_id'" position="after" >
+                    <field name="needReview"/>
+                </xpath> -->
+                <xpath expr="//field[@name='att_policy_id']" position="after">
+                    <field name="needReview"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+        <record id="view_ah_attendence_sheet_lines_tree" model="ir.ui.view">
+            <field name="name">attendance.sheet.line.ah.tree</field>
+            <field name="model">attendance.sheet.line</field>
+            <field name="arch" type="xml">
+                <!-- <tree create="false" editable="bottom" string="Attendences Need Review">
+                    <field name="emp_id"/>
+                    <field name="needReview" readonly='0'/>
+                    <field name="getReviewed" readonly='0'/>
+                    <field name="resource_calendar_id" readonly='0'/>
+                    <field name="date" readonly='1'/>
+                    <field name="att_sheet_id" readonly='1'/>
+                    <field name="pl_sign_in"   force_save="1"/>
+                    <field name="pl_sign_out"   force_save="1"/>
+                    <field name="worked_hours"   force_save="1"/>
+                    <field name="ac_sign_in"/>
+                    <field name="ac_sign_out"/>
+                    
+                        <field name="act_overtime" force_save="1"/>
+                        <field name="overtime" force_save="1"/>
+                   
+                    <field name="late_in"   force_save="1"/>
+                    <field name="diff_time"   force_save="1"/>
+                    <field name="status"   force_save="1"/>
+                   
+                    
+
+                    </tree> -->
+
+                    <tree create="false"  string="Attendences Need Review"   editable="bottom">
+                        <!-- <field name="state" invisible="1"/> -->
+                        <field name="emp_id"/>
+                        <field name="date"/>
+                        <field name="needReview" readonly='0'/>
+                        <field name="getReviewed" readonly='0'/>
+                    <field name="resource_calendar_id" readonly='0'/>
+                        <field name="day" string="Day"/>
+                        <field name="pl_sign_in"
+                               string="PL/IN"
+                               widget="float_time" force_save="1"/>
+                        <field name="pl_sign_out"
+                               string="PL/OUT"
+                               widget="float_time" force_save="1"/>
+                        <field name="ac_sign_in"
+                               string="ACT/IN"
+                               widget="float_time"/>
+                        <field name="ac_sign_out"
+                               string="ACT/OUT"
+                               widget="float_time"/>
+                        <field name="worked_hours"
+                               widget="float_time"
+                               optional="show"
+                               string="Worked/H"
+                               sum="Total"  force_save="1"/>
+                        <field name="act_late_in" force_save="1"
+                               optional="hide"
+                               widget="float_time"
+                               sum="Total"/>
+                        <field name="late_in"
+                               widget="float_time" force_save="1"
+                               optional="show"
+                               sum="Total"/>
+                        <field name="act_overtime" force_save="1"
+                               optional="hide"
+                               widget="float_time"
+                               sum="Total"/>
+                        <field name="overtime" 
+                               widget="float_time"
+                               optional="show"  force_save="1"
+                               sum="Total"/>
+                        <field name="act_diff_time"
+                               optional="hide"
+                               widget="float_time"  force_save="1"
+                               sum="Total"/>
+                        <field name="diff_time"
+                               widget="float_time"  force_save="1"
+                               optional="show"
+                               sum="Total"/>
+                        <field name="status"  force_save="1"/>
+                        <field name="note"  force_save="1"/>
+                      
+                    </tree>
+                    </field>
+                    </record>
+
+ <!-- Search View -->
+                  <record model="ir.ui.view" id="ah_attendence_sheet_lines__search">
+                      <field name="name">sheet.needreview.search</field>
+                      <field name="model">attendance.sheet.line</field>
+                      <field name="arch" type="xml">
+                          <search>
+<!--                             <filter name="filter_eedReview" string="Need Review" domain="[('needReview', '=', True),('getReviewed', '=', False)]"  />         -->
+                          </search>
+                      </field>
+                  </record>
+
+<record id="ah_attendence_sheet_lines_action" model="ir.actions.act_window">
+    <field name="name">Sheets need Reviews</field>
+    <field name="res_model">attendance.sheet.line</field>
+    <field name="view_mode">tree</field>
+     <!-- <field name="domain">[('needReview','=',True),('getReviewed','=',False)]</field> -->
+    
+           
+        
+     
+    <!-- <field name="context">{'needReview':1,'getReviewed':0}</field> -->
+   <!-- <field name="context">{}</field> -->
+    <!-- <field name="help" type="html">
+        
+    </field> -->
+   
+</record>
+
+ <!-- groups="groups_id" -->
+<menuitem
+    id="attendence_need_reviews_menu"
+    name="Sheets need Reviews"
+    action="ah_attendence_sheet_lines_action"
+    parent="rm_hr_attendance_sheet.menu_hr_attendance_rules"
+   
+    sequence="10"/>
+
+
+
+
+<!-- 
+        <record model="ir.ui.view" id="ah_attendance_sheet_form_view_inhert">
+            <field name="name">ah.attendance.sheet.form.view.inhert</field>
+            <field name="model">attendance.sheet</field>
+            <field name="inherit_id" ref="rm_hr_attendance_sheet.attendance_sheet_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']" position="inside">
+                    <button string="Req. Overtime" class="float-right" name="action_req_overtime" type="object" />
+                </xpath>
+
+        
+            </field>
+        </record>
+   -->
+
+
+
+    </data>
+</odoo>

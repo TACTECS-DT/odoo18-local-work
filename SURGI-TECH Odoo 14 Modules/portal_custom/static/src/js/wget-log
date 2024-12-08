@@ -1,0 +1,14 @@
+Will not apply HSTS. The HSTS database must be a regular and non-world-writable file.
+ERROR: could not open HSTS store at '/home/anas/.wget-hsts'. HSTS will be disabled.
+--2023-06-21 10:51:02--  https://code.jquery.com/jquery-migrate-3.4.1.js
+Resolving code.jquery.com (code.jquery.com)... 69.16.175.42, 69.16.175.10, 2001:4de0:ac18::1:a:3b, ...
+Connecting to code.jquery.com (code.jquery.com)|69.16.175.42|:443... failed: Connection timed out.
+Connecting to code.jquery.com (code.jquery.com)|69.16.175.10|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 31978 (31K) [application/javascript]
+Saving to: ‘jquery-migrate-3.4.1.js’
+
+     0K .......... .......... .......... .                    100%  202K=0.2s
+
+2023-06-21 10:53:12 (202 KB/s) - ‘jquery-migrate-3.4.1.js’ saved [31978/31978]
+

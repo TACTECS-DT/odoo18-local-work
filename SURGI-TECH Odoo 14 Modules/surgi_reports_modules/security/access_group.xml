@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+
+        <record id="surgi_report_group_category" model="ir.module.category">
+            <field name="name">Reports</field>
+        </record>
+
+        <record id="access_group_product_manager" model="res.groups">
+            <field name="name">Product Manager</field>
+            <field name="category_id" ref="surgi_reports_modules.surgi_report_group_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="account_invoice_line_rule_see_all_per_product_line" model="ir.rule">
+            <field name="name">All Invoice Lines Per Product Line</field>
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="domain_force">[('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), '|', '|', '|' , ('move_id.invoice_user_id', '=', user.id) ,('move_id.team_id.product_line_id','=',user.id) ,('move_id.team_id.user_id','=',user.id),('move_id.team_id.member_ids','in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('surgi_reports_modules.access_group_product_manager'))]"/>
+        </record>
+
+        <record id="sale_order_line_see_all_per_product_line" model="ir.rule">
+            <field name="name">All Orders Lines Per Product Line</field>
+            <field ref="sale.model_sale_order_line" name="model_id"/>
+            <field name="domain_force">['|',('salesman_id','=',user.id),('order_id.team_id.user_id','=',user.id),('order_id.team_id.product_line_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('surgi_reports_modules.access_group_product_manager'))]"/>
+        </record>
+
+        <record id="sale_order_personal_rule_per_product_line" model="ir.rule">
+            <field name="name">All Orders Per Product Line</field>
+            <field ref="sale.model_sale_order" name="model_id"/>
+            <field name="domain_force">['|','|',('user_id','=',user.id),('team_id.user_id','=',user.id),('team_id.product_line_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('surgi_reports_modules.access_group_product_manager'))]"/>
+        </record>
+
+        <!-- Operation Groups Start -->
+
+
+        <record id="surgi_report_manager_line_operation_group" model="res.groups">
+            <field name="name">Line Manager Operation Reports</field>
+            <field name="category_id" ref="surgi_reports_modules.surgi_report_group_category"/>
+        </record>
+
+
+        <!-- Operation Groups End -->
+
+        <!-- Sales Order Groups Start -->
+
+        <record id="surgi_report_manager_line_sales_order_group" model="res.groups">
+            <field name="name">Line Manager Sales Reports</field>
+            <field name="category_id" ref="surgi_reports_modules.surgi_report_group_category"/>
+        </record>
+
+        <record id="surgi_sales_order_collection_reports_group" model="res.groups">
+            <field name="name">Sales Order Collection Reports</field>
+            <field name="category_id" ref="surgi_reports_modules.surgi_report_group_category"/>
+        </record>
+
+        <!-- Sales Order Groups End -->
+
+        <!-- Main Menus -->
+
+
+        <menuitem id="surgi_menu_reports_root" name="Reports" sequence="-10"
+                  web_icon="surgi_reports_modules,static/src/img/icon.png"/>
+
+        <menuitem id="surgi_operation_reports_main_menu" name="Operation Reports"
+                  parent="surgi_menu_reports_root" sequence="1"/>
+
+        <menuitem id="surgi_sales_reports_main_menu" name="Sales Order Reports"
+                  parent="surgi_menu_reports_root" sequence="2"/>
+
+
+    </data>
+</odoo>

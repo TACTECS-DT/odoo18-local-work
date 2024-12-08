@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend_inh_knk" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/portal_leave_knk/static/src/js/portal_leave.js"></script>
+            <script type="text/javascript" src="/portal_leave_knk/static/src/flat/flatpickr.min.js"></script>
+
+        </xpath>
+    </template>
+</odoo>

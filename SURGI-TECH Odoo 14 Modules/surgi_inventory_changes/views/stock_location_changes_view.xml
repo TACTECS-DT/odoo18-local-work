@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_location_inherit" model="ir.ui.view">
+            <field name="name">stock.location.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//form/sheet" position="before">
+                    <header>
+					<button name="location_selling_check_button" string="Selling"  type="object" attrs="{'invisible': [('location_asset_selling', '=', 'selling'),],}" groups="surgi_inventory_changes.asset_and_selling_location"/>
+                    <button name="location_asset_check_button" string="Asset"  type="object" attrs="{'invisible': [('location_asset_selling', '=', 'asset'),],}" groups="surgi_inventory_changes.asset_and_selling_location"/>
+
+
+                    <button name="location_asset_uncheck_button" string="Uncheck location"  type="object"  attrs="{'invisible': [('location_asset_selling', '=', ''),],}" groups="surgi_inventory_changes.asset_and_selling_location"/>
+ </header>
+				</xpath>
+
+               <field name="return_location" position="after">
+
+                   <field name="is_operation_location" readonly="1"/>
+                   <field name="operation_location_freeze" readonly="0" groups="surgi_inventory_changes.controll_freeze_location_group" />
+                   <field name="internal_transit_location" readonly="0" groups="surgi_inventory_changes.controll_freeze_location_group" />
+                   <field name="delivery_order_location" readonly="1"/>
+
+                   <field name="sales_order_location" readonly="1"/>
+                                      <field name="exclude_from_stock_control_data" />
+                   <field name="location_asset_selling" readonly="1"/>
+
+
+
+               </field>
+
+               <field name="return_location" position="after">
+                   <field name="required_approval"/>
+                   <field name="warehouse_id" attrs="{'invisible': [('is_operation_location', '=', False),
+                        ('required_approval', '=', False)],
+                  'required': ['|',
+                        ('is_operation_location', '=', True),
+                        ('required_approval', '=', True)]}"/>
+               </field>
+               </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_stock_quant_freeze">
+	        <field name="name">view.stock.quant.freeze</field>
+	        <field name="model">stock.location</field>
+            <field name="arch" type="xml">
+                <form string="My Form">
+                    <field name="quant_ids">
+                        <tree string="Inventory Valuation"  create="0" delete="0">
+                            <field name="product_id" />
+                            <field name="location_id"/>
+                            <field name="lot_id" groups="stock.group_production_lot" invisible="context.get('hide_lot', False)"/>
+                            <field name="package_id" groups="stock.group_tracking_lot"/>
+                            <field name="owner_id" groups="stock.group_tracking_owner"/>
+                            <field name="available_quantity"/>
+                            <field name="quantity"/>
+                            <field name="product_uom_id" groups="uom.group_uom"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="freezconfirm" type="object" string="Freeze"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

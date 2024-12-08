@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+<!--          <record id="hr_expiration_sales_1" model="surgi_sales_expenses.hr_expense_expiration">-->
+<!--            <field name="num_day_expire">15</field>-->
+<!--          </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="website_portal_my_home" name="Portal My Home : ticket entries">
+<!--        <xpath expr="//form" position="replace">-->
+<!--            <form method="POST" t-attf-action="/new/lead">-->
+<!--                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />-->
+<!--                <button name="create_new_ticket" type="action" class="btn btn-primary" style="float: right; margin-right: 0px; margin-top:5px;">New Lead</button>-->
+<!--            </form>-->
+<!--        </xpath>-->
+        <xpath expr="//t[@t-if='ticket_count']" position="replace">
+            <t t-if="ticket_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Customer Leads</t>
+                <t t-set="url" t-value="'/my/home'" />
+                <t t-set="count" t-value="lead_count" />
+            </t>
+        </xpath>
+    </template>
+
+    <!--==================A SINGLE LEADS DETAILS============-->
+    <template id="portal_my_lead_page" name="My Lead">
+        <html lang="en">
+            <t t-call="portal_custom.website_dashboard_head" />
+            <body id="page-top">
+                <!-- Page Wrapper -->
+                <div id="wrapwrap">
+                    <div id="wrapper">
+                        <t t-call="portal_custom.website_dashboard_sidebar" />
+                        <!-- Content Wrapper -->
+                        <div id="content-wrapper" class="d-flex flex-column">
+                            <!-- Main Content -->
+                            <div id="content">
+                                <t t-call="portal_custom.website_dashboard_topbar" />
+                                <nav aria-label="breadcrumb" class="m-3">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="/my/feedback">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <span t-esc="lead.lead_number" />
+
+                                        </li>
+                                    </ol>
+                                </nav>
+
+                                <!-- Begin Page Content -->
+
+                                <section id="ticket-card" class="container">
+                                    <div class="row">
+                                        <article class="card fl-left">
+                                            <div t-if="lead.stage_id.name == 'New'" class="ribbon ribbon-top-right ">
+                                                <span style="background-color: #3498db;">pending</span>
+                                            </div>
+                                            <div t-if="(lead.stage_id.name == 'Qualified') or (lead.stage_id.name == 'Proposition')" class="ribbon ribbon-top-right t-warning">
+                                                <span style="background-color: #f6c23e;" t-esc="lead.stage_id.name" />
+                                            </div>
+
+                                            <div t-if="lead.stage_id.name == 'Won'" class="ribbon ribbon-top-right t-success">
+                                                <span style="background-color: #1cc88a;" t-esc="lead.stage_id.name" />
+                                            </div>
+                                            <section class="date">
+                                                <time datetime="23th feb">
+                                                    <span t-field="lead.lead_number" />
+
+                                                </time>
+                                            </section>
+                                            <section class="card-cont">
+                                                <table style="font-size:.9rem; text-transform: capitalize;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="" class="mr-1">
+                                                                <i class="fa fa-calendar mr-1"></i>
+                                                                Date:
+                                                            </th>
+                                                            <td>
+                                                                <span t-field="lead.date_open" />
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="mr-1">
+                                                                <i class="fa fa-list-alt  mr-1"></i>
+                                                                Category:
+                                                            </th>
+
+                                                            <td>
+                                                                <t t-esc="lead.category_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="mr-1">
+                                                                <i class="fa fa-list-alt  mr-1"></i>
+                                                                Service:
+                                                            </th>
+
+                                                            <td>
+                                                                <t t-esc="lead.service_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="mr-1">
+                                                                <i class="fa fa-window-maximize mr-1"></i>
+                                                                Stage:
+                                                            </th>
+                                                            <td>
+                                                                <t t-esc="lead.stage_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="mr-1">
+                                                                <i class="fa fa-calendar mr-1"></i>
+                                                                Company:
+                                                            </th>
+                                                            <td>
+                                                                <t t-raw="lead.company_id.name" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="mr-1">
+                                                                <i class="fa fa-calendar mr-1"></i>
+                                                                Description:
+                                                            </th>
+                                                            <td style="margin-bottom:-1rem !important">
+                                                                <t t-raw=" lead.description" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </section>
+                                        </article>
+
+                                    </div>
+                                </section>
+                                <div class="container-fluid">
+                                    <t t-call="portal_custom.comment_section" />
+                                </div>
+                            </div>
+                            <!-- End of Main Content -->
+
+                            <!-- Footer -->
+                            <t t-call="portal_custom.website_dashboard_footer" />
+                            <!-- End of Footer -->
+                        </div>
+                        <!-- End of Content Wrapper -->
+                        
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+                        <!-- Logout Modal-->
+                    </div>
+                </div>
+            </body>
+            <t t-call="portal_custom.website_dashboard_scripts" />
+        </html>
+    </template>
+
+    <!--==================PORTAL MY DETAILS============-->
+    <template id="portal_my_details" name="Portal Details">
+        <html lang="en">
+            <t t-call="portal_custom.website_dashboard_head" />
+            <body id="page-top">
+                <!-- Page Wrapper -->
+                <div id="wrapwrap">
+                    <div id="wrapper">
+                        <!-- Sidebar -->
+                        <t t-call="portal_custom.website_dashboard_sidebar" />
+                        <!-- End of Sidebar -->
+
+                        <!-- Content Wrapper -->
+                        <div id="content-wrapper" class="d-flex flex-column">
+                            <!-- Main Content -->
+                            <div id="content">
+                                <t t-call="portal_custom.website_dashboard_topbar" />
+                                <div class="container-fluid">
+                                    <!-- Page Heading -->
+                                    <h1 class="h3 mb-2 text-gray-800">Details</h1>
+                                    <!-- Content Row -->
+                                    <div class="row">
+
+                                        <div class="col-xl-12 col-lg-12">
+
+                                            <!-- Area Chart -->
+                                            <div class="card shadow mb-4">
+                                                <div class="card-body">
+                                                    <form action="/my/account" method="post">
+                                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                                        <!-- <div class="row o_portal_details">
+                                                            <div class="col-lg-8"> -->
+                                                        <!-- <div class="row"> -->
+                                                        <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()" />
+                                                        <div class="col-lg-12">
+                                                            <div t-if="error_message" class="alert alert-danger" role="alert">
+                                                                <t t-foreach="error_message" t-as="err">
+                                                                    <t t-esc="err" />
+                                                                    <br />
+                                                                </t>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- success paragraph-->
+                                                        <div t-if="success" class="alert alert-success" role="alert">
+                                                            <t t-esc="success" />
+                                                            <br />
+                                                        </div>
+                                                    
+
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="name">Name</label>
+                                                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="email">Email</label>
+                                                                <input type="email" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email or partner.email" readonly='readonly' />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="clearfix" />
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('company_name') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label label-optional" for="company_name">Company Name</label>
+                                                                <!-- The <input> is replace by a <p> to avoid sending an unauthorized value on form submit.
+                                     The user might not have rights to change company_name but should still be able to see it.
+                                -->
+                                                                <p t-if="not partner_can_edit_vat" t-attf-class="form-control" readonly="1" t-esc="partner.commercial_company_name" title="Changing company name is not allowed once document(s) have been issued for your account. Please contact us directly for this operation." />
+                                                                <input t-else="" type="text" name="company_name" t-attf-class="form-control #{error.get('company_name') and 'is-invalid' or ''}" t-att-value="company_name or partner.commercial_company_name" />
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label label-optional" for="vat">VAT Number</label>
+                                                                <t t-set="vat_not_editable_message">Changing VAT number is not allowed once document(s) have been issued for your account. Please contact us directly for this operation.</t>
+                                                                <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat" t-att-readonly="None if partner_can_edit_vat else '1'" t-att-title="None if partner_can_edit_vat else vat_not_editable_message" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="phone">Phone</label>
+                                                                <input type="tel" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone or partner.phone" />
+                                                            </div>
+
+                                                            <div class="clearfix" />
+                                                            <div t-attf-class="form-group #{error.get('street') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="street">Street</label>
+                                                                <input type="text" name="street" t-attf-class="form-control #{error.get('street') and 'is-invalid' or ''}" t-att-value="street or partner.street" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('city') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="city">City</label>
+                                                                <input type="text" name="city" t-attf-class="form-control #{error.get('city') and 'is-invalid' or ''}" t-att-value="city or partner.city" />
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label label-optional" for="zipcode">Zip / Postal Code</label>
+                                                                <input type="text" name="zipcode" t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}" t-att-value="zipcode or partner.zip" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('country_id') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="country_id">Country</label>
+                                                                <select name="country_id" t-attf-class="form-control #{error.get('country_id') and 'is-invalid' or ''}">
+                                                                    <option value="">Country...</option>
+                                                                    <t t-foreach="countries or []" t-as="country">
+                                                                        <option t-att-value="country.id" t-att-selected="country.id == int(country_id) if country_id else country.id == partner.country_id.id">
+                                                                            <t t-esc="country.name" />
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label label-optional" for="state_id">State / Province</label>
+                                                                <select name="state_id" t-attf-class="form-control #{error.get('state_id') and 'is-invalid' or ''}">
+                                                                    <option value="">select...</option>
+                                                                    <t t-foreach="states or []" t-as="state">
+                                                                        <option t-att-value="state.id" style="display:none;" t-att-data-country_id="state.country_id.id" t-att-selected="state.id == partner.state_id.id">
+                                                                            <t t-esc="state.name" />
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="redirect" t-att-value="redirect" />
+                                                        <!-- </div> -->
+                                                        <div class="clearfix">
+                                                            <button type="submit" class="btn btn-primary float-right mb32 ">
+                                                                Confirm
+                                                                <span class="fas fa-arrow-right" />
+                                                            </button>
+                                                        </div>
+                                                        <!-- </div>
+                                                        </div> -->
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- /.container-fluid -->
+
+
+                            <!-- End of Main Content -->
+
+                            <!-- Footer -->
+                            <t t-call="portal_custom.website_dashboard_footer" />
+                            <!-- End of Footer -->
+
+                        </div>
+                        <!-- End of Content Wrapper -->
+
+
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+
+                        <!-- Logout Modal-->
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-primary" href="login.html">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            <t t-call="portal_custom.website_dashboard_scripts" />
+        </html>
+    </template>
+
+    <!--==================PORTAL CONTACT US============-->
+    <template id="portal_contactus" name="Contact US Form">
+        <html lang="en">
+            <t t-call="portal_custom.website_dashboard_head" />
+            <body id="page-top">
+                <!-- Page Wrapper -->
+                <div id="wrapwrap">
+                    <div id="wrapper">
+
+                        <!-- Sidebar -->
+                        <t t-call="portal_custom.website_dashboard_sidebar" />
+                        
+                        <!-- Content Wrapper -->
+                        <div id="content-wrapper" class="d-flex flex-column">
+                            <!-- Main Content -->
+                            <div id="content">
+                                <t t-call="portal_custom.website_dashboard_topbar" />
+                                <div class="container-fluid">
+                                    <!-- Page Heading -->
+                                    <h1 class="h3 mb-2 text-gray-800">Contact Us</h1>
+                                    <!-- Content Row -->
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12">
+                                            <div class="card shadow mb-4">
+                                                <div class="card-body">
+                                                    <form action="/portal/contactus" method="post">
+                                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+
+                                                        <!--error pragraph-->
+                                                        <div class="col-lg-12">
+                                                            <div t-if="error_message" class="alert alert-danger" role="alert">
+                                                                <t t-foreach="error_message" t-as="err">
+                                                                    <t t-esc="err" />
+                                                                    <br />
+                                                                </t>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- success paragraph-->
+                                                        <div t-if="success" class="alert alert-success" role="alert">
+                                                            <t t-esc="success" />
+                                                            <br />
+                                                        </div>
+                                                        
+                                                        <!--failure paragraph-->
+                                                        <div class="col-lg-12">
+                                                            <div t-if="failure" class="alert alert-danger" role="alert">
+                                                                <t t-esc="failure" />
+                                                                <br />
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!--name and email-->
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="name">Name<span style="color:red;">*</span></label>
+                                                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="email">Email<span style="color:red;">*</span></label>
+                                                                <input type="email" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email or partner.email" readonly='readonly' />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!--company and phone-->
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group col-md-6">
+                                                                <label class="col-form-label" for="company-name">Your Company </label>
+                                                                <input type="text" name="partner_name" t-att-value="login" id="login" class="form-control form-control-sm" autofocus="autofocus" autocapitalize="off"/>
+                                                            </div>
+                                                            <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-md-6">
+                                                                <label class="col-form-label" for="phone">Phone<span style="color:red;">*</span></label>
+                                                                <input type="text" name="phone" t-att-value="phone or partner.phone" id="phone"  class="form-control form-control-sm" autofocus="autofocus" autocapitalize="off" required="required" />
+                                                            </div>
+                                                        </div>
+
+                                                        <!--Subject and service-->
+                                                        <div class="form-row">
+                                                            <div t-attf-class="form-group col-md-6">
+                                                                <label class="col-form-label" for="login">Subject<span style="color:red;">*</span></label>
+                                                                <input type="text" name="subject" t-att-value="subject" id="subject" class="form-control form-control-sm" autocapitalize="off" required="required" />
+                                                            </div>
+                                                            <div t-attf-class="form-group col-md-6">
+                                                                <label class="col-form-label" for="service">Service<span style="color:red;">*</span></label>
+                                                                
+                                                                <select class="form-control form-control-sm" id="service" name="service" required="True">
+                                                                    <option value=""></option>
+                                                                    <t t-foreach="services" t-as="service">
+                                                                        <option t-attf-value="#{service.id}">
+                                                                            <t t-esc="service.name" />
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--comments-->
+                                                        <div class="form-group">
+                                                            <label for="comment" class="col-form-label">
+                                                                Comment
+                                                                <span style="color:red;">*</span>
+                                                            </label>
+                                                            <textarea class="form-control" id="comment" name="comment" required="required" rows="2"></textarea>
+                                                        </div>
+                                                        
+                                                        <input type="hidden" name="redirect" t-att-value="redirect" />
+                                                        
+                                                        <div class="clearfix">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Contact Us
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Footer -->
+                            <t t-call="portal_custom.website_dashboard_footer" />
+                        </div>
+
+
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+
+                        <!-- Logout Modal-->
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-primary" href="login.html">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            <t t-call="portal_custom.website_dashboard_scripts" />
+        </html>
+    </template>
+
+</odoo>

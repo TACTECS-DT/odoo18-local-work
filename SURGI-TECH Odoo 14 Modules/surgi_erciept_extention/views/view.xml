@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_acccountmove_form_inherit_reciept" model="ir.ui.view">
+        <field name="name">Account Move Reciept Inhert</field> 
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_date_paid" position="after">
+                <field name="is_reciept"  />
+                <field name="reciept_name"   attrs="{'invisible':[('is_reciept','=',False)]}"/>
+                <field name="pos_reciept" domain="[('invoiceassigned','=',False),('partner_id','=',partner_id)]" attrs="{'invisible':[('is_reciept','=',False)]}"  options="{'no_create': True, 'no_create_edit':True}" />
+            </field>
+            <field name="name" position="attributes">
+        <attribute name="attrs">{'readonly': [('state', '!=', 'draft'),('is_reciept', '=', False)]}</attribute>
+                
+            </field>
+        </field>
+    </record>
+
+
+
+
+<!--     
+    <record id="view_order_form_inherit_reciept" model="ir.ui.view">
+        <field name="name">Sale Order Reciept Inhert</field> 
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="patientidimg" 
+            position="after"
+            >
+           
+        <field name="eReceipt"
+        attrs="{'invisible':['|',('payment_term_id','!=',1),('invoice_count','>',0)]}" 
+        
+        options="{'no_create': True, 'no_create_edit':True}" />
+        </field>
+        <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
+            <attribute name="attrs">{'invisible': ['|',('invoice_status', '!=', 'to invoice'),('eReceipt', '!=', False)]}</attribute>       
+         </xpath>
+         <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+            <attribute name="attrs">{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale'),('eReceipt', '!=', False)]}</attribute>       
+         </xpath>
+
+         <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="after">
+            <button name="postReciept" string="Post Reciept"  class="btn-primary" type="object" attrs="{'invisible': [('eReceipt', '=', False)]}" groups='surgi_erciept_extention.surgi_erciept_extention_postreciept'/>
+         </xpath>
+         
+       
+
+
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['draft', 'sent','sale','fullpos']), ('id', '=', False)]}</attribute>
+            </xpath>
+
+
+        </field>
+    </record>
+
+
+    <record id="view_account_payment_form_inherit_reciept" model="ir.ui.view">
+        <field name="name">payment Reciept Inhert</field> 
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="move_id" position="after" >
+           
+                <field name="eReceipt"  options="{'no_create': True, 'no_create_edit':True}" domain="[('partner_id','=',partner_id),('paymentassigned','=',False)]" />
+            </field>
+            <xpath expr="//header" position="inside">
+                <button name="setAsPaid" 
+                attrs="{ 'invisible':['|','|',('eReceipt','=',False),('state','not in',['posted']),('eRecieptPaid','=',True)] }"
+                 type='object' string="Set As Paid" />
+                
+            </xpath>
+           
+            <field name="id" position="before" >
+                <field name="eRecieptPaid" invisible='1'/>
+                <widget name="web_ribbon" text="Paid" attrs="{ 'invisible':[('eRecieptPaid','=',False)]}"/>
+            
+            </field>
+
+        </field>
+    </record>
+
+    <record id="view_pos_order_form_inherit_reciept" model="ir.ui.view">
+        <field name="name">pos.order erciept Inhert</field> 
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+
+            <field name="failed_pickings" position="before" >
+                <field name="eRecieptPaid" invisible='1'/>
+                <widget name="web_ribbon" text="Paid" attrs="{ 'invisible':[('eRecieptPaid','=',False)]}"/>
+           
+            </field>
+           
+
+
+
+        </field>
+        </record> -->
+
+    
+
+
+
+</odoo>

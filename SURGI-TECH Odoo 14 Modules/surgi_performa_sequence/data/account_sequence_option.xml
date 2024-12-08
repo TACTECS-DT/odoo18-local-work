@@ -1,0 +1,11 @@
+<odoo noupdate="1">
+
+        <record id="seq_res_partner_performa" model="ir.sequence">
+            <field name="name">Performa Partner</field>
+            <field name="code">account.move.performa</field>
+            <field name="prefix">performa/</field>
+            <field name="padding">5</field>
+            <field name="implementation">no_gap</field>
+            <field name="company_id" eval="False"/>
+        </record>
+</odoo>

@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record id="form_view_job_analysis_wizard" model="ir.ui.view">
+            <field name="name">name.job.analysis.wizard.form</field>
+            <field name="model">job.analysis.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Job Analysis Wizard">
+                    <sheet>
+                        <group col="4">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                        </group>
+                        <field name="job_line_ids">
+                            <tree editable="bottom">
+                                <field name="question"/>
+                            </tree>
+                        </field>
+                        <footer>
+                            <button name="job_analysis_create" string="Create Job Analysis" class="oe_right oe_highlight"
+                                    type="object"/>
+                            <button string="Cancel" class="oe_right" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_job_analysis_wizard" model="ir.actions.act_window">
+            <field name="name">Job Analysis Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.analysis.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_view_job_analysis_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="job_analysis_menu_wizard_categ" name="Job Analysis Wizard"
+                  parent="surgi_evaluation_menuitem" action="action_view_job_analysis_wizard"
+                  sequence="11"
+                  groups="surgi_evaluation.groups_show_all"
+        />
+    </data>
+</odoo>

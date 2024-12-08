@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+        <record id="action_maintenance_final_installation" model="ir.actions.report">
+   <field name="name">maintenance Report</field>
+   <field name="model">pickup.final</field>
+   <field name="report_type">qweb-pdf</field>
+   <field name="report_name">surgi_maintenance.report_maintenance_final_install_card</field>
+   <field name="report_file">surgi_maintenance.report_maintenance_final_install_card</field>
+   <field name="print_report_name">'Final installation - %s'</field>
+   <field name="binding_model_id" ref="model_pickup_final"/>
+</record>
+
+
+
+
+
+
+<template id="report_maintenance_final_install_card">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                <div class="oe_structure"/>
+                <h2  class="text-center">
+
+
+                    <span>محضر تسليم نهائي </span>
+                </h2>
+                <h2 class="mt16">
+<!--                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">-->
+<!--                        <span t-if="o.state not in ['draft','sent']">Order # </span>-->
+<!--                        <span t-if="o.state in ['draft','sent']">Quotation # </span>-->
+<!--                    </t>-->
+                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                        <span>Pro-Forma Invoice # </span>
+                    </t>
+                    <span t-field="o.name"/>
+                </h2>
+
+                <div class="row mt32 mb32" id="informations">
+                      <div t-if="o.client_res" class="col-auto col-3 mw-100 mb-2">
+                        <strong>  :العميل</strong>
+                        <p class="m-0" t-field="o.client_res"/>
+                    </div>
+                    <div t-if="o.contact_representative" class="col-auto col-3 mw-100 mb-2">
+                        <strong> :المندوب</strong>
+                        <p class="m-0" t-field="o.contact_representative"/>
+                    </div>
+
+                    <div  t-if="o.pickup_date" class="col-auto col-3 mw-100 mb-2">
+                        <strong> : تاريخ التركيب والتشغيل</strong>
+                        <p class="m-0" t-field="o.pickup_date"/>
+                    </div>
+
+
+                </div>
+
+                <!-- Is there a discount on at least one line? -->
+
+                <table class="table table-sm o_main_table">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th name="th_description" class="text-left">المنتج</th>
+
+                            <th name="th_quantity" class="text-right">الملاحظات</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t t-foreach="o.product_forms" t-as="line">
+
+
+
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section'">
+                                <t >
+                                    <td name="td_name"><span t-field="line.product_form_id"/></td>
+                                    <td name="td_quantity" class="text-right">
+                                        <span t-field="line.notic"/>
+                                    </td>
+
+                                </t>
+
+                            </tr>
+
+
+                        </t>
+
+                    </tbody>
+                </table>
+                <div class="row mt32 mb32" id="info_emp">
+
+                      <div t-if="o.employee_id" class="col-auto col-3 mw-100 mb-2">
+                        <strong>: أسم الموظف</strong>
+                        <p class="m-0" t-field="o.employee_id"/>
+                    </div>
+                      <div t-if="o.order_id" class="col-auto col-3 mw-100 mb-2">
+                        <strong> : رقم امر التوريد</strong>
+                        <p class="m-0" t-field="o.order_id"/>
+                    </div>
+                      <div t-if="o.sale_date" class="col-auto col-3 mw-100 mb-2">
+                        <strong>  : تاريخ امر التوريد</strong>
+                        <p class="m-0" t-field="o.sale_date"/>
+                    </div>
+
+                </div>
+                 </div>
+
+            </t>
+        </t>
+    </t>
+</template>
+
+    </data>
+</odoo>
+
+
+
+
+

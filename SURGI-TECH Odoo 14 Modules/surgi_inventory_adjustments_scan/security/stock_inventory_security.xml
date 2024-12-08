@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <data>
+         <!--================= A.Salama ==================-->
+        <!-- add record rules to see owen/all warhouses-->
+                <record id="inventory_adjustments_scan_block_group" model="res.groups">
+            <field name="name">Inventory Adjustments Lock</field>
+            <field name="category_id" ref="surgi_in_out_inventory_restriction.warehouse_validate_in_out"/>
+
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+        </record>
+
+
+
+    </data>
+</odoo>

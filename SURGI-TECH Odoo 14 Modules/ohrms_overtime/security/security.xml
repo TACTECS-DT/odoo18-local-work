@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_overtime_user" model="ir.rule">
+            <field name="name">User: Overtime</field>
+            <field name="model_id" ref="ohrms_overtime.model_hr_overtime"/>
+            <field name="domain_force">['|',('current_user','=',user.id),('reviewer_ids','in', user.ids)]
+            </field>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_read" eval="True"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="hr_overtime_manager" model="ir.rule">
+            <field name="name">Manager: Overtime</field>
+            <field name="model_id" ref="ohrms_overtime.model_hr_overtime"/>
+            <field name="domain_force">[(1,'=',1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+        </record>
+        
+         <record id="hr_overtime_Createedit" model="res.groups">
+            <field name="name">OverTime Manager</field>
+         
+        </record>
+        
+<!--             <field name="implied_ids" eval="[(4, ref('ohrms_overtime.overtime_admin'))]"/>  -->
+        
+    </data>
+</odoo>

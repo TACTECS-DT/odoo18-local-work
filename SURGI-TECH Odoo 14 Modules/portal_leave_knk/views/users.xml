@@ -1,0 +1,34 @@
+<odoo>
+<!--    <record id="res_users_view_form" model="ir.ui.view">-->
+<!--        <field name="name">res.users.form.inherit</field>-->
+<!--        <field name="model">res.users</field>-->
+<!--        <field name="inherit_id" ref="base.view_users_form"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--            <xpath expr="//notebook" position="before">-->
+<!--                <gorup>-->
+<!--                    <div>-->
+<!--                        <label for="is_portal_leave_approve">Portal Leave Approve</label>-->
+<!--                        <field name="is_portal_leave_approve"/>-->
+<!--                    </div>-->
+<!--                </gorup>-->
+
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="leave_res_users_form_view" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="portal_custom.res_users_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='portal_access']" position="inside">
+                <group>
+                    <field name="leave_portal_access"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

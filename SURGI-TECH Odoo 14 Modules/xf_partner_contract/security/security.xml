@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="module_category_xf_partner_contract" model="ir.module.category">
+            <field name="name">Contract Management</field>
+            <field name="description">Helps you add/approve/manage partner contract</field>
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_xf_partner_contract_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_xf_partner_contract"/>
+        </record>
+
+        <record id="group_xf_partner_contract_team_leader" model="res.groups">
+            <field name="name">Team Leader</field>
+            <field name="category_id" ref="module_category_xf_partner_contract"/>
+            <field name="implied_ids" eval="[(4, ref('group_xf_partner_contract_user'))]"/>
+        </record>
+
+        <record id="group_xf_partner_contract_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_xf_partner_contract"/>
+            <field name="implied_ids" eval="[(4, ref('group_xf_partner_contract_team_leader'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+        <!-- Rules -->
+
+        <!-- Company Based Global Rules -->
+
+        <record model="ir.rule" id="model_xf_partner_contract_comp_rule">
+            <field name="name">Partner Contract (multi-company)</field>
+            <field name="model_id" ref="model_xf_partner_contract"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_comp_rule">
+            <field name="name">Approval Team (multi-company)</field>
+            <field name="model_id" ref="model_xf_partner_contract_team"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_approver_comp_rule">
+            <field name="name">Team Approver (multi-company)</field>
+            <field name="model_id" ref="model_xf_partner_contract_team_approver"/>
+            <field name="domain_force">['|',('team_id.company_id','=',False),('team_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_approver_comp_rule">
+            <field name="name">Contract Approver (multi-company)</field>
+            <field name="model_id" ref="model_xf_partner_contract_approver"/>
+            <field name="domain_force">['|',('team_id.company_id','=',False),('team_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- User Rules -->
+
+        <record model="ir.rule" id="model_xf_partner_contract_base_user_rule">
+            <field name="name">Internal User can see contracts</field>
+            <field name="model_id" ref="model_xf_partner_contract"/>
+            <field name="domain_force">[
+                '|',
+                ('privacy_visibility', '=', 'employees'),
+                '&amp;', ('privacy_visibility', '=', 'followers'), ('message_partner_ids', '=', user.partner_id.id),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record model="ir.rule" id="model_xf_partner_contract_line_base_user_rule">
+            <field name="name">Internal User can see contract lines</field>
+            <field name="model_id" ref="model_xf_partner_contract_line"/>
+            <field name="domain_force">[
+                '|',
+                ('contract_id.privacy_visibility', '=', 'employees'),
+                '&amp;', ('contract_id.privacy_visibility', '=', 'followers'), ('contract_id.message_partner_ids', '=', user.partner_id.id),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_user_rule">
+            <field name="name">Responsible user can see/create/edit/delete contracts</field>
+            <field name="model_id" ref="model_xf_partner_contract"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_line_user_rule">
+            <field name="name">Responsible user can see/create/edit/delete contract lines</field>
+            <field name="model_id" ref="model_xf_partner_contract_line"/>
+            <field name="domain_force">[('contract_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_approval_team_rule">
+            <field name="name">Approval team leader and members can see/create/edit/delete contracts</field>
+            <field name="model_id" ref="model_xf_partner_contract"/>
+            <field name="domain_force">
+                [
+                ('approval_team_id', '!=', False),
+                '|',
+                ('approval_team_id.user_id', '=', user.id),
+                ('approval_team_id.approver_ids.user_id', '=', user.id),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_line_approval_team_rule">
+            <field name="name">Approval team leader and members can see/create/edit/delete contract lines</field>
+            <field name="model_id" ref="model_xf_partner_contract_line"/>
+            <field name="domain_force">
+                [
+                ('contract_id.approval_team_id', '!=', False),
+                '|',
+                ('contract_id.approval_team_id.user_id', '=', user.id),
+                ('contract_id.approval_team_id.approver_ids.user_id', '=', user.id),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_manager_rule">
+            <field name="name">Module Manager can see all contracts</field>
+            <field name="model_id" ref="model_xf_partner_contract"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_line_manager_rule">
+            <field name="name">Module Manager can see all contract lines</field>
+            <field name="model_id" ref="model_xf_partner_contract_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_team_leader_rule">
+            <field name="name">Team Leader can create/edit/delete own team</field>
+            <field name="model_id" ref="model_xf_partner_contract_team"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_team_leader'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_approver_team_leader_rule">
+            <field name="name">Team Leader can create/edit/delete own team approvers</field>
+            <field name="model_id" ref="model_xf_partner_contract_team_approver"/>
+            <field name="domain_force">[('team_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_team_leader'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_manager_rule">
+            <field name="name">Module Manager can create/edit/delete teams</field>
+            <field name="model_id" ref="model_xf_partner_contract_team"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_manager'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="model_xf_partner_contract_team_approver_manager_rule">
+            <field name="name">Module Manager can create/edit/delete approvers</field>
+            <field name="model_id" ref="model_xf_partner_contract_team_approver"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_partner_contract.group_xf_partner_contract_manager'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+    </data>
+</odoo>

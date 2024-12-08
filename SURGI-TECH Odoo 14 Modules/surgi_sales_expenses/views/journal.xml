@@ -1,0 +1,106 @@
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_account_account_inherit" model="ir.ui.view">
+            <field name="name">name.account.account.form.inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='deprecated']" position="after">
+                    <field name="sale_order_mandatory"/>
+                </xpath>
+
+            </field>
+        </record>
+
+                <record id="form_view_account_journal_inherit" model="ir.ui.view">
+            <field name="name">name.account.journal.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="transferred_by_bank" attrs="{'invisible': [('type', 'not in', ('bank'))]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_account_move_inherit" model="ir.ui.view">
+            <field name="name">name.account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Event">
+                        <group col="4">
+                            <field name="partner_surgeon_id"/>
+                            <field name="event_id"/>
+                        </group>
+                    </page>
+            <page string="Expenses Report Track">
+                    <group>
+                            <div  style="text-align:left">
+                                <group string="Create">
+                                    <field name="expenses_created_on"/>
+                                    <field name="expenses_created_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Submitted" >
+                                    <field name="submitted_on"/>
+                                    <field name="submitted_by"/>
+                                </group>
+                            </div>
+                            <div style="text-align:left">
+                                <group string="Approve" >
+                                    <field name="expenses_approve_on"/>
+                                    <field name="expenses_approve_by"/>
+                                </group>
+                            </div>
+                                                <div style="text-align:left">
+                                <group string="Second Approve" >
+                                    <field name="secend_approved_on"/>
+                                    <field name="secend_approved_by"/>
+                                </group>
+                            </div>
+                    <div style="text-align:left">
+                                <group string="Accountant Reviewer" >
+                                    <field name="account_reviewed_on"/>
+                                    <field name="account_reviewed_by"/>
+                                </group>
+                            </div>
+                    <div style="text-align:left">
+                                <group string="Treasury Manager" >
+                                    <field name="treasury_manager_on"/>
+                                    <field name="treasury_manager_by"/>
+                                </group>
+                            </div>
+                                        <div style="text-align:left">
+                                <group string="post" >
+                                    <field name="post_on"/>
+                                    <field name="post_by"/>
+                                </group>
+                            </div>
+                        <div style="text-align:left">
+                                <group string="Reset To Draft" >
+                                    <field name="reset_on"/>
+                                    <field name="reset_by"/>
+                                </group>
+                            </div>
+                    </group>
+                </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,453 @@
+<odoo>
+    <data>
+        <template id="portal_hr_evaluation" name="My evaluation">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Evaluation</t>
+                </t>
+                <t t-if="not evaluation">
+                    <p>There are currently no Evaluation for your account.</p>
+                </t>
+
+
+                <t t-if="evaluation" t-call="portal.portal_table">
+                    <t t-foreach="grouped_evaluation" t-as="group_evaluation">
+                        <thead>
+                            <tr t-attf-class="{{'thead-light' if not groupby == 'none' else ''}}">
+                                <th t-if="groupby == 'none'">Evaluation</th>
+                                <th t-else="">
+                                    <t t-if="groupby == 'state'">
+                                        <em class="font-weight-normal text-muted">State:</em>
+                                        <span t-field="group_evaluation[0].sudo().state"/>
+                                    </t>
+                                </th>
+                                <th class="text-left">Employee</th>
+                                <th class="text-left">Total Core</th>
+                                <th class="text-left">Total Function</th>
+                                <th class="text-center">Total KPI</th>
+                                <th class="text-left">Total</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="group_evaluation" t-as="l">
+                                <tr>
+
+                                    <td><a t-att-href="l.get_portal_url()"><t t-esc="l.name"/></a></td>
+                                    <!--                            <td><t t-esc="l.name"/></td>-->
+                                    <td class="text-center"><span t-field="l.employee_id"/></td>
+                                    <td class="text-center"><span t-field="l.total_competencies"/></td>
+                                    <td class="text-center"><span t-field="l.total_function_comp"/></td>
+                                    <td class="text-center"><span t-field="l.total_employee_kpi"/></td>
+                                    <td class="text-center"><span t-field="l.total_totals"/></td>
+                                    <td class="text-center"><span t-field="l.state" class=" badge badge-pill badge-info"
+                                                                  t-if="l.state == 'draft'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-warning"
+                                              t-if="l.state == 'esa'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-primary"
+                                              t-if="l.state == 'direct_manager'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-success"
+                                              t-if="l.state == 'done'"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="requests_followup" name="Hr Evaluation">
+            <t t-call="portal.portal_layout">
+                <style>
+                    .tag-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                    }
+
+                    .tag {
+                        display: inline-block;
+                        background-color: #007bff;
+                        color: white;
+                        padding: 4px 8px;
+                        margin: 4px;
+                        font-size: 14px;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        text-decoration: none;
+                    }
+
+                    .tag:hover {
+                        background-color: #0069d9;
+                    }
+
+                    .categories-tags .tag {
+                        display: inline-block;
+                        padding: 4px 8px;
+                        background-color: #007bff;
+                        color: #fff;
+                        margin: 4px;
+                        border-radius: 4px;
+                        text-decoration: none;
+                    }
+
+                    .categories-tags .tag:hover {
+                        background-color: #0056b3;
+                    }
+                </style>
+                <t t-set="wrap_classes" t-value="'o_portal_bg_dark'"/>
+                <t t-call="portal.portal_record_layout">
+                    <t t-set="card_header">
+                        <div class="row no-gutters">
+                            <div class="col-md">
+                                <h5 class="mb-1 mb-md-0">
+                                    <span t-field="evaluation.name"/>
+
+                                </h5>
+                            </div>
+
+
+                            <div class="col-md text-md-center">
+                                <strong class="text-right">Employee:</strong>
+                                <small>
+                                    <span t-field="evaluation.employee_id"/>
+                                </small>
+
+                            </div>
+                            <div class="col-md text-md-center">
+                                <strong class="text-right">Manager:</strong>
+                                <small>
+                                    <span t-field="evaluation.employee_parent_id"/>
+                                </small>
+                            </div>
+
+
+                            <div class="col-md text-md-right">
+                                <strong class="text-right">Status:</strong>
+                                <!--                            <span t-field="evaluation.state" class=" badge badge-pill badge-info"-->
+                                <!--                                  title="Current stage of this request"/>-->
+                                <span t-if="evaluation.state == 'draft'" title="Current stage of this request"
+                                      t-attf-class="bg-info rounded-pill py-1 px-2"
+                                      t-field="evaluation.state"/>
+                                <span t-if="evaluation.state == 'esa'" title="Current stage of this request"
+                                      t-attf-class="bg-primary rounded-pill py-1 px-2"
+                                      t-field="evaluation.state"/>
+                                <span t-if="evaluation.state == 'direct_manager'" title="Current stage of this request"
+                                      t-attf-class="bg-warning rounded-pill py-1 px-2" t-field="evaluation.state"/>
+
+                                <span t-if="evaluation.state == 'done'" title="Current stage of this request"
+                                      t-attf-class="bg-success rounded-pill py-1 px-2" t-field="evaluation.state"/>
+                            </div>
+                        </div>
+                        <br/>
+                    </t>
+                    <t t-set="card_body">
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Start Date</strong>
+                            <span class="col-lg-4" t-field="evaluation.date_start"
+                            />
+                            <strong class="col-lg-2">End Date</strong>
+                            <span class="col-lg-4" t-field="evaluation.date_end"
+                            />
+                        </div>
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Employee</strong>
+                            <span class="col-lg-4" t-field="evaluation.employee_id"
+                            />
+                            <strong class="col-lg-2">Department</strong>
+                            <span class="col-lg-4" t-field="evaluation.department_id"
+                            />
+                        </div>
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Manager</strong>
+                            <span class="col-lg-4" t-field="evaluation.employee_parent_id"
+                            />
+                        </div>
+
+                        <div class="row mb-4">
+                            <strong class="col-lg-2">Job Position </strong>
+                            <span class="col-lg-4" t-field="evaluation.jop_ids"
+                            />
+                            <strong class="col-lg-2">Evaluation Method </strong>
+                            <span class="col-lg-4" t-field="evaluation.evaluation_method"
+                            />
+                        </div>
+
+                        <div class="row mb-4" t-if="evaluation.create_uid">
+                            <strong class="col-lg-2">Created By</strong>
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col pl-sm-0">
+                                        <div t-field="evaluation.create_uid.name"
+                                        />
+                                    </div>
+                                    <div class="col flex-grow-0 pr-3">
+                                        <img t-if="evaluation.create_uid.image_1920"
+                                             class="rounded-circle o_portal_contact_img"
+                                             t-attf-src="data:image/png;base64,#{evaluation.create_uid.image_1920}"
+                                             alt="Contact"/>
+                                        <img t-else="" class="rounded-circle o_portal_contact_img"
+                                             src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4">
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-primary card-tabs">
+                                            <div class="card-header p-0 pt-1">
+                                                <ul class="nav nav-tabs "
+                                                    id="custom-tabs-one-tab" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active"
+                                                           id="components-tab"
+                                                           data-toggle="pill"
+                                                           href="#components"
+                                                           role="tab"
+                                                           aria-controls="components"
+                                                           aria-selected="true">Core Evaluation</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link"
+                                                           id="more-items-tab"
+                                                           data-toggle="pill"
+                                                           href="#more-items"
+                                                           role="tab"
+                                                           aria-controls="more-items"
+                                                           aria-selected="false">Function Competencies</a>
+                                                    </li>
+
+                                                    <li class="nav-item">
+                                                        <a class="nav-link"
+                                                           id="add-items-tab"
+                                                           data-toggle="pill"
+                                                           href="#add-items"
+                                                           role="tab"
+                                                           aria-controls="add-items"
+                                                           aria-selected="false">Employee KPI</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <form method="post" id="evaluation_form" name="evaluation_form"
+                                                  class="evaluation_form">
+                                                <input type="hidden" name="csrf_token"
+                                                       t-att-value="request.csrf_token()"/>
+                                                <input type="hidden"
+                                                       class="form-control evaluation_id"
+                                                       t-att-value="evaluation.id"
+                                                />
+                                                <div class="card-body">
+                                                    <div class="tab-content"
+                                                         id="custom-tabs-one-tabContent">
+                                                        <div class="tab-pane fade show active"
+                                                             id="components"
+                                                             role="tabpanel"
+                                                             aria-labelledby="components-tab">
+                                                            <t t-call="portal.portal_table">
+                                                                <tr class="text-center">
+                                                                    <th>Core</th>
+                                                                    <th>Employee Self Assessment</th>
+                                                                    <th>Direct Manager</th>
+                                                                    <th>In Direct Manager</th>
+                                                                    <th>Final %</th>
+                                                                    <th>KPI Weight</th>
+                                                                    <th>Result</th>
+                                                                    <th>Active</th>
+                                                                    <th>Score</th>
+                                                                </tr>
+                                                                <tr class="text-center"
+                                                                    t-foreach="evaluation.core_competencies"
+                                                                    t-as="line">
+                                                                    <td><span t-field="line.name"/></td>
+                                                                    <td style="display: flex; align-items: center; justify-content: center;">
+                                                                        <t t-if="self_evaluation_active">
+                                                                            <input type="number"
+                                                                                   class="form-control self_core_competencies"
+                                                                                   name="employee_self_assessment"
+                                                                                   t-att-data-id="line.id"
+                                                                                   t-att-value="line.employee_self_assessment * 100"
+                                                                                   step="0.01"
+                                                                                   style="width: 70px; height: 30px;"/>
+
+                                                                            <span style="margin-left: 5px;">%</span>
+
+                                                                        </t>
+                                                                        <t t-else="">
+
+                                                                            <span t-esc="line.employee_self_assessment * 100"/><span>
+                                                                            %</span>
+                                                                        </t>
+
+                                                                    </td>
+
+                                                                    <td><span t-esc="line.direct_manager * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span
+                                                                            t-esc="line.in_direct_manager * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span
+                                                                            t-esc="line.percentage * 100"/><span>
+                                                                        %</span></td>
+
+                                                                    <td><span t-esc="line.kpi_weight * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-field="line.state_result"/></td>
+                                                                    <td><span t-field="line.active_core"/></td>
+                                                                    <td><span t-field="line.score"/></td>
+
+                                                                </tr>
+                                                            </t>
+                                                        </div>
+                                                        <div class="tab-pane fade"
+                                                             id="more-items"
+                                                             role="tabpanel"
+                                                             aria-labelledby="more-items-tab">
+                                                            <t t-call="portal.portal_table">
+                                                                <tr class="text-center">
+                                                                    <th>Questions</th>
+                                                                    <th>Employee Self Assessment</th>
+                                                                    <th>Direct Manager</th>
+                                                                    <th>In Direct Manager</th>
+                                                                    <th>Final %</th>
+                                                                    <th>KPI Weight</th>
+                                                                    <th>Result</th>
+                                                                    <th>Score</th>
+                                                                </tr>
+                                                                <tr class="text-center"
+                                                                    t-foreach="evaluation.function_comp"
+                                                                    t-as="line">
+                                                                    <td><span t-field="line.name"/></td>
+                                                                    <td style="display: flex; align-items: center; justify-content: center;">
+                                                                        <t t-if="self_evaluation_active">
+                                                                            <input type="number"
+                                                                                   class="form-control self_function_comp"
+                                                                                   name="employee_self_assessment"
+                                                                                   t-att-value="line.employee_self_assessment * 100"
+                                                                                   step="0.01"
+                                                                                   t-att-data-id="line.id"
+
+                                                                                   style="width: 70px; height: 30px;"/>
+                                                                            <span style="margin-left: 5px;">%</span>
+
+                                                                        </t>
+                                                                        <t t-else="">
+
+                                                                            <span t-esc="line.employee_self_assessment * 100"/><span>
+                                                                            %</span>
+                                                                        </t>
+                                                                    </td>
+
+                                                                    <td><span t-esc="line.direct_manager * 100"/><span>
+                                                                        %</span></td>
+
+                                                                    <td><span
+                                                                            t-esc="line.in_direct_manager * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-esc="line.percentage * 100"/><span>
+                                                                        %</span></td>
+
+                                                                    <td><span t-esc="line.kpi_weight * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-field="line.state_result"/></td>
+
+                                                                    <td><span t-field="line.score"/></td>
+                                                                </tr>
+                                                            </t>
+                                                        </div>
+
+                                                        <div class="tab-pane fade"
+                                                             id="add-items"
+                                                             role="tabpanel"
+                                                             aria-labelledby="add-items-tab">
+                                                            <t t-call="portal.portal_table">
+                                                                <tr class="text-center">
+                                                                    <th>KRA</th>
+                                                                    <th>KPI</th>
+                                                                    <th>Employee Self Assessment</th>
+                                                                    <th>Direct Manager</th>
+                                                                    <th>In Direct Manager</th>
+                                                                    <th>Final %</th>
+                                                                    <th>KPI Weight</th>
+                                                                    <th>Result</th>
+                                                                    <th>Score</th>
+                                                                </tr>
+                                                                <tr class="text-center"
+                                                                    t-foreach="evaluation.employee_kpi"
+                                                                    t-as="line">
+                                                                    <td><span t-field="line.kra_kpi"/></td>
+                                                                    <td><span t-field="line.name"/></td>
+                                                                    <td style="display: flex; align-items: center; justify-content: center;">
+                                                                        <t t-if="self_evaluation_active">
+                                                                            <input type="number"
+                                                                                   class="form-control self_employee_kpi"
+                                                                                   name="employee_self_assessment"
+                                                                                   t-att-value="line.employee_self_assessment * 100"
+                                                                                   step="0.01"
+                                                                                   t-att-data-id="line.id"
+
+                                                                                   style="width: 70px; height: 30px;"/>
+                                                                            <span style="margin-left: 5px;">%</span>
+
+
+                                                                        </t>
+                                                                        <t t-else="">
+
+                                                                            <span t-esc="line.employee_self_assessment * 100"/><span>
+                                                                            %</span>
+                                                                        </t>
+                                                                    </td>
+
+                                                                    <td><span t-esc="line.direct_manager * 100"/><span>
+                                                                        %</span></td>
+
+                                                                    <td><span
+                                                                            t-esc="line.in_direct_manager * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-esc="line.percentage * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-esc="line.kpi_weight * 100"/><span>
+                                                                        %</span></td>
+                                                                    <td><span t-field="line.state_result"/></td>
+
+                                                                    <td><span t-field="line.score"/></td>
+                                                                </tr>
+                                                            </t>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-right" t-if="self_evaluation_active">
+                                                        <button type="button" class="btn btn-primary submit_evaluation"
+                                                                name="submit_evaluation" id="submit_evaluation">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="o_portal_messages_container mt32">
+                            <h4>Message and communication history</h4>
+                            <t t-call="portal.message_thread">
+                                <!--                            <t t-set="token" t-value="request_id.access_token"/>-->
+                                <t t-set="object" t-value="evaluation"/>
+                            </t>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

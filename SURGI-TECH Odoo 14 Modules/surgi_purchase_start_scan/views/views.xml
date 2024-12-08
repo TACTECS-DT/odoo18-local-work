@@ -1,0 +1,158 @@
+<odoo>
+  <data>
+
+<!--<record model="ir.actions.act_window" id="action_start_scanning_new">-->
+<!--<field name="name">Mortalité</field>-->
+<!--<field name="context">{'default_cycle_id': active_id}</field>-->
+<!--<field name="domain">[('id', '=', active_id)]</field>-->
+<!--<field name="view_mode">form</field>-->
+<!--<field name="res_model">stock.picking</field>-->
+<!--</record>-->
+
+<record model="ir.ui.view" id="view_pruchase_start_scan_new">
+	<field name="name">Start Scan</field>
+	<field name="model">stock.picking</field>
+<!--	<field name="groups_id"></field>-->
+
+	<field name="type">form</field>
+	<field name="arch" type="xml">
+
+		<form string="My Form">
+
+				<group>
+					<field name="lastscanned" />
+                    <field name="lastscannedtext"/>
+				</group>
+
+
+
+<!--                    <notebook>-->
+<!--                      <page string="Scan">-->
+                        <!--<group>-->
+                        <!--<button name="clear_scanned_lines" string="Clear" type="object" class="oe_highlight"/>-->
+                        <!--</group>-->
+                        <!--                        <group>
+                            <label for="last_scanned_item"/>
+                            <field name="last_scanned_item" style="color:blue" />
+                        </group>-->
+
+
+                        <field name="scan_products_ids">
+
+<!--                            colors="blue:state == 'draft';"-->
+                            <tree editable="bottom" colors="red:product_availabilty &lt; product_uom_qty; green:product_availabilty &gt; product_uom_qty;">
+                                <field name="product_id"/>
+                                <field name="product_uom_qty" sum="Product Sum"/>
+                                <field name="lot_no"/>
+                                <field name="pick_Typ_code" invisible="1"/>
+
+                                <!--<field name="lot_name" string="Lot Name"-->
+                                <!--attrs="{'invisible': [('pick_Typ_code', '!=', 'incoming')]}"/>-->
+                                <!--<field name="expiration_date"-->
+                                <!--attrs="{'invisible': [('pick_Typ_code', '!=', 'incoming')]}"/>-->
+                                <field name="lot_name" string="Lot Name"/>
+                                <field name="expiration_date"/>
+<!--                                <field name="id" invisible="1"/>-->
+                                <field name="product_availabilty"/>
+                            </tree>
+                        </field>
+<!--					  </page>-->
+<!--					</notebook>-->
+			<footer>
+				<button name="addedscanned" type="object" string="Confirm" class="oe_highlight"/>
+					or
+				<button special="cancel" string="Cancel"/>
+			</footer>
+
+		</form>
+	</field>
+</record>
+<!--<record model="ir.actions.act_window" id="action_start_scanning_new">-->
+<!--	<field name="name">Start Scan New</field>-->
+<!--    <field name="res_model">stock.picking</field>-->
+<!--	<field name="res_id">active_id</field>-->
+<!--	<field name="view_id" ref="view_pruchase_start_scan_new"/>-->
+<!--	<field name="view_mode">form</field>-->
+
+<!--&lt;!&ndash;            <field name="context">&ndash;&gt;-->
+<!--&lt;!&ndash;                {'scan_products_ids.stock_picking_id': active_id}&ndash;&gt;-->
+<!--&lt;!&ndash;            </field>&ndash;&gt;-->
+
+
+<!--</record>-->
+
+
+
+
+     <record id="stock_picking_scan_form_inherit_startscan_new" model="ir.ui.view">
+            <field name="name">stock.picking.scan.inherit.surgitech.startscannew</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <!--                    <button name="synchronize_scan"
+                    string="Synchronize" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('state', '!=', 'assigned')]}"/>-->
+<!--                    <field name="id" invisible="1" />-->
+                    <button class="startscanclass" name="action_start_scanning_new" type="object"  context="{'active_id':active_id}"  string="Start Scan new"  attrs="{'invisible': ['|',('id', '=', False),('state', 'in', ['done', 'cancel'])]}"/>
+
+                </xpath>
+            </field></record>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="surgi_purchase_start_scan.list">
+      <field name="name">SurgiPurchaseStartScan list</field>
+      <field name="model">surgi_purchase_start_scan.surgi_purchase_start_scan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="surgi_purchase_start_scan.action_window">
+      <field name="name">SurgiPurchaseStartScan window</field>
+      <field name="res_model">surgi_purchase_start_scan.surgi_purchase_start_scan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="surgi_purchase_start_scan.action_server">
+      <field name="name">SurgiPurchaseStartScan server</field>
+      <field name="model_id" ref="model_surgi_purchase_start_scan_surgi_purchase_start_scan"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="SurgiPurchaseStartScan" id="surgi_purchase_start_scan.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="surgi_purchase_start_scan.menu_1" parent="surgi_purchase_start_scan.menu_root"/>
+    <menuitem name="Menu 2" id="surgi_purchase_start_scan.menu_2" parent="surgi_purchase_start_scan.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="surgi_purchase_start_scan.menu_1_list" parent="surgi_purchase_start_scan.menu_1"
+              action="surgi_purchase_start_scan.action_window"/>
+    <menuitem name="Server to list" id="surgi_purchase_start_scan" parent="surgi_purchase_start_scan.menu_2"
+              action="surgi_purchase_start_scan.action_server"/>
+-->
+  </data>
+</odoo>

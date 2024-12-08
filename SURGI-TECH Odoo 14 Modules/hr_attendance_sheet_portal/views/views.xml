@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <template id="portal_attendance_sheet" name="My attendance_sheet">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">attendance_sheet</t>
+                </t>
+                <t t-if="not attendance_sheet">
+                    <p>There are currently no attendance_sheet for your account.</p>
+                </t>
+
+
+                <t t-if="attendance_sheet" t-call="portal.portal_table">
+                    <t t-foreach="grouped_attendance_sheet" t-as="group_attendance_sheet">
+                        <thead>
+                            <tr t-attf-class="{{'thead-light' if not groupby == 'none' else ''}}">
+                                <th t-if="groupby == 'none'">Name</th>
+                                <th t-else="">
+                                    <t t-if="groupby == 'state'">
+                                        <em class="font-weight-normal text-muted">State:</em>
+                                        <span t-field="group_attendance_sheet[0].sudo().state"/>
+                                    </t>
+                                </th>
+                                <th class="text-left">Employee</th>
+                                <th class="text-left">Date From</th>
+                                <th class="text-left">Date To</th>
+                                <th class="text-center">No of Miss Punches</th>
+                                <th class="text-left">No of Overtime</th>
+                                <th class="text-center">No of Lattes</th>
+                                <th class="text-center">No of Absense Days</th>
+                                <th class="text-center">No of Diff Times</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="group_attendance_sheet" t-as="l">
+                                <tr>
+
+                                    <td><a t-att-href="l.get_portal_url()"><t t-esc="l.name"/></a></td>
+                                    <!--                            <td><t t-esc="l.name"/></td>-->
+                                    <td class="text-center"><span t-field="l.employee_id"/></td>
+                                    <td class="text-center"><span t-field="l.date_from"/></td>
+                                    <td class="text-center"><span t-field="l.date_to"/></td>
+                                    <td class="text-center"><span t-field="l.no_miss"/></td>
+                                    <td class="text-center"><span t-field="l.no_overtime"/></td>
+                                    <td class="text-center"><span t-field="l.no_late"/></td>
+                                    <td class="text-center"><span t-field="l.no_absence"/></td>
+                                    <td class="text-center"><span t-field="l.no_difftime"/></td>
+                                    <td class="text-center"><span t-field="l.state" class=" badge badge-pill badge-primary"
+                                                                  t-if="l.state == 'draft'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-info"
+                                              t-if="l.state == 'confirm'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-danger"
+                                              t-if="l.state == 'cancel'"/>
+                                        <span t-field="l.state" class=" badge badge-pill badge-success"
+                                              t-if="l.state == 'done'"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

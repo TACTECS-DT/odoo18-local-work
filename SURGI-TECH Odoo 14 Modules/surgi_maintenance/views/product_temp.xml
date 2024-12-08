@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_inherit_res_partner_representative" model="ir.ui.view">
+            <field name="name">name.res.partner.form.inherit.representative</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="representative">
+                        <group>
+                        </group>
+
+                        <field name="erepresentative_id" string="Contact Representative"
+                               widget="section_and_note_one2many">
+
+                            <tree string="Contact representative" editable="bottom">
+                                <control>
+                                    <create name="add_relation_control" string="Add a representative"/>
+                                </control>
+                                <field name="name" string="name"/>
+                                <field name="position_representative" string="Position"/>
+                                <field name="client_representative_mobile" string="Mobile"/>
+
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

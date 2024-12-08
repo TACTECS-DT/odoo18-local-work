@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <report
+                id="action_evaluations_report"
+                model="hr.applicant"
+                string="Evaluations Report"
+                report_type="qweb-pdf"
+                name="surgi_recruitment_management.evaluations_report_template"
+                file="surgi_recruitment_management.evaluations_report_template"
+        />
+        <template id="evaluations_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <t t-foreach="o.evaluation_ids.filtered(lambda e: e.is_print and e.response_id and e.survey_id)" t-as="line">
+                            <div class="page">
+                                <div class="wrap">
+                                    <div class="o_survey_print container">
+                                        <div class='py-5 mt32'>
+                                            <h1>
+                                                <span t-field='line.partner_id'/>
+                                                <br/>
+                                                <span t-field='line.survey_id.title'/>
+                                            </h1>
+                                            <t t-if="line.survey_id.description">
+                                                <div t-field='line.survey_id.description' class="oe_no_empty"/>
+                                            </t>
+                                        </div>
+                                        <div role="form">
+                                            <fieldset disabled="disabled">
+                                                <t t-foreach='line.survey_id.question_and_page_ids' t-as='question'>
+                                                    <t>
+                                                        <div class="o_page_header">
+                                                            <h3 t-field='question.title'/>
+                                                            <div t-if="question.description"
+                                                                 t-field='question.description'
+                                                                 class="oe_no_empty"/>
+                                                        </div>
+                                                    </t>
+                                                    <t t-set="answer_lines"
+                                                       t-value="line.response_id.user_input_line_ids.filtered(lambda line: line.question_id == question)"/>
+                                                    <t t-if="question.description">
+                                                        <div class="text-muted oe_no_empty"
+                                                             t-field='question.description'/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'text_box'">
+                                                        <t t-esc="answer_lines.value_text_box"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'char_box'">
+                                                        <t t-esc="answer_lines.value_char_box"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'numerical_box'">
+                                                        <t t-esc="answer_lines.value_numerical_box"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'date'">
+                                                        <t t-esc="answer_lines.value_date"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'datetime'">
+                                                        <t t-esc="answer_lines.value_datetime"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'simple_choice'">
+                                                        <t t-esc="answer_lines.suggested_answer_id.value"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'multiple_choice'">
+                                                        <t t-esc="answer_lines.suggested_answer_id.value"/>
+                                                    </t>
+                                                    <t t-if="question.question_type == 'matrix'">
+                                                        <t t-foreach="answer_lines.matrix_row_id" t-as="val">
+                                                            <span t-esc="val.value"></span>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

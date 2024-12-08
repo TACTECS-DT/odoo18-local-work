@@ -1,0 +1,61 @@
+<odoo>
+
+    <record id="view_admin_warehouse_line_tree" model="ir.ui.view">
+        <field name="name">admin.warehouse.line.tree</field>
+        <field name="model">admin.warehouse.line</field>
+        <field name="arch" type="xml">
+            <tree string="Request Lines">
+                <field name="admin_warehouse"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+
+                <field name="ProductCategory"
+                />
+                <field name="employee_id"
+                />
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="department_id"/>
+                <field name="work_location"/>
+                <field name="Request_date"/>
+                <field name="reason" optional="hide"/>
+                <field name="state" decoration-primary="state == 'approved'" decoration-danger="state == 'refused'"
+                       decoration-info="state == 'submit'" decoration-success="state == 'received'"
+                       decoration-warning="state == 'draft'" widget="badge"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="view_admin_warehouse_line_tree_search_view" model="ir.ui.view">
+        <field name="name">admin.warehouse.line.tree.search</field>
+        <field name="model">admin.warehouse.line</field>
+        <field name="arch" type="xml">
+            <search string="Request Report">
+                <field name="product_id" filter_domain="[('product_id','ilike',self)]" string="Product"/>
+                <field name="ProductCategory" filter_domain="[('ProductCategory','ilike',self)]" string="Category"/>
+                <field name="admin_warehouse" filter_domain="[('admin_warehouse','ilike',self)]"
+                       string="Request" readonly="1"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_admin_warehouse_line_tree" model="ir.actions.act_window">
+        <field name="name">Request Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">admin.warehouse.line</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_admin_warehouse_line_tree_search_view"/>
+
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_admin_warehouse_line_report_to_approve" name="Request Lines Report" sequence="5"
+              parent="surgi_admin_wharehouse.menu_admin_warehouse_report"
+              action="surgi_admin_wharehouse.action_admin_warehouse_line_tree"
+              groups="surgi_admin_wharehouse.Warehouse_admin_viewer_group"
+    />
+
+</odoo>

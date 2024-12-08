@@ -1,0 +1,146 @@
+<odoo>
+    <data>
+
+        <record id="view_stock_move_line_form_inherit" model="ir.ui.view">
+            <field name="name">stock.move.line.form.inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_purchase_form_inherit" model="ir.ui.view">
+            <field name="name">view.picking.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">view.sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_picking_form_inherit_edit" model="ir.ui.view">
+            <field name="name">view.picking.edit.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="priority" eval="102"/>
+
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='analytic_account_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='analytic_account_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+                <xpath expr="//field[@name='scan_products_ids']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_edit': True, 'delete': False}</attribute>
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+        <record id="group_inventory_button" model="res.groups">
+            <field name="name">Inventory Button Approve</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_stock_picking_inherit" model="ir.ui.view">
+            <field name="name">name.stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_toggle_is_locked']" position="after">
+                    <button name="approve_button" type="object" string="Approved"
+                            groups="surgi_inventory_approved.group_inventory_button"/>
+                    <button name="reject_button" type="object" string="Rejected"
+                            groups="surgi_inventory_approved.group_inventory_button"/>
+                    <button name="hold_button" type="object" string="Hold"
+                            groups="surgi_inventory_approved.group_inventory_button"/>
+                </xpath>
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="accounting_approval"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Accounting Approval Tracking">
+                        <group>
+                            <field name="approval_date"/>
+                            <field name="reject_date"/>
+                            <field name="hold_date"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="view_sale_order_form_inherit_unit_price" model="ir.ui.view">
+            <field name="name">view.sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']"
+                       position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '=', 'sale')]}</attribute>
+
+                </xpath>
+            </field>
+        </record>
+        <record id="view_order_form_inherited_unit_price" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority">36</field>
+            <field name="groups_id" eval="[(4, ref('surgi_inventory_approved.sale_unit_price_edit_group'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']"
+                       position="replace">
+                        <field name="price_unit" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

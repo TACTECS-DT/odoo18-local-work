@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="inherit_view_stock_quant_tree_editable_usdcost" model="ir.ui.view">
+            <field name="name">stock.quant.tree.editable.usdcost</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <!-- <field name="lot_id" position="after"> -->
+                <xpath expr="//field[@name='lot_id']" position="after">
+                    <field name="priceusd" />
+                    <field name="total_usdcost" />
+                </xpath>
+                    <!-- </field> -->
+            </field>
+        </record>
+        
+        
+
+        
+        <record id="stock_production_lot_form_serialbarcode" model="ir.ui.view">
+            <field name="name">stock.production.lot.form.serialbarcode</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                
+                
+                <xpath expr="//field[@name='ref']" position="after">
+                   
+                    <field name="lot_name"/>
+                    <field name="invoice_date"/>
+                    <field name="expiration_date"/>
+
+                    <field name="effective_date" readonly="1"/>
+                    <field name="import_ref" invisible="0" readonly="0"/>
+                    <field name="isPacked"/>
+                    <field name="priceusd" />
+     
+                    
+                    
+                </xpath>
+                
+                
+                
+                
+                <xpath expr="//page[@name='description']" position="after">
+                    <page string="Packed Lots" name="packedlots" attrs="{'invisible':[('isPacked', '=', False)]}">
+                        <field name="packedSerials" >
+                            <tree create="1" edit="1"  editable="bottom">
+                                <field name="serialnumber"/>
+                           
+                            </tree>
+                          </field>
+                    </page>
+                </xpath>
+                
+                
+                
+            </field>
+        </record>
+    </data>
+</odoo>

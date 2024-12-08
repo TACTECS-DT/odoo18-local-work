@@ -1,0 +1,138 @@
+<odoo>
+    <data>
+
+
+
+        <record id="tree_view_helpdesk_ticket_inherit" model="ir.ui.view">
+            <field name="name">name.helpdesk.ticket.tree.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="request_user_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit  View to Modify it -->
+        <record id="form_view_helpdesk_ticket_inherit" model="ir.ui.view">
+            <field name="name">name.helpdesk.ticket.form.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_email']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='email_cc']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_name']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}</attribute>
+                </xpath>
+
+
+
+
+
+                <xpath expr="//button[@name='assign_ticket_to_self']" position="after">
+                    <button name="button_manager_approval" string="Manager Approval"
+                            type="object" class="oe_highlight" attrs="{'invisible': ['|',
+                            ('is_user_manager', '=',False),
+                            ('is_manager', '=',False)
+
+                            ]}"/>
+
+                    <button name="button_create_task" string="Create Task"
+                            type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|','|',('appear_create_task','=',False),('create_task','=',False),('type_helpdesk', '!=','maintenance_helpdesk')]}"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='email_cc']" position="after">
+                    <field name="category_needed" invisible="1"/>
+                    <field name="is_maintenance" invisible="1"/>
+                    <field name="create_task" invisible="1"/>
+                    <field name="appear_create_task" invisible="1"/>
+                    <field name="category_id" force_save="1" attrs="{'required': [('category_needed', '=',True)]}" options="{'no_open': True}"/>
+                    <field name="is_user_manager" invisible="1"/>
+                    <field name="other_request" invisible="1"/>
+                    <field name="new_other_request" invisible="1"/>
+                    <field name="request_user_id"/>
+                    <field name="is_manager" invisible="1"/>
+                    <field name="next_sequence_stage" invisible="1"/>
+
+
+                    <field name="employee_full_name" attrs="{'invisible': [('type_helpdesk','!=','maintenance_helpdesk')]}" readonly="1" force_save="1"/>
+                    <field name="employee_email" attrs="{'invisible': [('type_helpdesk','!=','maintenance_helpdesk')]}" readonly="1" force_save="1"/>
+                    <field name="employee_phone" attrs="{'invisible': [('type_helpdesk','!=','maintenance_helpdesk')]}" readonly="1" force_save="1"/>
+                    <field name="employee_job_id" attrs="{'invisible': [('type_helpdesk','!=','maintenance_helpdesk')]}" readonly="1" force_save="1" options="{'no_open': True}"/>
+                    <field name="employee_department_id" attrs="{'invisible': [('type_helpdesk','!=','maintenance_helpdesk')]}" readonly="1" force_save="1" options="{'no_open': True}" />
+                    <field name="order_phone_num" attrs="{'invisible': ['|',('is_order_phone','=',False),('type_helpdesk','!=','maintenance_helpdesk')]}"/>
+
+
+                    <field name="is_order_phone" invisible="1"/>
+
+
+                    <field name="type_helpdesk" invisible="1" force_save="1"/>
+                    <field name="is_manager_appoval" readonly="1" force_save="1" />
+<!--                    attrs="{'invisible': [('type_helpdesk','=','maintenance_helpdesk')]}"-->
+                    <field name="is_state_repair" invisible="1" force_save="1"/>
+                    <field name="description_repair" width="90px;" attrs="{'invisible': ['|',
+                    ('type_helpdesk', '!=','maintenance_helpdesk'),
+                    ('is_state_repair', '=',False),
+                    ]}"/>
+
+
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="equipment_id" attrs="{'invisible': [('is_maintenance', '=',False)]}"/>
+                    <field name="state_repair" widget="radio" attrs="{'invisible': [('is_maintenance', '=',False)]}"/>
+                    <field name="delivery_expect_date"  attrs="{'invisible': [('is_maintenance', '=',False)]}"/>
+
+                </xpath>
+
+
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_helpdesk_stage_inherit" model="ir.ui.view">
+            <field name="name">name.helpdesk.stage.form.inherit</field>
+            <field name="model">helpdesk.stage</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_stage_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='fold']" position="after">
+                    <field name="all_users"/>
+                    <field name="user_ids" widget="many2many_tags"/>
+<!--                    <field name="other_request_ids" widget="many2many_tags"/>-->
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

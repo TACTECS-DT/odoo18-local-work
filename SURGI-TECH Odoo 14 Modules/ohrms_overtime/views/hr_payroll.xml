@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_hr_payslip_form_inhert">
+            <field name="name">view.hr.payslip.form.inhert</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='contract_id']" position="before">
+                    <label for="hr_calculation_start" string="HR Calculation Period"/>
+                    <div>
+                        <field name="hr_calculation_start" class="oe_inline"/> - <field name="hr_calculation_end" class="oe_inline"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

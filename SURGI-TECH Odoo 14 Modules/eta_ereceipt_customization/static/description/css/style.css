@@ -1,0 +1,259 @@
+/* fonts */
+@font-face {
+    font-family: 'ElMessiriRegular';
+    src: url('../fonts/ElMessiri-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ElMessiriBold';
+    src: url('../fonts/ElMessiri-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+  font-family: 'TajawalRegular';
+  src: url('../fonts/Tajawal-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+    font-family: 'TajawalBold';
+    src: url('../fonts/Tajawal-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.pl_app_description{
+    margin-left:-32px;
+    margin-right:-32px;
+}
+@media (max-width: 991px){
+    .pl_app_description{
+        margin-left:-16px;
+        margin-right:-16px;
+    }
+}
+/* header */
+.pl_app_description .app_header {
+    padding: 50px;
+}
+.pl_app_description .app_header h1 {
+    font-family: 'TajawalBold';
+    color: #1ab89a;
+    margin-bottom: 25px;
+    font-size: 38px;
+}
+.pl_app_description .app_header p {
+    font-family: 'TajawalRegular';
+    font-size: 22px;
+    color: #777;
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* app features */
+.pl_app_description .app_features {
+    padding: 50px;
+    background-color: #f7f7f7;
+}
+.pl_app_description .app_features h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'ElMessiriBold';
+    position: relative;
+}
+.pl_app_description .app_features h2:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #1ab89a;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -50px;
+}
+.pl_app_description .app_features p {
+    font-family: 'TajawalRegular';
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.pl_app_description .app_features ul {
+    margin-bottom: 0;
+}
+.pl_app_description .app_features ul li {
+    font-family: 'TajawalRegular';
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.pl_app_description .app_features ul li i {
+    color: #1ab89a;
+    margin-right: 15px;
+}
+
+/* description */
+.pl_app_description .description {
+    padding: 50px;
+}
+.pl_app_description .description h2 {
+    margin-bottom: 40px;
+    font-family: 'ElMessiriBold';
+    position: relative;
+}
+.pl_app_description .description .img_box {
+    height: 500px;
+    padding: 50px;
+    margin-bottom: 20px;
+}
+.pl_app_description .description .img_box img {
+    width: 100%;
+    height: auto;
+}
+.pl_app_description .description h2:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #1ab89a;
+    bottom: -10px;
+    left: 0;
+}
+.pl_app_description .description p {
+    font-family: 'TajawalRegular';
+    font-size: 18px;
+    color: #777;
+}
+
+/* related modules */
+.pl_app_description .related_modules {
+    padding: 50px 0;
+}
+.pl_app_description .related_modules h2 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-family: 'ElMessiriBold';
+    position: relative;
+}
+.pl_app_description .related_modules h2:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #1ab89a;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -50px;
+}
+.pl_app_description .related_modules .module_box {
+    position: relative;
+}
+.pl_app_description .related_modules .module_box img {
+    width: 100%;
+}
+.pl_app_description .related_modules .module_box .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 80px 40px;
+    text-align: center;
+}
+.pl_app_description .related_modules .module_box .overlay h3 {
+    color: #fff;
+    font-family: 'ElMessiriBold';
+    margin-bottom: 15px;
+}
+.pl_app_description .related_modules .module_box .overlay p {
+    color: #fff;
+    font-family: 'TajawalRegular';
+}
+.pl_app_description .blue_back {
+    background-color: rgba(58, 165, 247, 0.6);
+}
+.pl_app_description .red_back {
+    background-color: rgba(255, 104, 87, 0.6);
+}
+.pl_app_description .purple_back {
+    background-color: rgba(107, 114, 228, 0.6);
+}
+
+/* who_we_are */
+.pl_app_description .who_we_are {
+    padding: 50px;
+    background-color: #f7f7f7;
+}
+.pl_app_description .who_we_are .logo {
+    width: 160px;
+    margin-bottom: 20px;
+}
+.pl_app_description .who_we_are h2 {
+    margin-bottom: 40px;
+    font-family: 'ElMessiriBold';
+    position: relative;
+}
+.pl_app_description .who_we_are h2:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #1ab89a;
+    bottom: -10px;
+    left: 0;
+}
+.pl_app_description .who_we_are p {
+    font-family: 'TajawalRegular';
+    font-size: 18px;
+}
+
+/* contact us */
+.pl_app_description .contact_us {
+    padding: 50px;
+    background-color: #353a40;
+    color: #fff;
+}
+.pl_app_description .contact_us h2 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-family: 'ElMessiriBold';
+    position: relative;
+    color: #fff;
+}
+.pl_app_description .contact_us h2:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #1ab89a;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -50px;
+}
+.pl_app_description .contact_us p {
+    font-family: 'TajawalRegular';
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+}
+.pl_app_description .contact_us p i {
+    color: #1ab89a;
+    margin-right: 15px;
+}
+
+/* social icons */
+.pl_app_description .social_icons {
+    padding: 20px;
+    text-align: center;
+}
+.pl_app_description .social_icons ul {
+    margin-bottom: 0;
+}
+.pl_app_description .social_icons ul li {
+    display: inline-block;
+    margin: 0 5px;
+}
+.pl_app_description .social_icons ul li i {
+    color: #1ab89a;
+    font-size: 30px;
+}

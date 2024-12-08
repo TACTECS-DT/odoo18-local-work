@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surgi_operation_tracking_surgi_operation_tracking,surgi_operation_tracking.surgi_operation_tracking,model_surgi_operation_tracking_surgi_operation_tracking,base.group_user,1,1,1,1

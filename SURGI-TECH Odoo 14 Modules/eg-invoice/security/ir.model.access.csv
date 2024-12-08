@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_eg_tax,eg-invoice.eg_tax,model_eg_tax,base.group_user,1,1,1,1
+access_eg_subtax,eg-invoice.eg_subtax,model_eg_subtax,base.group_user,1,1,1,1
+access_einvoice_lines,eg-invoice.einvoice_lines,model_einvoice_lines,base.group_user,1,1,1,1
+access_egytax_getdocuments,eg-invoice.egytax_getdocuments,model_egytax_getdocuments,base.group_user,1,1,1,1
+access_succesesswizerd_egtaxmodel,eg-invoice.succesesswizerd_egtaxmodel,model_succesesswizerd_egtaxmodel,base.group_user,1,1,1,1

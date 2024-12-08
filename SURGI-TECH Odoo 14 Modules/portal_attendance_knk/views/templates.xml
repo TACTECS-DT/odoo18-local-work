@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_attendances" inherit_id="portal.portal_breadcrumbs" priority="100">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'hr_attendance' or hr_attendance"
+                t-attf-class="breadcrumb-item #{'active' if not hr_attendance else ''}">
+                Attendance
+            </li>
+        </xpath>
+    </template>
+    <template id="portal_my_home_attendances" name="Show Attendance" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="100">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div t-att-title="title"
+                 class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                <span>Attendance</span>
+                <span>
+                    <a href="/my/attendance"><i class="btn btn-secondary fa fa-list"></i></a>
+                    <a href="/attendance"><i class="btn btn-primary fa fa-sign-in"></i></a>
+                </span>
+            </div>
+        </xpath>
+    </template>
+    <template id="portal_searchbar_attendance" name="Portal Search Bar">
+        <nav t-attf-class="navbar navbar-light navbar-expand-lg border py-0 mb-2 o_portal_navbar {{classes if classes else ''}} {{'mt-3 rounded' if breadcrumbs_searchbar else 'border-top-0' }}">
+            <!--  Navbar breadcrumb or title  -->
+            <t t-if="breadcrumbs_searchbar">
+                <t t-call="portal.portal_breadcrumbs"/>
+            </t>
+            <span t-else="" class="navbar-brand mb-0 h1 mr-auto" t-esc="title or 'No title'"/>
+
+            <!--  Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#o_portal_navbar_content"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle filters">
+                <span class="navbar-toggler-icon small"/>
+            </button>
+
+            <!--  Collapsable content  -->
+            <div class="collapse navbar-collapse" id="o_portal_navbar_content">
+                <div class="nav flex-column flex-lg-row ml-auto p-0 mb-3 mb-lg-0 mt-1 mt-lg-0">
+                    <div t-if="searchbar_filters" class="form-inline ml-lg-2">
+                        <span class="small mr-1 navbar-text">Filter By:</span>
+                        <div class="btn-group">
+                            <button id="portal_searchbar_filters" data-toggle="dropdown"
+                                    class="btn btn-secondary btn-sm dropdown-toggle">
+                                <t t-esc="searchbar_filters.get(filterby,searchbar_filters.get('all')).get('label', 'All')"/>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="portal_searchbar_filters">
+                                <t t-foreach="searchbar_filters" t-as="option">
+                                    <a t-att-href="default_url + '?' + keep_query('*', filterby=option)"
+                                       t-attf-class="dropdown-item#{filterby == option and ' active' or ''}">
+                                        <span t-esc="searchbar_filters[option].get('label')"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-raw="0"/>
+                </div>
+                <form t-if="searchbar_inputs" class="form-inline o_portal_search_panel ml-lg-4 col-xl-4 col-md-5">
+                    <div class="input-group input-group-sm w-100">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"/>
+                            <div class="dropdown-menu" role="menu">
+                                <t t-foreach='searchbar_inputs' t-as='input'>
+                                    <a t-att-href="'#' + searchbar_inputs[input]['input']"
+                                       t-attf-class="dropdown-item#{search_in == searchbar_inputs[input]['input'] and ' active' or ''}">
+                                        <span t-raw="searchbar_inputs[input]['label']"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control form-control-sm" placeholder="Search"
+                               t-att-value='search' name="search"/>
+                        <span class="input-group-append">
+                            <button class="btn btn-secondary search-submit" type="button">
+                                <span class="fa fa-search"/>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </template>
+
+    <template id="portal_my_attendances" name="My Attendance">
+
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal_attendance_knk.portal_searchbar_attendance">
+                <t t-set="title">Attendance</t>
+            </t>
+            <t t-if="not attendances">
+                <p>There are currently no attendances for your account.</p>
+            </t>
+            <div id="portal_attendance">
+                <link type="text/css" rel="stylesheet" href="/portal_attendance_knk/static/src/scss/check_in_out.css"/>
+
+                <t t-set="checked_in"
+                   t-value="True if request.env.user.employee_id.attendance_state=='checked_in' else False"/>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="o_content portal_attendance_knk">
+                            <div class="o_hr_attendance_kiosk_mode_container o_home_menu_background">
+
+                                <div class="o_hr_attendance_kiosk_mode">
+
+                                    <button class="o_hr_attendance_sign_in_out o_hr_attendance_sign_in_out_icon fa-sign-out btn btn-warning"
+                                            t-if="checked_in" aria-label="Sign out" title="Sign out"
+                                            t-att-data-id="request.env.user.employee_id.id">Sign out</button>
+                                    <button class="o_hr_attendance_sign_in_out o_hr_attendance_sign_in_out_icon fa-sign-in btn btn-success"
+                                            t-if="not checked_in" aria-label="Sign in" title="Sign in"
+                                            t-att-data-id="request.env.user.employee_id.id">Sign in</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <t t-if="attendances" t-call="portal.portal_table">
+                <table class="attendance-table">
+                    <thead>
+                        <tr class="active">
+                            <th>Employee</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Work Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="attendances" t-as="attendance">
+                            <tr>
+                                <td><span t-field="attendance.employee_id.name"/></td>
+                                <td><span t-field="attendance.check_in"/></td>
+                                <td><span t-field="attendance.check_out"/></td>
+                                <td><span
+                                        t-esc="attendance.convert_float_to_hours_minutes(float(attendance.worked_hours))"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </t>
+    </template>
+    <template id="my_attendance_panel">
+        <!--                <t t-call="website.layout">-->
+        <!--                    <div class="o_action_manager">-->
+        <!--                        <div class="o_action">-->
+        <!--                            <div class="o_content portal_attendance_knk">-->
+        <!--                                <div class="o_hr_attendance_kiosk_mode_container o_home_menu_background">-->
+        <!--                                    <span class="o_hr_attendance_kiosk_backdrop"></span>-->
+        <!--                                    <div class="o_hr_attendance_clock text-center"></div>-->
+        <!--                                    <div class="o_hr_attendance_kiosk_mode">-->
+        <!--                                        <t t-set="checked_in"-->
+        <!--                                           t-value="True if request.env.user.employee_id.attendance_state=='checked_in' else False"/>-->
+
+        <!--                                        <t t-if="request.env.user.employee_id">-->
+        <!--                                            <div class="o_hr_attendance_user_badge o_home_menu_background">-->
+        <!--                                                <img class="img rounded-circle"-->
+        <!--                                                     t-attf-src="/web/image?model=hr.employee&amp;field=image_128&amp;id=#{request.env.user.employee_id.id}"-->
+        <!--                                                     t-att-title="request.env.user.employee_id.name"-->
+        <!--                                                     t-att-alt="request.env.user.employee_id.name"/>-->
+        <!--                                            </div>-->
+        <!--                                            <h1 class="mb8"><t t-esc="request.env.user.employee_id.name"/></h1>-->
+        <!--                                            <h3 class="mt8 mb24"><t t-if="not checked_in">Welcome!</t><t t-else="">Want to check-->
+        <!--                                                out?</t></h3>-->
+        <!--                                            <h4 class="mt0 mb0 text-muted" t-if="checked_in">Today's work hours: <span-->
+        <!--                                                    t-esc="'%.2f'% request.env.user.employee_id.hours_today"/></h4>-->
+        <!--                                            <a class="fa fa-7x o_hr_attendance_sign_in_out_icon fa-sign-out btn-warning"-->
+        <!--                                               t-if="checked_in" aria-label="Sign out" title="Sign out"-->
+        <!--                                               t-att-data-id="request.env.user.employee_id.id"/>-->
+        <!--                                            <a class="fa fa-7x o_hr_attendance_sign_in_out_icon fa-sign-in btn-secondary"-->
+        <!--                                               t-if="not checked_in" aria-label="Sign in" title="Sign in"-->
+        <!--                                               t-att-data-id="request.env.user.employee_id.id"/>-->
+        <!--                                            <h3 class="mt0 mb0 text-muted">Click to <b t-if="checked_in">check out</b><b-->
+        <!--                                                    t-if="not checked_in">check in</b></h3>-->
+        <!--                                        </t>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </t>-->
+        <t t-call="portal.portal_layout">
+            <t t-set="title">Employee Attendance</t>
+            <div id="wrap" class="container">
+                <h1>Employee Attendance</h1>
+                <!-- Check-in and check-out buttons -->
+            </div>
+        </t>
+
+    </template>
+</odoo>

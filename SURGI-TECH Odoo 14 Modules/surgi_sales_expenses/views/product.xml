@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="form_view_product_product_inherit" model="ir.ui.view">
+            <field name="name">name.product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_policy']" position="after">
+
+                    <field name="is_sales_order"/>
+                </xpath>
+                <xpath expr="//field[@name='uom_po_id']" position="after">
+
+                    <field name="po_type"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Department" attrs="{'invisible':[('can_be_expensed','=',False)]}">
+                        <group>
+                            <group>
+                                <field name="department_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

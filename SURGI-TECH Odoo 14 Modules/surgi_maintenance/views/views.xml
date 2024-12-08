@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <menuitem id="surgi_menu_reports_root" name="Maintenance" sequence="-10" groups="surgi_maintenance.maintenance_viewer_group"
+        web_icon="surgi_maintenance,static/src/img/icon.jpg"
+        />
+
+        <menuitem id="surgi_main_confj_main_menu" name="Configuration"
+                  parent="surgi_menu_reports_root" sequence="10"/>
+
+
+    </data>
+</odoo>

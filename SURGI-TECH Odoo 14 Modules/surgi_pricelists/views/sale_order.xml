@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+    
+
+<odoo>
+        <data>
+            <record model="ir.ui.view" id="sale_order_pricelist_inhert">
+                <field name="name">sale.order.pricelist.form.inhert</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_order_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//header" position="inside">
+                        <button name="update_price_list_hospital"
+                        string="Update Price"
+                        type="object"
+                    />
+                    </xpath>
+
+                    
+                </field>
+            </record>
+        </data>
+
+
+
+
+<!-- price list items report-->
+<template id="report_price_list_items_print">
+    <t t-call="web.html_container">
+        <!-- <t t-foreach="docs" t-as="o"> -->
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Price List</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Min. Quantity</th>
+                            <th scope="col">Company </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="o">
+                        
+                        <tr>
+                        
+                        <td><span t-field="o.pricelist_id.name" /></td>
+                        
+                        <td><span t-field="o.name" /></td>
+                        
+                        <td><span t-field="o.price" /></td>
+                        <td><span t-field="o.min_quantity" /></td>
+                        <td><span t-field="o.company_id" /></td>
+                        
+                        </tr>
+                        
+                        </t>
+                    </tbody>
+                        </table>
+                </div>
+            <!-- </t> -->
+        </t>
+    </t>
+</template>
+<!-- <record id="action_report_price_list_items_print" model="ir.actions.report">
+    <field name="name">Price List Items Report</field>
+    <field name="model">product.pricelist.item</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">price_list_items_print.report</field>
+    <field name="report_file">price_list_items_print.report</field>
+    <field name="print_report_name">'price_list_items'</field>
+  <field name="binding_model_id" ref="model_product_pricelist_item"/> 
+ </record> -->
+<report
+
+id="action_report_price_list_items_print"
+
+string="Price List Items Report"
+
+model="product.pricelist.item"
+
+report_type="qweb-pdf"
+
+name="surgi_pricelists.report_price_list_items_print"
+
+file="report_price_list_items_print"
+
+print_report_name="price_list_items_print"
+
+/>
+
+
+
+
+
+
+
+
+
+
+
+
+    </odoo>
+

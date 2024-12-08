@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+
+
+        <record id="action_view_manager_request_allowance" model="ir.actions.act_window">
+            <field name="name">Manager Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.variable.allowance.request</field>
+            <field name="domain">['|','|','|',
+                ('employee_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.parent_id.user_id', '=', uid),
+                ('employee_id.parent_id.parent_id.parent_id.parent_id.user_id', '=', uid),
+                ]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_manager_request_allowance" name="Manager Request" parent="surgi_salary_variables.variable_allowance_submenu"
+                  action="action_view_manager_request_allowance" sequence="7"/>
+
+
+
+    </data>
+</odoo>

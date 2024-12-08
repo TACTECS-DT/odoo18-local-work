@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+  <record id="view_tax_form_envoice" model="ir.ui.view" >
+            <field name="name">view.tax.form.envoice</field>
+            <field name="model">account.tax</field>
+            <field name="groups_id" eval="[(4, ref('E_invoice_manager_group'))]"/>
+<field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tax_scope']" position="after">
+
+
+                            <field name="eg_tax_type" required="True"/>
+                            <field name="nonetaxabletype"/>
+                            <field name="eg_tax_subtype"   />
+
+
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

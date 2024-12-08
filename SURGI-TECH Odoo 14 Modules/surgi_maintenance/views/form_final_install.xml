@@ -1,0 +1,198 @@
+<odoo>
+    <data>
+        <record id="tree_view_pickup_finalpage" model="ir.ui.view">
+            <field name="name">محضر تسليم نهائي</field>
+            <field name="model">pickup.final</field>
+            <field name="arch" type="xml">
+                <tree string="محضر تسليم نهائي">
+                    <field name="name"/>
+
+                    <field name="order_id"/>
+                    <field name="sale_date"/>
+
+
+                    <field name="client_res"/>
+
+                    <field name="contact_representative"/>
+                    <field name="employee_id"/>
+
+
+                    <field name="pickup_date"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="form_view_pickup_final" model="ir.ui.view">
+            <field name="name">محضر تسليم نهائي</field>
+            <field name="model">pickup.final</field>
+            <field name="arch" type="xml">
+                <form string="Pickup final">
+
+                    <sheet>
+                        <div style="text-align:center">
+
+                            <group string="محضر تسليم نهائي" col="4" colspan="6">
+
+                            </group>
+                        </div>
+                        <group>
+                            <div>
+                                <group string="Contact" name="con_id">
+                                    <field name="client_res"/>
+                                    <field name="contact_representative"/>
+                                    <field name="representative_mobile"/>
+
+                                </group>
+                            </div>
+                            <div>
+                                <group string="Company" name="emp_id">
+                                    <field name="employee_id"/>
+                                </group>
+                            </div>
+
+                            <div>
+                                <group string="Location" name="loc_id">
+                                    <field name="street1" string="الشارع"/>
+                                    <!--                                    <field name="street2"/>-->
+                                    <field name="city" string="المدينة"/>
+                                    <field name="country_id" string="الدولة"/>
+
+                                </group>
+                            </div>
+
+                            <div>
+                                <group string="ٍSales Order">
+                                    <field name="order_id"/>
+                                                                        <field name="picking_id" />
+
+                                    <field name="sale_date"/>
+                                </group>
+                            </div>
+                            <div>
+                                <group>
+                                    <field name="pickup_date"/>
+
+                                </group>
+                            </div>
+<!--                            <div>-->
+<!--                                <group>-->
+<!--                                    <field name="default_code"/>-->
+
+<!--                                </group>-->
+<!--                            </div>-->
+                        </group>
+
+                        <notebook>
+ <page name="product" string="بيانات الاجهزة">
+                                <group></group>
+                                <field name="product_forms"  delete="0">
+
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add a product"/>
+                                        </control>
+                    <field name="product_id"  attrs="{}"/>
+                    <field name="specilaization"   widget="many2many_tags"/>
+                    <field name="operting_maint"   widget="many2many_tags"/>
+                    <field name="occuption_maint"   widget="many2many_tags"/>
+
+                    <field name="company_id" invisible="1"/>
+                    <field name="move_id" invisible="1"/>
+                    <field name="picking_id" invisible="1"/>
+                    <field name="product_uom_category_id" invisible="1"/>
+                    <field name="location_id" options="{'no_create': True}"  groups="stock.group_stock_multi_locations" invisible="1"/>
+                    <field name="location_dest_id" options="{'no_create': True}"  groups="stock.group_stock_multi_locations" invisible="1"/>
+                    <field name="package_id" groups="stock.group_tracking_lot" invisible="1"/>
+                    <field name="result_package_id" groups="stock.group_tracking_lot" invisible="1"/>
+                    <field name="lots_visible" invisible="1"/>
+                    <field name="owner_id" groups="stock.group_tracking_owner" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="lot_id" />
+                    <field name="lot_name" invisible="1"/>
+                    <field name="is_initial_demand_editable" invisible="1"/>
+                    <field name="product_uom_qty" readonly="1"  optional="show" invisible="1"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="qty_done"  force_save="1"/>
+                    <field name="product_uom_id" force_save="1" invisible="1"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+
+                            <page name="comments" string="ملاحظات">
+                                <group>
+
+                                    <field name="comments" placeholder="Other Information ...">
+
+
+                                    </field>
+                                </group>
+
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="employee_pickup_final_search" model="ir.ui.view">
+            <field name="name">pickup.final.search</field>
+            <field name="model">pickup.final</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                                                            <field name="name" string="الرقم المرجعي"/>
+
+                    <field name="contact_representative" string="المندوب"/>
+                    <field name="client_res" string="العميل"/>
+                    <field name="employee_id" string="الموظف"/>
+
+                    <field name="order_id" string="امر التوريد"/>
+
+
+                    <!--                <filter string="Brith Date" name="bdate" date="from_date"/>-->
+                    <separator/>
+                    <group expand="0" string="Group By">
+
+                        <filter string="المندوب" name="contact_representative"
+                                context="{'group_by': 'contact_representative'}"/>
+                        <filter string="العميل" name="client_res" context="{'group_by': 'client_res'}"/>
+
+                        <filter string="الموظف" name="employee_id" context="{'group_by': 'employee_id'}"/>
+
+                        <filter string="امر التوريد" name="order_id"
+                                context="{'group_by': 'order_id'}"/>
+
+                    </group>
+                </search>
+            </field>
+
+        </record>
+        <record id="action_pickup_final_pages" model="ir.actions.act_window">
+            <field name="name">محضر تسليم نهائي</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pickup.final</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="employee_pickup_final_search"/>
+
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_pickup_final_views" name="محضر تسليم نهائي" parent="surgi_menu_reports_root"
+                  action="action_pickup_final_pages" sequence="4"/>
+
+
+    </data>
+</odoo>

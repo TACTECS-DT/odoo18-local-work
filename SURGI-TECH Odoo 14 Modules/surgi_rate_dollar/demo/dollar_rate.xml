@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="1">
+         <record id="dollar1" model="dollar.rate">
+            <field name="value">0.0</field>
+        </record>
+
+    </data>
+</odoo>

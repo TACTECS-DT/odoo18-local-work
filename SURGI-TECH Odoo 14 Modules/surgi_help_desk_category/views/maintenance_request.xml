@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+
+        <record id="group_helpdesk_maintenance_request" model="res.groups">
+            <field name="name">Maintenance Request</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_services_helpdesk"/>
+        </record>
+        <record id="action_maintenance_request_tickets" model="ir.actions.act_window">
+            <field name="name">My Request Tickets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpdesk.ticket</field>
+            <field name="view_mode">list,kanban,form,activity</field>
+            <field name="domain">[('request_user_id', '=', uid)]</field>
+            <field name="context">{'default_type_helpdesk': 'maintenance_helpdesk'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No tickets found. Let's create one!
+                </p>
+                <p>To get things done, use activities and status on tickets.
+                    <br/>
+                    Chat in real time or by email to collaborate efficiently.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="menu_maintenance_request_root" name="Maintenance Request" sequence="8"
+                  web_icon="surgi_help_desk_category,static/description/icon.png"/>
+
+        <menuitem id="menu_action_helpdesk_maintenance_request" name="My Request Tickets"
+                  parent="surgi_help_desk_category.menu_maintenance_request_root"
+                  action="action_maintenance_request_tickets"
+                  sequence="1"
+                  groups="surgi_help_desk_category.group_helpdesk_maintenance_request"
+        />
+    </data>
+</odoo>

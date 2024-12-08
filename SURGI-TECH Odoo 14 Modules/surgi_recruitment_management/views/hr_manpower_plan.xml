@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="hr_manpower_plan_tree_view" model="ir.ui.view">
+        <field name="name">hr.manpower.plan.tree</field>
+        <field name="model">hr.manpower.plan</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Man Power Plan">
+                <field name="name"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="user_id"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'gm_approved'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_manpower_plan_form_view" model="ir.ui.view">
+        <field name="name">hr.manpower.plan.form</field>
+        <field name="model">hr.manpower.plan</field>
+        <field name="arch" type="xml">
+            <form string="Man Power Plan">
+                <header>
+                    <button name="action_approved" string="HR Approval" states="draft" type="object"
+                            class="oe_highlight" groups="surgi_recruitment_management.group_hr_approve_job"/>
+                    <button name="action_gm_approved" string="GM Approval" states="approved" type="object"
+                            class="oe_highlight" groups="surgi_recruitment_management.group_hr_approve_job"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,gm_approved"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline" required="1"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/>
+                                -
+                                <field name="date_to" class="oe_inline"
+                                       nolabel="1" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"
+                                   readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Plan Lines" name="line_ids">
+                            <field name="line_ids" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree string="Plan Lines">
+                                    <field name="job_id"/>
+                                    <field name="open_date"/>
+                                    <field name="close_date"/>
+                                    <field name="ceiling_count"/>
+                                    <field name="no_of_employee"/>
+                                    <field name="grade_id"/>
+                                    <field name="department_id"/>
+                                    <field name="resource_id"/>
+                                    <field name="address_id" widget="many2many_tags"/>
+                                    <field name="request_count"/>
+                                    <field name="plan_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_manpower_plan_line_form_view" model="ir.ui.view">
+        <field name="name">manpower.plan.line.form</field>
+        <field name="model">manpower.plan.line</field>
+        <field name="arch" type="xml">
+            <form string="Plan Line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="job_id"/>
+                            <field name="ceiling_count"/>
+                            <field name="no_of_employee"/>
+                            <field name="grade_id"/>
+                            <field name="department_id"/>
+                            <field name="plan_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="open_date"/>
+                            <field name="close_date" readonly="1" force_save="1"/>
+                            <field name="resource_id"/>
+                            <field name="address_id" widget="many2many_tags"/>
+                            <field name="request_count"/>
+                        </group>
+                    </group>
+                    <group string="Recruiters">
+                        <field name="recruiter_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="user_id"/>
+                                <field name="required_application"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="hr_manpower_plan_search" model="ir.ui.view">
+        <field name="name">hr.manpower.plan.search</field>
+        <field name="model">hr.manpower.plan</field>
+        <field name="arch" type="xml">
+            <search string="Search Man Power Plans">
+                <field name="name" string="Name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="user_id"/>
+                <separator/>
+                <filter string="Date" name="filter_start_date" date="date_from"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_manpower_plan">
+        <field name="name">Man Power Plan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.manpower.plan</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="hr_manpower_plan_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_manpower_plan_approval" model="ir.actions.server">
+        <field name="name">HR Approval</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_hr_manpower_plan"/>
+        <field name="binding_model_id" ref="model_hr_manpower_plan"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_approve_multi()
+        </field>
+    </record>
+
+    <record id="action_manpower_plan_gm_approval" model="ir.actions.server">
+        <field name="name">GM Approval</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_hr_manpower_plan"/>
+        <field name="binding_model_id" ref="model_hr_manpower_plan"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_gm_approve_multi()
+        </field>
+    </record>
+
+
+    <menuitem id="menu_hr_manpower_plan" action="action_hr_manpower_plan" parent="menu_hiring_plan_parent"
+              name="Man Power Plan" sequence="1"/>
+</odoo>

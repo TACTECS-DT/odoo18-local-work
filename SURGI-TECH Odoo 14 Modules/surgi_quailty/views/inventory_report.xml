@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    
+    <!-- primary|extension Inherited .:Tree:. view for "model" -->
+<record id="view_stock_quant_tree_editable_expiration" model="ir.ui.view">
+    <field name="name">	stock.quant.tree.editable.expiration</field>
+    <field name="model">stock.quant</field>
+    <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+    <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
+    <field name="type">tree</field>
+
+    <field name="priority" eval="16" />
+    <field name="active" eval="True" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='lot_id']" position="after">
+            <field name="expiration_date_quality"></field>
+        </xpath>
+    </field>
+</record>
+    
+    
+    
+    
+    
+    <record id="qulity_quant_search_view" model="ir.ui.view">
+        <field name="name">qulity.stock.quant.search</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <search string="Quants">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="package_id" groups="stock.group_tracking_lot"/>
+                <field name="lot_id" groups="stock.group_production_lot"/>
+                <field name="owner_id" groups="stock.group_tracking_owner"/>
+                <group expand='0' string='Filters'>
+                    <filter name='internal_loc' string="Internal Locations"
+                            domain="[('location_id.usage','=', 'internal')]"/>
+                    <filter name='transit_loc' string="Transit Locations"
+                            domain="[('location_id.usage' ,'=', 'transit')]"/>
+                    <filter name="on_hand" string="On Hand" domain="[('on_hand', '=', True)]"/>
+                    <separator/>
+                    <filter name="negative" string="Negative Stock" domain="[('quantity', '&lt;', 0.0)]"/>
+                    <filter name="positive" string="Positive Stock" domain="[('quantity', '&gt;', 0.0)]"/>
+                    <filter name="reserved" string="Reservations" domain="[('reserved_quantity', '&gt;', 0.0)]"/>
+                    <separator/>
+                    <filter name="filter_in_date" date="in_date"/>
+                </group>
+                <group expand='0' string='Group by...'>
+                    <filter string='Product' name="productgroup" context="{'group_by': 'product_id'}"/>
+                    <filter string='Location' name="locationgroup" domain="[]" context="{'group_by': 'location_id'}"/>
+                    <filter string='Owner' name="owner" context="{'group_by': 'owner_id'}"
+                            groups="stock.group_tracking_owner"/>
+                    <filter string='Lot/Serial Number' name="Lot_Serial_number" context="{'group_by': 'lot_id'}"
+                            groups="stock.group_production_lot"/>
+                    <filter string='Package' name="package" domain="[]" context="{'group_by': 'package_id'}"
+                            groups="stock.group_tracking_lot"/>
+                    <filter string='Company' name="company" domain="[]" context="{'group_by': 'company_id'}"
+                            groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_report_stock_user" model="ir.actions.act_window">
+        <field name="name">Inventory Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="search_view_id" ref="qulity_quant_search_view"/>
+
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Operation.
+            </p>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_qulity_stock_quant_tree_editable">
+        <field name="name">qulity.stock.quant.tree.editable</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <tree   editable="bottom" create="0" edit="0" import="0" 
+                  js_class="singleton_list" sample="1">
+                <field name="id" invisible="1"/>
+                <field name="tracking" invisible="1"/>
+                <field name="product_id" attrs="{'readonly': [('id', '!=', False)]}"
+                       invisible="context.get('single_product', False)" readonly="context.get('single_product', False)"
+                       force_save="1" options="{'no_create': True}"/>
+                <field name="product_group" invisible="0" optional="hide"/>
+                <field name="product_categ_id" invisible="0" optional="hide"/>
+                <field name="location_id" attrs="{'readonly': [('id', '!=', False)]}"
+                       invisible="context.get('hide_location', False)" options="{'no_create': True}"/>
+                <field name="lot_id" groups="stock.group_production_lot"
+                       attrs="{'readonly': ['|', ('id', '!=', False), ('tracking', 'not in', ['serial', 'lot'])],'required': [('tracking', '!=', 'none')]}"
+                       invisible="context.get('hide_lot', False)"
+                       context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                <field name="package_id" groups="stock.group_tracking_lot" attrs="{'readonly': [('id', '!=', False)]}"/>
+                <field name="owner_id" groups="stock.group_tracking_owner" attrs="{'readonly': [('id', '!=', False)]}"
+                       options="{'no_create': True}"/>
+                <field name="quantity" string="On Hand Quantity" invisible="1"/>
+                <field name="inventory_quantity" string="On Hand Quantity" readonly="0" optional="hide"/>
+                <field name="reserved_quantity" optional="hide"/>
+                <field name="usd_value"/>
+                <field name="unit_cost_dollar"/>
+                <field name="available_quantity"/>
+                <field name="product_uom_id" groups="uom.group_uom"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <field name="expiration_date_quality" />
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_qulity_stock_quant_form_editable">
+        <field name="name">qulity.stock.quant.form.editable</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Report" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="tracking" invisible="1" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="product_id" readonly="0" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="location_id" readonly="0" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="lot_id" groups="stock.group_production_lot"
+                                   attrs="{'readonly': [('tracking', 'not in', ['serial', 'lot'])], 'required': [('tracking', '!=', 'none')]}"
+                                   context="{'default_product_id': product_id, 'default_company_id': company_id}" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="package_id" readonly="0" groups="stock.group_tracking_lot" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="owner_id" readonly="0" groups="stock.group_tracking_owner"
+                                   options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name='company_id' groups="base.group_multi_company" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <label for="inventory_quantity" string="Quantity On Hand" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <div class="o_row">
+                                <field name="inventory_quantity" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="product_uom_id" groups="uom.group_uom" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            </div>
+                            <label for="reserved_quantity" string="Quantity Reserved" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <div class="o_row">
+                                <field name="reserved_quantity" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                <field name="product_uom_id" groups="uom.group_uom" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_view_qulity_stock_quant_tree_editable" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_report_stock_user"/>
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_qulity_stock_quant_tree_editable"/>
+    </record>
+
+    <record id="action_qulity_stock_quant_form_editable" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_report_stock_user"/>
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_qulity_stock_quant_form_editable"/>
+    </record>
+
+
+    <menuitem id="menu_sock_report_qulity" name="Inventory Report" parent="operations_quality_menuitem"
+              action="action_report_stock_user" sequence="2"/>
+
+
+</odoo>

@@ -1,0 +1,118 @@
+<odoo>
+    <data>
+        <record id="tree_view_check_report_finalpage" model="ir.ui.view">
+            <field name="name">Check Report</field>
+            <field name="model">check.report</field>
+            <field name="arch" type="xml">
+                <tree string="Check Report">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="form_view_check_report_final" model="ir.ui.view">
+            <field name="name">Check Report</field>
+            <field name="model">check.report</field>
+            <field name="arch" type="xml">
+                <form string="Check Report">
+                    <sheet>
+                        <div style="text-align:center">
+                            <group string="Check Report" col="4" colspan="6"></group>
+                        </div>
+                        <group>
+                            <div>
+                                <group string="Purchase Order">
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                </group>
+                            </div>
+                        </group>
+                        <notebook>
+                            <page name="product" string="product">
+                                <group>
+                                </group>
+                                <field name="order_line">
+                                    <tree editable="bottom">
+                                        <control>
+                                            <create name="add_relation_control" string="Add"/>
+                                        </control>
+                                    <field name="product_id" widget="product_configurator"/>
+                                    <field name="registrationLicense" optional="show"/>
+                                    <field name="registrationLicenseExpiry" optional="show"/>
+                                        <field name="importationPlanName" optional="show"/>
+                                    <field name="importationPlanExpiry" optional="show"/>
+                                        <field name="scientificCommitteeName" optional="show"/>
+                                        <field name="appointmentName" optional="show"/>
+                                        <field name="appointmentaccept" optional="show"/>
+
+                                        <field name="certificateName" optional="show"/>
+                                        <field name="certificateExpiry" optional="show"/>
+                                        <field name="certificatetype" optional="show"/>
+
+                                    <field name="name" widget="section_and_note_text" optional="show"/>
+                                    <field name="product_uom_qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+<!--                            <page name="Certificate" string="Certificate">-->
+<!--                                <group>-->
+<!--                                </group>-->
+<!--                                <field name="certificate_reg">-->
+
+<!--                                    <tree editable="bottom">-->
+<!--                                        <control>-->
+<!--                                            <create name="add_relation_control" string="Add"/>-->
+<!--                                        </control>-->
+
+<!--                                        <field name="regularity_certificate"/>-->
+<!--                                        <field name="regularity_certificate_type"/>-->
+<!--                                        <field name="regularity_certificate_class"/>-->
+<!--                                        <field name="regularity_certificate_issue"/>-->
+<!--                                        <field name="regularity_certificate_expiry"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+
+<!--                            </page>-->
+<!--                            <page name="Certificate" string="Variations">-->
+<!--                                <group>-->
+
+<!--                                </group>-->
+
+
+<!--                                <field name="varition_reg">-->
+
+<!--                                    <tree editable="bottom">-->
+<!--                                        <control>-->
+<!--                                            <create name="add_relation_control" string="Add"/>-->
+<!--                                        </control>-->
+<!--                                        <field name="varition_num"/>-->
+<!--                                        <field name="varition_num_date"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+
+<!--                            </page>-->
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_check_report_line_pages" model="ir.actions.act_window">
+            <field name="name">Check Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">check.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+                <p>
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_check_report_final_views" name="Check Report" parent="regularity_menuitem"
+                  action="action_check_report_line_pages" sequence="19"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surgi_sales_expenses_expenses_lines,expenses lines,model_expenses_lines,,1,1,1,1
+access_surgi_sales_hr_expenses_expenses,hr expenses expenses,model_hr_expenses_expenses,,1,1,1,1
+access_surgi_sales_hr_expenses_event_user,hr expenses event user,model_hr_expenses_event,base.group_user,1,0,0,0
+access_surgi_sales_hr_expenses_event,hr expenses event,model_hr_expenses_event,surgi_sales_expenses.expenses_event_hr_group,1,1,1,1
+access_surgi_sales_hr_expense_expiration,hr expense expiration,model_hr_expense_expiration,,1,1,1,1
+access_surgi_sales_hr_expense_only_view,hr expense view,model_hr_expense,surgi_sales_expenses.expenses_only_view_group,1,0,0,0
