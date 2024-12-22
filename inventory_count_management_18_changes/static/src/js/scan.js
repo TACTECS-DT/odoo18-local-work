@@ -42,6 +42,17 @@ class Scanning extends Component {
                 $(document).ready(function() {
                     self.render_view(fitched_scan_data)    
                     const scanInput = document.querySelector('.scan-input');
+                    console.log(fitched_scan_data," fitched_scan_data")
+                    // scanInput.addEventListener('keydown', (e) => {
+                    //     if (e.key === 'Enter') { // Most barcode scanners send an Enter after the scan
+                    //         self._ActionScanInput(e);
+                    //         self.update_total_scanned_qty();
+                    //         e.preventDefault(); // Prevent form submission or default behavior
+                    //     }
+                    // });
+
+
+         
 
                     scanInput.addEventListener('change', (e) => {
                         self._ActionScanInput(e);
@@ -132,6 +143,11 @@ add_scnned_from_backend(fitched_scan_data) {
 
 
 
+      let isAllCodeCell = document.createElement('td');
+      isAllCodeCell.id = 'is_all_code';
+      isAllCodeCell.setAttribute('data-is-all-code', line.is_all_code);
+      isAllCodeCell.style.display = 'none';
+      row.appendChild(isAllCodeCell);
 
       // Add the Product column
       let productCell = document.createElement('td');
@@ -157,6 +173,11 @@ add_scnned_from_backend(fitched_scan_data) {
       serialNumberCell.textContent = line.line_lot.lot_name
         ? line.line_lot.lot_name
         : line.line_internal_refrence;
+        let lot_idSpan = document.createElement('span');
+        lot_idSpan.id = 'lot_id';
+        lot_idSpan.setAttribute('data-lot-id', line.line_lot.lot_id);
+        serialNumberCell.appendChild(lot_idSpan);
+        
       row.appendChild(serialNumberCell);
   
       // Add the Theoretical Quantity column
@@ -302,20 +323,82 @@ _createOrUpdateRowFromScan(foundData ,scanned_code) {
         ? data.internal_reference
         : data.product.internal_reference;
 
+    
+    // console.log(scanned_code,'scanned_code')
+    // console.log(foundData,"foundData")
+    // console.log(p_internal_reference,"p_internal_reference")
+    let r_lot_id =  source === "all_lots_data" || source === "privet_lots_data"
+    ? data.lot_id
+    : false;
+    let r_lot_name =  source === "all_lots_data" || source === "privet_lots_data"
+    ? data.lot_name
+    : false;
 
+    // console.log(r_lot_name,"r_lot_name")
+    // console.log(r_lot_id,"lot_id")
 
     let line_location_id = this.main_location.location_id;
     let line_location_name = this.main_location.location_name;
 
-    // Check the source and handle logic accordingly
     if (source === "privet_lots_data" || source === "privet_internal_reference_data") {
-        // Search for rows with the same product ID
-        let existingRows = Array.from(tbody.querySelectorAll(`[data-product-id="${productId}"]`));
+
+
+
+let existingRows;
+
+if (source === "privet_lots_data") {
+
+/*
+ filters :
+ productId = productId
+ is_all_code = 0  //privet 
+ data-lot-id = lot_id 
+*/
+
+
+
+    existingRows = Array.from(tbody.querySelectorAll(`[data-product-id="${productId}"]`)).map(cell => cell.closest('tr')) 
+
+        .filter(row => {
+            let isAllCodeInRow = row.querySelector('#is_all_code');
+            
+        // if (!isAllCodeInRow) {
+        //     return false; // Exclude rows without this <td>
+        // }
+            const lotSpan = row.querySelector('span#lot_id');
+            return lotSpan && lotSpan.getAttribute('data-lot-id')== r_lot_id  && isAllCodeInRow.getAttribute('data-is-all-code') ==='0';
+        });
+} 
+
+
+else if (source === "privet_internal_reference_data") {
+
+/*
+ filters :
+ productId = productId
+ is_all_code = 0  //privet 
+ data-lot-id = 'false' 
+ must have is_all_code to avoid old scan lines
+*/
+
+existingRows = Array.from(tbody.querySelectorAll(`[data-product-id="${productId}"]`))
+    .map(cell => cell.closest('tr')).filter(row => {
+        let isAllCodeInRow = row.querySelector('#is_all_code');
+
+        // if (!isAllCodeInRow) {
+        //     return false; // Exclude rows without this <td>
+        // }
+        const lotId = row.querySelector('[data-lot-id]')?.getAttribute('data-lot-id');
+        return lotId === 'false' && isAllCodeInRow.getAttribute('data-is-all-code') ==='0';
+    });
+
+
+}
 
 
         if (existingRows.length > 0) {
             let firstRow = existingRows[0].closest('tr');
-            console.log(firstRow,"firstRow")
+            // console.log(firstRow,"firstRow")
             let scannedQtyInput = firstRow.querySelector('#scanned_Qty_Input');
             scannedQtyInput.value = parseInt(scannedQtyInput.value, 10) + 1; // Increment by 1
 
@@ -330,31 +413,85 @@ _createOrUpdateRowFromScan(foundData ,scanned_code) {
                 productId,
                 productName,
                 p_internal_reference,
+                r_lot_id,
+                r_lot_name,
                 theoreticalQty: this.scan_data.privet_products_data.find(product => product.product_id === productId)?.quantity || 0,
                 is_all_code: 0,
                 line_location_id,
-                line_location_name
-            },scanned_code);
+                line_location_name,
+                
+            },scanned_code,source);
         }
-    } else if (source === "all_lots_data" || source === "all_internal_reference_data") {
-        console.log(tbody,"tbody")
+    }
+    
+    
+    else if (source === "all_lots_data" || source === "all_internal_reference_data") {
 
         let rowsWithCode = Array.from(tbody.querySelectorAll('td')).filter(row => row.hasAttribute('data-is-all-code'));
         
 
-                let existingRow = rowsWithCode.find(row => {
-            let isAllCodeInRow = row.getAttribute('data-is-all-code');
-            let productIdInRow = row.closest('tr').querySelector('[data-product-id]')?.getAttribute('data-product-id');
-            return isAllCodeInRow === '1' && productIdInRow === productId.toString();
-        });
+        let existingRow;
 
+        if (source === "all_lots_data") {
+       
+/*
+ filters :
+ productId = productId
+ is_all_code = 1  //all 
+ data-lot-id = lot_id
+*/
+
+
+
+             existingRow = rowsWithCode.find(row => {
+                let isAllCodeInRow = row.getAttribute('data-is-all-code');
+                let productIdInRow = row.closest('tr').querySelector('[data-product-id]')?.getAttribute('data-product-id');
+                // if (!isAllCodeInRow) {
+                //     return false; // Exclude rows without this <td>
+                // }
+                let rowLot_id = row.closest('tr').querySelector('[data-lot-id]')?.getAttribute('data-lot-id');
+
+
+                return isAllCodeInRow === '1' && productIdInRow === productId.toString()  && rowLot_id === r_lot_id.toString() ;
+            });
         
-        console.log(existingRow,'existingRow')
-        console.log(productId,'productId')
+            
+
+        } 
+        
+        
+        else if (source === "all_internal_reference_data") {
+
+/*
+ filters :
+ productId = productId
+ is_all_code = 1  //all 
+ data-lot-id = 'false'
+*/
+
+
+
+         existingRow = rowsWithCode.find(row => {
+            let rowLot_id = row.closest('tr').querySelector('[data-lot-id]')?.getAttribute('data-lot-id');
+
+        let isAllCodeInRow = row.getAttribute('data-is-all-code');
+        // if (!isAllCodeInRow) {
+        //     return false; // Exclude rows without this <td>
+        // }
+        let productIdInRow = row.closest('tr').querySelector('[data-product-id]')?.getAttribute('data-product-id');
+        return isAllCodeInRow === '1' && productIdInRow === productId.toString()  && rowLot_id === 'false' ;
+    });
+
+
+        }
+
+
         if (existingRow) {
             existingRow = existingRow.closest('tr')
             let scannedQtyInput = existingRow.querySelector('#scanned_Qty_Input');
             scannedQtyInput.value = parseInt(scannedQtyInput.value, 10) + 1; // Increment by 1
+            this.set_last_scan(scanned_code, productName, p_internal_reference);
+
         } else {
             // Add a new row if no existing row found
             this._addRowToTable({
@@ -362,20 +499,24 @@ _createOrUpdateRowFromScan(foundData ,scanned_code) {
                 productId,
                 productName,
                 p_internal_reference,
+                r_lot_id,
+                r_lot_name,
                 theoreticalQty: 0,
                 is_all_code: 1,
                 line_location_id,
-                line_location_name
-            },scanned_code);
+                line_location_name,
+                
+            },scanned_code,source);
         }
     }
 }
 
 // Separate function to add a row to the table
-_addRowToTable({ tbody, productId, productName, p_internal_reference, theoreticalQty, is_all_code, line_location_id, line_location_name },scanned_code) {
+_addRowToTable({ tbody, productId, productName, p_internal_reference,  r_lot_id,
+    r_lot_name,theoreticalQty, is_all_code, line_location_id, line_location_name },scanned_code,source) {
     let row = document.createElement('tr');
 
-    // Hidden column for is_all_code
+
     let isAllCodeCell = document.createElement('td');
     isAllCodeCell.id = 'is_all_code';
     isAllCodeCell.setAttribute('data-is-all-code', is_all_code);
@@ -401,8 +542,23 @@ _addRowToTable({ tbody, productId, productName, p_internal_reference, theoretica
 
     // Serial/Reference Number
     let serialCell = document.createElement('td');
-    serialCell.textContent = scanned_code;
+    serialCell.textContent =   source === "all_lots_data" || source === "privet_lots_data"
+    ? r_lot_name
+    : p_internal_reference;
+    // console.log(source,"r_source 2 ")
+    // console.log(r_lot_name,"r_lot_name 2 ")
+    // console.log(p_internal_reference,"p_internal_reference 2 ")
+
+    let lot_idSpan = document.createElement('span');
+    lot_idSpan.id = 'lot_id';
+    lot_idSpan.setAttribute('data-lot-id', r_lot_id);
+    serialCell.appendChild(lot_idSpan);
+
     row.appendChild(serialCell);
+
+
+
+
 
     // Theoretical Quantity
     let theoreticalQtyCell = document.createElement('td');
@@ -506,7 +662,7 @@ cancel_button () {
  async save_button (e) {
     var self = this;
     let scannedData= self.collect_table_vals()
-    console.log(scannedData); 
+    // console.log(scannedData); 
     if (scannedData && (
         (Array.isArray(scannedData) && scannedData.length > 0) || 
         (typeof scannedData === 'object' && Object.keys(scannedData).length > 0)
@@ -562,13 +718,15 @@ collect_table_vals() {
         // Get scanned quantity input value
         let scannedQty = parseInt(row.querySelector('#scanned_Qty_Input').value, 10) || 0;
         let theoretical_qty = parseInt(row.querySelector('#theoretical_qty').getAttribute('data-theoretical_qty'), 10) || 0;
+        let lot_id = parseInt(row.querySelector('#lot_id').getAttribute('data-lot-id'), 10) || 0;
         
         // Add the data to the scannedData array
         Data.push({
             "product_id": productId,
             "qty": scannedQty,
             "old_line_id": old_line_id,
-            "theoretical_qty": theoretical_qty
+            "theoretical_qty": theoretical_qty,
+            "lot_id": lot_id
         });
     });
 

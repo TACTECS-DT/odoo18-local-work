@@ -37,6 +37,7 @@ class InventoryCountSession(models.Model):
                                 'location_id': location_id, 
                                 'scanned_qty': i['qty'], 
                                 'theoretical_qty': i['theoretical_qty'], 
+                                'lot_id': i['lot_id'], 
                                 })
                 
         msg = "done"
@@ -52,23 +53,12 @@ class InventoryCountSession(models.Model):
             rec = self.env['setu.inventory.count.session'].search([('id', '=', active_id)])
             company = rec.inventory_count_id.company_id
             session_line_ids = rec.session_line_ids
-            session_line_ids_Data = [{
-                "line_id" : i.id,
-                "line_product" :{"product_id":i.product_id.id,"product_name":i.product_id.name},
-                "line_tracking" : i.tracking,
-                "line_lot" : {"lot_id": i.lot_id.id,"lot_name":i.lot_id.name},
-                "line_internal_refrence" : i.product_id.default_code if i.product_id.tracking =='none' else False ,
-                
-                "line_location" : {"location_id":i.location_id.id,"location_name": i.location_id.complete_name},
-                "line_quantity" : i.scanned_qty,
-                "line_theoretical_qty" : i.theoretical_qty,
 
-            }for i in session_line_ids]
-     
+            all_products = self.env["product.product"].search([])
             
-            all_lots = self.env["stock.lot"].search([])
+            all_lots = self.env["stock.lot"].search([("product_id.tracking","=","lot")])
             
-            privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id)])
+            privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id),("product_id.tracking","=","lot")])
             if not privet_lots :
                 raise ValidationError("no lots found  in  this location")
             
@@ -76,7 +66,6 @@ class InventoryCountSession(models.Model):
             if not privet_quants :
                 raise ValidationError("no quants found  in  this location")
             
-            all_products = self.env["product.product"].search([])
 
 
             all_products_data = [{
@@ -95,25 +84,29 @@ class InventoryCountSession(models.Model):
                 "internal_reference" :i.product_id.default_code ,
                 } for i in privet_quants]
             
+            privet_products_ids = [i.product_id.id for i in privet_quants]
+            
 
             all_lots_data = [{
                 "lot_id" :i.id ,
                 "lot_name" :i.name ,
-                 "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name,"internal_reference":i.product_id.default_code}    
+                 "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name ,"internal_reference" :i.product_id.default_code }    
                 } for i in all_lots]
 
             privet_lots_data = [{
                 "lot_id" :i.id ,
                 "lot_name" :i.name ,
-                 "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name,"internal_reference":i.product_id.default_code}    
+                 "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name ,"internal_reference" :i.product_id.default_code}    
                 } for i in privet_lots]
+
+            privet_lots_ids = [i.id  for i in privet_lots]
 
 
             all_internal_reference_data = [{
                 "internal_reference" :i["internal_reference"] ,
                 "product" : {"product_id":i["product_id"],"product_name":i["product_name"]} ,
              
-                } for i in all_products_data]
+                } for i in all_products_data if  i["tracking"] =='none']
 
 
 
@@ -121,10 +114,23 @@ class InventoryCountSession(models.Model):
             privet_internal_reference_data = [{
                 "internal_reference" :i["internal_reference"] ,
                 "product" : {"product_id":i["product_id"],"product_name":i["product_name"]} ,
-                } for i in privet_products_data]
+                } for i in privet_products_data if  i["tracking"] =='none']
 
 
+            session_line_ids_Data = [{
+                "line_id" : i.id,
+                "is_all_code" : '0' if i.product_id.id in privet_products_ids or i.lot_id.id in  privet_lots_ids else '1',
+                "line_product" :{"product_id":i.product_id.id,"product_name":i.product_id.name},
+                "line_tracking" : i.tracking,
+                "line_lot" : {"lot_id": i.lot_id.id,"lot_name":i.lot_id.name},
+                "line_internal_refrence" : i.product_id.default_code if i.product_id.tracking =='none' else False ,
+                
+                "line_location" : {"location_id":i.location_id.id,"location_name": i.location_id.complete_name},
+                "line_quantity" : i.scanned_qty,
+                "line_theoretical_qty" : i.theoretical_qty,
 
+            }for i in session_line_ids]
+     
 
 
             main_location ={
