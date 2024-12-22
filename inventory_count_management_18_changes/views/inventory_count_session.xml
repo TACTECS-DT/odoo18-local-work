@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <record id="invintory_count_session_form_changes"  model="ir.ui.view">
+        <field name="name">invintory.count.session.form.changes</field>
+        <field name="model">setu.inventory.count.session</field>
+        <field name="inherit_id" ref="setu_inventory_count_management_18.inventory_count_session_form_view"/>
+        <field name="arch" type="xml">
+
+
+
+            <xpath expr="//header" position="inside">
+
+             <button class="startscanclass" name="%(action_start_scanning)d" type="action" string="Start Scan" 
+                  />
+<!-- invisible = "not use_barcode_scanner or state !='In Progress' or current_state =='Pause'" -->
+            </xpath> 
+
+
+        </field>
+    </record>
+
+
+
+    </data>
+</odoo>

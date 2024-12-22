@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Inventory Count / Stock Take | Setu Consulting Services Pvt. Ltd. | Odoo | ERP Consultant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://www.setuconsulting.com/css/fonts.css" rel="stylesheet">
+    <link href="https://www.setuconsulting.com/css/plugins.css" rel="stylesheet">
+    <!-- <link href="https://www.setuconsulting.com/css/style.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style type="text/css">
+        .mt50{
+            margin-top: 50px;
+        }
+        .mr20{
+            margin-right: 50px;
+        }
+    </style>
+</head>
+
+<body style="background-image: url('images/bgimage5.jpeg'); background-position: center center; background-repeat: no-repeat;background-attachment: fixed; background-size: cover;">
+<div class="container">
+    <!-- Header -->
+    <div class="row justify-content-md-between justify-content-center border-bottom align-items-center py-2 mx-0">
+        <div id="logo">
+            <img src="images/odoo_images/setu.png" width="150px" class="logo-default" data-toggle="tooltip" data-placement="right" title="Setu Consulting Services Pvt. Ltd." alt="Setu Consulting Services Pvt. Ltd.">
+        </div>
+        <!-- <div class="mt-md-0 mt-3 mr-3">
+            <a class="btn btn-outline-warning btn-sm mb-2 mb-lg-0" style="font-size: 13px; border-radius: 4px !important; position: relative; overflow: hidden; color: #585e64; padding: 10px 4px;line-height: 0px;"><i class="fa fa-user"></i><strong><span class="ml-2 mr-3">Username : demo@setuconsulting.com</span></strong> </a>
+            <a class="btn btn-outline-warning btn-sm mb-2 mb-lg-0" style="font-size: 13px; border-radius: 4px !important; position: relative; overflow: hidden; color: #585e64; padding: 10px 4px;line-height: 0px;"><i class="fa fa-key"></i><strong><span class="ml-2 mr-3">Password : demo</span></strong></a>
+        </div> -->
+        <div class="text-center">
+            <a href="mailto:apps@setuconsulting.com?subject=Inventory Count Version 16.0 - Demo Request" target="_blank" class="btn btn-primary mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request a demo</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="text-center">
+                <a class="btn btn-primary mb-4 mt-3" style="width: auto;font-weight: bold;font-size: 32px;background: linear-gradient(to right, #F27E00, #F29500);box-shadow: 0px 0px 6px 3px #d7e5f1;padding-top: 12px;padding-bottom: 12px;padding-left: 60px;padding-right: 60px;border-radius: 28px; color: white; border: none;" target="_blank">
+                    Inventory Count / Stock Take
+                </a>
+                <a href="https://www.youtube.com/playlist?list=PLH6xCEY0yCIAj4TjwiQLbBfUdTqh9zOgE" target="_blank"><img src="images/video_userguide.png" title="Video user guide" alt="Video user guide" width="300px" class="ml-4">
+                </a>
+            </div>
+            <!-- <h1 class="text-center">Advance Inventory Reports</h1> -->
+            <div class="row p-3 pt64 pb64 shadow" style="border-radius:10px; padding:5px; border-top:4px solid #5A63A6; width: 100%">
+                <div class="col-lg-8 text-center">
+                    <!-- <h2 class="mb-3">OVERVIEW</h2> -->
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify;" class="px-sm-4 p-2">
+                        In this fastest growing technology world, almost all Businesses with Multiple Products and Multiple Warehouses uses Inventory Management Solutions for Automating all processes to Manage Inventory but because of various reasons like physically damaged products, theft reasons, misplacement of products and many such real time incidencies, it is mandatory to compare and match What quantity of products do you have physically versus what your Stock count or Inventory Management Software says you should have?
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/inventory-count-setu-consulting.jpg" alt="Inventory Count" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+
+                <div class="col-lg-4 mt32">
+                    <img src="images/stock-take.png" alt="Stock Take" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-8 text-center">
+                    <p style="font-size: 18px; letter-spacing: 0.2px; text-align: justify; margin-top: 20px" class="px-sm-4 p-2">
+                        Inventory Count Solution designed by us not only allows you to avoid such discrepancies and get rid of such Nightmares but manage various other processes too in Automated way while syncing up the Physical availability of products to the one with stock count in Inventory Management Software.
+                    </p>
+                </div>
+
+                <div class="col-lg-12" style="margin-top: 30px;">
+                    <div class="card mb-3">
+                        <div class="card-header"><b>It Automates and solves various process of your Business while counting stock manually like</b></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Which employee will perform this process of Physical Stock Count?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Which Manager will take analytical decisions?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">How much time does your employee spend to count inventories?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Which employee will perform Inventory counting for which Warehouse and which location?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">How to analyze  the accuracy and performance of employees?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">How to manage and synchronize multiple teams at multiple locations simultaneously for a large number of products and multiple Warehouses?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">How to analyze and decide which manager employees are involved in which Physical count task to plan and assign future work?</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Decide on approval or rejection of Inventory count by employee</li>
+                                <li class="mb-2" style="list-style: none;"><img src="images/redo.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Barcode scanning system feasibility also provided with this solution for counting products with Multiple Quantities avoiding manual count and thus error.</li>
+                            </li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-justify text-muted" data-animate="fadeIn" data-animate-delay="400">
+                <font size="4"></font>
+            </p><br>
+            
+            <!-- KEY FEATURES START -->
+            <!-- <h2 class="text-left">Price Tracker</h2> -->
+            <h5 class="text-right">
+                <span style="padding: .3em .8em; color: #ffffff; background-color: #875A7B !important; font-size: 16px; border-radius: 2px;"><b><i class="fa fa-check"></i> Enerprise</b></span>
+                <span style="padding: .3em .8em; color: #ffffff; background-color: #875A7B !important; font-size: 16px; border-radius: 2px;"><b><i class="fa fa-check"></i> Community</b></span>
+                <span style="padding: .3em .8em; color: #ffffff; background-color: #875A7B !important; font-size: 16px; border-radius: 2px;"><b><i class="fa fa-check"></i> Odoo.sh</b></span>
+            </h5>
+            
+            <div class="row border-left-0 position-relative align-items-center px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b; border-radius: 35px; border-top-left-radius: 0;border-bottom-left-radius:0; margin-top: -2px; margin-left: 15px;">
+                <div class="col-lg-4">
+                    <img src="images/index_images/inventory-planner.png" alt="Set Planner for Inventory Count" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h2 class="text-center mb-3">Set Plannar</h2>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">Planner of Inventory Counting can be set based on Users’ choice where user can </li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Set Warehouse in which Inventory Count should be performed</li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Set Frequency Day after which every time checking should be performed.</li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Set type whether counting should be done for a single or Multiple session</li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">Select Products that should be checked.</li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <div class="row position-relative border-right-0 px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b;margin-top: -2px ;transform: translateX(-35px);;border-radius: 35px;border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 20px">
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h3 class="text-center mb-3">Track Records of Inventory Count</h3>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">Users can track records and status of Inventory Count done based on Scheduled Action by setting planar of Inventory Count.</li>
+                        </font>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/index_images/track-records-of-inventory-count.png" alt="Track Records of Inventory Count" width="90%" height="90%" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+            </div>
+            <div class="row border-left-0 position-relative align-items-center px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b; border-radius: 35px; border-top-left-radius: 0;border-bottom-left-radius:0; margin-top: -2px; margin-left: 15px">
+                <div class="col-lg-4">
+                    <img src="images/index_images/manage-multiple-session-simultaneously.png" alt="Manage multiple Session simultaneously" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h2 class="text-center mb-3">Manage multiple Session simultaneously</h2>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">It allows you to set and manage multiple sessions to verify physical quantity of products when there are multiple Warehouses and Multiple locations where a single user performing a complete task becomes too time consuming and practically impossible.</li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <div class="row position-relative border-right-0 px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b;margin-top: -2px ;transform: translateX(-35px);;border-radius: 35px;border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 20px">
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h3 class="text-center mb-3">Analysis over performance of employee</h3>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">Allows managers to analyze the performance of employees by comparing how much time is being taken by employees to complete the assigned work.</li>
+                        </font>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/index_images/employee-performance-analysis.jpg" alt="Analysis over performance of employee" width="90%" height="90%" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+            </div>
+            <div class="row border-left-0 position-relative align-items-center px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b; border-radius: 35px; border-top-left-radius: 0; border-bottom-left-radius: 0; margin-top: -1px; margin-left: 15px">
+                <div class="col-lg-5 text-center order-lg-0 order-1">
+                    <img src="images/index_images/employee-work-accuracy.jpg" alt="Analysis over accuracy of work done by employee" style="width:90%; border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-7 order-lg-1 order-0">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h2 class="text-center mb-3">Analysis over accuracy of work done by employee</h2>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">Allows to analyze the performance throughput of employees and take necessary decisions by comparing the physical quantity counted by them and the one in the system.</li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <div class="row position-relative border-right-0 px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b;margin-top: -2px ;transform: translateX(-35px);;border-radius: 35px;border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 20px">
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h3 class="text-center mb-3">Approve/Reject based on discrepancy generated</h3>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">Allows manager to analyze and take action to either approve or reject the quantity counted by User based on real time analysis and discrepancies</li>
+                        </font>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/index_images/approved-rejected.png" alt="Approve/Reject based on discrepancy generated" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;" width="70%" height="70%">
+                </div>
+            </div>
+            <div class="row border-left-0 position-relative align-items-center px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b; border-radius: 35px; border-top-left-radius: 0;border-bottom-left-radius:0; margin-top: -1px; margin-left: 15px">
+                <div class="col-lg-4">
+                    <img src="images/index_images/inventory-count-report.jpg" alt="Inventory Count Report" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h2 class="text-center mb-3">Inventory Count Report</h2>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">This report allows you to track and analyze over the difference in quantity  between the theoretical quantity in system and the counted quantity for the products belonging to which Warehouse at Which location.</li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <div class="row position-relative border-right-0 px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b;margin-top: -2px ;transform: translateX(-35px);;border-radius: 35px;border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 20px">
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                        <h3 class="text-center mb-3">Adjustment Report</h3>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">This report allows you to track and identify that for which products of which Warehouse at which location</li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">The counted quantity is more than the one in system and what adjustment of quantity was done aiding to solve overstock Nightmare</li>
+                        </font>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none"><img src="images/next.svg" alt="arrow" style="width:15px;margin-right:10px" class="ml-4">The counted quantity is less than the one in system and what adjustment of quantity was done aiding to solve Out-of-Stock Nightmare</li>
+                        </font>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/index_images/inventory-adjustment-report.png" alt="Adjustment Report" width="110%" height="110%" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+            </div>
+            <div class="row border-left-0 position-relative align-items-center px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b; border-radius: 35px; border-top-left-radius: 0; border-bottom-left-radius: 0; margin-top: -1px; margin-left: 15px">
+                <div class="col-lg-5 text-center order-lg-0 order-1">
+                    <img src="images/index_images/user-statistics-report.png" alt="User Statistic Report" style="width:60%; border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+                <div class="col-lg-7 order-lg-1 order-0">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h2 class="text-center mb-3">User Statistic Report</h2>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">This report allows you to analyze which user performed how many tasks and what percentage of calculative mistakes were done by the user and thus analyze over performance of the user.</li>
+                        </font>
+                    </ul>
+                </div>
+            </div>
+            <div class="row position-relative border-right-0 px-sm-5 py-sm-5 px-1 py-4" style="border: 2px solid #875a7b;margin-top: -2px ;transform: translateX(-35px);;border-radius: 35px;border-top-right-radius: 0;border-bottom-right-radius: 0; margin-right: 20px">
+                <div class="col-lg-8">
+                    <ul class="list-unstyled pl-0" style="font-size:15px;">
+                        <h3 class="text-center mb-3">Informative Dashboard</h3>
+                        <font size="4">
+                            <li class="mb-4" style="list-style: none">You can analyze and gather all information about current status of each Inventory Count session displaying all details about time, date, users assigned, manager assigned, total number of products with Warehouse Location under calculation, number of products scanned and number of products remaining to count and all such details in most user friendly manner</li>
+                        </font>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img src="images/index_images/informative-dashboard.png" alt="SMART reporting" class="w-100" style="border-radius: 10px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                </div>
+            </div>
+            <!-- <div class="row py-sm-5 px-1 py-4">
+                <h2 class="w-100 text-center my-3">Key Features</h2>
+                <div class="text-center w-100 mb-4">
+                    <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                </div>
+                <img src="images/Sales-Purchase-price-tracker-features.png">
+            </div> -->
+        <div class="line"></div>
+    </div>
+
+    <!-- tab view START -->
+    <h2 class="w-100 text-center my-3">Screenshots</h2>
+    <div class="text-center w-100 mb-4">
+        <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+    </div>
+    <div class="row pt-4 px-3">
+        <div class="w-100">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs mb-4 justify-content-center bg-transparent">
+<!--                 <li class="nav-item ml-4">
+                    <a class="nav-link active" style="border-top-left-radius: .25rem;border-top-right-radius: .25rem; font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#product-performance">Product Performance</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="border-top-left-radius: .25rem;border-top-right-radius: .25rem;font-family: Roboto;font-weight: 500;" data-toggle="tab" href="#sales-performance">Sales Performance</a>
+                </li> -->
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- Screenshots Start -->
+                <div class="tab-pane fade show active" id="product-performance">
+                    <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966;">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <ul class="list-unstyled pl-0  bg-white" style="font-size:15px;">
+                                    <li class="d-flex align-items-baseline mb-2 p-3 font-weight-bold" style="border-radius: 10px;font-size: 16px;">
+                                        <span class="text-center " style="font-size: 40px;font-weight: 400;color: #8482b2;">
+                                        <!-- Screenshots start -->
+                                            <div class="row">
+                                                <!-- <div class="text-center" style="width:100%">
+                                                    <h3 style="font-family: San Francisco;">Shopify</h3>
+                                                </div> -->
+                                                <div id="product_performance" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                                                    <div class="carousel-inner" >
+                                                        <div class="carousel-item px-4 active">
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/0-inventory-count.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Create Inventory Count
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-lg-gutters">
+                                                                <img src="images/screenshots/1-create-inventory-count.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-left mb-2">
+                                                                <ul style="list-style-type: disc;">
+                                                                    <li>Select Approver</li>
+                                                                    <li>If use Barcode set it ON</li>
+                                                                    <li>Select Warehouse and Location</li>
+                                                                    <li>Select Type of Session</li>
+                                                                    <li>Add Products for Count</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/2-inventory-count-form.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-left mb-2">
+                                                                Create Session
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/3-create-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-left mb-2">
+                                                                Select user/s for Session
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/4-select-user-for-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-left mb-2">
+                                                                <ul style="list-style-type: disc;">
+                                                                    <li>Inventory Started</li>
+                                                                    <li>Inventory Count Reference Number</li>
+                                                                    <li>Users Selected</li>
+                                                                    <li>Selected Locations and Warehouses</li>
+                                                                    <li>List of Products with Child locations</li>
+                                                                    <li>Details of Total Products, Total Scanned Products, and to be Scanned Products</li>
+                                                                    <li>Session Type</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/5-inventory-count-start-with-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Inventory Count Sessions
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/6-inventory-count-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Inventory Count Session in Progress
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/7-inventory-session-in-progress.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Inventory Count Session in Progress
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/7-inventory-session-in-progress.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Inventory Count Session Submitted
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/8-session-submited.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                For Rejected lines Create Re-Session
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/9-create-resession.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Re-session from done Session for Rejected Product Lines
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/10-resession-from-done-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Re-session from done Session for Rejected Product Lines
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/10-resession-from-done-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Submitted Session Details
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/11-submitted-session-details.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Re-Session details
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/12-resession-details.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Once Inventory Session Completed, Complete the Counting
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/13-inventory-count-completed.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Session Submitted to Approver
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/14-session-submitted-to-approver.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                Multi User Session Type
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/15-multi-user-type-session.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item px-4">
+                                                            <div style="font-size: 20px;color: #A24789;" class="text-center mb-2">
+                                                                More then One Sessison at a time for Multi User Type
+                                                            </div>
+                                                            <div class="row pb-sm-4 no-gutters">
+                                                                <img src="images/screenshots/16-multi-session-for-multi-user-type.png" style="max-width: 100%;" class="responsive">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#product_performance" data-slide="prev" style="left: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#product_performance" data-slide="next" style="right: -5%; width: 60px;">
+                                                        <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Screenshots Over -->
+            </div>
+        </div>
+    </div>
+    <!-- tab view END -->
+
+    <!-- SUGGESTED APPS -->
+    <div class="container" style="width: 100%;">
+        <div class="row">
+            <div class="col-sm-6 col-md-12 px-2">
+                <h2 class="w-100 text-center my-3">Suggested Apps</h2>
+                <div class="text-center w-100 mb-4">
+                    <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+                </div>
+            </div>
+            <div class="card border-0" style="border-radius: .25rem;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); color: #002966; width: 100%;">
+                <div id="demo11" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                    <div class="row">
+                        <div id="apps" class="carousel slide col-12 col-lg-12 mx-auto" data-ride="carousel">
+                            <div class="carousel-inner pt-lg-5" >
+                                <div class="carousel-item active">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_advance_reordering/" target="_blank">
+                                        <img src="images/odoo_images/advance-reordering.png" alt="Advance Reordering" width="450px"  style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_advance_inventory_reports/" target="_blank">
+                                        <img src="images/odoo_images/advance-inventory-reports.png" alt="Advance Inventory Reports" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_intercompany_transaction/" target="_blank">
+                                        <img src="images/odoo_images/inter-company-transfer.png" alt="Inter Company Transfer" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_inventory_ledger_report/" target="_blank">
+                                        <img src="images/odoo_images/inventory-ledger-report.png" alt="Inventory Ledger Report" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_abc_analysis_reports/" target="_blank">
+                                        <img src="images/odoo_images/abc-analysis.png"alt="ABC Analysis Reports" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_rfm_analysis/" target="_blank">
+                                        <img src="images/odoo_images/rfm-analysis.png" alt="RFM Analysis" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_rma" target="_blank">
+                                        <img src="images/odoo_images/ledgerCard.png"alt="Return Merchandise Authorization / Website RMA" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_sales_purchase_price_tracker/" target="_blank">
+                                        <img src="images/odoo_images/price-tracker.png" alt="Sales - Purchase Price Tracker" width="450px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_customer_rating" target="_blank">
+                                        <img src="images/odoo_images/customer-rating.png"alt="Customer Rating" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_shopify_connector" target="_blank">
+                                        <img src="images/odoo_images/odoo-shopify-connector.png" alt="Odoo Shopify Connector" width="450px" height="230px" class="ml-4"></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row pb-sm-4 no-lg-gutters">
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/setu_sales_product_performance_report/" target="_blank">
+                                        <img src="images/odoo_images/inventory-count.png"alt="Sales and Product performance Report" width="450px" style="margin-left: 100px; margin-right:10px"></a>
+                                        <!-- <a href="https://apps.odoo.com/apps/modules/15.0/setu_sales_purchase_price_tracker/" target="_blank">
+                                        <img src="images/odoo_images/price-tracker.png" alt="Sales - Purchase Price Tracker" width="450px" class="ml-4"></a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#apps" data-slide="prev" style="left: -5%; width: 60px;">
+                                <i class="fa fa-chevron-circle-left" style="font-size: 2vw;color: #875a7b;"></i>
+                            </a>
+                            <a class="carousel-control-next" href="#apps" data-slide="next" style="right: -5%; width: 60px;">
+                                <i class="fa fa-chevron-circle-right" style="font-size: 2vw;color: #875a7b;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FREE SUPPORT -->
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; padding:5px; border-left:4px solid #5A63A6; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h5 class="font-weight-bold">FREE SUPPORT</h5>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">We will provide free support for any issues, queries, and bug fixing upto 90 days from the date of purchase of this application. 
+                    </p>
+                    <a href="mailto:support@setuconsulting.com?subject=Inventory Count Version 16.0 - Support Request" target="_blank" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request free support</span></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; padding:5px; border-left:4px solid #5A63A6; height: 150px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h3 class="font-weight-bold">NOTE</h3>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">
+                        Get notified about latest update. Please drop an email when you make purchase at
+                        <a href="mailto:sales@setuconsulting.com?subject=Inventory Count Version 16.0 - New Purchase" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Setu Consulting</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-12 mt-6 px-2 text-center">
+        <img src="images/odoo_images/odoo-services-1.png" class="responsive" style="margin:2px 2px 2px 2px;  box-shadow: -1px 0px 10px 2px #888;" alt="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner" title="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

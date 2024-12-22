@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inventory_session_details_tree_view" model="ir.ui.view">
+        <field name="name">inventory_session_details_tree_view</field>
+        <field name="model">inventory.session.details</field>
+        <field name="arch" type="xml">
+            <list string="Inventory Session History" create="0" edit="0" delete="0">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="duration" string='Duration (H:M:S)'/>
+            </list>
+        </field>
+    </record>
+</odoo>

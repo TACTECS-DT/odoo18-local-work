@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inventory_count_session_form_view" model="ir.ui.view">
+            <field name="name">.inventory_count_session.form</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Count Session" create="0">
+                    <div class="alert alert-info" role="alert"
+ invisible="not current_scanning_location_id"
+
+                         >
+                        <strong>Currently scanned Details : </strong>
+                        <div  invisible="not current_scanning_location_id">
+                            <strong>Location : </strong>
+                            <strong>
+                                <field name="current_scanning_location_id" readonly="1" force_save="1"/>
+                            </strong>
+                        </div>
+                        <div invisible="not current_scanning_lot_id">
+                            <strong>Lot/Serial Number : </strong>
+                            <strong>
+                                <field name="current_scanning_lot_id" readonly="1" force_save="1"/>
+                            </strong>
+                        </div>
+                        <div
+                          invisible="not current_scanning_product_id">
+                            <strong>Product : </strong>
+                            <strong>
+                                <field name="current_scanning_product_id" readonly="1" force_save="1"/>
+                            </strong>
+                        </div>
+                    </div>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="Draft,In Progress,Done"/>
+                        <field name="count_state" invisible="1"/>
+                        <field name="is_session_approved" invisible="1"/>
+                        <field name="current_state" invisible="1"/>
+                        <field name="session_ids" invisible="1"/>
+                        <field name="re_open_session_bool" invisible="1"/>
+                        <field name="rejected_lines_count" invisible="1"/>
+                        <button name="start" type="object" string="Start" class="oe_highlight"
+                             
+                             
+                             invisible="state =='Cancel' or current_state !='Created'"
+                            />
+                        <button name="pause" type="object" string="Pause" class="oe_highlight"
+                         
+                         
+                                invisible="state =='Cancel' or current_state in ['Created','Pause','End'] "
+
+                                />
+                        <button name="resume" type="object" string="Resume" class="oe_highlight"
+   invisible="state =='Cancel' or current_state   in ['Created','Resume','Start','End']"
+
+                        />
+                        <button name="submit" type="object" string="Submit" class="oe_highlight"
+
+   invisible="state =='Cancel' or current_state  not in ['Start','Resume']"
+/>
+                        <!--                        <button name="submit" type="object" string="SUBMIT" class="oe_highlight"-->
+                        <!--                                attrs="{'invisible':['|',('state','in',['Submitted','Done']),('current_state','!=','End')]}"/>-->
+                        <button name="approve_all_lines" type="object" string="Approve Session Lines"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                class="oe_highlight"
+
+   invisible="state !='Submitted' or state =='Done' or  is_multi_session or session_line_ids == []"
+                        />
+                        <button name="reject_all_lines" type="object" string="Reject Session Lines"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                class="oe_highlight"
+  invisible="state !='Submitted' or  state =='Done' or  is_multi_session or session_line_ids == []"
+
+
+                                />
+                        <button name="create_re_session" type="object" string="Create Re-Session" class="oe_highlight"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+  invisible="not re_open_session_bool or is_multi_session"
+                    />
+                        <button name="validate_session" type="object" string="Validate" class="oe_highlight"
+                                confirm="Are you sure you want to Validate the Session? "
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+
+  invisible="state !='Submitted' or state =='Done' or  is_multi_session"
+                                
+                            />
+                        <button name="cancel_session" type="object" string="Cancel" class="oe_highlight"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                confirm="Are you sure you want to Cancel the Session ? "
+  invisible="state !='Draft'"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_session_history" type="object" class="oe_stat_button"
+                                    icon="fa-clock-o"
+
+  invisible="current_state =='Created'" >
+                                <field name="time_taken"/>
+                            </button>
+                            <field name="count_child_session_ids" invisible="1"/>
+                            <button name="action_open_child_sessions" type="object" class="oe_stat_button"
+                                    icon="fa-pencil-square-o"
+  invisible="count_child_session_ids == 0">
+                                <field name="count_child_session_ids" widget="statinfo" string="Re-Session"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <div style="margin-bottom: 10px;word-wrap: break-word;border: 1px dotted;padding: 3px;font-weight: bold;color: #666666;background: antiquewhite;"
+
+  invisible="not use_barcode_scanner">
+                                <p>
+                                    <strong>1.</strong> Scan the location first<br/>
+                                    <strong>2.</strong> If "No Tracking" type product then directly scan the product's Barcode.<br/>
+                                        &#160;&#160;&#160;&#160;&#160;If "Serial" type product then scan Barcode of the serial number<br/>
+                                        &#160;&#160;&#160;&#160;&#160;If "Lot" type product then scan Barcode of lot and then scan product's Barcode, if you want change the lot<br/>
+                                        &#160;&#160;&#160;&#160;&#160;then scan again the Barcode of lot and rest will be the same.<br/>
+                                    <strong>3.</strong> Change the location every time if you start to scan the product of different location.
+                                </p>
+                            </div>
+                            <div>
+                            <h1>
+                                <field name="name" nolabel="1" readonly="1"/>
+                            </h1>
+                            </div>
+
+                        </div>
+                        <group>
+                            <group>
+                                <field name="inventory_count_id" readonly="1" groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"/>
+                                <field name="user_ids" widget="many2many_tags"
+
+    readonly="1"/>
+                                <field name="location_id" readonly="1"/>
+                                <field name="warehouse_id" readonly="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="use_barcode_scanner" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="session_start_date" readonly="1" invisible="1"/>
+                                <field name="session_end_date" readonly="1" invisible="1"/>
+                                <field name="session_submit_date" string="Submit Date" readonly="1"
+                                invisible="not session_submit_date"
+                                       />
+                                <field name="total_products" readonly="1"/>
+                                <field name="total_scanned_products" readonly="1"/>
+                                <field name="is_multi_session" invisible="1"/>
+                                <field name="to_be_scanned" readonly="1"/>
+                                <field name="type"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Session Lines">
+                                    <field name="session_line_ids"
+                                      force_save="1"
+                                           nolabel="1"
+                                                readonly="current_state not in ['Start', 'Resume']"
+                                            >
+                                        <list decoration-muted="state=='Reject'" decoration-danger="is_system_generated" delete="true" editable="bottom"
+                                              decoration-primary="state=='Pending Review'">
+                                            <field name="date_of_scanning" invisible="1"/>
+                                            <field name="product_id" required="True" force_save="1"
+                                                   options="{'no_create_edit': True, 'no_create': True}"
+                                                readonly="parent.use_barcode_scanner"
+                                                    
+                                                />
+                                            <field name="tracking" invisible="1"
+                                                readonly="parent.use_barcode_scanner"
+
+
+                                                  />
+                                            <field name="serial_number_ids" widget="many2many_tags" force_save="1"
+                                                   domain="[('product_id', '=', product_id)]"
+                                                   options="{'no_create_edit': True, 'no_create': True}"
+              readonly="tracking != 'serial'  or  parent.use_barcode_scanner"
+              required="tracking == 'serial'"
+
+                                               />
+                                            <field name="not_found_serial_number_ids" widget="many2many_tags" force_save="1" readonly="1"/>
+                                            <field name="lot_id" force_save="1"
+                                                   options="{'no_create_edit': True, 'no_create': True}"
+                                                   domain="[('product_id', '=', product_id)]"
+                                                  
+                                                readonly="parent.use_barcode_scanner or tracking !='lot'"
+                                                required="tracking == 'lot'"
+                             
+                                               />
+                                            <field name="location_id" force_save="1" required="1"
+                                                   domain="[('usage','=','internal'),('company_id','=',parent.company_id)]"
+                                                   options="{'no_create_edit': True, 'no_create': True}"
+
+
+                                                readonly="parent.use_barcode_scanner "
+
+
+                                             />
+                                            <field name="theoretical_qty"
+                                                   force_save="1"
+                                                   groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                                   readonly="1"
+                                                   />
+                                            <!--attrs="{'readonly': [('parent.use_barcode_scanner', '=', True)]}"-->
+                                            <!--groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"-->
+                                            <field name="is_multi_session" invisible="1"/>
+                                            <!--                                        <field name="state" invisible="1"/>-->
+                                            <!--                                        <field name="theoretical_qty" string="Theoretical QTY"-->
+                                            <!--                                               attrs="{'column_invisible':[('parent.count_state','!=','Draft')]}"-->
+                                            <!--                                               readonly="1"/>-->
+                                            <!--                                        <field name="qty_in_stock" string="Theoretical QTY" readonly="1"-->
+                                            <!--                                               attrs="{'column_invisible':[('parent.count_state','=','Draft')]}"/>-->
+                                            <field name="scanned_qty" string="Counted Qty" force_save="1"
+
+                               readonly="parent.current_state in ['Created','Pause','End']  or  product_scanned or not product_id or not location_id"           
+                                            />
+                                            <!--                                        <field name="is_discrepancy_found" string="Discrepancy" readonly="1" invisible="1"-->
+                                            <!--                                               force_save="1" style="text-align:center !important;"/>-->
+                                            <!-- <field name="state"  readonly="1" attrs="{'column_invisible': [('parent.type', '=', 'Multi Session')]}"/>-->
+                                            <!--                                               attrs="{'readonly':[('parent.state','!=','Submitted')]}"-->
+                                            <field name="state" readonly="1"
+
+                            column_invisible="parent.type == 'Multi Session' or parent.state not in ['Submitted', 'Done']"
+                                            
+                                                   style="text-align:center !important;"/>
+                                            <field name="user_calculation_mistake" readonly="1"
+                                                
+                                 column_invisible="parent.type == 'Multi Session'"
+                                                
+                                            
+                                                   style="text-align:center !important;"/>
+                                            <field name="product_scanned" string="Scanned?"
+                                                   style="text-align:center !important;"
+        readonly="not product_id or parent.current_state in ['Created','Pause','End']"
+/>
+                                            <!--                                            <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">-->
+                                            <field name="is_system_generated" invisible="1"/>
+                                            <button string="Scan"
+
+                                            invisible="parent.current_state not in ['Start','Resume'] or  product_scanned"
+                                                 
+                                                    style="font-size: 1rem; font-weight: bold;"
+                                                    class="oe_highlight"
+                                                    type="object"
+                                                    name="set_mark_scanned"/>
+                                            <button string="Unscan"
+                   invisible="parent.current_state not in ['Start','Resume'] or  not product_scanned"
+                                                    style="font-size: 1rem; font-weight: bold;"
+                                                    class="oe_highlight"
+                                                    type="object"
+                                                    name="set_mark_unscanned"/>
+                                            <button string="Approve"
+                                invisible="parent.state !='Submitted' or is_multi_session"
+                                                   
+                                                    style="font-size: 1rem; font-weight: bold;" class="oe_highlight"
+                                                    groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                                    type="object"
+                                                    name="change_line_state_to_approve"/>
+                                            <button string="Reject"
+                                invisible="parent.state !='Submitted' or is_multi_session"
+
+                                                 
+                                                    class="oe_highlight"
+                                                    style="background-color:red; font-size: 1rem; font-weight: bold;"
+                                                    groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                                    type="object"
+                                                    name="change_line_state_to_reject"/>
+                                            <button string="Add as Counted"
+                                            invisible="parent.state !='Submitted' or not is_system_generated"
+                                          
+                                                    class="oe_highlight"
+                                                    style="background-color:green; font-size: 1rem; font-weight: bold;"
+                                                    groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                                    type="object"
+                                                    name="set_theoretical"/>
+
+                                            <!--                                        <field name="to_be_scanned"/>-->
+                                        </list>
+                                        <form create="0" edit="0">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="session_id" readonly="1"/>
+                                                    <field name="inventory_count_id" readonly="1"/>
+                                                    <field name="inventory_count_line_id" invisible="1"/>
+                                                    <field name="location_id" readonly="1"/>
+                                                    <field name="is_multi_session" readonly="1"/>
+                                                    <field name="date_of_scanning" invisible="1"/>
+                                                </group>
+                                                <group>
+                                                    <field name="product_id" readonly="1"/>
+                                                    <field name="tracking" invisible="1"/>
+                                                    <field name="serial_number_ids" widget="many2many_tags"
+                                                    
+                                                    invisible="serial_number_ids == []"
+                                                    
+                                                 />
+                                                    <field name="not_found_serial_number_ids" widget="many2many_tags" readonly="1"/>
+                                                    <field name="lot_id"
+                                                    
+                                                    invisible="not lot_id"
+                                                   readonly="1"/>
+                                                    <field name="theoretical_qty"
+                                                           readonly="1"
+                                                           groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"/>
+                                                    <field name="scanned_qty" readonly="1"/>
+                                                    <field name="product_scanned" invisible="1"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    </field>
+                                    <!--                                    <group attrs="{'invisible':[('current_scanning_location_id','=',False)]}">-->
+                                    <!--                                        <div>-->
+                                    <!--                                            Currently location <strong><field name="current_scanning_location_id" readonly="1" force_save="1"/></strong> is being scanned.-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </group>-->
+                            </page>
+                        </notebook>
+                    </sheet>
+<chatter/>
+                    <!-- <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                    -->
+                   
+                    <field name="_barcode_scanned" widget="barcode_handler"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_inventory_count_session_form_view_inherit_group_manager" model="ir.ui.view">
+            <field name="name">setu_inventory_count_management_18.inherit.group.manager</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="inherit_id" ref="setu_inventory_count_management_18.inventory_count_session_form_view"/>
+            <field name="arch" type="xml">
+<!--                <field name="use_barcode_scanner" position="attributes">-->
+<!--                    <attribute name="readonly">0</attribute>-->
+<!--                </field>-->
+                <field name="user_ids" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="inventory_count_session_tree_view" model="ir.ui.view">
+            <field name="name">.inventory_count_session.tree</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="arch" type="xml">
+                <list string="Inventory Count Session"
+                      decoration-danger="color==1"
+                      decoration-muted="state=='Cancel'"
+                      create="0"
+                      default_order="id desc">
+                    <field name="name"/>
+                    <field name="color" invisible="1"/>
+                    <field name="user_ids" widget="many2many_tags"/>
+                    <field name="location_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="session_start_date"/>
+                    <field name="session_submit_date"/>
+                    <field name="total_products"/>
+                    <field name="total_scanned_products"/>
+                    <field name="to_be_scanned"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_inventory_count_session_kanban_view" model="ir.ui.view">
+            <field name="name">setu.inventory.count.session.kanban</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" create="0" edit="0" delete="0">
+                    <field name="state" readonly="1"/>
+                    <field name="id"/>
+                    <field name="color"/>
+                    <field name="name" readonly="1"/>
+                    <field name="user_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="to_be_scanned" readonly="1"/>
+                    <field name="total_products" readonly="1"/>
+                    <field name="total_scanned_products"/>
+                    <field name="user_ids_count"/>
+
+                    <!--                    Value shouldn't change when you drag any record in Kanban view-->
+                    <field name="create_uid" invisible="1" readonly="1"/>
+                    <field name="create_date" invisible="1" readonly="1"/>
+                    <field name="current_scanning_location_id" invisible="1" readonly="1"/>
+                    <field name="current_state" invisible="1" readonly="1"/>
+                    <field name="inventory_count_id" invisible="1" readonly="1"/>
+                    <field name="is_multi_session" invisible="1" readonly="1"/>
+                    <field name="is_session_approved" invisible="1" readonly="1"/>
+                    <field name="write_uid" invisible="1" readonly="1"/>
+                    <field name="write_date" invisible="1" readonly="1"/>
+                    <field name="location_id" invisible="1" readonly="1"/>
+                    <!-- <field name="message_main_attachment_id" invisible="1" readonly="1"/> -->
+                    <field name="access_token" invisible="1" readonly="1"/>
+                    <field name="session_ids" invisible="1" readonly="1"/>
+                    <field name="session_end_date" invisible="1" readonly="1"/>
+                    <field name="session_start_date" invisible="1" readonly="1"/>
+                    <field name="session_submit_date" invisible="1" readonly="1"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click o_res_partner_kanban"
+                                 style="padding:15px;margin-bottom:13px;border: 1px solid rgba(119,119,119,0.3);transition: all 0.1s ease 0.1s"
+                                 onMouseOver="this.style.border='1.2px solid rgba(102,204,153,1)',this.style.background='rgba(241,243,244,0.1)'"
+                                 onMouseOut="this.style.border='1px solid rgba(119,119,119,0.3)',this.style.background='rgba(255,255,255,1)'">
+                                <div>
+                                    <div>
+                                        <h4>
+                                            <field name="name"/>
+                                        </h4>
+
+                                        <div class="float-end"
+                                             style="font-size:1rem;margin-top:2px !important;margin-top:-27px !important;">
+                                            <div
+                                            
+                                  
+   invisible="state not in ['In Progress','Done','Submitted']"
+
+                                          >
+                                                <label style="margin-bottom:-6px;font-weight:500;"
+                                                       for="session_start_date">Session
+                                                    Started:
+                                                </label>
+                                                <br/>
+                                                <field name="session_start_date"/>
+                                            </div>
+                                            <div
+                                            
+                                               invisible="state not in ['Submitted','Done']"
+                                           >
+                                                <label style="margin-bottom:-6px;font-weight:500;"
+                                                       for="session_submit_date">
+                                                    Session Submitted:
+                                                </label>
+                                                <br/>
+                                                <field name="session_submit_date"/>
+                                            </div>
+
+                                            <div 
+                                            invisible="state not in ['In Progress','Done','Submitted']"
+
+                                            >
+                                                <label style="margin-bottom:-6px;font-weight:500;" for="time_taken">Time
+                                                    Consumed:
+                                                </label>
+                                                <br/>
+                                                <field name="time_taken"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="font-size:1rem;margin-top:12px;">
+                                        <br/>
+                                        <strong>
+                                            <a name="open_total_products" type="object" class="mr-auto">
+                                                <field name="total_products" widget="statinfo"/>
+                                            </a>
+                                        </strong>
+                                        <br/>
+                                        <strong>
+                                            <a name="open_scanned_products" type="object" class="mr-auto">
+                                                <field name="total_scanned_products" string="Products Scanned"
+                                                       widget="statinfo"/>
+                                            </a>
+                                        </strong>
+                                        <br/>
+                                        <strong>
+                                            <a name="open_products_to_be_scanned" type="object" class="mr-auto">
+                                                <field name="to_be_scanned" string="Products To Scan"
+                                                       widget="statinfo"/>
+                                            </a>
+                                        </strong>
+                                        <br/>
+                                        <div class="pull-left" style="font-size:1rem;margin-top:18px;">
+                                            <strong groups="setu_inventory_count_management_18.group_setu_inventory_count_manager">Inventory Count:</strong>
+
+                                            <a name="open_inventory_count" type="object" class="mr-auto" groups="setu_inventory_count_management_18.group_setu_inventory_count_manager">
+                                                <field string="Count" name="inventory_count_id"/>
+                                            </a>
+                                            <br/>
+                                            <strong>Location:</strong>
+                                            <a name="open_location" type="object" class="mr-auto">
+                                                <field name="location_id"/>
+                                            </a>
+                                            <br/>
+                                            <strong>
+                                                Assigned To:
+                                                <a name="open_user" type="object" class="mr-auto">
+                                                    <field name="user_ids_count" string="User" widget="statinfo"/>
+                                                </a>
+                                            </strong>
+                                            <br/>
+                                            <strong>
+                                                Approver:
+
+                                                <a name="open_approver_id" type="object" class="mr-auto">
+                                                    <field name="approver_id"/>
+                                                </a>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="pull-right" style="margin-top:25px;font-size:1.1rem;">-->
+                                    <!--                                        <strong>-->
+                                    <!--                                            Approver:-->
+                                    <!--                                            <br/>-->
+                                    <!--                                            <a name="open_approver_id" type="object" class="mr-auto">-->
+                                    <!--                                                <field name="approver_id"/>-->
+                                    <!--                                            </a>-->
+                                    <!--                                        </strong>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="inventory_count_session_search_view" model="ir.ui.view">
+            <field name="name">.inventory_count_session.search</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="arch" type="xml">
+                <search string="Inventory Count Session">
+                    <field name="name" string="Name"
+                           filter_domain="['|','|',('name','ilike',self),('user_ids','ilike',self),('location_id','ilike',self)]"/>
+                    <field name="user_ids" string="User"
+                           filter_domain="[('user_ids','ilike',self)]"/>
+                    <field name="location_id"/>
+                    <field name="warehouse_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="State" name="state" domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="inventory_count_session_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count Session</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.inventory.count.session</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There is no Session.
+                </p>
+            </field>
+        </record>
+
+        <record id="inventory_count_session_kanban_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count Sessions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.inventory.count.session</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There is no Session.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Dashboard"
+                  id="menu_setu_inventory_count_session_dashboard"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_root"
+                  sequence="0"
+                  action="inventory_count_session_kanban_act_window"/>
+
+        <menuitem name="Sessions"
+                  id="inventory_count_session_menu"
+                  parent="setu_inventory_count_management_18.main_documents_menu"
+                  action="inventory_count_session_act_window"
+                  sequence="10"/>
+
+        <record id="readonly_attribute_setu_inventory_session_manager" model="ir.ui.view">
+            <field name="name">readonly_attribute_setu_inventory_session_manager</field>
+            <field name="model">setu.inventory.count.session</field>
+            <field name="inherit_id"
+                   ref="setu_inventory_count_management_18.inventory_count_session_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='session_line_ids']/list/field[@name='state']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="readonly">parent.state !='Submitted'</attribute>
+                    <attribute name="column_invisible">parent.type =='Multi Session' or parent.state not in ['Submitted', 'Done']</attribute>
+                    <!-- <attribute name="attrs">
+                    {'readonly':[('parent.state','!=','Submitted')],
+                        'column_invisible': ['|', ('parent.type', '=', 'Multi Session'),
+                        ('parent.state', 'not in', ['Submitted', 'Done'])]}
+                    </attribute> -->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

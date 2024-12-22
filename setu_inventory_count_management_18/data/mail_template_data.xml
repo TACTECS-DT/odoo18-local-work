@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_request_for_inventory_count" model="mail.template">
+            <field name="name">Send Inventory Count</field>
+            <field name="model_id" ref="setu_inventory_count_management_18.model_setu_stock_inventory_count"/>
+            <field name="subject">Send {{object.name}} Inventory Count</field>
+            <field name="email_from">{{object.user_id.partner_id.email}}</field>
+            <field name="reply_to">{{object.user_id.partner_id.email}}</field>
+<!--            <field name="partner_to">${object.approver_id.id}</field>-->
+             <field name="lang">{{object.user_id.lang}}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                Hello <strong t-out="object.approver_id.name or ''"/>,<br/><br/>
+                You have been assigned to new Inventory Count.
+                <br/><br/>
+                Please check : <strong t-out="object.name or ''"/>
+                        <br/><br/>
+                        Best regards,
+                        <br/>
+                        <strong t-out="object.user_id.name or ''"/>
+            </div>
+        </field>
+        </record>
+    </data>
+</odoo>

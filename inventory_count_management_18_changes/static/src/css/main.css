@@ -1,0 +1,107 @@
+
+.main_cont{
+    margin-top: 10%;
+}
+
+.scan-input {
+    font-size: 1.2rem;
+    padding: 10px;
+    border: 2px solid #ced4da;
+    border-radius: 0.5rem;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+  background: none;
+  }
+  html .o_web_client > .o_action_manager{
+    border-top:3px solid #28a745 ;
+  }
+.scan_boxparent{
+    padding-top: 30px;
+}
+.thead-dark {
+background-color: #714b67 !important;
+  color: #fff !important;
+  text-align: left;
+  font-weight: bold;
+
+}
+  /* Table Rows */
+  .table tbody tr {
+  font-weight: bold;
+
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+  }
+
+
+
+  .table tbody tr:hover {
+    background-color: #eaeaea;
+  }
+
+  .table td {
+  font-weight: bold;
+
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  /* Total Row Footer */
+  .table tfoot tr {
+  font-weight: bold;
+
+    background-color: #714b67 !important;
+    color: #fff !important;
+    font-weight: bold;
+  }
+
+  .table tfoot td {
+  font-weight: bold;
+
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    color: white;
+  }
+
+
+
+
+
+.thead-dark th {
+  font-weight: bold;
+
+  padding: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.table{
+  font-weight: bold;
+
+    margin-top: 20px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.last_scan_lot , .last_scan_internal_ref,.last_scan_product , #total-scanned-qty2{
+color: red;
+font-weight: bold;
+}
+
+.scan_msg{
+font-weight: bold;
+}
+
+html .o_web_client > .o_action_manager{
+overflow-y: scroll;
+
+
+}

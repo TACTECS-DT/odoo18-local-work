@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Pending Progress"
+                  id="menu_setu_inventory_count_in_progress"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_root"
+                  groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"/>
+
+        <record id="setu_stock_inventory_count_to_be_counted_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count To Be Counted</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.stock.inventory.count</field>
+            <field name="context">{'create':0}</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','in',('Draft','In Progress'))]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There is no "To Be Counted" Inventory Count.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="To Be Counted"
+                  id="inventory_count_to_be_counted_menu"
+                  groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                  parent="setu_inventory_count_management_18.menu_setu_inventory_count_in_progress"
+                  action="setu_stock_inventory_count_to_be_counted_act_window"
+                  sequence="2"/>
+
+        <record id="setu_stock_inventory_count_to_be_approved_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count To Be Approved</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.stock.inventory.count</field>
+            <field name="context">{'create':0}</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state','=','To Be Approved')]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There is no "To Be Approved" Inventory Count.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="To Be Approved"
+                  id="inventory_count_to_be_approved_menu"
+                  parent="setu_inventory_count_management_18.menu_setu_inventory_count_in_progress"
+                  groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                  action="setu_stock_inventory_count_to_be_approved_act_window"
+                  sequence="3"/>
+
+        <record id="action_setu_stock_inventory_count_adjustment_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Adjustments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.stock.inventory</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">list,kanban,form</field>
+            <!--            <field name="view_id" ref="view_inventory_tree"/>-->
+            <!--            <field name="search_view_id" ref="view_inventory_filter"/>-->
+            <field name="domain">[('inventory_count_id','!=',False)]</field>
+            <field name="context">{'create':0}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    Click to start an inventory.
+                </p>
+                <p>
+                    Periodical Inventories are used to count the number of products
+                    available per location. You can use it once a year when you do
+                    the general inventory or whenever you need it, to adapt the
+                    current inventory level of a product.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Inventory Adjustments"
+                  id="inventory_count_adjustments_menu"
+                  groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                  parent="setu_inventory_count_management_18.main_documents_menu"
+                  action="action_setu_stock_inventory_count_adjustment_act_window"
+                  sequence="11"/>
+    </data>
+</odoo>

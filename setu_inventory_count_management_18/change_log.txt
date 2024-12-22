@@ -1,0 +1,60 @@
+Date : 21st Jul 2023
+Version : '16.6' (in __manifest__.py)
+Odoo Version : 16
+Done by : Harshit, Udit Ramani
+Tested by : Harshit, Udit Ramani
+Description : No tracking product scanning issue resolved.
+
+Date : 17th March 2023
+Version : '16.5' (in __manifest__.py)
+Odoo Version : 16
+Done by : Udit Ramani
+Tested by : Udit Ramani
+Description : Added Inventory Count and Inventory Adjustment reference in the stock move and stock move line.
+
+Date : 28th February 2023
+Version : '16.4' (in __manifest__.py)
+Odoo Version : 16
+Done by : Devangi Pabari
+Tested by : Udit Ramani, Devangi Pabari
+Description : Reject lines removed once session submitted to avoid wrong inventory adjustment issue.
+
+Date : 9th February 2023
+Version : '16.3' (in __manifest__.py)
+Odoo Version : 16
+Done by : Udit Ramani
+Tested by : Udit Ramani
+Description : Accounting entry from valuation up and down will have inventory count name in reference.
+
+Date : 30th September 2022
+Version : '16.0' (in __manifest__.py)
+Odoo Version : 16
+Done by : Niyati Palan
+Tested by : Udit Ramani
+Module : setu_inventory_count_management, setu_inventory_count_extended
+ - Took jsonb related change in sql (tmpl.name)
+
+
+Date : 21st December 2022
+Version : '16.1' (in __manifest__.py)
+Odoo Version : 16
+Done by : Niyati Palan
+Tested by : Udit Ramani, Nikhil Sudra and Niyati Palan
+Module : setu_inventory_count_management
+ - Added Feature of Lot/Serial Number with Dynamic scanning.
+ 
+Date : 16th January 2023
+Version : '16.2' (in __manifest__.py)
+Odoo Version : 16
+Done by : Udit Ramani
+Tested by : Udit Ramani, Nikhil Sudra
+Module : setu_inventory_count_management
+ - Bug Fixes of Lot/Serial Number with Dynamic scanning, lot's of issues in serial number scanning.
+ 
+ Date : 19th January 2023
+Version : '16.2' (in __manifest__.py)
+Odoo Version : 16
+Done by : Udit Ramani
+Tested by : Udit Ramani, Nikhil Sudra
+Module : setu_inventory_count_management
+ - Auto suggestion of Lots at other location in scanning and bug fixes.

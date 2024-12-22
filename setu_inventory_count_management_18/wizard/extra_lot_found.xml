@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="extra_lot_found_form_view" model="ir.ui.view">
+            <field name="name">extra.lot.found.wizard.form</field>
+            <field name="model">extra.lot.found.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                 
+                    <sheet>
+                        <field name="note" />
+                        <field name="note_to_continue" style="color: red; font-size:14px" readonly="1"/>
+                    </sheet>
+            
+                <footer>
+                    <button string="continue" name="add_the_extra_lot_lines_in_adj" type="object" class="btn-primary"/>
+                    <button string="cancel" special="cancel" class="btn-primary"/>
+                </footer>
+                    </form>
+            </field>
+        </record>
+
+        <record id="extra_lot_found_act_window" model="ir.actions.act_window">
+            <field name="name">Extra Lot Found</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">extra.lot.found.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

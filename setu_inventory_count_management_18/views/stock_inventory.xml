@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_stock_inventory_form_view" model="ir.ui.view">
+            <field name="name">setu.stock.inventory.form</field>
+            <field name="model">setu.stock.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Stock Inventory" create="0">
+                    <header>
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="confirm, done"/>
+                        <!-- states="draft,confirm" -->
+                        <button name="action_cancel" type="object" string="Cancel" 
+                                confirm="Are you sure to cancel this inventory adjustment?"/>
+                     
+                     <!-- states="confirm" -->
+                        <button name="action_validate" type="object" string="Validate" class="oe_highlight"
+                                confirm="Are you sure to validate this inventory adjustment?"
+                                />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" readonly="1"/>
+                            <h1>
+                                <field name="name" readonly="1" placeholder="Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field readonly="1" name="partner_id"/>
+                                <field readonly="1" name="inventory_count_id"/>
+                            </group>
+                            <group>
+                                <field readonly="1" name="location_id"/>
+                                <field readonly="1" name="date"/>
+                                <field readonly="1" name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Lines">
+                                <field name="line_ids" 
+                                readonly="state not in ['draft','confirm']"
+                          
+                                
+                                >
+                                    <list editable="bottom" create="0">
+                                        <field name="product_id" readonly="1"/>
+                                        <field name="location_id" readonly="1"/>
+                                        <field name="prod_lot_id" readonly="1"/>
+                                        <field name="serial_number_ids" widget="many2many_tags" readonly="1"/>
+<!--                                        <field name="not_found_serial_number_ids" widget="many2many_tags" readonly="1"/>-->
+<!--                                        <field name="new_serial_number_ids" widget="many2many_tags" readonly="1"/>-->
+                                        <field name="theoretical_qty" readonly="1"/>
+                                        <field name="product_qty"
+                                readonly="parent.state not in ['draft','confirm']"
+
+/>
+                                        <field name="difference_qty" readonly="1"/>
+                                    </list>
+
+                                </field>
+                            </page>
+                            <page string="Stock Moves">
+                                <field name="move_ids" readonly="1">
+                                    <list>
+                                        <field name="product_id"/>
+                                        <field name="location_id"/>
+                                        <field name="location_dest_id"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="state"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="setu_stock_inventory_tree_view" model="ir.ui.view">
+            <field name="name">setu.stock.inventory.tree</field>
+            <field name="model">setu.stock.inventory</field>
+            <field name="arch" type="xml">
+                <list string="Stock Inventory" create="0">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="location_id"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <field name="inventory_count_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="setu_stock_inventory_act_window" model="ir.actions.act_window">
+            <field name="name">Stock Inventory</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.stock.inventory</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There is no examples click here to add new Stock Inventory.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

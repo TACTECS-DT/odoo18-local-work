@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inventory_user_states_report_tree_view" model="ir.ui.view">
+            <field name="name">inventory.user.states.report.tree</field>
+            <field name="model">inventory.user.states.report</field>
+            <field name="arch" type="xml">
+                <list string="Inventory Session" create="0" edit="0" delete="0">
+                    <field name="user_id"/>
+                    <field name="sessions"/>
+                    <field name="user_mistake_ratio" string="Calculation Mistake(%)"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="inventory_user_states_report_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory User Statistics Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.user.states.report</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="context">{'search_default_group_by_session_id':1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There are no Inventory Sessions completed.
+                </p>
+            </field>
+        </record>
+
+        <record id="inventory_user_states_report_search_view" model="ir.ui.view">
+            <field name="name">inventory.user.states.report.search</field>
+            <field name="model">inventory.user.states.report</field>
+            <field name="arch" type="xml">
+                <search string="Inventory User Statistics Report">
+                    <field name="user_id" string="User"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="setu_inventory_user_statistics_report_graph" model="ir.ui.view">
+            <field name="name">setu.inventory.user.statistics.report.graph</field>
+            <field name="model">inventory.user.states.report</field>
+            <field name="arch" type="xml">
+                <graph string="User Statistics Graph" type="bar" stacked="False">
+                    <field name="user_id" type="row"/>
+<!--                    <field name="discrepancy_ratio" type="measure"/>-->
+                    <field name="user_mistake_ratio" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="inventory_user_states_report_act_server" model="ir.actions.server">
+            <field name="name">Inventory User Statistics Report</field>
+            <field name="model_id" ref="setu_inventory_count_management_18.model_inventory_user_states_report"/>
+            <field name="state">code</field>
+            <field name="code">action = model.generate_report()</field>
+        </record>
+
+        <menuitem name="User Statistics Report"
+                  id="inventory_user_states_report_menu"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_reports_menu"
+                  action="setu_inventory_count_management_18.inventory_user_states_report_act_server"/>
+    </data>
+</odoo>

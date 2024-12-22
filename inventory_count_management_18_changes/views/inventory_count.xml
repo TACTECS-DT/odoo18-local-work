@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <record id="invintory_count_form_changes"  model="ir.ui.view">
+        <field name="name">invintory.count.form.changes</field>
+        <field name="model">setu.stock.inventory.count</field>
+        <field name="inherit_id" ref="setu_inventory_count_management_18.setu_stock_inventory_count_form_view"/>
+        <field name="arch" type="xml">
+
+
+
+            <xpath expr="//field[@name='location_id']" position="after">
+                <field name="scanning_mode" />
+                <field name="company_id" />
+            </xpath> 
+
+            <xpath expr="//field[@name='use_barcode_scanner']" position="after">
+                <field name="is_lock" />
+            </xpath> 
+
+       <xpath expr="//div/h1/field[@name='name']" position="replace">
+             
+                <div class="oe_title">
+                    <label for="inventory_reference" class="oe_edit_only"/>
+                    <h1><field name="inventory_reference" placeholder="e.g. Annual inventory"/></h1>
+                </div>
+        </xpath>
+            <xpath expr="//field[@name='approver_id']" position="before">
+              <label for="name" class="oe_edit_only"/>
+            <field name="name" readonly="1" nolabel="1"/>
+            </xpath>     
+
+
+
+
+
+
+        </field>
+    </record>
+
+
+
+    </data>
+</odoo>

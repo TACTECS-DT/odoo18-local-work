@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inventory_discrepancy_report_tree_view" model="ir.ui.view">
+            <field name="name">inventory.discrepancy.report.tree</field>
+            <field name="model">inventory.discrepancy.report</field>
+            <field name="arch" type="xml">
+                <list string="Inventory Session" create="0" edit="0" delete="0">
+                    <field name="user_ids" widget="many2many_tags"/>
+                    <field name="approver_id"/>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="warehouse_id"/>
+                    <field name="session_id"/>
+                    <field name="inventory_count_date"/>
+                    <field name="theoretical_qty"/>
+                    <field name="counted_qty"/>
+                    <field name="discrepancy_qty"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="inventory_discrepancy_report_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Discrepancy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.discrepancy.report</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_group_by_session_id':1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There are no Inventory Sessions completed.
+                </p>
+            </field>
+        </record>
+
+        <record id="inventory_discrepancy_report_search_view" model="ir.ui.view">
+            <field name="name">inventory.discrepancy.report.search</field>
+            <field name="model">inventory.discrepancy.report</field>
+            <field name="arch" type="xml">
+                <search string="Inventory Discrepancy Report">
+                    <field name="user_ids" string="Name"
+                           filter_domain="['|','|','|',('user_ids','ilike',self),('product_id','ilike',self),('location_id','ilike',self),('warehouse_id','ilike',self),]"/>
+                    <field name="approver_id"/>
+                    <field name="session_id"/>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="warehouse_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Inventory Count Session" name="group_by_session_id" domain="[]"
+                                context="{'group_by':'session_id'}"/>
+                        <filter string="Responsible" name="group_by_user_id" domain="[]"
+                                context="{'group_by':'approver_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="inventory_discrepancy_report_act_server" model="ir.actions.server">
+            <field name="name">Inventory Discrepancy Report</field>
+            <field name="model_id" ref="setu_inventory_count_management_18.model_inventory_discrepancy_report"/>
+            <field name="state">code</field>
+            <field name="code">action = model.generate_report()</field>
+        </record>
+
+        <menuitem name="Discrepancy Report"
+                  id="inventory_discrepancy_report_menu"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_reports_menu"
+                  action="setu_inventory_count_management_18.inventory_discrepancy_report_act_server"/>
+    </data>
+</odoo>

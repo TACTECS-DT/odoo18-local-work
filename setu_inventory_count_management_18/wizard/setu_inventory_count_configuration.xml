@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="setu_inventory_count_configuration_wizard" model="ir.ui.view">
+            <field name="name">setu.inventory.count.configuration.wizard</field>
+            <field name="model">setu.inventory.count.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Setu Inventory Count Configuration">
+                    <sheet>
+                        <group>
+                            <div>
+                                <strong>Just click on "Extract" button which will add the "Inventory Count with ABC/FSN
+                                    CLASSIFICATION" functionality, after that please follow below steps,
+                                </strong>
+                                <br/>
+                                <br/>
+                                <div class="o_field_image o_field_widget o_readonly_modifier" aria-atomic="true"
+                                     name="install_image" data-original-title="" title="">
+                                    <img class="img img-fluid" alt="Binary file"
+                                         src="setu_inventory_count_management_18/static/description/setu_inventory_count_extended.png"
+                                         border="1" name="setu_inventory_count_extended"/>
+                                </div>
+                            </div>
+                        </group>
+                        <footer>
+                            <button name="execute" string="Extract" type="object"
+                                    class="oe_highlight"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="actions_setu_inventory_count_configuration" model="ir.actions.act_window">
+            <field name="name">Extract ABC/FSN Classification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">setu.inventory.count.configuration</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

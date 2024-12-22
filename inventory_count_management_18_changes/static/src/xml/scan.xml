@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve" owl='1'>
+    <t t-name="Scanning">
+    <t t-call="scan_wizard" />
+
+        <link rel='stylesheet'  href='/inventory_count_management_18_changes/static/src/css/main.css?v=1.62'/>
+        <!-- <script src='/inventory_count_management_18_changes/static/src/js/nativ.js?v=1.00' defer="defer" ></script> -->
+
+  <!-- start content -->
+
+ <div class="main_cont container vh-100 d-flex justify-content-center">
+    <div class="w-100">
+      <!-- Row with buttons -->
+      <div class="d-flex justify-content-between mb-3">
+
+
+        <button class="btn btn-danger  btn-lg cancel_button" t-on-click="cancel_button">Cancle</button>
+<div class="scan_msg text-center"></div>
+        <button t-on-click="save_button"  class="btn btn-success  btn-lg save_button">Save</button>
+      </div>
+
+      <!-- Header -->
+      <!-- <h1 class="text-center mb-4">Scanner</h1> -->
+      <h1 class="text-center mb-4"></h1>
+
+      <!-- scan Input -->
+      <div class="mb-4 scan_boxparent">
+        <input
+          type="text"
+          class="scan-input"
+          placeholder="S.N"
+          autofocus="autofocus"
+        />
+      </div>
+<!-- last scan -->
+
+
+<div class="last_scan col-12 ">
+<div class="row text-left">
+
+
+<div class="col-12 row">
+
+<div class="col-3">
+Total Qty:  <span id="total-scanned-qty2" ></span>
+</div>
+
+
+<div class="col-3">
+Product:  <span class="last_scan_product" ></span>
+</div>
+<div class="col-3">
+Scanned code :
+<span class="last_scan_lot"></span>
+</div>
+<div class="col-3">
+Internal Referance : 
+<span class="last_scan_internal_ref" ></span>
+
+ </div>
+
+</div>
+
+
+</div>
+</div>
+
+
+<!--end last scan -->
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+
+              <th style="display: none;">is_all_code</th>
+              <th style="display: none;">old_line_id</th>
+              <th style="display: none;">ID</th>
+              <th>Product</th>
+              <th>Location</th>
+              <th>Scanned code </th>
+              <!-- <th>Serial Number</th> -->
+              <th>Theoretical Quantity</th>
+              <th>Scanned Quantity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+
+
+
+
+
+            <!-- Additional rows can be added here -->
+          </tbody>
+          <tfoot>
+            <tr>
+
+              <td colspan="6"  class="text-center">
+              
+              Total Scanned Quantity : <span id="total-scanned-qty" style="color:red;"></span>
+              
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- end content -->
+
+
+
+
+        <!-- <script src='/inventory_count_management_18_changes/static/src/js/jquery.js'></script> -->
+        <!-- <script src='/inventory_count_management_18_changes/static/src/js/bootstrap.js'></script> -->
+
+     
+            <audio id="audio" src="/inventory_count_management_18_changes/static/src/audio/beep-04.wav" style="display:none;" autostart="false" ></audio>
+
+     </t>
+</templates>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.config_parameter" id="install_setu_inventory_count_extended">
+            <field name="key">setu_inventory_stock.install_inventory_count_extended</field>
+            <field name="value">uninstall</field>
+        </record>
+    </data>
+</odoo>

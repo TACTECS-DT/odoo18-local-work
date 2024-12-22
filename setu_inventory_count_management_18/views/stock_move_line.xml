@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_sicm_stock_move_line_form" model="ir.ui.view">
+        <field name="name">sicmstock.move.line.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="count_id"
+                
+                invisible="not count_id"/>
+                <field name="inventory_adj_id" 
+                
+                invisible="not inventory_adj_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

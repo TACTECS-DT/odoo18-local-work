@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inventory_count_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">inventory.count.report.form</field>
+            <field name="model">inventory.count.report</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Count">
+                    <sheet>
+                         <div style="margin-top:-15px;">
+                            • Select the <strong>Location(s)</strong> and <strong>User(s)</strong> only if you want the data with specific location(s) and user(s).
+                            <br/>
+                            • Report will be generated based on selected <strong>Date Range</strong>.
+                            Do not select the dates if you want all data report.
+                         </div>
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+                            </group>
+                            <group>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+<!--                                <field name="warehouse_ids" widget="many2many_tags"/>-->
+                                <field name="location_ids" options="{'no_create': True, 'no_create_edit':True}"
+                                       widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="user_ids" options="{'no_create': True, 'no_create_edit':True}"
+                                       string="Approvers" widget="many2many_tags" domain="[('share','=',False)]"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="generate_report" string="Generate" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="inventory_count_report_tree_view" model="ir.ui.view">
+            <field name="name">inventory.count.report.tree</field>
+            <field name="model">inventory.count.report</field>
+            <field name="arch" type="xml">
+                <list string="Inventory Count" create="0" edit="0" delete="0">
+                    <field name="user_id" string="Responsible" widget="none"/>
+                    <field name="count_id" widget="none"/>
+                    <field name="product_id" widget="none"/>
+                    <field name="location_id" widget="none"/>
+                    <field name="warehouse_id" widget="none"/>
+                    <field name="inventory_count_date" widget="none" string="Date"/>
+                    <field name="theoretical_qty" widget="none"/>
+                    <field name="counted_qty" widget="none"/>
+                    <field name="discrepancy_qty" widget="none"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="inventory_count_report_wizard_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.count.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <record id="inventory_count_report_act_window" model="ir.actions.act_window">
+            <field name="name">Inventory Count</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.count.report</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_group_by_count_id':1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face" style="margin-top:250px;">
+                    There are no Inventory Counts completed.
+                </p>
+            </field>
+        </record>
+
+        <record id="inventory_count_report_act_server" model="ir.actions.server">
+            <field name="name">Inventory Count Discrepancy Report</field>
+            <field name="model_id" ref="setu_inventory_count_management_18.model_inventory_count_report"/>
+            <field name="state">code</field>
+            <field name="code">action = model.generate_report()</field>
+        </record>
+
+        <record id="inventory_count_report_search_view" model="ir.ui.view">
+            <field name="name">inventory.count.report.search</field>
+            <field name="model">inventory.count.report</field>
+            <field name="arch" type="xml">
+                <search string="Inventory Count Report">
+                    <field name="count_id" string="Name" filter_domain="['|','|','|',('count_id','ilike',self),
+                    ('product_id','ilike',self),('location_id','ilike',self),('warehouse_id','ilike',self)]"/>
+                    <field name="user_id"/>
+<!--                    <field name="count_id"/>-->
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="warehouse_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Inventory Count" name="group_by_count_id" domain="[]"
+                                context="{'group_by':'count_id'}"/>
+                        <filter string="Responsible" name="group_by_user_id" domain="[]"
+                                context="{'group_by':'user_id'}"/>
+                        <filter string="Warehouse" name="group_by_warehouse" domain="[]"
+                                context="{'group_by':'warehouse_id'}"/>
+                        <filter string="Location" name="group_by_location" domain="[]"
+                                context="{'group_by':'location_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem name="Reporting"
+                  groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                  id="setu_inventory_count_reports_menu"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_root" sequence="999"/>
+
+        <menuitem name="Count Report"
+                  id="inventory_count_report_menu"
+                  parent="setu_inventory_count_management_18.setu_inventory_count_reports_menu"
+                  action="setu_inventory_count_management_18.inventory_count_report_wizard_act_window"/>
+    </data>
+</odoo>
