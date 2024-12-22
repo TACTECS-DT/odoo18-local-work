@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_surgi_job_analysis_job_analysis_evaluation,job_analysis_evaluation,model_job_analysis_evaluation,base.group_user,1,1,0,0
-access_surgi_job_analysis_job_analysis_evaluation_manager,job_analysis_evaluation manager,model_job_analysis_evaluation,surgi_job_analysis.manager_group_job_analysis,1,1,0,1
-access_surgi_job_analysis_wizard,job_analysis_wizard,model_job_analysis_wizard,,1,1,1,1
-access_surgi_job_question_answer,question_answer,model_question_answer,,1,1,1,1
-access_surgi_job_analysis_approved,job_analysis_approved,model_job_analysis_approved,base.group_user,1,1,1,1
-access_surgi_question_answer_approved,question_answer_approved,model_question_answer_approved,,1,1,1,1
-access_surgi_job_job_analysis,job_job_analysis,model_job_job_analysis,,1,1,1,1
-access_surgi_question_job_analysis_type,job_analysis_type,model_job_analysis_type,,1,1,1,1

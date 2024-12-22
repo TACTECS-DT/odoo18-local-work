@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_surgi_pricelists_surgi_pricelists,surgi_pricelists.surgi_pricelists,surgi_pricelists.model_surgi_pricelists_surgi_pricelists,base.group_user,1,1,1,1
-access_surgi_pricelists_surgi_pricelists_tracker,surgi_pricelists.pricelist_tracker,surgi_pricelists.model_pricelist_tracker,base.group_user,1,1,1,1
-access_surgi_pricelists_surgi_hospitallist_tracker,surgi_pricelists.hospitallist_tracker,surgi_pricelists.model_hospitallist_tracker,base.group_user,1,1,1,1

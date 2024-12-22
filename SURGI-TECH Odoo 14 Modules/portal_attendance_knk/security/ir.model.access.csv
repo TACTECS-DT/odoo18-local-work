@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_portal_hr_attendance,portal_custom_hr_attendance,hr_attendance.model_hr_attendance,base.group_portal,1,1,1,1
-access_portal_res_partner,portal_custom_res_partner,base.model_res_partner,base.group_portal,1,1,1,1
-

@@ -1,5 +1,0 @@
-<odoo>
-    <record id="sale_unit_price_edit_group" model="res.groups">
-            <field name="name">Sale Unit Price Edit</field>
-        </record>
-</odoo>

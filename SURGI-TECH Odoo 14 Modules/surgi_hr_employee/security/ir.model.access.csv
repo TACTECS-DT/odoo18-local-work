@@ -1,8 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_emp_relations_id,access_emp_relations,model_emp_relations,,1,1,1,1
-access_emp_scholarship_id,access_emp_scholarship,model_emp_scholarship,,1,1,1,1
-access_scholarship_stage_id,access_scholarship_stage,model_scholarship_stage,,1,1,1,1
-
-
-

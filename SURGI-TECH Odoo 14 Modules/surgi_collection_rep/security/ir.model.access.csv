@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_surgi_collection_rep_account_move,surgi_collection_rep,account.model_account_move,surgi_collection_rep.collection_rep_access_group_part,1,1,1,1
-access_surgi_collection_rep_account_payment,surgi_account_payment,account.model_account_payment,surgi_collection_rep.collection_rep_access_group_part,1,1,1,1

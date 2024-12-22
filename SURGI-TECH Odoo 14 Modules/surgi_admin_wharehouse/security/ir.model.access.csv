@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-"access_admin_warehouse","res_admin_warehouse","model_admin_warehouse",,1,1,1,1
-"access_admin_warehouse_line","res_admin_warehouse_line","model_admin_warehouse_line",,1,1,1,1

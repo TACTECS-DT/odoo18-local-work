@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_portal_hr_leave,portal_custom_hr_leave,hr_holidays.model_hr_leave,base.group_portal,1,1,1,1
-access_portal_hr_leave_type,portal_custom_hr_leave_type,hr_holidays.model_hr_leave_type,base.group_portal,1,1,1,1
-access_portal_hr_leave_allocation,portal_custom_hr_leave_allocation,hr_holidays.model_hr_leave_allocation,base.group_portal,1,1,1,1
-access_portal_resource_resource,portal_custom_resource_resource,resource.model_resource_resource,base.group_portal,1,1,1,1
-access_portal_resource_calendar_attendance,portal_custom_resource_calendar_attendance,resource.model_resource_calendar_attendance,base.group_portal,1,1,1,1
-access_portal_resource_calendar,portal_custom_resource_calendar,resource.model_resource_calendar,base.group_portal,1,1,1,1
-access_portal_resource_calendar_leaves,portal_custom_resource_calendar_leaves,resource.model_resource_calendar_leaves,base.group_portal,1,1,1,1
-

@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ah_hr_employee_locations,ah_em_attendence_map.access_ah_hr_employee_locations,model_ah_hr_employee_locations,base.group_user,1,1,1,1

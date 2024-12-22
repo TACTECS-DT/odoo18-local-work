@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ah_hr_attendence_sheet_ah_hr_attendence_sheet,ah_hr_attendence_sheet.ah_hr_attendence_sheet,model_ah_hr_attendence_sheet_ah_hr_attendence_sheet,base.group_user,1,1,1,1
