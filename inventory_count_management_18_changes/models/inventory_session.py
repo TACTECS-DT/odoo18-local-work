@@ -11,7 +11,27 @@ from odoo.exceptions import UserError, ValidationError
 class InventoryCountSession(models.Model):
     _inherit = 'setu.inventory.count.session'
     
+    def create(self, vals_list):
+        quants_lines = []
+        if 'location_id' in vals_list :
+            quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"])])
+            for i in quants :
+                quants_lines.append((0, 0, {
+                'product_id': i.product_id.id,
+                'tracking': i.tracking,
+                'location_id': i.location_id.id,
+                'lot_id': i.lot_id.id if i.product_id.tracking  =='lot' else False,
+                'theoretical_qty': i.inventory_quantity_auto_apply,
+                'scanned_qty': 0,
+            
+            }))
+                
 
+            vals_list["session_line_ids"] = quants_lines 
+
+        return super(InventoryCountSession,self).create(vals_list)
+        
+        
 
     @api.model
     def save_scanned_data(self, scannedData,current_id):

@@ -6,6 +6,7 @@
         'views/inventory_count.xml',
         'views/scan_action.xml',
         'views/inventory_count_session.xml',
+        'views/stock_inventory.xml',
     ],
 
 

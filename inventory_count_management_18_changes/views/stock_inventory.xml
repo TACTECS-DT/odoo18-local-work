@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+    <record id="invintory_adjustment_form_changes"  model="ir.ui.view">
+        <field name="name">setu.stock.inventory.form.changes</field>
+        <field name="model">setu.stock.inventory</field>
+        <field name="inherit_id" ref="setu_inventory_count_management_18.setu_stock_inventory_form_view"/>
+        <field name="arch" type="xml">
+
+
+
+            <xpath expr="//button[@name='action_validate']" position="replace">
+                   <button name="action_validate" type="object" string="Validate" class="oe_highlight"
+                                confirm="Are you sure to validate this inventory adjustment?" invisible="state !='confirm'"
+                                />
+            </xpath> 
+
+
+
+
+        </field>
+    </record>
+
+
+
+    </data>
+</odoo>
