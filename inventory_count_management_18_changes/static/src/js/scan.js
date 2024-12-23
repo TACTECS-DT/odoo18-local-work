@@ -42,7 +42,7 @@ class Scanning extends Component {
                 $(document).ready(function() {
                     self.render_view(fitched_scan_data)    
                     const scanInput = document.querySelector('.scan-input');
-                    console.log(fitched_scan_data," fitched_scan_data")
+                    // console.log(fitched_scan_data," fitched_scan_data")
                     // scanInput.addEventListener('keydown', (e) => {
                     //     if (e.key === 'Enter') { // Most barcode scanners send an Enter after the scan
                     //         self._ActionScanInput(e);
@@ -243,7 +243,12 @@ _ActionScanInput(event) {
     if (foundData) {
         this._createOrUpdateRowFromScan(foundData,inputCode);
     } else {
+
+ 
+    const errorAudio = document.getElementById('error_audio');
+
         this.show_wizard('Scanned code not found!',"404");
+        errorAudio.play();
     }
 
     event.target.value = ""; // Clear the input field after handling
@@ -310,6 +315,14 @@ if(!foundIn_1 && !foundIn_2) {
 
 
 _createOrUpdateRowFromScan(foundData ,scanned_code) {
+
+
+    // Get references to the audio elements
+    const scanAudio = document.getElementById('scan_audio');
+    const warningAudio = document.getElementById('warning_audio');
+    const errorAudio = document.getElementById('error_audio');
+    
+
     let { source, data } = foundData;
     let tbody = document.querySelector('.tbody');
 
@@ -405,6 +418,16 @@ existingRows = Array.from(tbody.querySelectorAll(`[data-product-id="${productId}
             if (existingRows.length > 1) {
                 console.warn(`More than one row found for product_id: ${productId}. Quantity updated only in the first row.`);
             }
+            console.log("source xxx" , source)
+            if (source==='privet_lots_data' || source ==="privet_internal_reference_data"){
+                scanAudio.play();  
+              }
+        
+            
+            if (source==='all_lots_data' || source ==="all_internal_reference_data"){
+                warningAudio .play();  
+              }
+        
             this.set_last_scan(scanned_code, productName, p_internal_reference);
         } else {
             // Add a new row if no existing row found
@@ -491,6 +514,22 @@ existingRows = Array.from(tbody.querySelectorAll(`[data-product-id="${productId}
             let scannedQtyInput = existingRow.querySelector('#scanned_Qty_Input');
             scannedQtyInput.value = parseInt(scannedQtyInput.value, 10) + 1; // Increment by 1
             this.set_last_scan(scanned_code, productName, p_internal_reference);
+
+
+
+
+
+            console.log("source xxx" , source)
+            if (source==='privet_lots_data' || source ==="privet_internal_reference_data"){
+                scanAudio.play();  
+              }
+        
+            
+            if (source==='all_lots_data' || source ==="all_internal_reference_data"){
+                warningAudio .play();  
+              }
+        
+
 
         } else {
             // Add a new row if no existing row found
@@ -600,6 +639,26 @@ _addRowToTable({ tbody, productId, productName, p_internal_reference,  r_lot_id,
 
     this.update_total_scanned_qty();
     this.set_last_scan(scanned_code, productName, p_internal_reference);
+
+
+
+    // Get references to the audio elements
+    const scanAudio = document.getElementById('scan_audio');
+    const warningAudio = document.getElementById('warning_audio');
+
+    console.log("source xxx" , source)
+    if (source==='privet_lots_data' || source ==="privet_internal_reference_data"){
+        scanAudio.play();  
+      }
+
+    
+    if (source==='all_lots_data' || source ==="all_internal_reference_data"){
+        warningAudio .play();  
+      }
+
+
+
+
 }
 
 

@@ -11,3 +11,11 @@ class StockInvCount(models.Model):
     company_id = fields.Many2one("res.company",string="Company",required=True)
     is_lock = fields.Boolean(string="Lock")
 
+    type = fields.Selection([
+        ('Single Session', 'Single Session'),
+        ('Multi Session', 'Multi Session')],
+        default='Multi Session',
+        required=True,
+        string="Type"
+    )
+    

@@ -19,6 +19,25 @@
             </xpath> 
 
 
+
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='location_id']" position="replace">
+         <field name="location_id"  required="0" force_save="1" />
+
+            </xpath> 
+
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='scanned_qty']" position="replace">
+            <field name="scanned_qty" string="Counted Qty" force_save="1" readonly="parent.current_state in ['Created','Pause','End']  or  product_scanned or not product_id or not location_id"    sum="Total Counted Qty"   />
+            </xpath> 
+
+
+
+
+
+
         </field>
     </record>
 

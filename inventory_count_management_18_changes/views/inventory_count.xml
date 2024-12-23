@@ -35,6 +35,16 @@
 
 
 
+<xpath expr="//field[@name='line_ids']//field[@name='counted_qty']" position="replace">
+      <field name="counted_qty"   readonly=" parent.state != 'To Be Approved'"
+      sum="Total counted qty"
+      />
+
+                               
+                                           </xpath> 
+
+
+
 
 
         </field>

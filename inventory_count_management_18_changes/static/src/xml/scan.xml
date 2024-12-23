@@ -116,8 +116,11 @@ Internal Referance :
         <!-- <script src='/inventory_count_management_18_changes/static/src/js/jquery.js'></script> -->
         <!-- <script src='/inventory_count_management_18_changes/static/src/js/bootstrap.js'></script> -->
 
-     
-            <audio id="audio" src="/inventory_count_management_18_changes/static/src/audio/beep-04.wav" style="display:none;" autostart="false" ></audio>
+   
+            <audio id="scan_audio" src="/inventory_count_management_18_changes/static/src/audio/beep-scan.wav" style="display:none;"   autostart="false" ></audio>
+
+            <audio id="warning_audio" src="/inventory_count_management_18_changes/static/src/audio/boop-warinig.mp3" style="display:none;" autostart="false" ></audio>
+            <audio id="error_audio" src="/inventory_count_management_18_changes/static/src/audio/beep-error.wav" style="display:none;" autostart="false" ></audio>
 
      </t>
 </templates>

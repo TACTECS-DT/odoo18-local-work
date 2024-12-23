@@ -182,3 +182,48 @@ class InventoryCountSession(models.Model):
    
    
    
+   
+    # def refresh_theoretical_qty(self):
+    #    for rec in self :
+    #        for line in rec.session_line_ids : 
+    #             domain =[("location_id","=",rec.location_id),("product_id","=",line.product_id)]
+    #             if line.product_id.tracking == 'none' :
+                    
+                
+                
+    #             last_qty = self.env["stock.quant"].search(domain)
+    #             line.theoretical_qty = last_qty
+           
+    #    issu with fitring to rich to each  line related  quant 
+       
+    
+    
+class InventoryCountSessionLine(models.Model):
+    _inherit = 'setu.inventory.count.session.line'
+
+
+    location_id = fields.Many2one(
+        "stock.location",
+        string="Location",
+        required=False,
+        readonly=True,
+        store=True
+    )
+
+    @api.model
+    def create(self, vals):
+        # Set location_id automatically if not provided
+        if not vals.get("location_id") and vals.get("session_id"):
+            session = self.env["setu.inventory.count.session"].browse(vals["session_id"])
+            vals["location_id"] = session.location_id.id
+        return super(InventoryCountSessionLine, self).create(vals)
+   
+
+    def write(self, vals):
+        if not self.session_id : 
+            return super(InventoryCountSessionLine, self).write(vals)
+        session = self.env["setu.inventory.count.session"].browse(self.session_id.id)
+        vals["location_id"] = session.location_id.id
+        return super(InventoryCountSessionLine, self).write(vals)
+
+
