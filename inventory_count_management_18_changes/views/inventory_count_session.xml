@@ -13,10 +13,102 @@
 
             <xpath expr="//header" position="inside">
 
-             <button class="startscanclass" name="%(action_start_scanning)d" type="action" string="Start Scan" 
+             <button class="startscanclass" name="%(action_start_scanning)d" type="action" string="Start Scan"  invisible = "not use_barcode_scanner or state !='In Progress' or current_state =='Pause'"
                   />
-<!-- invisible = "not use_barcode_scanner or state !='In Progress' or current_state =='Pause'" -->
+
             </xpath> 
+
+
+
+
+<xpath expr="//field[@name='inventory_count_id']" position="replace">
+     <field name="inventory_count_id" readonly="1" groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+        options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+     />
+
+            </xpath> 
+
+
+
+<xpath expr="//field[@name='location_id']" position="replace">
+
+                                <field name="location_id" readonly="1"
+                                  options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                />
+
+            </xpath> 
+
+
+<xpath expr="//field[@name='warehouse_id']" position="replace">
+
+                                <field name="warehouse_id" readonly="1"
+                                  options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" 
+                                />
+
+            </xpath> 
+
+
+
+
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='location_id']" position="replace">
+         <field name="location_id"    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  required="0" force_save="1" />
+
+            </xpath> 
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='product_id']" position="replace">
+         <field name="domain_product_id" column_invisible='1' />
+                    <field name="product_id"     options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  domain="domain_product_id"/>
+
+            </xpath> 
+
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='scanned_qty']" position="replace">
+            <field name="scanned_qty" string="Counted Qty" force_save="1" readonly="parent.current_state in ['Created','Pause','End']"    sum="Total Counted Qty"   />
+            </xpath> 
+
+
+
+
+
+
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='serial_number_ids']" position="replace">
+
+<field name="serial_number_ids" 
+widget="many2many_tags" 
+force_save="1"
+    domain="[('product_id', '=', product_id)]"
+    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"  
+     readonly="tracking != 'serial'  or  parent.use_barcode_scanner"
+required="tracking == 'serial'"  />
+
+ 
+
+            </xpath> 
+
+
+<xpath expr="//field[@name='session_line_ids']//field[@name='lot_id']" position="replace">
+
+             <field name="lot_id" force_save="1"
+                   options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                                   domain="[('product_id', '=', product_id)]"
+                                                  
+                                                readonly="parent.use_barcode_scanner or tracking !='lot'"
+                                                required="tracking == 'lot'"
+                             
+                                               />
+
+            </xpath> 
+
+
+
+
+
 
 
         </field>

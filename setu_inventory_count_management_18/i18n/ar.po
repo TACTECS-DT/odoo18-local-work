@@ -1,0 +1,2252 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* setu_inventory_count_management_18
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20241125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-29 19:35+0000\n"
+"PO-Revision-Date: 2024-12-30 09:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_EG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.5\n"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid ""
+"<br/>\n"
+"                                            <strong>Location:</strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model:mail.template,body_html:setu_inventory_count_management_18.mail_template_request_for_inventory_count
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                Hello <strong t-out=\"object.approver_id.name or ''\"/>,<br/"
+"><br/>\n"
+"                You have been assigned to new Inventory Count.\n"
+"                <br/><br/>\n"
+"                Please check : <strong t-out=\"object.name or ''\"/>\n"
+"                        <br/><br/>\n"
+"                        Best regards,\n"
+"                        <br/>\n"
+"                        <strong t-out=\"object.user_id.name or ''\"/>\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid ""
+"<strong groups=\"setu_inventory_count_management_18."
+"group_setu_inventory_count_manager\">Inventory Count:</strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid ""
+"<strong>1.</strong> Scan the location first<br/>\n"
+"                                    <strong>2.</strong> If \"No Tracking\" "
+"type product then directly scan the product's Barcode.<br/>\n"
+"                                             If \"Serial\" type product then "
+"scan Barcode of the serial number<br/>\n"
+"                                             If \"Lot\" type product then "
+"scan Barcode of lot and then scan product's Barcode, if you want change the "
+"lot<br/>\n"
+"                                             then scan again the Barcode of "
+"lot and rest will be the same.<br/>\n"
+"                                    <strong>3.</strong> Change the location "
+"every time if you start to scan the product of different location."
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "<strong>Currently scanned Details : </strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "<strong>Location : </strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "<strong>Lot/Serial Number : </strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "<strong>Product : </strong>"
+msgstr ""
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__access_warning
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__access_warning
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__access_warning
+msgid "Access warning"
+msgstr "تحذير بالوصول"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_needaction
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_needaction
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_needaction
+msgid "Action Needed"
+msgstr "الإجراء مطلوب"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_exception_decoration
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_exception_decoration
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "ترتيب استثناء النشاط"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_type_icon
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_type_icon
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Add as Counted"
+msgstr "إضافة كحساب"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_tree_view
+msgid "Adjustment Date"
+msgstr "تاريخ التعديل"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+msgid "Adjustment IN"
+msgstr "التعديل في"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+msgid "Adjustment OUT"
+msgstr "خروج التعديل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_adjustment_report_menu
+msgid "Adjustment Report"
+msgstr "تقرير التعديل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__adjustment_type
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+msgid "Adjustment Type"
+msgstr "نوع التضبيطات"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid "Administrator has already Cancelled the Session."
+msgstr "قام المسؤول بالفعل بإلغاء الجلسة."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid ""
+"Another session for the same User is Running. You cannot Start/Resume more "
+"than one session at a time."
+msgstr ""
+"جلسة عمل أخرى لنفس المستخدم قيد التشغيل. لا يمكنك بدء/استئناف أكثر من جلسة "
+"واحدة في المرة الواحدة."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session_line__state__approve
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_line__state__approve
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Approve"
+msgstr "موافقة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Approve Session Lines"
+msgstr "الموافقة على بنود الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Approve count Lines"
+msgstr "الموافقة على بنود العد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__approved
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "Approved"
+msgstr "تمت الموافقة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__approver_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__approver_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__approver_id
+msgid "Approver"
+msgstr "مسؤول المصادقة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Approver:"
+msgstr "الموافق:"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_wizard_form_view
+msgid "Approvers"
+msgstr "المُعتمِدين"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Are you sure to cancel this inventory adjustment?"
+msgstr "هل أنت متأكد من إلغاء تعديل المخزون هذا؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Are you sure to validate this inventory adjustment?"
+msgstr "هل أنت متأكد من التحقق من صحة تعديل المخزون هذا؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Are you sure you want to Cancel the Session ?"
+msgstr "هل أنت متأكد من أنك تريد إلغاء الجلسة؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Are you sure you want to Reject the Inventory Count ?"
+msgstr "هل أنت متأكد من أنك تريد رفض جرد المخزون؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Are you sure you want to Validate the Inventory Count?"
+msgstr "هل أنت متأكد من أنك تريد التحقق من صحة جرد المخزون؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Are you sure you want to Validate the Session?"
+msgstr "هل أنت متأكد من أنك تريد التحقق من صحة الجلسة؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Are you sure you want to cancel the Inventory Count ?"
+msgstr "هل أنت متأكد من أنك تريد إلغاء جرد المخزون؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Assigned To:"
+msgstr "تم تعيينه إلى:"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_attachment_count
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_attachment_count
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.server,name:setu_inventory_count_management_18.auto_create_inventory_count_with_planner_cron_ir_actions_server
+msgid "Auto Create Inventory Count with Planner"
+msgstr "إنشاء جرد المخزون تلقائيا باستخدام Planner"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_res_config_settings__auto_inventory_adjustment
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_res_config_settings_view_form
+msgid "Auto Inventory Adjustment?"
+msgstr "تعديل المخزون التلقائي؟"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_location__barcode
+msgid "Barcode"
+msgstr "باركود"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session___barcode_scanned
+msgid "Barcode Scanned"
+msgstr "مسح الباركود ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_res_config_settings_view_form
+msgid ""
+"By doing this while the user Validate the inventory, the stock will be "
+"automatically updated Realtime."
+msgstr ""
+"من خلال القيام بذلك أثناء قيام المستخدم بالتحقق من المخزون ، سيتم تحديث "
+"المخزون تلقائيًا في الوقت الفعلي ."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__user_mistake_ratio
+msgid "Calculation Mistake"
+msgstr "خطأ في الحساب"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_user_states_report_tree_view
+msgid "Calculation Mistake(%)"
+msgstr "خطأ في الحساب (٪)"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__state__cancel
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__cancel
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory__state__cancel
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid "Cannot cancel session in Done or Submitted stage."
+msgstr "لا يمكن إلغاء الجلسة في مرحلة تم أو تم إرسالها."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__count_child_session_ids
+msgid "Child Sessions"
+msgstr "جلسات الطفل"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_count_planner_act_window
+msgid "Click create to add new Inventory Count Planner."
+msgstr "انقر فوق إنشاء لإضافة مخطط جرد المخزون الجديد."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.action_setu_stock_inventory_count_adjustment_act_window
+msgid "Click to start an inventory."
+msgstr "انقر لبدء المخزون."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_reject_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_reject_wizard_form_view
+msgid "Close"
+msgstr "إغلاق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__color
+msgid "Color"
+msgstr "اللون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__company_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__company_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Complete Counting"
+msgstr "العد الكامل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_res_config_settings
+msgid "Config Settings"
+msgstr "تهيئة الإعدادات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.main_configuration_menu
+msgid "Configuration"
+msgstr "الإعدادات"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_reject_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_session_creator_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_reject_wizard_form_view
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_re_create_form_view
+msgid "Continue"
+msgstr "استمر"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_move_line__count_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Count"
+msgstr "عد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_count_report_menu
+msgid "Count Report"
+msgstr "تقرير العد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__count_state
+msgid "Count State"
+msgstr "حالة العد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__product_qty
+msgid "Counted QTY"
+msgstr "الكمية المحسوبة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Counted Qty"
+msgstr "عد الكمية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__counted_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__counted_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__counted_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__counted_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__counted_qty
+msgid "Counted Quantity"
+msgstr "الكمية المحسوبة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__count_ids
+msgid "Counts"
+msgstr "العدد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__create_count_bool
+msgid "Create Count"
+msgstr "إنشاء العد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Create Inventory"
+msgstr "إنشاء مخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_validate_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Create Re-Count"
+msgstr "إنشاء إعادة العد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_validate_form_view
+msgid "Create Re-Session"
+msgstr "إنشاء إعادة الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Create Session"
+msgstr "إنشاء جلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__current_state__created
+msgid "Created"
+msgstr "تم الإنشاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__create_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__create_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_re_create_form_view
+msgid ""
+"Creating Re-Session will automatically <strong>Validate</strong> the current "
+"session. Click\n"
+"                            on <strong>Continue</strong> to Re-Create the "
+"session for rejected lines."
+msgstr ""
+"سيؤدي إنشاء إعادة الجلسة إلى <strong>التحقق من صحة</strong> الجلسة الحالية "
+"تلقائيا. نقر\n"
+"                            على <strong>متابعة</strong> لإعادة إنشاء جلسة "
+"العمل للبنود المرفوضة."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_re_create_form_view
+msgid ""
+"Current Session is <strong>Validated</strong>. Click on <strong>Continue</"
+"strong> to\n"
+"                            Re-Create the session for rejected lines."
+msgstr ""
+"تم <strong>التحقق من</strong> صحة الجلسة الحالية. انقر فوق <strong>متابعة</"
+"strong> إلى\n"
+"                            أعد إنشاء جلسة العمل للبنود المرفوضة."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__current_state
+msgid "Current State"
+msgstr "الحالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__current_scanning_location_id
+msgid "Current scanning location"
+msgstr "موقع المسح الحالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__current_scanning_lot_id
+msgid "Current scanning lot"
+msgstr "الكثير المسح الضوئي الحالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__current_scanning_product_id
+msgid "Current scanning product"
+msgstr "منتج المسح الضوئي الحالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__access_url
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__access_url
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__access_url
+msgid "Customer Portal URL"
+msgstr "رابط بوابة العملاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.menu_setu_inventory_count_session_dashboard
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__inventory_count_date
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_tree_view
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__date_of_scanning
+msgid "Date of scanning"
+msgstr "تاريخ المسح"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__difference_qty
+msgid "Difference"
+msgstr "الفارق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__discrepancy_ratio
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_line_tree_view
+msgid "Discrepancy"
+msgstr "التناقض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__discrepancy_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__discrepancy_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__discrepancy_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__discrepancy_qty
+msgid "Discrepancy Quantity"
+msgstr "كمية التناقض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__discrepancy_ratio
+msgid "Discrepancy Ratio"
+msgstr "نسبة التناقض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__display_name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.main_documents_menu
+msgid "Documents"
+msgstr "المستندات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__state__done
+msgid "Done"
+msgstr "تم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__state__draft
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory__state__draft
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__draft
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_planner__state__draft
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__duration
+msgid "Duration"
+msgstr "المدة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_session_details_tree_view
+msgid "Duration (H:M:S)"
+msgstr "المدة (H:M:S)"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__duration_seconds
+msgid "Duration seconds"
+msgstr "المدة الثواني"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__current_state__end
+msgid "End"
+msgstr "النهاية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__end_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__end_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__end_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__end_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__end_date
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session_line__tracking
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__tracking
+msgid "Ensure the traceability of a storable product in your warehouse."
+msgstr "تأكد من إمكانية تتبع المنتج القابل للتخزين في المستودع الخاص بك."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.extra_lot_found_act_window
+msgid "Extra Lot Found"
+msgstr "تم العثور على  رقم دفعه إضافي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_follower_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_follower_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_follower_ids
+msgid "Followers"
+msgstr "متابعون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_partner_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_partner_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_type_icon
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_type_icon
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيفونه الخط Font awesome مثلاً fa-tasks"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_wizard_form_view
+msgid "Generate"
+msgstr "توليد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_search_view
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__has_message
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__has_message
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__has_message
+msgid "Has Message"
+msgstr "توجد رسالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__inventory_adjustment_report__adjustment_type__in
+msgid "IN"
+msgstr "في"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/stock_inventory.py:0
+msgid "INV:"
+msgstr "INV:"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_exception_icon
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_exception_icon
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_exception_icon
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_exception_icon
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "الأيقونة للإشارة إلى استثناء النشاط."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__message_needaction
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_needaction
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "عند التفعيل ، رسائل جديدة ستتطلب انتباهك"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_error
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_sms_error
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_error
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_sms_error
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_error
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ في التسليم."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__state__in_progress
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory__state__confirm
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__in_progress
+msgid "In Progress"
+msgstr "قيد التقدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_line__difference_qty
+msgid ""
+"Indicates the gap between the product's theoretical quantity and its newest "
+"quantity."
+msgstr "الإشارة إلى الفجوة بين الكمية النظرية للمنتج وكميته الأحدث."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__partner_id
+msgid "Inventoried Owner"
+msgstr "مالك المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__line_ids
+msgid "Inventories"
+msgstr "قوائم جرد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__inventory_id
+msgid "Inventory"
+msgstr "المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__inventory_adjusted
+msgid "Inventory Adjusted"
+msgstr "المخزون المعدل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_adjustment_report_act_window
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_adjustment_report_wizard_act_window
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_move__inventory_adj_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_move_line__inventory_adj_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Inventory Adjustment"
+msgstr "محضر الجرد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__inventory_adj_ids
+msgid "Inventory Adjustment Details"
+msgstr "تفاصيل تعديل المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.server,name:setu_inventory_count_management_18.inventory_adjustment_report_act_server
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_adjustment_report
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+msgid "Inventory Adjustment Report"
+msgstr "تقرير تسوية المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.action_setu_stock_inventory_count_adjustment_act_window
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_count_adjustments_menu
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_wizard_form_view
+msgid "Inventory Adjustments"
+msgstr "تضبيطات الجرد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_count_report_act_window
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_count_report_wizard_act_window
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.new_inventory_count_act_window
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_stock_inventory_count_act_window
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__inventory_count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__inventory_count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__inventory_count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__inventory_count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__inventory_count_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_move__inventory_count_id
+#: model:ir.module.category,name:setu_inventory_count_management_18.categ_setu_inventory_count
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.setu_inventory_count_root
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.setu_stock_inventory_count_menu
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_tree_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_tree_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_tree_view
+msgid "Inventory Count"
+msgstr "عدد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_res_config_settings_view_form
+msgid "Inventory Count Configuration"
+msgstr "تكوين جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__inventory_count_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__inventory_count_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__inventory_count_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__inventory_count_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__inventory_count_date
+msgid "Inventory Count Date"
+msgstr "تاريخ جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.server,name:setu_inventory_count_management_18.inventory_count_report_act_server
+msgid "Inventory Count Discrepancy Report"
+msgstr "تقرير تناقض عدد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__line_ids
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_line_tree_view
+msgid "Inventory Count Lines"
+msgstr "بنود جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_stock_inventory_count_planner_act_window
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.setu_stock_inventory_count_planner_menu
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "Inventory Count Planner"
+msgstr "مخطط جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_re_create_form_view
+msgid "Inventory Count Re-Session"
+msgstr "إعادة جلسة جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_count_report
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+msgid "Inventory Count Report"
+msgstr "تقرير جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_count_session_act_window
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_inventory_count_session
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_tree_view
+msgid "Inventory Count Session"
+msgstr "جلسة جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_inventory_count_session_line
+msgid "Inventory Count Session Line"
+msgstr "بند جلسة جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_validate_form_view
+msgid "Inventory Count Session Validate"
+msgstr "التحقق من صحة جلسة جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_count_session_kanban_act_window
+msgid "Inventory Count Sessions"
+msgstr "جلسات جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_stock_inventory_count_to_be_approved_act_window
+msgid "Inventory Count To Be Approved"
+msgstr "جرد المخزون المراد اعتماده"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_stock_inventory_count_to_be_counted_act_window
+msgid "Inventory Count To Be Counted"
+msgstr "جرد المخزون المراد جرده"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_validate_form_view
+msgid "Inventory Count Validate"
+msgstr "التحقق من صحة جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__date
+msgid "Inventory Date"
+msgstr "تاريخ الجرد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_stock_location
+msgid "Inventory Locations"
+msgstr "أماكن المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_tree_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_user_states_report_tree_view
+msgid "Inventory Session"
+msgstr "جلسة الجرد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_line_ids
+msgid "Inventory Session Count Lines"
+msgstr "بنود جرد جلسة المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_session_creator
+msgid "Inventory Session Creator"
+msgstr "منشئ جلسة المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_session_details
+msgid "Inventory Session Details"
+msgstr "تفاصيل جلسة الجرد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_session_details_tree_view
+msgid "Inventory Session History"
+msgstr "سجل جلسة المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.inventory_user_states_report_act_window
+#: model:ir.actions.server,name:setu_inventory_count_management_18.inventory_user_states_report_act_server
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_user_states_report
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_user_states_report_search_view
+msgid "Inventory User Statistics Report"
+msgstr "تقرير إحصائيات مستخدم المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_inventory_warning_message_wizard
+msgid "Inventory Warning Message Wizard"
+msgstr "معالج رسائل تحذير المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__inventory_count_id
+msgid "Inventory count"
+msgstr "جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__inventory_count_line_id
+msgid "Inventory count line"
+msgstr "بند جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__create_session_bool
+msgid "Is Create Session"
+msgstr "هو إنشاء جلسة عمل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__is_discrepancy_found
+msgid "Is Discrepancy Found"
+msgstr "هل تم العثور على تناقض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_is_follower
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_is_follower
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__start_inventory_bool
+msgid "Is Start Inventory"
+msgstr "هو بدء المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__is_multi_session
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__is_multi_session
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__is_multi_session
+msgid "Is multi session"
+msgstr "متعدد الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__is_multi_session
+msgid "Is multi sesstion"
+msgstr "هو متعدد الesstion"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__is_session_approved
+msgid "Is session approved"
+msgstr "هل تمت الموافقة على الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__write_uid
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__write_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Lines"
+msgstr "بنود طلب المواد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__location_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__location_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+msgid "Location"
+msgstr "الموقع"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__location_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__location_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__location_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__location_ids
+msgid "Locations"
+msgstr "المواقع"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__lot_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__lot_id
+msgid "Lot"
+msgstr "وحدة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__prod_lot_id
+msgid "Lot/Serial Number"
+msgstr "رقم الدفعة / الرقم التسلسلي"
+
+#. module: setu_inventory_count_management_18
+#: model:res.groups,name:setu_inventory_count_management_18.group_setu_inventory_count_manager
+msgid "Manager"
+msgstr "مدير"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_warning_message_wizard__message
+msgid "Message"
+msgstr "الرسالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_error
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_error
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ تسليم الرسالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__not_found_serial_number_ids
+msgid "Missing Serial Numbers"
+msgstr "الأرقام التسلسلية المفقودة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_ir_module_module
+msgid "Module"
+msgstr "وحدة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_stock_location__check_stock_barcode_installed
+msgid "Module is Installed"
+msgstr "تم تثبيت الوحدة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__stock_move_line_ids
+msgid "Move Line"
+msgstr "بند الحركة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__move_ids
+msgid "Moves"
+msgstr "الحركات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__type__multi_session
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_planner__type__multi_session
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "Multi Session"
+msgstr "متعدد الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__my_activity_date_deadline
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__my_activity_date_deadline
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__name
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__name
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Name"
+msgstr "الاسم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__new_serial_number_ids
+msgid "New Serial Numbers"
+msgstr "الأرقام التسلسلية الجديدة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_date_deadline
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_date_deadline
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_summary
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_summary
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_type_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_type_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__next_execution_date
+msgid "Next Execution Date"
+msgstr "تاريخ التنفيذ التالي"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/wizard/get_products.py:0
+msgid "No products found."
+msgstr "لا يوجد منتجات."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__non_cancelled_session
+msgid "Non cancelled session"
+msgstr "جلسة غير ملغاة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__not_found_serial_number_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__not_found_serial_number_ids
+msgid "Not Founded Serial Numbers"
+msgstr "الأرقام التسلسلية غير المنشأة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__note
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_extra_lot_found_wizard__note_to_continue
+msgid "Note"
+msgstr "ملاحظة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_validate_form_view
+msgid "Note : This Users will be assigned to the session of the Re-Count."
+msgstr "ملاحظة : سيتم تعيين هؤلاء المستخدمين لجلسة إعادة العد."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_needaction_counter
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_needaction_counter
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_error_counter
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_error_counter
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__message_needaction_counter
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_needaction_counter
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب عمل عليها"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_error_counter
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_error_counter
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__inventory_adjustment_report__adjustment_type__out
+msgid "OUT"
+msgstr "خارج"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_extra_lot_found_wizard
+msgid "Open Wizard if you find unscanned lot/serial numbers"
+msgstr "افتح المعالج إذا وجدت الدفعات/الأرقام التسلسلية غير الممسوحة ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__open_session_again
+msgid "Open session again"
+msgstr "فتح الجلسة مرة أخرى"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__partner_id
+msgid "Owner"
+msgstr "المالك"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__package_id
+msgid "Package"
+msgstr "الباقة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__parent_count_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Parent Count"
+msgstr "عدد الوالدين"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__past_history_days
+msgid "Past History Days"
+msgstr "أيام التاريخ الماضية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__current_state__pause
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Pause"
+msgstr "إيقاف مؤقت"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.menu_setu_inventory_count_in_progress
+msgid "Pending Progress"
+msgstr "التقدم المعلق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session_line__state__pending_review
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_line__state__pending_review
+msgid "Pending Review"
+msgstr "في انتظار المراجعة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.action_setu_stock_inventory_count_adjustment_act_window
+msgid ""
+"Periodical Inventories are used to count the number of products\n"
+"                    available per location. You can use it once a year when "
+"you do\n"
+"                    the general inventory or whenever you need it, to adapt "
+"the\n"
+"                    current inventory level of a product."
+msgstr ""
+"تستخدم قوائم الجرد الدورية لحساب عدد المنتجات\n"
+"                    متاح لكل موقع. يمكنك استخدامه مرة واحدة في السنة عند "
+"القيام بذلك\n"
+"                    المخزون العام أو متى احتجت إليه ، لتكييف\n"
+"                    مستوى المخزون الحالي للمنتج."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__planing_frequency
+msgid "Planing Frequency Day"
+msgstr "يوم تردد التخطيط"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__planner_id
+msgid "Planner"
+msgstr "المخطط"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/wizard/wizards.py:0
+msgid "Please add User(s)."
+msgstr "يرجى إضافة مستخدم (مستخدمين)."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_count.py:0
+msgid ""
+"Please check and set the state in all count lines of this count to open this "
+"count again."
+msgstr ""
+"يرجى التحقق من الحالة وتعيينها في جميع أسطر العد هذه لفتح هذا العدد مرة أخرى."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid ""
+"Please check and set the state in all session lines of this session to open "
+"this session again."
+msgstr ""
+"يرجى التحقق من الحالة وتعيينها في جميع بنود الجلسة هذه لفتح هذه الجلسة مرة "
+"أخرى."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_count.py:0
+msgid "Please validate all sessions before approving the Inventory Count."
+msgstr "يرجى التحقق من صحة جميع الجلسات قبل الموافقة على جرد المخزون."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__access_url
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__access_url
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__access_url
+msgid "Portal Access URL"
+msgstr "رابط الوصول لبوابة العملاء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__previous_execution_date
+msgid "Previous Execution Date"
+msgstr "تاريخ التنفيذ السابق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__product_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "Product Configuration"
+msgstr "تكوين المنتج"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "حركات المنتج (بند حركة المخزون)"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__product_uom_id
+msgid "Product Unit of Measure"
+msgstr "وحدة قياس الصنف"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__product_scanned
+msgid "Product scanned"
+msgstr "تم فحص المنتج"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__product_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__product_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__product_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__product_ids
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Products"
+msgstr "المنتجات"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Products Scanned"
+msgstr "المنتجات الممسوحة ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Products To Scan"
+msgstr "المنتجات المراد مسحها ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__quant_id
+msgid "Quant"
+msgstr "مقدار"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__qty_in_stock
+msgid "Quantity In Stock"
+msgstr "الكمية متوفرة في المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__re_count_ids
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Re-Count"
+msgstr "إعادة العد"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Re-Session"
+msgstr "إعادة الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__re_open_session_bool
+msgid "Re-open session"
+msgstr "إعادة فتح الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session_line__state__reject
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_line__state__reject
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Reject"
+msgstr "رفض"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Reject Session Lines"
+msgstr "رفض بنود الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Reject count Lines"
+msgstr "رفض بنود العد"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__rejected
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__rejected_lines_count
+msgid "Rejected count lines"
+msgstr "بنود العد المرفوضة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__rejected_lines_count
+msgid "Rejected lines count"
+msgstr "عدد الأسطر المرفوضة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_validate_form_view
+msgid "Rejected lines found. Create Re-Count to validate this Count."
+msgstr ""
+"تم العثور على الأسطر المرفوضة. قم بإنشاء إعادة الجرد للتحقق من صحة هذا العدد."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_validate_form_view
+msgid "Rejected lines found. Create Re-Session to validate this session."
+msgstr ""
+"تم العثور على الأسطر المرفوضة. قم بإنشاء إعادة جلسة للتحقق من صحة هذه الجلسة."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.setu_inventory_count_reports_menu
+msgid "Reporting"
+msgstr "التقارير"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "Reset To Draft"
+msgstr "إعادة لحالة المسودة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_tree_view
+msgid "Responsible"
+msgstr "المسؤول"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسئول"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__current_state__resume
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Resume"
+msgstr "استئنف"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "Run Manually"
+msgstr "تنفيذ يدوي"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__message_has_sms_error
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__message_has_sms_error
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Scan"
+msgstr "مسح"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__scanned_qty
+msgid "Scanned quantity"
+msgstr "كمية ممسوحة ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Scanned?"
+msgstr "الممسوحه ضوئيا؟"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "Scheduler Configuration"
+msgstr "تكوين المجدول"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__access_token
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__access_token
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__access_token
+msgid "Security Token"
+msgstr "رمز الحماية"
+
+#. module: setu_inventory_count_management_18
+#: model:mail.template,name:setu_inventory_count_management_18.mail_template_request_for_inventory_count
+msgid "Send Inventory Count"
+msgstr "إرسال جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:mail.template,subject:setu_inventory_count_management_18.mail_template_request_for_inventory_count
+msgid "Send {{object.name}} Inventory Count"
+msgstr "إرسال جرد المخزون {{object.name}}"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__serial_number_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__serial_number_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__serial_number_ids
+msgid "Serial Numbers"
+msgstr "الأرقام التسلسلية"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/stock_inventory.py:0
+msgid "Serial number product should not have more than 1 quantity."
+msgstr "يجب ألا يحتوي منتج الرقم التسلسلي على أكثر من 1 كمية."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__session_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__session_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__session_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Session"
+msgstr "الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid ""
+"Session\n"
+"                                                    Started:"
+msgstr ""
+"جلسة\n"
+"                                                    بدات:"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__count_session_ids
+msgid "Session Count"
+msgstr "عدد الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_session_creator_form_view
+msgid "Session Creator"
+msgstr "منشئ الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__session_line_ids
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Session Lines"
+msgstr "خطوط الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__session_state
+msgid "Session State"
+msgstr "حالة الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "Session Submitted:"
+msgstr "الجلسة المقدمة:"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_end_date
+msgid "Session end date"
+msgstr "تاريخ انتهاء الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_history_count
+msgid "Session history count"
+msgstr "عدد محفوظات الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_start_date
+msgid "Session start date"
+msgstr "تاريخ بدء الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_submit_date
+msgid "Session submit date"
+msgstr "تاريخ تقديم الجلسة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__session_ids
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_count_session_menu
+msgid "Sessions"
+msgstr "الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__session_ids
+msgid "Sessions Details"
+msgstr "تفاصيل الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_inventory_count_config_settings
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.setu_inventory_count_settings_menu
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_inventory_session_validate_wizard
+msgid "Setu Inventory  Session Validate Wizard"
+msgstr "معالج التحقق من صحة جلسة المخزون Setu"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_inventory_reporting_template
+msgid "Setu Inventory Reporting Template"
+msgstr "قالب تقارير مخزون Setu"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_stock_inventory
+msgid "Setu Stock Inventory"
+msgstr "مخزون Setu"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_stock_inventory_line
+msgid "Setu Stock Inventory Line"
+msgstr "خط مخزون Setu"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__type__single_session
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_planner__type__single_session
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "Single Session"
+msgstr "جلسة واحدة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory__partner_id
+msgid "Specify Owner to focus your inventory on a particular Owner."
+msgstr "تحديد المالك للتركيز المخزون الخاص بك على مالك معين."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory__product_ids
+msgid "Specify Products to focus your inventory on particular Products."
+msgstr "حدد المنتجات لتركيز جردك على منتجات معينة."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__current_state__start
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Start"
+msgstr "ابدأ"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__start_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__start_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_details__start_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__start_date
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__start_date
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__state
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "State"
+msgstr "الحالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory__state
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_state
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_state
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة على أساس الأنشطة\n"
+"المتأخرة: تاريخ الاستحقاق انقضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: setu_inventory_count_management_18
+#: model:ir.actions.act_window,name:setu_inventory_count_management_18.setu_stock_inventory_act_window
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_tree_view
+msgid "Stock Inventory"
+msgstr "جرد المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_stock_inventory_count
+msgid "Stock Inventory Count"
+msgstr "عدد مخزون المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_stock_inventory_count_line
+msgid "Stock Inventory Count Line"
+msgstr "سطر جرد مخزون المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_setu_stock_inventory_count_planner
+msgid "Stock Inventory Count Planner"
+msgstr "مخطط جرد مخزون المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model,name:setu_inventory_count_management_18.model_stock_move
+msgid "Stock Move"
+msgstr "حركة المخزون "
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "Stock Move lines"
+msgstr "خطوط نقل الأسهم"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Stock Moves"
+msgstr "حركات المخزون"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Submit"
+msgstr "إرسال"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Submit Date"
+msgstr "نوع التاريخ"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_inventory_count_session__state__submitted
+msgid "Submitted"
+msgstr "تم الإرسال"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__is_system_generated
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__is_system_generated
+msgid "System Generated Line"
+msgstr "الخط الذي تم إنشاؤه بواسطة النظام"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__company_id
+msgid "The company is automatically set from your user preferences."
+msgstr "المؤسسة تم تعيينها تلقائياً وفقاً لتفضيلات المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_line__theoretical_qty
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_line_tree_view
+msgid "Theoretical QTY"
+msgstr "الكميه في المخزن"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__theoretical_qty
+msgid "Theoretical Qty"
+msgstr "الكمية النظرية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__theoretical_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__theoretical_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__theoretical_qty
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__theoretical_qty
+msgid "Theoretical Quantity"
+msgstr "الكميه في المخزن"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__theoretical_qty
+msgid "Theoretical quantity"
+msgstr "الكميه في المخزن"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.inventory_adjustment_report_act_window
+msgid "There are no Inventory Adjustments for Inventory Counts."
+msgstr "لا توجد تسويات مخزون لجرد المخزون."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.inventory_count_report_act_window
+msgid "There are no Inventory Counts completed."
+msgstr "لم يتم إكمال جرد المخزون."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.inventory_user_states_report_act_window
+msgid "There are no Inventory Sessions completed."
+msgstr "لم يتم إكمال جلسات الجرد."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid ""
+"There are some lines with Pending Review. Please check and set the state in "
+"all session lines of this session to validate this session."
+msgstr ""
+"هناك بعض الأسطر مع المراجعة المعلقة. يرجى التحقق من الحالة وتعيينها في جميع "
+"بنود الجلسة هذه للتحقق من صحة هذه الجلسة."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_count_to_be_approved_act_window
+msgid "There is no \"To Be Approved\" Inventory Count."
+msgstr "لا يوجد عدد مخزون \"لتتم الموافقة عليه\"."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_count_to_be_counted_act_window
+msgid "There is no \"To Be Counted\" Inventory Count."
+msgstr "لا يوجد عدد مخزون \"ليتم احتسابه\"."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_count_planner_act_window
+msgid "There is no Inventory Count Planner."
+msgstr "لا يوجد مخطط جرد المخزون."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.new_inventory_count_act_window
+msgid "There is no Inventory Count."
+msgstr "لا يوجد جرد ."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_count_act_window
+msgid "There is no Inventory Count. Click here to add new Inventory Count."
+msgstr "لا يوجد جرد مخزون. انقر هنا لإضافة جرد مخزون جديد."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.inventory_count_session_act_window
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.inventory_count_session_kanban_act_window
+msgid "There is no Session."
+msgstr "لا توجد جلسة."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.actions.act_window,help:setu_inventory_count_management_18.setu_stock_inventory_act_window
+msgid "There is no examples click here to add new Stock Inventory."
+msgstr "لا توجد أمثلة انقر هنا لإضافة مخزون مخزون جديد."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_count.py:0
+msgid ""
+"This Inventory Count cannot be cancelled because few of the sessions are "
+"already running, \n"
+"%s"
+msgstr ""
+"لا يمكن إلغاء جرد المخزون هذا لأن عددا قليلا من الجلسات قيد التشغيل "
+"بالفعل، \n"
+"%s"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid ""
+"Time\n"
+"                                                    Consumed:"
+msgstr ""
+"الوقت\n"
+"                                                    استهلاك:"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__time_taken
+msgid "Time Taken"
+msgstr "الوقت الذي تم أستهلاكه"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count__state__to_be_approved
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_count_to_be_approved_menu
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_search_view
+msgid "To Be Approved"
+msgstr "ليتم اعتمادها"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_count_to_be_counted_menu
+msgid "To Be Counted"
+msgstr "ليتم احتسابها"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__to_be_scanned
+msgid "To be quantity"
+msgstr "أن تكون كمية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__to_be_scanned
+msgid "To be scanned"
+msgstr "ليتم مسحها ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__state
+msgid "To identify process status"
+msgstr "لتحديد حالة العملية"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__total_products
+msgid "Total Products"
+msgstr "إجمالي المنتجات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__total_scanned_products
+msgid "Total Scanned Products"
+msgstr "إجمالي المنتجات الممسوحة ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__sessions
+msgid "Total Sessions"
+msgstr "إجمالي الجلسات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__tracking
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__tracking
+msgid "Tracking"
+msgstr "تتبع"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__type
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__type
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__activity_exception_decoration
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__activity_exception_decoration
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي على السجل."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+msgid "Unscan"
+msgstr "غير ممسوحة ضوئيا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__use_barcode_scanner
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__use_barcode_scanner
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__use_barcode_scanner
+msgid "Use barcode scanner"
+msgstr "استخدام ماسح الباركود"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__user_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__user_id
+#: model:res.groups,name:setu_inventory_count_management_18.group_setu_inventory_count_user
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_user_states_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_count_session_kanban_view
+msgid "User"
+msgstr "المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_line__user_calculation_mistake
+msgid "User Calculation Mistake"
+msgstr "خطأ في حساب المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__user_ids_count
+msgid "User Count"
+msgstr "عدد المستخدمين"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+msgid "User Mistake"
+msgstr "خطأ المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__user_mistake_ratio
+msgid "User Mistake Ration"
+msgstr "حصص خطأ المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_inventory_user_statistics_report_graph
+msgid "User Statistics Graph"
+msgstr "الرسم البياني لإحصائيات المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.ui.menu,name:setu_inventory_count_management_18.inventory_user_states_report_menu
+msgid "User Statistics Report"
+msgstr "تقرير إحصائيات المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session_line__user_calculation_mistake
+msgid "User calculation mistake"
+msgstr "خطأ في حساب المستخدم"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_session_creator__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__user_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_session_validate_wizard__user_ids
+msgid "Users"
+msgstr "المستخدمين"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_session_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_form_view
+msgid "Validate"
+msgstr "تصديق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory__state__done
+msgid "Validated"
+msgstr "مُصدّق"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr "قيمة آخر باركود تم مسحه ضوئيًا"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields.selection,name:setu_inventory_count_management_18.selection__setu_stock_inventory_count_planner__state__verified
+msgid "Verified"
+msgstr "تم التحقق منه"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__warehouse_id
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__warehouse_id
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_search_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_search_view
+msgid "Warehouse"
+msgstr "المستودعات"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_adjustment_report__warehouse_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_count_report__warehouse_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_inventory_user_states_report__warehouse_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_reporting_template__warehouse_ids
+msgid "Warehouses"
+msgstr "المستودعات"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_warning_message_reject_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_approve_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_warning_message_reject_wizard_form_view
+msgid "Warning!!!"
+msgstr "تحذير!!!"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_inventory_count_session__website_message_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count__website_message_ids
+#: model:ir.model.fields,field_description:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل موقع الانترنت"
+
+#. module: setu_inventory_count_management_18
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_inventory_count_session__website_message_ids
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count__website_message_ids
+#: model:ir.model.fields,help:setu_inventory_count_management_18.field_setu_stock_inventory_count_planner__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل موقع الانترنت"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid "You cannot change 'Name' of the Session"
+msgstr "لا يمكنك تغيير \"اسم\" الجلسة"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid "You cannot change the Reference Inventory Count of the Session"
+msgstr "لا يمكنك تغيير جرد المخزون المرجعي للجلسة"
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_session.py:0
+msgid ""
+"You cannot delete Inventory Count Sessions. To delete Inventory Count "
+"Sessions, delete their Inventory Count. Deleting the Inventory Count will "
+"delete all its sessions."
+msgstr ""
+"لا يمكنك حذف جلسات جرد المخزون. لحذف جلسات جرد المخزون، احذف جرد المخزون "
+"الخاص بها. سيؤدي حذف جرد المخزون إلى حذف جميع جلساته."
+
+#. module: setu_inventory_count_management_18
+#. odoo-python
+#: code:addons/setu_inventory_count_management_18/models/inventory_count.py:0
+msgid "You cannot select date from past."
+msgstr "لا يمكنك تحديد التاريخ من الماضي."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.extra_lot_found_form_view
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_session_creator_form_view
+msgid "cancel"
+msgstr "إلغاء"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.extra_lot_found_form_view
+msgid "continue"
+msgstr "استمر"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.setu_stock_inventory_count_planner_form_view
+msgid "verify"
+msgstr "التحقق"
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_adjustment_report_wizard_form_view
+msgid ""
+"• Select the <strong>Location(s)</strong> and <strong>User(s)</strong>\n"
+"                             only if you want the data with specific "
+"location(s) and user(s).\n"
+"                            <br/>\n"
+"                            • Report will be generated based on selected "
+"<strong>Date Range</strong>.\n"
+"                            Do not select the dates if you want all data "
+"report."
+msgstr ""
+"• حدد <strong>الموقع (المواقع)</strong> <strong>والمستخدم (المستخدمين)</"
+"strong>\n"
+"                             فقط إذا كنت تريد البيانات ذات الموقع (المواقع) "
+"والمستخدم (المستخدمين) المحددين.                            <br/>• سيتم "
+"إنشاء التقرير بناء على <strong>النطاق الزمني</strong> المحدد.\n"
+"                            لا تحدد التواريخ إذا كنت تريد تقرير جميع "
+"البيانات."
+
+#. module: setu_inventory_count_management_18
+#: model_terms:ir.ui.view,arch_db:setu_inventory_count_management_18.inventory_count_report_wizard_form_view
+msgid ""
+"• Select the <strong>Location(s)</strong> and <strong>User(s)</strong> only "
+"if you want the data with specific location(s) and user(s).\n"
+"                            <br/>\n"
+"                            • Report will be generated based on selected "
+"<strong>Date Range</strong>.\n"
+"                            Do not select the dates if you want all data "
+"report."
+msgstr ""
+"• حدد الموقع <strong>(المواقع)</strong> <strong>والمستخدم (المستخدمين)</"
+"strong> فقط إذا كنت تريد البيانات ذات الموقع (المواقع) والمستخدم "
+"(المستخدمين) المحددين.                            <br/>• سيتم إنشاء التقرير "
+"بناء على <strong>النطاق الزمني</strong> المحدد.\n"
+"                            لا تحدد التواريخ إذا كنت تريد تقرير جميع "
+"البيانات."

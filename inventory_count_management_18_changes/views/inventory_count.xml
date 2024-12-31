@@ -11,26 +11,92 @@
 
 
 
+            <xpath expr="//field[@name='location_id']" position="replace">
+                            <field name="location_id" required="1"   readonly=" state != 'Draft'"
+                                       domain="[('usage', '=', 'internal'),('company_id','=',company_id),('warehouse_id','=',warehouse_id)]"
+                                       options="{'no_create': True, 'no_create_edit':True}"/>
+</xpath>
+
+
             <xpath expr="//field[@name='location_id']" position="after">
                 <field name="scanning_mode" />
+                <field name="allw_product_ids" widget='many2many_tags' invisible='scanning_mode !="products"'   required='scanning_mode =="products"' />
+
+                <field name="product_category_ids" invisible='scanning_mode !="product_categories"'   widget='many2many_tags'   required='scanning_mode =="product_categories"' />
+ 
                 <field name="company_id" />
             </xpath> 
 
             <xpath expr="//field[@name='use_barcode_scanner']" position="after">
                 <field name="is_lock" />
+            <field name="is_all_line_approved" invisible='1' />
+            <field name="is_all_line_refused" invisible='1' />
+
             </xpath> 
 
        <xpath expr="//div/h1/field[@name='name']" position="replace">
              
                 <div class="oe_title">
                     <label for="inventory_reference" class="oe_edit_only"/>
-                    <h1><field name="inventory_reference" placeholder="e.g. Annual inventory"/></h1>
+                    <h1><field name="inventory_reference" required='1' placeholder="e.g. Annual inventory"/></h1>
                 </div>
         </xpath>
             <xpath expr="//field[@name='approver_id']" position="before">
               <label for="name" class="oe_edit_only"/>
             <field name="name" readonly="1" nolabel="1"/>
             </xpath>     
+
+
+
+
+<xpath expr="//field[@name='line_ids']//field[@name='counted_qty']" position="replace">
+      <field name="counted_qty"   readonly=" parent.state != 'To Be Approved'"
+      sum="Total counted qty"
+      />
+
+                               
+                                           </xpath> 
+
+
+
+<xpath expr="//header//button[@name='approve_all_lines']" position="replace">
+
+                      <button name="approve_all_lines"
+                                type="object"
+                                string="Approve count Lines"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                class="oe_highlight"
+                                      invisible="type=='Single Session' or state !='To Be Approved' or line_ids==[] or is_all_line_approved  or is_all_line_refused "                        
+                                />
+
+                                           </xpath> 
+
+
+
+
+<xpath expr="//header//button[@name='reject_all_lines']" position="replace">
+
+                                  <button name="reject_all_lines"
+                                type="object"
+                                     invisible="type=='Single Session' or state !='To Be Approved' or line_ids==[] or is_all_line_refused  or is_all_line_approved"   
+                 
+                                string="Reject count Lines"
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                class="oe_highlight"/>
+                        
+                                           </xpath> 
+
+<xpath expr="//header//button[@name='complete_counting']" position="replace">
+
+                     <button name="complete_counting"
+                              
+                                groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"
+                                type="object"
+                                string="Complete Counting"
+                                invisible='state !="In Progress" ' />
+                        
+                                           </xpath> 
+
 
 
 

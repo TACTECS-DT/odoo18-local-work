@@ -1,0 +1,43 @@
+wanted products = products in field products or products that  under target categories  
+
+  
+------------scan lines table to move lines  -------------------- 
+
+A - incase products or categories : 
+
+only wanted products that have qty in this location and company   
+
+B - incase other options : 
+
+all  products that have qty  in wanted  location and company  
+
+
+------------scan lines table scan options  -------------------- 
+
+same like start scan  
+
+
+--------start scan----------  
+
+  
+
+A -incase scan by products or categories : 
+
+to scan lot : all wanted products lots even the lot for product that have no qty in this location  
+
+  
+
+to scan internal references : only internal references for products that have qty in this location  
+
+- if user input a product or category that for product witch have no lot or qty in this location  and company .... cannot scan (404 not found) 
+
+  
+B- incase  other option : 
+
+  
+
+all products with  [same company or false ] are available  across internal reference unless its have lot (in this case can scan this product only with lot ) with alert if this reference belong to product that have no qty in this location and company    
+
+  
+
+all lots with same company are available with alert if lot not in wanted location 
