@@ -190,9 +190,9 @@
 
 
                                                 readonly="parent.use_barcode_scanner "
-
-
                                              />
+
+
                                             <field name="theoretical_qty"
                                                    force_save="1"
                                                    groups="setu_inventory_count_management_18.group_setu_inventory_count_manager"

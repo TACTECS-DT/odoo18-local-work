@@ -1,0 +1,253 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* inventory_count_management_18_changes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20241125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-30 07:56+0000\n"
+"PO-Revision-Date: 2024-12-30 10:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_EG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.5\n"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Actions"
+msgstr "الإجراءات"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_adjustment_form_changes
+msgid "Are you sure to validate this inventory adjustment?"
+msgstr "هل أنت متأكد من التحقق من صحة تعديل المخزون هذا؟"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__scanning_mode__internal_ref
+msgid "By Internal reference"
+msgstr "حسب المرجع الداخلي"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__scanning_mode__lot_serial_no
+msgid "By Lot/Serial Number"
+msgstr "عن طريق الدفعة / الرقم التسلسلي"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__scanning_mode__products
+msgid "By Products"
+msgstr "حسب المنتجات"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__scanning_mode__product_categories
+msgid "By Products category"
+msgstr "حسب فئة المنتجات"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Cancle"
+msgstr "ألغاء"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/wizard.xml:0
+msgid "Close"
+msgstr "إغلاق"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_count_session_form_changes
+msgid "Counted Qty"
+msgstr "عد الكمية"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "ID"
+msgstr "المعرف"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Internal Referance :"
+msgstr "المرجعية الداخلية :"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model,name:inventory_count_management_18_changes.model_setu_inventory_count_session
+msgid "Inventory Count Session"
+msgstr "جلسة جرد المخزون"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model,name:inventory_count_management_18_changes.model_setu_inventory_count_session_line
+msgid "Inventory Count Session Line"
+msgstr "بند جلسة جرد المخزون"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__inventory_reference
+msgid "Inventory Reference"
+msgstr "مرجع المخزون"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_inventory_count_session_line__location_id
+msgid "Location"
+msgstr "الموقع"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__is_lock
+msgid "Lock"
+msgstr "إقفال"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__type__multi_session
+msgid "Multi Session"
+msgstr "متعدد الجلسات"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_inventory_count_session_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_inventory_count_session_line__domain_product_id
+msgid "Product Domain"
+msgstr "مجال المنتج"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Product:"
+msgstr "المنتج:"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__product_ids
+msgid "Products"
+msgstr "المنتجات"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__product_category_ids
+msgid "Products Category"
+msgstr "فئة المنتجات"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "S.N"
+msgstr ""
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Save"
+msgstr "حفظ"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Scanned Quantity"
+msgstr "الكمية الممسوحة ضوئيا"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Scanned code"
+msgstr "الرمز الممسوح ضوئيا"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Scanned code :"
+msgstr "الكود الممسوح ضوئيا:"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__scanning_mode
+msgid "Scanning Mode"
+msgstr "وضع المسح الضوئي"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields.selection,name:inventory_count_management_18_changes.selection__setu_stock_inventory_count__type__single_session
+msgid "Single Session"
+msgstr "جلسة واحدة"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_count_session_form_changes
+msgid "Start Scan"
+msgstr "بدء المسح"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.actions.client,name:inventory_count_management_18_changes.action_start_scanning
+msgid "Start Scanning"
+msgstr "بدء المسح الضوئي"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model,name:inventory_count_management_18_changes.model_setu_stock_inventory_count
+msgid "Stock Inventory Count"
+msgstr "عدد مخزون المخزون"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Theoretical Quantity"
+msgstr "الكميه في المخزن"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_count_session_form_changes
+msgid "Total Counted Qty"
+msgstr "إجمالي الكمية المحسوبة"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Total Qty:"
+msgstr "الكمية الإجمالية:"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "Total Scanned Quantity :"
+msgstr "الكمية الإجمالية الممسوحة ضوئيا:"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_count_form_changes
+msgid "Total counted qty"
+msgstr "إجمالي الكمية المحسوبة"
+
+#. module: inventory_count_management_18_changes
+#: model:ir.model.fields,field_description:inventory_count_management_18_changes.field_setu_stock_inventory_count__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_adjustment_form_changes
+msgid "Validate"
+msgstr "تصديق"
+
+#. module: inventory_count_management_18_changes
+#: model_terms:ir.ui.view,arch_db:inventory_count_management_18_changes.invintory_count_form_changes
+msgid "e.g. Annual inventory"
+msgstr "مثلاً : الجرد السنوي"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "is_all_code"
+msgstr "is_all_code"
+
+#. module: inventory_count_management_18_changes
+#. odoo-javascript
+#: code:addons/inventory_count_management_18_changes/static/src/xml/scan.xml:0
+msgid "old_line_id"
+msgstr ""
